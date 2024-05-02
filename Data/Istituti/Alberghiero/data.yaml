@@ -1,0 +1,162 @@
+{
+  nome: "Istituto di Formazione Professionale Alberghiero",
+  codice_MIUR: "TNCF011001",
+  scuole: [
+    {
+      codice_MIUR: "TNCF011001",
+      name: "Istituto di Formazione Professionale Alberghiero",
+      dirigente: "Vito Rovigo",
+      direttore: "Cazzani Daniela",
+      posizione: {
+        indirizzo: "Viale Dei Colli, 17 - 38068 ROVERETO",
+        latitudine: "45.89080798116856", 
+        longitudine: "11.048049058366294",
+      },
+      website: "https://www.alberghierorovereto.it",
+      contacts: {
+        mail: [
+          {
+            description: "istituto",
+            mail: "ifpa.rovereto@pec.provincia.tn.it"
+          },
+          {
+            description: "segreteria",
+            mail: "segr.ifpa.rovereto@scuole.provincia.tn.it"
+          },
+          {
+            description: "dirigenza",
+            mail: "dir.ifpa.rovereto@scuole.provincia.tn.it"
+          }
+        ],
+        phone: [
+          {
+            description: "telefono",
+            numero: "+39 0464 439164"
+          },
+          {
+            description: "fax",
+            numero: "+39 0464 435851"
+          }
+        ]
+      }
+
+    },
+    {
+      codice_MIUR: "TNCF011001",
+      name: "Settore Industria e Artigianato",
+      dirigente: "Vito Rovigo",
+      direttore: "Cazzani Daniela",
+      posizione: {
+        indirizzo: "Viale Dei Colli, 17 - 38068 ROVERETO",
+        latitudine: "45.89080798116856", 
+        longitudine: "11.048049058366294",
+      },
+      website: "https://www.alberghierorovereto.it",
+      contacts: {
+        mail: [
+          {
+            description: "istituto",
+            mail: "ifpa.rovereto@pec.provincia.tn.it"
+          },
+          {
+            description: "segreteria",
+            mail: "segr.ifpa.rovereto@scuole.provincia.tn.it"
+          },
+          {
+            description: "dirigenza",
+            mail: "dir.ifpa.rovereto@scuole.provincia.tn.it"
+          }
+        ],
+        phone: [
+          {
+            description: "telefono",
+            numero: "+39 0464 439164"
+          }
+          {
+            description: "fax",
+            numero: "+39 0464 435851"
+          }
+        ]
+      }
+
+    },
+    {
+      codice_MIUR: "TNCF011001",
+      name: "Settore Servizi",
+      dirigente: "Vito Rovigo",
+      direttore: "Cazzani Daniela",
+      posizione: {
+        indirizzo: "Viale Dei Colli, 17 - 38068 ROVERETO",
+        latitudine: "45.89080798116856", 
+        longitudine: "11.048049058366294",
+      },
+      website: "https://www.alberghierorovereto.it",
+      contacts: {
+        mail: [
+          {
+            description: "istituto",
+            mail: "ifpa.rovereto@pec.provincia.tn.it"
+          },
+          {
+            description: "segreteria",
+            mail: "segr.ifpa.rovereto@scuole.provincia.tn.it"
+          },
+          {
+            description: "dirigenza",
+            mail: "dir.ifpa.rovereto@scuole.provincia.tn.it"
+          }
+        ],
+        phone: [
+          {
+            description: "telefono",
+            numero: "+39 0464 439164"
+          }
+          {
+            description: "fax",
+            numero: "+39 0464 435851"
+          }
+        ]
+      }
+
+    },
+    {
+      codice_MIUR: "TNCF011001",
+      name: "Settore Servizi Serale",
+      dirigente: "Vito Rovigo",
+      direttore: "Cazzani Daniela",
+      posizione: {
+        indirizzo: "Viale Dei Colli, 17 - 38068 ROVERETO",
+        latitudine: "45.89080798116856", 
+        longitudine: "11.048049058366294",
+      },
+      website: "https://www.alberghierorovereto.it",
+      contacts: {
+        mail: [
+          {
+            description: "istituto",
+            mail: "ifpa.rovereto@pec.provincia.tn.it"
+          },
+          {
+            description: "segreteria",
+            mail: "segr.ifpa.rovereto@scuole.provincia.tn.it"
+          },
+          {
+            description: "dirigenza",
+            mail: "dir.ifpa.rovereto@scuole.provincia.tn.it"
+          }
+        ],
+        phone: [
+          {
+            description: "telefono",
+            numero: "+39 0464 439164"
+          }
+          {
+            description: "fax",
+            numero: "+39 0464 435851"
+          }
+        ]
+      }
+
+    }
+  ]
+}

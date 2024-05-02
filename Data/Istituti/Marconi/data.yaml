@@ -21,7 +21,7 @@
           {
             description: "segreteria",
             mail: "segr.itimarconi@scuole.provincia.tn.it"
-          }
+          },
           {
             description: "dirigenza",
             mail: "dir.itimarconi@scuole.provincia.tn.it"
@@ -31,7 +31,7 @@
           {
             description: "telefono",
             numero: "+39 0464 411400"
-          }
+          },
           {
             description: "fax",
             numero: "+39 0464 419130"
@@ -58,7 +58,7 @@
           {
             description: "segreteria",
             mail: "segr.itimarconi@scuole.provincia.tn.it"
-          }
+          },
           {
             description: "dirigenza",
             mail: "dir.itimarconi@scuole.provincia.tn.it"
@@ -68,7 +68,7 @@
           {
             description: "telefono",
             numero: "+39 0464 411400"
-          }
+          },
           {
             description: "fax",
             numero: "+39 0464 419130"

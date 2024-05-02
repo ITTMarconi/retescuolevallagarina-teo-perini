@@ -1,5 +1,5 @@
 {
-  nome: "Liceo delle Scienze Umane 'F. Filzi'",
+  nome: "Liceo Antonio Rosmini",
   codice_MIUR: "TNPC02000A",
   scuole: [
     {
@@ -21,7 +21,7 @@
           {
             description: "segreteria",
             mail: "segr.liceorosmini@scuole.provincia.tn.it"
-          }
+          },
           {
             description: "dirigenza",
             mail: "dir.liceorosmini@scuole.provincia.tn.it"
@@ -31,13 +31,166 @@
           {
             description: "telefono",
             numero: "+39 0464 437700"
-          }
+          },
           {
             description: "fax",
             numero: "+39 0464 420025"
           }
         ]
       }
+
+    },
+    {
+      codice_MIUR: "TNPC02000A",
+      name: "Liceo Classico",
+      dirigente: "Paolo Pendenza",
+      posizione: {
+        indirizzo: "Corso Bettini, 86 - 38068 ROVERETO",
+        latitudine: "45.89606734364496",
+        longitudine": "11.042964249413174",F
+      },
+      website: "https://www.liceorosmini.eu",
+      contacts: {
+        mail: [
+          {
+            description: "istituto",
+            mail: "rosmini.rovereto@pec.provincia.tn.it"
+          },
+          {
+            description: "segreteria",
+            mail: "segr.liceorosmini@scuole.provincia.tn.it"
+          },
+          {
+            description: "dirigenza",
+            mail: "dir.liceorosmini@scuole.provincia.tn.it"
+          }
+        ],
+        phone: [
+          {
+            description: "telefono",
+            numero: "+39 0464 437700"
+          },
+          {
+            description: "fax",
+            numero: "+39 0464 420025"
+          }
+        ]
+      }
+
+    },
+    {
+      codice_MIUR: "TNPC02000A",
+      name: "Liceo Linguistico",
+      dirigente: "Paolo Pendenza",
+      posizione: {
+        indirizzo: "Corso Bettini, 86 - 38068 ROVERETO",
+        latitudine: "45.89606734364496",
+        longitudine": "11.042964249413174",F
+      },
+      website: "https://www.liceorosmini.eu",
+      contacts: {
+        mail: [
+          {
+            description: "istituto",
+            mail: "rosmini.rovereto@pec.provincia.tn.it"
+          },
+          {
+            description: "segreteria",
+            mail: "segr.liceorosmini@scuole.provincia.tn.it"
+          },
+          {
+            description: "dirigenza",
+            mail: "dir.liceorosmini@scuole.provincia.tn.it"
+          }
+        ],
+        phone: [
+          {
+            description: "telefono",
+            numero: "+39 0464 437700"
+          },
+          {
+            description: "fax",
+            numero: "+39 0464 420025"
+          }
+        ]
+      }
+
+    },
+    {
+      codice_MIUR: "TNPC02000A",
+      name: "Liceo Scientifico",
+      dirigente: "Paolo Pendenza",
+      posizione: {
+        indirizzo: "Corso Bettini, 86 - 38068 ROVERETO",
+        latitudine: "45.89606734364496",
+        longitudine": "11.042964249413174",F
+      },
+      website: "https://www.liceorosmini.eu",
+      contacts: {
+        mail: [
+          {
+            description: "istituto",
+            mail: "rosmini.rovereto@pec.provincia.tn.it"
+          },
+          {
+            description: "segreteria",
+            mail: "segr.liceorosmini@scuole.provincia.tn.it"
+          },
+          {
+            description: "dirigenza",
+            mail: "dir.liceorosmini@scuole.provincia.tn.it"
+          }
+        ],
+        phone: [
+          {
+            description: "telefono",
+            numero: "+39 0464 437700"
+          },
+          {
+            description: "fax",
+            numero: "+39 0464 420025"
+          }
+        ]
+      }
+
+    },
+    {
+      codice_MIUR: "TNPC02000A",
+      name: "Liceo Scientifico opzione Scienze Applicate",
+      dirigente: "Paolo Pendenza",
+      posizione: {
+        indirizzo: "Corso Bettini, 86 - 38068 ROVERETO",
+        latitudine: "45.89606734364496",
+        longitudine": "11.042964249413174",F
+      },
+      website: "https://www.liceorosmini.eu",
+      contacts: {
+        mail: [
+          {
+            description: "istituto",
+            mail: "rosmini.rovereto@pec.provincia.tn.it"
+          },
+          {
+            description: "segreteria",
+            mail: "segr.liceorosmini@scuole.provincia.tn.it"
+          },
+          {
+            description: "dirigenza",
+            mail: "dir.liceorosmini@scuole.provincia.tn.it"
+          }
+        ],
+        phone: [
+          {
+            description: "telefono",
+            numero: "+39 0464 437700"
+          },
+          {
+            description: "fax",
+            numero: "+39 0464 420025"
+          }
+        ]
+      }
+
     }
   ]
 }
