@@ -1,0 +1,31 @@
+{
+    "nome": "NOME ISTIUTO",
+    "id": "ID ISTITUTO",
+    "sedi": [
+        {
+            "codice_MIUR": "CODICE MIUR",
+            "name": "NOME SEDE",
+            "dirigente": "NOME DIRIGENTE",
+            "posizione": {
+                "indirizzo": "INDIRIZZO SEDE",
+                "latitudine": "LATITUDINE SEDE",
+                "longitudine": "LONGITUDINE SEDE"
+            },
+            "website": "SITO WEB SEDE",
+            "contacts": {
+                "mail": [
+                    {
+                        "description": "SEGRETERIA",
+                        "mail": "MAIL SEGRETERIA"
+                    }
+                ],
+                "phone": [
+                    {
+                        "description": "TELEFONO",
+                        "numero": "NUMERO DI TELEFONO"
+                    }
+                ]
+            }
+        }
+    ]
+}
