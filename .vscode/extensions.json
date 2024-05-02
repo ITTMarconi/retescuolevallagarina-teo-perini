@@ -1,0 +1,23 @@
+{
+    "recommendations": [
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "aaron-bond.better-comments",
+        "pranaygp.vscode-css-peek",
+        "usernamehw.errorlens",
+        "dbaeumer.vscode-eslint",
+        "compulim.vscode-express",
+        "expresssnippets.vscode-express-snippets",
+        "ecmel.vscode-html-css",
+        "visualstudioexptteam.vscodeintellicode",
+        "xabikos.javascriptsnippets",
+        "zignd.html-css-class-completion",
+        "ms-vscode.vscode-typescript-next",
+        "yzhang.markdown-all-in-one",
+        "pkief.material-icon-theme",
+        "humao.rest-client",
+        "sonarsource.sonarlint-vscode",
+        "redhat.vscode-yaml",
+        "astro-build.astro-vscode"
+    ]
+}
