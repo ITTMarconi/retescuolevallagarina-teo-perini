@@ -25,5 +25,6 @@ export type Sede = {
 }
 export type Institute = {
     id: string
+    logo_url: string
     Sedi: Array<Sede>
 }

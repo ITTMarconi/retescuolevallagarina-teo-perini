@@ -16,16 +16,14 @@ module.exports = class Database {
 	_database = [];
 
 	Database() {
-		/** @type {string} */
-		let data_path = "../Data";
-		if(this.fetchFromDisk(data_path)) {
-			console.log(`Error fetching from disk at ${data_path}, exiting...`)
+		if(this.fetchFromDisk()) {
+			console.log(`Error fetching from disk, exiting...`)
 			exit(1)
 		}
 	}
 
 	/** @returns {boolean} - returns true if an error occurred */
-	fetchFromDisk(data_path) {
+	fetchFromDisk() {
 		/** @type {Array<Institute>} */
 		let database_swap = [];
 
@@ -33,7 +31,7 @@ module.exports = class Database {
 		let ISTITUTE_DIR;
 
 		/** @type {string} */
-		const INSTITUTES_PATH = path.join(data_path, "Istituti");
+		const INSTITUTES_PATH = "../Data/Istituti";
 
 		try {
 			ISTITUTE_DIR = fs.readdirSync(INSTITUTES_PATH);
@@ -65,6 +63,13 @@ module.exports = class Database {
 			} catch (error) {
 				console.error(`Could not parse '${institute_id}' file\n${error}`);
 				return true;
+			}
+
+			const LOGO_PATH = path.join(INSTITUTE_PATH, "logo.png")
+			if (fs.existsSync(LOGO_PATH)) {
+				institute_data.logo_url = path.join(path.dirname(INSTITUTE_PATH), "logo.png");
+			} else {
+				console.warn(`File '${LOGO_PATH}' does not exist`)
 			}
 
 			database_swap.push(institute_data);
