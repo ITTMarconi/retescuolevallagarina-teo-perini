@@ -1,0 +1,10 @@
+codice_MIUR: TNTF02000G
+name: "Marconi Rovereto ITT"
+contacts:
+  mail:
+    - segreteria: segr.itimarconi@scuole.provincia.tn.it
+    - dirigenza: dir.itimarconi@scuole.provincia.tn.it
+
+indirizzi:
+  - elettronica
+  - informatica
