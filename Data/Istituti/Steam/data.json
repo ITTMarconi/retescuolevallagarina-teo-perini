@@ -1,0 +1,40 @@
+{
+  "nome": "Liceo Steam International",
+  "codice_MIUR": "TNPSID500S",
+  "scuole": [
+    {
+      "codice_MIUR": "TNPSID500S",
+      "name": "Liceo Steam International",
+      "dirigente": "Laura Scalfi",
+      "posizione": {
+        "indirizzo": "Piazzale Orsi, 1 - 38068 ROVERETO",
+        "latitudine": "45.88245950158836", 
+        "longitudine": "11.043971027468505"
+      },
+      "website": "https://www.poloveronesi.it/",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "iscrizioni.veronesi@pec.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segreteria.dir@cfpgveronesi.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 433484"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 436873"
+          }
+        ]
+      }
+
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "nome": "ITET Fontana",
+  "codice_MIUR": "TNTD020009",
+  "scuole": [
+    {
+      "codice_MIUR": "TNTD020009",
+      "name": "ITET Fontana",
+      "dirigente": "Giuseppe Santoli",
+      "posizione": {
+        "indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
+        "latitudine": "45.893601249611514", 
+        "longitudine": "11.042651600484701"
+      },
+      "website": "https://www.fgfontana.eu",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "fontana@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.fontana@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.fontana@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 436100"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 434116"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNTD020009",
+      "name": "Istituto Tecnico per il settore economico",
+      "dirigente": "Giuseppe Santoli",
+      "posizione": {
+        "indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
+        "latitudine": "45.893601249611514", 
+        "longitudine": "11.042651600484701"
+      },
+      "website": "https://www.fgfontana.eu",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "fontana@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.fontana@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.fontana@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 436100"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 434116"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNTD020009",
+      "name": "Istituto Tecnico per il settore tecnologico",
+      "dirigente": "Giuseppe Santoli",
+      "posizione": {
+        "indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
+        "latitudine": "45.893601249611514", 
+        "longitudine": "11.042651600484701"
+      },
+      "website": "https://www.fgfontana.eu",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "fontana@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.fontana@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.fontana@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 436100"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 434116"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNTD02050P",
+      "name": "Istituto Tecnologico per il settore economico serale",
+      "dirigente": "Giuseppe Santoli",
+      "posizione": {
+        "indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
+        "latitudine": "45.893601249611514", 
+        "longitudine": "11.042651600484701"
+      },
+      "website": "https://www.fgfontana.eu",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "fontana@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.fontana@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.fontana@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 436100"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 434116"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNTD02050P",
+      "name": "Istituto Tecnologico per il settore tecnologico serale",
+      "dirigente": "Giuseppe Santoli",
+      "posizione": {
+        "indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
+        "latitudine": "45.893601249611514", 
+        "longitudine": "11.042651600484701"
+      },
+      "website": "https://www.fgfontana.eu",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "fontana@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.fontana@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.fontana@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 436100"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 434116"
+          }
+        ]
+      }
+
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "nome": "Istituto d’Istruzione 'Don Milani'",
+  "codice_MIUR": "TNIS009009",
+  "scuole": [
+    {
+      "codice_MIUR": "TNIS009009",
+      "name": "Istituto d’Istruzione 'Don Milani'",
+      "dirigente": "Maria Teresa Dosso",
+      "posizione": {
+        "indirizzo": "Via Balista, 6 - 38068 ROVERETO",
+        "latitudine": "45.89467684881463", 
+        "longitudine": "11.032274219398017"
+      },
+      "website": "http://www.domir.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "donmilani@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.donmilani@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.donmilani@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 485511"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 485550"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNRC009018",
+      "name": "Istituto professionale per il settore dei servizi",
+      "dirigente": "Maria Teresa Dosso",
+      "posizione": {
+        "indirizzo": "Via Balista, 6 - 38068 ROVERETO",
+        "latitudine": "45.89467684881463", 
+        "longitudine": "11.032274219398017"
+      },
+      "website": "http://www.domir.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "donmilani@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.donmilani@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.donmilani@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 485511"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 485550"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNIS009009",
+      "name": "Istituto tecnico per il settore economico",
+      "dirigente": "Maria Teresa Dosso",
+      "posizione": {
+        "indirizzo": "Via Balista, 6 - 38068 ROVERETO",
+        "latitudine": "45.89467684881463", 
+        "longitudine": "11.032274219398017"
+      },
+      "website": "http://www.domir.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "donmilani@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.donmilani@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.donmilani@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 485511"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 485550"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNCT70100B",
+      "name": "Educazione per adulti relativa al primo ciclo",
+      "dirigente": "Maria Teresa Dosso",
+      "posizione": {
+        "indirizzo": "Via Balista, 6 - 38068 ROVERETO",
+        "latitudine": "45.89467684881463", 
+        "longitudine": "11.032274219398017"
+      },
+      "website": "http://www.domir.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "donmilani@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.donmilani@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.donmilani@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 485511"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 485550"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNRC00951N",
+      "name": "Istituto Professionale per il settore dei servizi serale",
+      "dirigente": "Maria Teresa Dosso",
+      "posizione": {
+        "indirizzo": "Via Balista, 6 - 38068 ROVERETO",
+        "latitudine": "45.89467684881463", 
+        "longitudine": "11.032274219398017"
+      },
+      "website": "http://www.domir.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "donmilani@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.donmilani@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.donmilani@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 485511"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 485550"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNTD00950X",
+      "name": "Istituto Tecnico per il settore economico serale",
+      "dirigente": "Maria Teresa Dosso",
+      "posizione": {
+        "indirizzo": "Via Balista, 6 - 38068 ROVERETO",
+        "latitudine": "45.89467684881463", 
+        "longitudine": "11.032274219398017"
+      },
+      "website": "http://www.domir.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "donmilani@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.donmilani@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.donmilani@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 485511"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 485550"
+          }
+        ]
+      }
+
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "nome": "Polo Giuseppe Veronesi CFP - MADE++",
+  "codice_MIUR": "TNCF002001",
+  "scuole": [
+    {
+      "codice_MIUR": "TNCF002001",
+      "name": "Polo Giuseppe Veronesi CFP - MADE++",
+      "dirigente": "Laura Scalfi",
+      "posizione": {
+        "indirizzo": "Via Fortunato Zeni, 8 - 38068 ROVERETO",
+        "latitudine": "45.88983988284274", 
+        "longitudine": "11.032062487155184"
+      },
+      "website": "https://www.poloveronesi.it/",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "iscrizioni.veronesi@pec.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segreteria.dir@cfpgveronesi.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 433484"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 436873"
+          }
+        ]
+      }
+
+    }
+  ]
+}

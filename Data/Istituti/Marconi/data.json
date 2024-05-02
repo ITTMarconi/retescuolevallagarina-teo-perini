@@ -1,0 +1,88 @@
+{
+  "nome": "Istituto Tecnico Tecnologico 'G. Marconi'",
+  "codice_MIUR": "TNTF02000G",
+  "scuole": [
+    {
+      "codice_MIUR": "TNTF02000G",
+      "name": "Istituto Tecnico Tecnologico 'G. Marconi'",
+      "dirigente": "Daniela Depentori",
+      "posizione": {
+        "indirizzo": "Via Monti, 1 - 38068 Rovereto",
+        "latitudine": "45.91112141952386",
+        "longitudine": "11.042719652063543"
+      },
+      "website": "https://www.marconirovereto.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "marconi@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.itimarconi@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.itimarconi@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 411400"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 419130"
+          }
+        ]
+      }
+    },
+    {
+      "codice_MIUR": "TNTF020501",
+      "name": "Istituto Tecnico Tecnologico 'G. Marconi' Serale",
+      "dirigente": "Daniela Depentori",
+      "posizione": {
+        "indirizzo": "Via Monti, 1 - 38068 Rovereto",
+        "latitudine": "45.91112141952386",
+        "longitudine": "11.042719652063543"
+      },
+      "website": "https://www.marconirovereto.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "marconi@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.itimarconi@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.itimarconi@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 411400"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 419130"
+          }
+        ]
+      }
+    }
+  ]
+}
+
+
+
+ 
+
+
+
+

@@ -11,7 +11,7 @@ const fs = require('fs');
 /** @typedef {import("../Data/types").Sede} Sede */
 /** @typedef {import("../Data/types").Institute} Institute */
 
-modules.exports = class Database {
+module.exports = class Database {
 	/** @type {Array<Institute>} */
 	_database = [];
 
@@ -33,12 +33,12 @@ modules.exports = class Database {
 		let ISTITUTE_DIR;
 
 		/** @type {string} */
-		const ISTITUTES_PATH = path.join(data_path, "Istituti");
+		const INSTITUTES_PATH = path.join(data_path, "Istituti");
 
 		try {
-			ISTITUTE_DIR = fs.readdirSync(ISTITUTES_PATH);
+			ISTITUTE_DIR = fs.readdirSync(INSTITUTES_PATH);
 		} catch (error) {
-			console.error(`Could not read '${ISTITUTES_PATH}' directory\n${error}`);
+			console.error(`Could not read '${INSTITUTES_PATH}' directory\n${error}`);
 			return true;
 		}
 
@@ -49,7 +49,9 @@ modules.exports = class Database {
 			/** @type {Institute} */
 			let institute_data;
 
-			const INSTITUTE_PATH = path.join(ISTITUTES_PATH, institute_id)
+			/** @type {string} */
+			let INSTITUTE_PATH = path.join(INSTITUTES_PATH, institute_id)
+			INSTITUTE_PATH = path.join(INSTITUTE_PATH, "data.json")
 
 			try {
 				institute_data_raw = fs.readFileSync(INSTITUTE_PATH)
@@ -69,6 +71,7 @@ modules.exports = class Database {
 		})
 
 		this._database = database_swap;
+		console.info(`Loaded ${this._database.length} institutes`)
 		return false;
 	}
 

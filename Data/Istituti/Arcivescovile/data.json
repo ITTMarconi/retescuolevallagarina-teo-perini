@@ -1,0 +1,122 @@
+{
+  "nome": "Liceo Internazionale Arcivescovile",
+  "codice_MIUR": "TN1M00200X",
+  "scuole": [
+    {
+      "codice_MIUR": "TN1M00200X",
+      "name": "Collegio Arcivescovile Dame Inglesi",
+      "dirigente": "Christian Bonazza",
+      "direttore": "Bruno Daves",
+      "posizione": {
+        "indirizzo": "Corso Bettini, 71 - 38068 ROVERETO",
+        "latitudine": "45.896796472675156", 
+        "longitudine": "11.044075139109527"
+      },
+      "website": "https://www.arcivescoviletrento.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "collegioarcivescovile@pec.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "lia@arcivescoviletrento.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dameinglesi@arcivescoviletrento.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 406000"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 406077"
+          }
+        ]
+      }
+    },
+    {
+      "codice_MIUR": "TN1M00200X",
+      "name": "Scuola Secondaria di primo grado Arcivescovile Dame Inglesi",
+      "dirigente": "Christian Bonazza",
+      "direttore": "Bruno Daves",
+      "posizione": {
+        "indirizzo": "Corso Bettini, 71 - 38068 ROVERETO",
+        "latitudine": "45.896796472675156", 
+        "longitudine": "11.044075139109527"
+      },
+      "website": "https://www.arcivescoviletrento.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "collegioarcivescovile@pec.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "lia@arcivescoviletrento.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dameinglesi@arcivescoviletrento.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 406000"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 406077"
+          }
+        ]
+      }
+
+    },
+    {
+      "codice_MIUR": "TNPL005006",
+      "name": "Liceo Linguistico Arcivescovile Dame Inglesi",
+      "dirigente": "Christian Bonazza",
+      "direttore": "Bruno Daves",
+      "posizione": {
+        "indirizzo": "Corso Bettini, 71 - 38068 ROVERETO",
+        "latitudine": "45.896796472675156", 
+        "longitudine": "11.044075139109527"
+      },
+      "website": "https://www.arcivescoviletrento.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "istituto",
+            "mail": "collegioarcivescovile@pec.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "lia@arcivescoviletrento.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dameinglesi@arcivescoviletrento.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 406000"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 406077"
+          }
+        ]
+      }
+
+    }
+  ]
+}
