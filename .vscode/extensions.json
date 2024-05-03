@@ -19,6 +19,7 @@
         "sonarsource.sonarlint-vscode",
         "redhat.vscode-yaml",
         "astro-build.astro-vscode",
-        "bierner.markdown-preview-github-styles"
+        "bierner.markdown-preview-github-styles",
+        "simonsiefke.svg-preview"
     ]
 }

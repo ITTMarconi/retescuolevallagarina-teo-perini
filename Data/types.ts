@@ -28,5 +28,6 @@ export type Sede = {
 export type Institute = {
     id: string
     logo_url: string
+    video_url: string
     sedi: Array<Sede>
 }

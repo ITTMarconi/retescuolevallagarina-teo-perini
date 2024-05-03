@@ -1,4 +1,5 @@
 //@ts-check
+const { exit } = require('process');
 
 const Database = require("./database")
 const express = require('express')
@@ -8,12 +9,18 @@ const database = new Database()
 const app = express()
 const PORT = 25565
 
-__dirname = path.dirname(__dirname)
 app.use(express.static(__dirname))
 app.use(express.json())
 
 app.listen(PORT, () => {
-	console.log(`Backend online at http://localhost:${PORT}/`)
+	console.log("Starting backend...")
+
+	if (database.fetchFromDisk()) {
+		console.log(`Error fetching from disk, exiting...`)
+		exit(1);
+	}
+
+	console.log(`Backend ready at http://localhost:${PORT}/`)
 })
 
 app.get('/institutes', (req, res) => {
@@ -21,6 +28,28 @@ app.get('/institutes', (req, res) => {
 
 	const institutes = database.getInstitutes();
 	res.json(institutes);
+})
+
+app.get('/video/:id', (req, res) => {
+	/** @type {string} */
+	const VIDEO_ID = req.params.id;
+	console.log(`Requested video ${VIDEO_ID} from ${req.hostname}`)
+	if (VIDEO_ID == null || VIDEO_ID == undefined) {
+		res.status(400).send("Video id not given")
+		return
+	}
+
+	/** @type {import("./database").Institute | null} */
+	const INSTITUTE = database.searchInstituteByID(VIDEO_ID);
+	if (INSTITUTE == null) {
+		res.status(400).send(`Institute ${VIDEO_ID} not found, check the id again!`)
+		return
+	}
+
+	//@ts-ignore
+	console.log(`Sending video at '${path.join(__dirname, INSTITUTE.video_url)}'...`)
+	res.sendFile(path.join(__dirname, INSTITUTE.video_url))
+	console.log("Sent!")
 })
 
 app.get('/logo/:id', (req, res) => {
@@ -39,10 +68,10 @@ app.get('/logo/:id', (req, res) => {
 		return
 	}
 
-	// Using the url send the image
-
 	//@ts-ignore
-	res.sendFile(INSTITUTE.logo_url)
+	console.log(`Sending logo at '${path.join(__dirname, INSTITUTE.logo_url)}'...`)
+	res.sendFile(path.join(__dirname, INSTITUTE.logo_url))
+	console.log("Sent!")
 })
 
 app.get('/updateDB', (req, res) => {
