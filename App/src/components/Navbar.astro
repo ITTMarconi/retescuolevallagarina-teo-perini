@@ -1,8 +1,53 @@
 ---
-
-
+import Icon from "./Icon.astro";
 ---
 
 <header>
+    <span>Icon</span>
 
+    <nav>
+      <a href="/istituti">
+        <Icon code="e7ee" color="var(--foreground-secondary)" icon_size="2.2rem" />
+      </a>
+      <a href="/openday">
+        <Icon code="ebcc" color="var(--foreground-secondary)" icon_size="2.2rem" />
+      </a>
+      <a href="/map">
+        <Icon code="e0c8" color="var(--foreground-secondary)" icon_size="2.2rem" />
+      </a>
+      <a href="">
+        <Icon code="e887" color="var(--foreground-secondary)" icon_size="2.2rem" />
+      </a>
+    </nav>
 </header>
+
+<style>
+  header {
+    height: 3rem;
+    padding: 0 1rem;
+
+    background-color: var(--background-primary);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  header > span {
+    width: 40px;
+    height: 40px;
+
+    background-color: white;
+    color: var(--tint-orange);
+  }
+
+  a:hover span {
+    color: var(--tint-orange);
+  }
+
+  header > nav {
+    display: flex;
+    gap: 0.6rem;
+  }
+</style>

@@ -1,6 +1,6 @@
 :root {
     --background-primary: #3a737d;
-    
+
     --foreground-primary: #FFFFFF;
     --foreground-secondary: #c0e1e7;
 
@@ -26,6 +26,15 @@ body {
 h1 {
     margin: 0;
     padding: 0;
+}
+
+a:active,
+a:hover,
+a:focus,
+a:visited,
+a:-webkit-any-link {
+    color: unset;
+    text-decoration: unset;
 }
 
 .font-bold {

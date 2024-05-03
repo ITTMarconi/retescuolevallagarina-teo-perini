@@ -1,67 +1,66 @@
 ---
-import Icon from "../components/Icon.astro";
-import Layout from "../layouts/Layout.astro";
-import "../styles/common.css"
+import Icon from '../components/Icon.astro';
+import Layout from '../layouts/Layout.astro';
+import '../styles/common.css';
 ---
 
 <Layout>
-	<main>
-		<h1 class="font-bold">DIREZIONE <br /> FUTURO</h1>
+  <main>
+    <h1 class="font-bold">DIREZIONE <br /> FUTURO</h1>
 
-		<nav>
-			<a href="">
-				<Icon code="e7ee" color="var(--foreground-secondary)" icon_size="9rem" />
-				<span class="font-light">Isituti</span>
-			</a>
-			<a href="">
-				<Icon code="ebcc" color="var(--foreground-secondary)" icon_size="9rem" />
-				<span class="font-light">Open Day</span>
-			</a>
-			<a href="">
-				<Icon code="e0c8" color="var(--foreground-secondary)" icon_size="9rem" />
-				<span class="font-light">Mappa scuole</span>
-			</a>
-			<a href="">
-				<Icon code="e887" color="var(--foreground-secondary)" icon_size="9rem" />
-				<span class="font-light">Help</span>
-			</a>
-		</nav>
-	</main>
+    <nav>
+      <a href="/istituti">
+        <Icon code="e7ee" color="var(--foreground-secondary)" icon_size="9rem" />
+        <span class="font-light">Isituti</span>
+      </a>
+      <a href="/openday">
+        <Icon code="ebcc" color="var(--foreground-secondary)" icon_size="9rem" />
+        <span class="font-light">Open Day</span>
+      </a>
+      <a href="/map">
+        <Icon code="e0c8" color="var(--foreground-secondary)" icon_size="9rem" />
+        <span class="font-light">Mappa scuole</span>
+      </a>
+      <a href="">
+        <Icon code="e887" color="var(--foreground-secondary)" icon_size="9rem" />
+        <span class="font-light">Help</span>
+      </a>
+    </nav>
+  </main>
 </Layout>
 
 <style>
-	a:active,
-	a:hover,
-	a:focus,
-	a:visited,
-	a:-webkit-any-link {
-		color: unset;
-		text-decoration: unset;
-	}
+  body {
+    background-color: var(--background-primary);
+  }
 
-	h1 {
-		font-size: 4.5rem;
-		padding: 1em 0 0 .8em;
-		color: var(--foreground-primary);
-	}
+  h1 {
+    font-size: 4.5rem;
+    padding: 1em 0 0 0.8em;
+    color: var(--foreground-primary);
+  }
 
-	nav {
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		gap: 4em;
-	}
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 4em;
+  }
 
-	a {
-		text-align: center;
-		margin: 0.5rem;
+  a {
+    text-align: center;
+    margin: 0.5rem;
 
-		display: flex;
-		flex-direction: column;
-	}
+    display: flex;
+    flex-direction: column;
+  }
 
-	span {
-		font-size: 1.2rem;
-		color: var(--foreground-secondary);
-	}
+  a:hover span {
+    color: var(--tint-orange);
+  }
+
+  span:last-child {
+    font-size: 1.2rem;
+    color: var(--foreground-secondary);
+  }
 </style>

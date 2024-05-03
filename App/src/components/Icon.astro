@@ -7,7 +7,14 @@ interface Props {
   icon_size: string;
 }
 
-const { code, color, icon_size } = Astro.props;
+const { code, color, icon_size, ...rest } = Astro.props;
 ---
 
-<span class="material-symbols-outlined" style={`color: ${color}; font-size: ${icon_size};`}>&#x{code}</span>
+<style define:vars={{ color, icon_size }}>
+  span {
+    color: var(--color);
+    font-size: var(--icon_size);
+  }
+</style>
+
+<span class="material-symbols-outlined" {...rest}>&#x{code}</span>
