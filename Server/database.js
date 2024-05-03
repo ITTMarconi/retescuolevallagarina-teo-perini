@@ -16,7 +16,7 @@ module.exports = class Database {
 	_database = [];
 
 	Database() {
-		if(this.fetchFromDisk()) {
+		if (this.fetchFromDisk()) {
 			console.log(`Error fetching from disk, exiting...`)
 			exit(1)
 		}
@@ -48,13 +48,13 @@ module.exports = class Database {
 			let institute_data;
 
 			/** @type {string} */
-			let INSTITUTE_PATH = path.join(INSTITUTES_PATH, institute_id)
-			INSTITUTE_PATH = path.join(INSTITUTE_PATH, "data.json")
+			const INSTITUTE_PATH = path.join(INSTITUTES_PATH, institute_id)
+			const INSTITUTE_DATA_PATH = path.join(INSTITUTE_PATH, "data.json")
 
 			try {
-				institute_data_raw = fs.readFileSync(INSTITUTE_PATH)
+				institute_data_raw = fs.readFileSync(INSTITUTE_DATA_PATH)
 			} catch (error) {
-				console.error(`Could not read '${INSTITUTE_PATH}' file\n${error}`);
+				console.error(`Could not read '${INSTITUTE_DATA_PATH}' file\n${error}`);
 				return true;
 			}
 
@@ -83,6 +83,26 @@ module.exports = class Database {
 	/** @returns {Array<Institute>} */
 	getInstitutes() {
 		return this._database;
+	}
+
+	/** 
+	 * @param id {string}
+	 * @returns {Institute | null} */
+	searchInstituteByID(id) {
+		console.log("Requested search of " + id);
+
+		for (const institute of this._database) {
+			console.table(institute)
+			for (const sede of institute.sedi) {
+				console.log(`\t Comparing ${id} with ${sede.codice_MIUR}`)
+				if (sede.codice_MIUR === id) {
+					console.log("Found institute!");
+					return institute;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	// 	getSchool(id)

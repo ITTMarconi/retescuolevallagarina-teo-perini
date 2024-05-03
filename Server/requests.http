@@ -3,3 +3,8 @@ GET http://localhost:25565/institutes
 ###
 
 GET http://localhost:25565/updateDB
+
+
+###
+
+GET http://localhost:25565/logo/TNTD020009
