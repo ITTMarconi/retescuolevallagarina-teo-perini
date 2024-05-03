@@ -3,9 +3,13 @@ import Navbar from '../components/Navbar.astro';
 import Layout from '../layouts/Layout.astro';
 import type { Sede } from '../../../Data/types.ts';
 
-const SEDI_RAW = await fetch("http://localhost:25565/sedi");
-const SEDI: Sede[] = await SEDI_RAW.json()
-console.table(`Loaded ${SEDI.length} sedi`)
+const SEDI_RAW = await fetch('http://localhost:25565/sedi');
+const SEDI: Sede[] = await SEDI_RAW.json();
+console.table(`Loaded ${SEDI.length} sedi`);
+
+const LICEI: Sede[] = SEDI.filter(sede => sede.tag.includes("liceo"))
+const TECNICI: Sede[] = SEDI.filter(sede => sede.tag.includes("tecnico"))
+const PROFESSIONALI: Sede[] = SEDI.filter(sede => sede.tag.includes("professionale"))
 ---
 
 <Layout>
@@ -13,28 +17,31 @@ console.table(`Loaded ${SEDI.length} sedi`)
 
   <main>
     <article>
-      <h2>Liceo {SEDI.filter(sede => sede.tag?.includes("liceo")).length}</h2>
-      <hr>
+      <h2>Liceo {LICEI.length}</h2>
+      <hr />
 
       {
-        SEDI.map(sede => <div>
-          {sede.name}
-          </div>)
+        LICEI.map(sede => <div>{sede.name}</div>)
       }
-
     </article>
 
     <article>
-      <h2>Tecnico</h2>
-      <hr>
-      
+      <h2>Tecnico {TECNICI.length}</h2>
+      <hr />
+
+      {
+        TECNICI.map(sede => <div>{sede.name}</div>)
+      }
     </article>
 
     <article>
-      <h2>Professionale</h2>
-      <hr>
-      
+      <h2>Professionale {PROFESSIONALI.length}</h2>
+      <hr />
+
+      {
+        PROFESSIONALI
+          .map(sede => <div>{sede.name}</div>)
+      }
     </article>
   </main>
-  
 </Layout>
