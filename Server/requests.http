@@ -1,4 +1,11 @@
-GET http://localhost:25565/institutes
+GET http://localhost:25565/instituti
+
+###
+GET http://localhost:25565/sedi
+
+###
+
+get http://localhost:25565/opendays
 
 ###
 

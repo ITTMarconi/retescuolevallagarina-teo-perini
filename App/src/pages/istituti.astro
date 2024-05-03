@@ -1,10 +1,40 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Layout from '../layouts/Layout.astro';
+import type { Sede } from '../../../Data/types.ts';
+
+const SEDI_RAW = await fetch("http://localhost:25565/sedi");
+const SEDI: Sede[] = await SEDI_RAW.json()
+console.table(`Loaded ${SEDI.length} sedi`)
 ---
 
 <Layout>
   <Navbar />
 
+  <main>
+    <article>
+      <h2>Liceo {SEDI.filter(sede => sede.tag?.includes("liceo")).length}</h2>
+      <hr>
+
+      {
+        SEDI.map(sede => <div>
+          {sede.name}
+          </div>)
+      }
+
+    </article>
+
+    <article>
+      <h2>Tecnico</h2>
+      <hr>
+      
+    </article>
+
+    <article>
+      <h2>Professionale</h2>
+      <hr>
+      
+    </article>
+  </main>
   
 </Layout>

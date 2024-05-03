@@ -21,7 +21,7 @@ export type Sede = {
     director: string
     website: string
     descrizione: string
-    tags: Array<String>
+    tag: Array<String>
     position: Position
     contacts: Contacts
 }

@@ -23,11 +23,30 @@ app.listen(PORT, () => {
 	console.log(`Backend ready at http://localhost:${PORT}/`)
 })
 
-app.get('/institutes', (req, res) => {
+app.get('/instituti', (req, res) => {
 	console.log(`Requested institutes from ${req.hostname}`)
 
 	const institutes = database.getInstitutes();
 	res.json(institutes);
+})
+
+app.get('/sedi', (req, res) => {
+	console.log(`Requested schools from ${req.hostname}`)
+
+	/** @type {Array<import('./database').Sede>} */
+	let sedi = [];
+
+	const INSTITUTES = database.getInstitutes();
+	INSTITUTES.forEach(institute => sedi.push(...institute.sedi));
+
+	res.json(sedi);
+})
+
+app.get('/opendays', (req, res) => {
+	console.log(`Requested open days from ${req.hostname}`)
+
+	const opendays = database.getOpenDays();
+	res.json(opendays);
 })
 
 app.get('/video/:id', (req, res) => {
