@@ -18,6 +18,7 @@
         "humao.rest-client",
         "sonarsource.sonarlint-vscode",
         "redhat.vscode-yaml",
-        "astro-build.astro-vscode"
+        "astro-build.astro-vscode",
+        "bierner.markdown-preview-github-styles"
     ]
 }

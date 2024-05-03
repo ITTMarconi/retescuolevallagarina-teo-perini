@@ -1,11 +1,53 @@
 ---
-import Layout from "../layouts/Layout.astro";
-
+import Icon from '../components/Icon.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
-
 <Layout>
-
-	<h1>Ciao</h1>
-
-</Layout>
+	<div>
+	  <h1 class="font-bold text-center mt-8">DIREZIONE <br /> FUTURO</h1>
+  
+	  <nav class="flex justify-center mt-16">
+		<a href="" class="flex flex-col items-center">
+		  <Icon code="e7ee" />
+		  <span>Isituti</span>
+		</a>
+		<a href="" class="flex flex-col items-center">
+		  <Icon code="ebcc" />
+		  <span>Open Day</span>
+		</a>
+		<a href="" class="flex flex-col items-center">
+		  <Icon code="e0c8" />
+		  <span>Mappa scuole</span>
+		</a>
+		<a href="" class="flex flex-col items-center">
+		  <Icon code="e887" />
+		  <span>Help</span>
+		</a>
+	  </nav>
+	</div>
+  </Layout>
+  <style>
+	.font-bold {
+	  font-weight: bold;
+	  font-size: 2rem;
+	}
+	.flex {
+	  display: flex;
+	}
+	.justify-center {
+	  justify-content: center;
+	}
+	.items-center {
+	  align-items: center;
+	}
+	.mt-8 {
+	  margin-top: 2rem;
+	}
+	.mt-16 {
+	  margin-top: 4rem;
+	}
+	.text-center {
+	  text-align: center;
+	}
+  </style>
