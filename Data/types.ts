@@ -20,11 +20,13 @@ export type Sede = {
     name: string
     director: string
     website: string
+    descrizione: string
+    tags: Array<String>
     position: Position
     contacts: Contacts
 }
 export type Institute = {
     id: string
     logo_url: string
-    Sedi: Array<Sede>
+    sedi: Array<Sede>
 }
