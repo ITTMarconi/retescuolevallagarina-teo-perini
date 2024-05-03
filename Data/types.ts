@@ -31,3 +31,17 @@ export type Institute = {
     video_url: string
     sedi: Array<Sede>
 }
+
+///////////////////////////////////////
+
+export type Orario = {
+    attivita: string
+    descrizione: string
+    inizio_orario: Date
+    fine_orario: Date
+}
+
+export type OpenDay = {
+    sede_id: string;
+    orari: Array<Orario>;
+}
