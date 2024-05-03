@@ -1,7 +1,7 @@
 ---
 import Icon from "../components/Icon.astro";
 import Layout from "../layouts/Layout.astro";
-import "../styles/common.css"
+import "../styles/common.css";
 ---
 
 <Layout>
@@ -9,22 +9,42 @@ import "../styles/common.css"
 		<h1 class="font-bold">DIREZIONE <br /> FUTURO</h1>
 
 		<nav>
-			<a href="">
-				<Icon code="e7ee" color="var(--foreground-secondary)" icon_size="9rem" />
-				<span class="font-light">Isituti</span>
-			</a>
-			<a href="">
-				<Icon code="ebcc" color="var(--foreground-secondary)" icon_size="9rem" />
-				<span class="font-light">Open Day</span>
-			</a>
-			<a href="">
-				<Icon code="e0c8" color="var(--foreground-secondary)" icon_size="9rem" />
-				<span class="font-light">Mappa scuole</span>
-			</a>
-			<a href="">
-				<Icon code="e887" color="var(--foreground-secondary)" icon_size="9rem" />
-				<span class="font-light">Help</span>
-			</a>
+			<div>
+				<a href="">
+					<Icon
+						code="e7ee"
+						color="var(--foreground-secondary)"
+						icon_size="9.5rem"
+					/>
+					<span class="font-light">Isituti</span>
+				</a>
+				<a href="">
+					<Icon
+						code="ebcc"
+						color="var(--foreground-secondary)"
+						icon_size="9.5rem"
+					/>
+					<span class="font-light">Open Day</span>
+				</a>
+			</div>
+			<div>
+				<a href="">
+					<Icon
+						code="e0c8"
+						color="var(--foreground-secondary)"
+						icon_size="9.5rem"
+					/>
+					<span class="font-light">Mappa scuole</span>
+				</a>
+				<a href="">
+					<Icon
+						code="e887"
+						color="var(--foreground-secondary)"
+						icon_size="9.5rem"
+					/>
+					<span class="font-light">Help</span>
+				</a>
+			</div>
 		</nav>
 	</main>
 </Layout>
@@ -40,8 +60,8 @@ import "../styles/common.css"
 	}
 
 	h1 {
-		font-size: 4.5rem;
-		padding: 1em 0 0 .8em;
+		font-size: 5rem;
+		padding: 1em 0 0 0.8em;
 		color: var(--foreground-primary);
 	}
 
@@ -49,6 +69,14 @@ import "../styles/common.css"
 		width: 100%;
 		display: flex;
 		justify-content: center;
+		flex-wrap: wrap;
+		gap: 4em;
+	}
+	
+	div {
+		display: flex;
+		justify-content: center;
+		flex-wrap: nowrap;	
 		gap: 4em;
 	}
 
