@@ -1,12 +1,14 @@
 {
   "nome": "CFP Opera Armida Barelli",
   "codice_MIUR": "TNCF005001",
-  "scuole": [
+  "sedi": [
     {
       "codice_MIUR": "TNCF005001",
       "name": "CFP Opera Armida Barelli",
       "dirigente": "Bernardo Zanoner",
       "direttore": "Camilla Cestari",
+      "descrizione": "",
+      "tag": [ "Barelli", "parrucchiere", "massaggiatrice", "estetista"],
       "posizione": {
         "indirizzo": "Via Setaioli, 5 - 38068 ROVERETO",
         "latitudine": "45.88750266631085", 
@@ -42,6 +44,8 @@
       "name": "Settore Servizi",
       "dirigente": "Bernardo Zanoner",
       "direttore": "Camilla Cestari",
+      "descrizione": "",
+      "tag": [ "Barelli", "parrucchiere", "massaggiatrice", "estetista"],
       "posizione": {
         "indirizzo": "Via Setaioli, 5 - 38068 ROVERETO",
         "latitudine": "45.88750266631085", 

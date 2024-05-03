@@ -1,12 +1,14 @@
 {
   "nome": "Liceo Internazionale Arcivescovile",
   "codice_MIUR": "TN1M00200X",
-  "scuole": [
+  "sedi": [
     {
       "codice_MIUR": "TN1M00200X",
       "name": "Collegio Arcivescovile Dame Inglesi",
       "dirigente": "Christian Bonazza",
       "direttore": "Bruno Daves",
+      "descrizione": "",
+      "tag": [ "arcivescovile", "liceo", "lia" ],
       "posizione": {
         "indirizzo": "Corso Bettini, 71 - 38068 ROVERETO",
         "latitudine": "45.896796472675156", 
@@ -45,6 +47,8 @@
       "name": "Scuola Secondaria di primo grado Arcivescovile Dame Inglesi",
       "dirigente": "Christian Bonazza",
       "direttore": "Bruno Daves",
+      "descrizione": "",
+      "tag": [ "arcivescovile", "liceo", "lia" ],
       "posizione": {
         "indirizzo": "Corso Bettini, 71 - 38068 ROVERETO",
         "latitudine": "45.896796472675156", 
@@ -84,6 +88,8 @@
       "name": "Liceo Linguistico Arcivescovile Dame Inglesi",
       "dirigente": "Christian Bonazza",
       "direttore": "Bruno Daves",
+      "descrizione": "",
+      "tag": [ "arcivescovile", "liceo", "lia" ],
       "posizione": {
         "indirizzo": "Corso Bettini, 71 - 38068 ROVERETO",
         "latitudine": "45.896796472675156", 

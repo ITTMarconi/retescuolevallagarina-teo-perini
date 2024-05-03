@@ -1,12 +1,14 @@
 {
   "nome": "Istituto di Formazione Professionale Alberghiero",
   "codice_MIUR": "TNCF011001",
-  "scuole": [
+  "sedi": [
     {
       "codice_MIUR": "TNCF011001",
       "name": "Istituto di Formazione Professionale Alberghiero",
       "dirigente": "Vito Rovigo",
       "direttore": "Cazzani Daniela",
+      "descrizione": "",
+      "tag": [ "alberghiero", "cucina", "pasticceria" ],
       "posizione": {
         "indirizzo": "Viale Dei Colli, 17 - 38068 ROVERETO",
         "latitudine": "45.89080798116856", 
@@ -46,6 +48,8 @@
       "name": "Settore Industria e Artigianato",
       "dirigente": "Vito Rovigo",
       "direttore": "Cazzani Daniela",
+      "descrizione": "",
+      "tag": [ "alberghiero", "cucina", "pasticceria" ],
       "posizione": {
         "indirizzo": "Viale Dei Colli, 17 - 38068 ROVERETO",
         "latitudine": "45.89080798116856", 
@@ -85,6 +89,8 @@
       "name": "Settore Servizi",
       "dirigente": "Vito Rovigo",
       "direttore": "Cazzani Daniela",
+      "descrizione": "",
+      "tag": [ "alberghiero", "cucina", "pasticceria" ],
       "posizione": {
         "indirizzo": "Viale Dei Colli, 17 - 38068 ROVERETO",
         "latitudine": "45.89080798116856", 
@@ -123,6 +129,8 @@
       "name": "Settore Servizi Serale",
       "dirigente": "Vito Rovigo",
       "direttore": "Cazzani Daniela",
+      "descrizione": "",
+      "tag": [ "alberghiero", "cucina", "pasticceria" ],
       "posizione": {
         "indirizzo": "Viale Dei Colli, 17 - 38068 ROVERETO",
         "latitudine": "45.89080798116856", 

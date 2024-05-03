@@ -1,6 +1,5 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import '../styles/common.css';
+import "../styles/common.css";
 ---
 
 <!doctype html>
@@ -13,11 +12,19 @@ import '../styles/common.css';
     <link rel="stylesheet" href="https://use.typekit.net/nmt0aht.css" />
 
     <!-- Icon link by Google Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
 
     <title>Test</title>
   </head>
   <body>
     <slot />
   </body>
+  <style>
+    body {
+      background-color: var(--background-primary);
+    }
+  </style>
 </html>

@@ -7,6 +7,8 @@
             "name": "NOME SEDE",
             "dirigente": "NOME DIRIGENTE",
             "direttore": "NOME DIRETTORE",
+            "descrizione": "Lorem ipsium...",
+            "tag": [ "tecnico", "artistico" ],
             "posizione": {
                 "indirizzo": "INDIRIZZO SEDE",
                 "latitudine": "LATITUDINE SEDE",

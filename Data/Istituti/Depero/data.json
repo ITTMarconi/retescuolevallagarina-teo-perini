@@ -1,11 +1,13 @@
 {
   "nome": "Liceo Artistico Depero",
   "codice_MIUR": "TNSD020011",
-  "scuole": [
+  "sedi": [
     {
       "codice_MIUR": "TNSD020011",
       "name": "Liceo Artistico Depero",
       "dirigente": "Daniela Simoncelli",
+      "descrizione": "",
+      "tag": [ "Artistico", "Depero"],
       "posizione": {
         "indirizzo": "Via Delle Fosse, 9 - 38068 ROVERETO",
         "latitudine": "45.89562750313714", 
@@ -44,6 +46,8 @@
       "codice_MIUR": "TNSD02000X",
       "name": "Liceo Artistico Vittoria",
       "dirigente": "Daniela Simoncelli",
+      "descrizione": "",
+      "tag": [ "Artistico", "Depero"],
       "posizione": {
         "indirizzo": "Via Zambra, 3 - 38121 TRENTO",
         "latitudine": "46.092990552099664", 
@@ -82,6 +86,8 @@
       "codice_MIUR": "TNSD02000X",
       "name": "Liceo Musicale Coreutico",
       "dirigente": "Daniela Simoncelli",
+      "descrizione": "",
+      "tag": [ "Artistico", "Depero"],
       "posizione": {
         "indirizzo": "Vicolo S Maria Maddalena, 16 - 38122 TRENTO",
         "latitudine": "46.06909347331769", 

@@ -1,11 +1,13 @@
 {
   "nome": "C.F.P. U.P.T. - Scuola delle Professioni per il Terziario",
   "codice_MIUR": "TNFP000001",
-  "scuole": [
+  "sedi": [
     {
       "codice_MIUR": "TNFP000001",
       "name": "C.F.P. U.P.T. - Scuola delle Professioni per il Terziario",
       "dirigente": "Walter Iori",
+      "descrizione": "",
+      "tag": ["UPT"],
       "posizione": {
         "indirizzo": "Via Pasqui, 10 - 38068 ROVERETO",
         "latitudine": "45.89826946898197", 

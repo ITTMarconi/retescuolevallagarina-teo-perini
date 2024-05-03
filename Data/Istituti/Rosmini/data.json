@@ -1,11 +1,13 @@
 {
   "nome": "Liceo Antonio Rosmini",
   "codice_MIUR": "TNPC02000A",
-  "scuole": [
+  "sedi": [
     {
       "codice_MIUR": "TNPC02000A",
       "name": "Liceo Antonio Rosmini",
       "dirigente": "Paolo Pendenza",
+      "descrizione": "",
+      "tag": [ "Rosimini", "Liceo", "Classico", "Linguistico", "Scientifico", "Scienze Applicate"],
       "posizione": {
         "indirizzo": "Corso Bettini, 86 - 38068 ROVERETO",
         "latitudine": "45.89606734364496",
@@ -44,6 +46,8 @@
       "codice_MIUR": "TNPC02000A",
       "name": "Liceo Classico",
       "dirigente": "Paolo Pendenza",
+      "descrizione": "",
+      "tag": [ "Rosimini", "Liceo", "Classico", "Linguistico", "Scientifico", "Scienze Applicate"],
       "posizione": {
         "indirizzo": "Corso Bettini, 86 - 38068 ROVERETO",
         "latitudine": "45.89606734364496",
@@ -82,6 +86,8 @@
       "codice_MIUR": "TNPC02000A",
       "name": "Liceo Linguistico",
       "dirigente": "Paolo Pendenza",
+      "descrizione": "",
+      "tag": [ "Rosimini", "Liceo", "Classico", "Linguistico", "Scientifico", "Scienze Applicate"],
       "posizione": {
         "indirizzo": "Corso Bettini, 86 - 38068 ROVERETO",
         "latitudine": "45.89606734364496",
@@ -120,6 +126,8 @@
       "codice_MIUR": "TNPC02000A",
       "name": "Liceo Scientifico",
       "dirigente": "Paolo Pendenza",
+      "descrizione": "",
+      "tag": [ "Rosimini", "Liceo", "Classico", "Linguistico", "Scientifico", "Scienze Applicate"],
       "posizione": {
         "indirizzo": "Corso Bettini, 86 - 38068 ROVERETO",
         "latitudine": "45.89606734364496",
@@ -158,6 +166,8 @@
       "codice_MIUR": "TNPC02000A",
       "name": "Liceo Scientifico opzione Scienze Applicate",
       "dirigente": "Paolo Pendenza",
+      "descrizione": "",
+      "tag": [ "Rosimini", "Classico", "Linguistico", "Scientifico", "Scienze Applicate"],
       "posizione": {
         "indirizzo": "Corso Bettini, 86 - 38068 ROVERETO",
         "latitudine": "45.89606734364496",

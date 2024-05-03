@@ -1,9 +1,13 @@
 ---
+import "../styles/common.css"
+
 interface Props {
   code: string;
+  color: string;
+  icon_size: string;
 }
 
-const { code } = Astro.props;
+const { code, color, icon_size } = Astro.props;
 ---
 
-<span class="material-symbols-outlined">&#x{code}</span>
+<span class="material-symbols-outlined" style={`color: ${color}; font-size: ${icon_size};`}>&#x{code}</span>
