@@ -8,3 +8,7 @@ GET http://localhost:25565/updateDB
 ###
 
 GET http://localhost:25565/logo/TNTD020009
+
+###
+
+GET http://localhost:25565/video/TNTD020009

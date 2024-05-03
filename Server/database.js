@@ -1,6 +1,5 @@
 //@ts-check
 
-const { exit } = require('process');
 const path = require('path')
 const fs = require('fs');
 
@@ -14,13 +13,6 @@ const fs = require('fs');
 module.exports = class Database {
 	/** @type {Array<Institute>} */
 	_database = [];
-
-	Database() {
-		if (this.fetchFromDisk()) {
-			console.log(`Error fetching from disk, exiting...`)
-			exit(1)
-		}
-	}
 
 	/** @returns {boolean} - returns true if an error occurred */
 	fetchFromDisk() {
@@ -67,9 +59,16 @@ module.exports = class Database {
 
 			const LOGO_PATH = path.join(INSTITUTE_PATH, "logo.png")
 			if (fs.existsSync(LOGO_PATH)) {
-				institute_data.logo_url = path.join(path.dirname(INSTITUTE_PATH), "logo.png");
+				institute_data.logo_url = LOGO_PATH;
 			} else {
 				console.warn(`File '${LOGO_PATH}' does not exist`)
+			}
+
+			const VIDEO_PATH = path.join(INSTITUTE_PATH, "video.mp4")
+			if (fs.existsSync(VIDEO_PATH)) {
+				institute_data.video_url = VIDEO_PATH;
+			} else {
+				console.warn(`File '${VIDEO_PATH}' does not exist`)
 			}
 
 			database_swap.push(institute_data);
@@ -92,9 +91,7 @@ module.exports = class Database {
 		console.log("Requested search of " + id);
 
 		for (const institute of this._database) {
-			console.table(institute)
 			for (const sede of institute.sedi) {
-				console.log(`\t Comparing ${id} with ${sede.codice_MIUR}`)
 				if (sede.codice_MIUR === id) {
 					console.log("Found institute!");
 					return institute;
