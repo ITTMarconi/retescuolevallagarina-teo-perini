@@ -1,0 +1,12 @@
+{
+    "name": "NOME ISTITUTO",
+    "codice_MIUR": "CODICE MIUR",
+    "orari": [
+        {
+            "inizio_orario": "2023-11-25T10:00:00+01:00",
+            "fine_orario": "2023-11-25T10:00:00+01:00",
+            "attivita": "ATTIVITA OPEN DAY",
+            "descrizione": "DESCRIZIONE ATTIVITA"
+        }
+    ]
+}

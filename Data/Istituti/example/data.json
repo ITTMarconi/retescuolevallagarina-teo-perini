@@ -1,6 +1,6 @@
 {
     "nome": "NOME ISTIUTO",
-    "id": "ID ISTITUTO",
+    "codice_MIUR": "ID ISTITUTO",
     "sedi": [
         {
             "codice_MIUR": "CODICE MIUR",
