@@ -1,0 +1,17 @@
+{
+    "codice_MIUR": "TNCF005001",
+    "orari": [
+        {
+            "inizio_orario": "2023-12-02T14:00:00+01:00",
+            "fine_orario": "2023-12-02T16:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "In presenza. Presentazione dell’offerta formativa. Visita della scuola."
+        },
+        {
+            "inizio_orario": "2024-01-20T14:00:00+01:00",
+            "fine_orario": "2024-01-20T16:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "In presenza. Presentazione dell’offerta formativa. Visita della scuola."
+        }
+    ]
+}

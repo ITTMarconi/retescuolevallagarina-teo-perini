@@ -1,0 +1,29 @@
+{
+    "codice_MIUR": "TNTD020009",
+    "orari": [
+        {
+            "inizio_orario": "2023-11-11T09:00:00+01:00",
+            "fine_orario": "2023-11-11T11:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Presentazione dell’offerta formativa e degli indirizzi di studio. Visita della scuola con postazioni informative."
+        },
+        {
+            "inizio_orario": "2023-11-20T19:00:00+01:00",
+            "fine_orario": "2023-11-20T21:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Presentazione dell’offerta formativa e degli indirizzi di studio. Visita della scuola con postazioni informative."
+        },
+        {
+            "inizio_orario": "2023-12-14T19:00:00+01:00",
+            "fine_orario": "2023-12-14T21:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Presentazione dell’offerta formativa e degli indirizzi di studio. Visita della scuola con postazioni informative."
+        },
+        {
+            "inizio_orario": "2024-01-17T19:00:00+01:00",
+            "fine_orario": "2024-01-17T21:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Presentazione dell’offerta formativa e degli indirizzi di studio. Visita della scuola con postazioni informative."
+        }
+    ]
+}

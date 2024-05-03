@@ -1,0 +1,29 @@
+{
+    "codice_MIUR": "TNTF02000G",
+    "orari": [
+        {
+            "inizio_orario": "2023-11-24T18:00:00+01:00",
+            "fine_orario": "2023-11-25T20:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "È gradita la prenotazione con le modalità presenti sul sito della scuola www.marconirovereto.it"
+        },
+        {
+            "inizio_orario": "2023-12-02T15:00:00+01:00",
+            "fine_orario": "2023-12-02T17:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "È gradita la prenotazione con le modalità presenti sul sito della scuola www.marconirovereto.it"
+        },
+        {
+            "inizio_orario": "2023-12-15T18:00:00+01:00",
+            "fine_orario": "2023-12-15T20:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "È gradita la prenotazione con le modalità presenti sul sito della scuola www.marconirovereto.it"
+        },
+        {
+            "inizio_orario": "2024-01-13T15:00:00+01:00",
+            "fine_orario": "2024-01-13T17:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "È gradita la prenotazione con le modalità presenti sul sito della scuola www.marconirovereto.it"
+        }
+    ]
+}
