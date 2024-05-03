@@ -47,7 +47,7 @@
       "name": "Liceo delle Scienze Umane",
       "dirigente": "Manuela Broz",
       "descrizione": "",
-      "tag": [ "Filzi", "Scienze Umane", "Economico Sociale"],
+      "tag": [ "liceo"],
       "posizione": {
         "indirizzo": "Corso Rosmini, 61 - 38068 ROVERETO",
         "latitudine": "45.89133141950716", 
@@ -87,7 +87,7 @@
       "name": "Liceo delle Scienze Umane opzione Economico Sociale",
       "dirigente": "Manuela Broz",
       "descrizione": "",
-      "tag": [ "Filzi", "Scienze Umane", "Economico Sociale"],
+      "tag": [ "liceo"],
       "posizione": {
         "indirizzo": "Corso Rosmini, 61 - 38068 ROVERETO",
         "latitudine": "45.89133141950716", 

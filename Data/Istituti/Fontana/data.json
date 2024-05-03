@@ -47,7 +47,7 @@
       "name": "Istituto Tecnico per il settore economico",
       "dirigente": "Giuseppe Santoli",
       "descrizione": "",
-      "tag": [ "Fontana", "Tecnologico", "Economico"],
+      "tag": [ "tecnico"],
       "posizione": {
         "indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
         "latitudine": "45.893601249611514", 
@@ -87,7 +87,7 @@
       "name": "Istituto Tecnico per il settore tecnologico",
       "dirigente": "Giuseppe Santoli",
       "descrizione": "",
-      "tag": [ "Fontana", "Tecnologico", "Economico"],
+      "tag": [ "tecnico"],
       "posizione": {
         "indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
         "latitudine": "45.893601249611514", 
@@ -127,7 +127,7 @@
       "name": "Istituto Tecnologico per il settore economico serale",
       "dirigente": "Giuseppe Santoli",
       "descrizione": "",
-      "tag": [ "Fontana", "Tecnologico", "Economico"],
+      "tag": [ "tecnico"],
       "posizione": {
         "indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
         "latitudine": "45.893601249611514", 
@@ -167,7 +167,7 @@
       "name": "Istituto Tecnologico per il settore tecnologico serale",
       "dirigente": "Giuseppe Santoli",
       "descrizione": "",
-      "tag": [ "Fontana", "Tecnologico", "Economico"],
+      "tag": [ "tecnico"],
       "posizione": {
         "indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
         "latitudine": "45.893601249611514", 
