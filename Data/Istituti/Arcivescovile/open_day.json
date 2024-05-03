@@ -1,0 +1,23 @@
+{
+    "codice_MIUR": "TN1M00200X",
+    "orari": [
+        {
+            "inizio_orario": "2023-11-25T14:00:00+01:00",
+            "fine_orario": "2023-11-25T18:00:00+01:00",
+            "attivita": "LIA DAY - Scuola Aperta",
+            "descrizione": "Presentazione indirizzi, visita alla scuola. In presenza"
+        },
+        {
+            "inizio_orario": "2023-12-16T14:00:00+01:00",
+            "fine_orario": "2023-12-16T18:00:00+01:00",
+            "attivita": "LIA DAY - Scuola Aperta",
+            "descrizione": "Presentazione indirizzi, visita alla scuola. In presenza"
+        },
+        {
+            "inizio_orario": "2024-01-13T14:00:00+01:00",
+            "fine_orario": "2024-01-13T18:00:00+01:00",
+            "attivita": "LIA DAY - Scuola Aperta",
+            "descrizione": "Presentazione indirizzi, visita alla scuola. In presenza"
+        }
+    ]
+}

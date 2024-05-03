@@ -1,0 +1,29 @@
+{
+    "codice_MIUR": "TNPC02000A",
+    "orari": [
+        {
+            "inizio_orario": "2023-11-18T14:30:00+01:00",
+            "fine_orario": "2023-11-18T17:30:00+01:00",
+            "attivita": "Scuola Aperta",
+            "descrizione": "Presentazione indirizzi, visita alla scuola in presenza p/o Liceo Rosmini"
+        },
+        {
+            "inizio_orario": "2023-12-01T20:00:00+01:00",
+            "fine_orario": "2023-12-01T22:00:00+01:00",
+            "attivita": "Serata Orientamento",
+            "descrizione": "Per studenti e genitori in presenza p/o Liceo Rosmini"
+        },
+        {
+            "inizio_orario": "2023-12-16T14:30:00+01:00",
+            "fine_orario": "2023-12-16T17:30:00+01:00",
+            "attivita": "Scuola Aperta",
+            "descrizione": "Presentazione indirizzi, visita alla scuola in presenza p/o Liceo Rosmini"
+        },
+        {
+            "inizio_orario": "2024-01-13T14:30:00+01:00",
+            "fine_orario": "2024-01-13T17:30:00+01:00",
+            "attivita": "Scuola Aperta",
+            "descrizione": "Presentazione indirizzi, visita alla scuola in presenza p/o Liceo Rosmini"
+        }
+    ]
+}

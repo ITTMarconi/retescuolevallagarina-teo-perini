@@ -1,0 +1,35 @@
+{
+    "codice_MIUR": "CODICE MIUR",
+    "orari": [
+        {
+            "inizio_orario": "2023-10-20T15:00:00+01:00",
+            "fine_orario": "2023-10-20T18:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Presso lo STEAM Campus, via Madonna del Monte 6"
+        },
+        {
+            "inizio_orario": "2023-11-04T15:00:00+01:00",
+            "fine_orario": "2023-11-04T18:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Presso lo STEAM Campus, via Madonna del Monte 6"
+        },
+        {
+            "inizio_orario": "2023-11-25T15:00:00+01:00",
+            "fine_orario": "2023-11-25T18:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Presso lo STEAM Campus, via Madonna del Monte 6"
+        },
+        {
+            "inizio_orario": "2023-12-16T15:00:00+01:00",
+            "fine_orario": "2023-12-16T18:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Presso lo STEAM Campus, via Madonna del Monte 6"
+        },
+        {
+            "inizio_orario": "2024-01-13T15:00:00+01:00",
+            "fine_orario": "2024-01-13T18:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Presso lo STEAM Campus, via Madonna del Monte 6"
+        }
+    ]
+}

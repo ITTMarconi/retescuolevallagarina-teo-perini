@@ -1,0 +1,23 @@
+{
+    "codice_MIUR": "TNSD020011",
+    "orari": [
+        {
+            "inizio_orario": "2023-12-02T10:30:00+01:00",
+            "fine_orario": "2023-12-02T12:30:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Appuntamento presso la sede del BIENNIO in via Balista, 1. Presentazione dell’offerta formativa e visita alla scuola."
+        },
+        {
+            "inizio_orario": "2023-12-15T18:00:00+01:00",
+            "fine_orario": "2023-12-02T20:00:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Appuntamento presso la sede del BIENNIO in via Balista, 1. Presentazione dell’offerta formativa e visita alla scuola."
+        },
+        {
+            "inizio_orario": "2024-01-20T14:30:00+01:00",
+            "fine_orario": "2024-01-20T16:30:00+01:00",
+            "attivita": "Open Day",
+            "descrizione": "Appuntamento presso la sede del TRIENNIO In via delle Fosse, 9. Visita agli spazi della scuola con mostra dei lavori svolti dai ragazzi del triennio nei diversi indirizzi del liceo."
+        }
+    ]
+}
