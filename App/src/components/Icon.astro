@@ -13,6 +13,11 @@ const { code, color, ...rest } = Astro.props;
   span {
     color: var(--color);
     /* font-size: var(--icon_size); */
+    transition: 200ms;
+  }
+
+  span:hover {
+    transition: 100ms;
   }
 </style>
 

@@ -127,9 +127,27 @@ module.exports = class Database {
 
 	/** 
 	 * @param id {string}
+	 * @returns {Sede | null} */
+	getSedeByID(id) {
+		console.log("Requested sede: " + id);
+
+		for (const institute of this._institutes_database) {
+			for (const sede of institute.sedi) {
+				if (sede.codice_MIUR === id) {
+					console.log("Found sede!");
+					return sede;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/** 
+	 * @param id {string}
 	 * @returns {Institute | null} */
-	searchInstituteByID(id) {
-		console.log("Requested search of " + id);
+	getInstituteByID(id) {
+		console.log("Requested istitute: " + id);
 
 		for (const institute of this._institutes_database) {
 			for (const sede of institute.sedi) {

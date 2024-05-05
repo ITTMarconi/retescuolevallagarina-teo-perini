@@ -7,9 +7,7 @@
             "name": "Liceo Steam International",
             "dirigente": "Laura Scalfi",
             "descrizione": "",
-            "tag": [
-                "liceo"
-            ],
+            "tag": "liceo",
             "posizione": {
                 "indirizzo": "Piazzale Orsi, 1 - 38068 ROVERETO",
                 "latitudine": "45.88245950158836",

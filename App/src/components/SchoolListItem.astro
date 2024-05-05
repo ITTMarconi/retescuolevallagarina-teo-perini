@@ -1,0 +1,167 @@
+---
+import { getMainSede, type Institute, type Sede } from '../../../Data/types';
+import { SERVER_ADDRESS, SERVER_PORT } from '../../constants';
+import Icon from './Icon.astro';
+
+interface Props {
+    institute: Institute;
+}
+
+const { institute } = Astro.props;
+const MAIN_SEDE: Sede = getMainSede(institute)!;
+---
+
+<school-list-item data-istituto_id={institute.codice_MIUR}>
+    <header>
+        <a href={`/sede/${MAIN_SEDE.codice_MIUR}`}>
+            <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${institute.logo_url}`} alt="" srcset="" />
+            <span>{MAIN_SEDE.name}</span>
+        </a>
+
+        <nav>
+            <button onclick={`window.open("${MAIN_SEDE.website}", "_blank")`}>
+                <Icon code="f728" color="var(--foreground-secondary)" />
+            </button>
+
+            <button id={`btn-${institute.codice_MIUR}`}>
+                <Icon code="f06a" color="var(--foreground-secondary)" />
+            </button>
+
+            <button onclick={`window.open("https://www.google.com/maps/search/?api=1&query=${MAIN_SEDE.posizione.indirizzo}", "_blank")`}>
+                <Icon code="e0c8" color="var(--foreground-secondary)" />
+            </button>
+
+        </nav>
+    </header>
+
+    <video id={`video-${institute.codice_MIUR}`} src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${institute.video_url}`} controls/> 
+</school-list-item>
+
+<script is:inline define:vars={{ institute }}>
+    const ID = institute.codice_MIUR
+
+    const VIDEO = document.getElementById(`video-${ID}`);
+    const BUTTON = document.getElementById(`btn-${ID}`)
+
+    let isVideoCollapsed = true;
+
+    BUTTON.addEventListener('click', () => toggleVideo());
+    function toggleVideo() {
+        if(this.isVideoCollapsed) {
+            VIDEO.style.display = "none";
+            BUTTON.children[0].style.color = "";
+        } else {
+            VIDEO.style.display = "block";
+            BUTTON.children[0].style.color = "var(--tint-orange)";
+        }
+
+        this.isVideoCollapsed = !this.isVideoCollapsed
+    }
+</script>
+
+<style>
+    video {
+        border-radius: 0 0 0.6rem 0.6rem;
+        outline: 0.15rem solid var(--foreground-tertiary);
+
+        width: 100%;
+
+        display: none;
+        transform: 200ms;
+    }
+
+    school-list-item {
+        border-radius: 0.6rem;
+        outline: 0.15rem solid var(--foreground-tertiary);
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+
+        transition: 200ms;
+    }
+
+    school-list-item:hover {
+        outline: 0.15rem solid var(--foreground-secondary);
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+        transition: 100ms;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        /* gap: 1.8rem; */
+    }
+
+    header > a {
+        padding: 0.5rem 1rem;
+
+        color: unset;
+        text-decoration-line: unset;
+
+        display: flex;
+        flex-basis: 100%;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 1rem;
+
+        cursor: pointer;
+    }
+
+    header > a > img {
+        height: 4rem;
+        /* width: 5rem; */
+
+        /* padding: 0.5rem 1rem; */
+
+        /* border: 1px solid green; */
+        border-radius: 0.8rem;
+    }
+
+    header > nav {
+        display: none;
+    }
+
+    /* For tablets: */
+    @media only screen and (min-width: 600px) {
+        header > nav {
+            padding: 0.5rem 1.5rem;
+
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 0.2rem;
+        }
+
+        nav > button {
+            padding: 0.4rem;
+
+            border: unset;
+            background-color: unset;
+            
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+
+            cursor: pointer;
+        }
+
+        nav > button:hover span {
+            color: var(--tint-orange);
+        }
+        nav > button:active span {
+            /* TODO: Find nicer color */
+            color: var(--background-primary);
+        }
+
+        button > span {
+            font-size: 2.2rem;
+        }
+    }
+
+    /* For desktop: */
+    @media only screen and (min-width: 768px) { }
+</style>

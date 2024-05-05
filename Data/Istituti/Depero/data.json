@@ -7,7 +7,7 @@
       "name": "Liceo Artistico Depero",
       "dirigente": "Daniela Simoncelli",
       "descrizione": "",
-      "tag": [ "liceo"],
+      "tag": "liceo",
       "posizione": {
         "indirizzo": "Via Delle Fosse, 9 - 38068 ROVERETO",
         "latitudine": "45.89562750313714", 
@@ -47,7 +47,7 @@
       "name": "Liceo Artistico Vittoria",
       "dirigente": "Daniela Simoncelli",
       "descrizione": "",
-      "tag": [ "liceo"],
+      "tag": "liceo",
       "posizione": {
         "indirizzo": "Via Zambra, 3 - 38121 TRENTO",
         "latitudine": "46.092990552099664", 
@@ -87,7 +87,7 @@
       "name": "Liceo Musicale Coreutico",
       "dirigente": "Daniela Simoncelli",
       "descrizione": "",
-      "tag": [ "liceo"],
+      "tag": "liceo",
       "posizione": {
         "indirizzo": "Vicolo S Maria Maddalena, 16 - 38122 TRENTO",
         "latitudine": "46.06909347331769", 

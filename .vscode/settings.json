@@ -1,4 +1,5 @@
 {
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
     "explorer.fileNesting.patterns": {
         "astro.config.mjs": "package*, tsconfig.json, env.d.ts",
         "README.md": ".*ignore, Dockerfile",

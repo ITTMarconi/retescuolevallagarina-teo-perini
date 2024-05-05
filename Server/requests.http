@@ -1,7 +1,10 @@
+###
+
 GET http://localhost:25565/instituti
 
 ###
-GET http://localhost:25565/sedi
+
+get http://localhost:25565/sedi
 
 ###
 
@@ -11,11 +14,20 @@ get http://localhost:25565/opendays
 
 GET http://localhost:25565/updateDB
 
+###
+
+get http://localhost:25565/institute/TNTD020009
 
 ###
 
-GET http://localhost:25565/logo/TNTD020009
+get http://localhost:25565/sede/TNTD020009
 
 ###
 
-GET http://localhost:25565/video/TNTD020009
+# GET http://localhost:25565/logo/TNTD020009
+
+###
+
+# GET http://localhost:25565/video/TNTD020009
+
+###

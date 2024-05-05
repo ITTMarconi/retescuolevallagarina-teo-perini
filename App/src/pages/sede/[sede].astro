@@ -1,0 +1,225 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Icon from '../../components/Icon.astro';
+
+import type { Institute, Sede } from '../../../../Data/types';
+import { SERVER_ADDRESS, SERVER_PORT } from '../../../constants';
+
+const { sede } = Astro.params;
+
+const SEDE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/sede/${sede}`);
+const SEDE: Sede = await SEDE_RAW.json();
+
+const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/institute/${sede}`);
+const INSTITUTE: Institute = await INSTITUTE_RAW.json();
+
+console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
+---
+
+<Layout>
+    <Navbar />
+
+    <main>
+        <header>
+            <div>
+                <h2>{SEDE.name}</h2>
+                <!-- <span>{SEDE.tag}</span> -->
+
+                <nav>
+                    <button onclick={`window.open("${SEDE.website}", "_blank")`}>
+                        <Icon code="f728" color="var(--foreground-secondary)" />
+                        <span>{SEDE.website}</span>
+                    </button>
+
+                    <button onclick={`window.open("https://www.google.com/maps/search/?api=1&query=${SEDE.posizione.indirizzo}", "_blank")`}>
+                        <Icon code="e0c8" color="var(--foreground-secondary)" />
+                        <span>{SEDE.posizione.indirizzo}</span>
+                    </button>
+                </nav>
+            </div>
+
+            <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.logo_url}`} alt="" />
+        </header>
+
+        <span>Dirigente: {SEDE.dirigente}</span>
+        <span>Direttore: {SEDE.direttore}</span>
+
+        <hr />
+
+        <span>Descrizione: {SEDE.descrizione}</span>
+
+        <hr />
+
+        <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
+
+        <hr />
+
+        TODO: altre scuole, eg. stesso istituto, stesso tipo (tag)
+        
+    </main>
+
+    <footer>
+        <span>
+            mail
+            
+            <br />
+
+            <table> {
+                SEDE.contacts.mail.map(mail => <tr>
+                    <td>{mail.description}</td>
+                    <td><a href={`mailto:${mail.mail}`}>{mail.mail}</a></td>
+                </tr>)
+            } </table>
+        </span>
+
+        <span>
+            numeri di telefono
+
+            <br />
+
+            <table> {
+                SEDE.contacts.phone.map(phone => <tr>
+                    <td>{phone.description}</td>
+                    <td><a href={`tel:${phone.numero}`}>{phone.numero}</a></td>
+                </tr>)
+            } </table>
+        </span>
+
+    </footer>
+</Layout>
+
+<style>
+    main {
+        padding: 2rem;
+
+        border-radius: 0.6rem;
+        outline: 0.15rem solid var(--foreground-tertiary);
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+
+        gap: 1rem;
+    }
+
+    main > header {
+        /* outline: 1px solid green; */
+
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+    }
+
+    header > img {
+        height: 12rem;
+
+        /* padding: 0.5rem 1rem; */
+        border-radius: 0.8rem;
+    }
+
+    header > div {
+        padding: 0.5rem 1rem;
+
+        color: unset;
+        text-decoration-line: unset;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 1.6rem;
+    }
+
+    header > div > span:first-child {
+    }
+
+    header > div > span:nth-child(2) {
+        width: fit-content;
+
+        padding: 0.4rem 1rem;
+
+        color: var(--background-primary);
+        /* outline: 2px solid var(--background-primary); */
+        border-radius: 2rem;
+
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: center;
+
+        display: flex;
+        justify-content: center;
+    }
+
+    header > div > nav {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: .1rem;
+    }
+
+    nav > button {
+        padding: 0.4rem;
+
+        border: unset;
+        background-color: unset;
+
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        cursor: pointer;
+    }
+
+    nav > button:hover span {
+        color: var(--tint-orange);
+    }
+
+    nav > button:hover span:nth-child(2) {
+        text-decoration: underline;
+        transition: 200ms;
+    }
+
+    nav > button:active span {
+        /* TODO: Find nicer color */
+        color: var(--background-primary);
+    }
+
+    button > span:first-child {
+        font-size: 2.2rem;
+    }
+
+    button > span:nth-child(2) {
+        transition: 200ms;
+    }
+
+/* ************************************************* */
+
+    footer {
+        padding: 3rem 0 2rem 0;
+        /* bottom: 0; */
+
+        background-color: var(--background-secondary);
+
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        gap: .1rem;
+    }
+
+    footer > span > table > tbody > tr > td {
+        text-align: right;
+    }
+
+/* ************************************************* */
+    video {
+        width: 400px;
+    }
+
+    a {
+        /* TODO: Get a better color for this */
+        color: var(--background-primary);
+        text-decoration: underline;
+    }
+</style>
