@@ -1,60 +1,97 @@
 ---
-import Icon from "./Icon.astro";
+import Icon from './Icon.astro';
+
+interface Prop {
+    current_view: string;
+}
+
+const { current_view } = Astro.props;
 ---
 
 <header>
-    <span>Icon</span>
+    <a href="/">
+        <img src="/logo_sito.svg" alt="" srcset="" />
+    </a>
 
     <nav>
-      <a href="/istituti">
-        <Icon code="e7ee" color="var(--foreground-secondary)" icon_size="2.2rem" />
-      </a>
-      <a href="/openday">
-        <Icon code="ebcc" color="var(--foreground-secondary)" icon_size="2.2rem" />
-      </a>
-      <a href="/map">
-        <Icon code="e0c8" color="var(--foreground-secondary)" icon_size="2.2rem" />
-      </a>
-      <a href="">
-        <Icon code="e887" color="var(--foreground-secondary)" icon_size="2.2rem" />
-      </a>
+        <a href="/istituti">
+            <Icon code="e7ee" color={current_view == 'istituti' ? 'var(--foreground-primary)' : 'var(--foreground-secondary)'} />
+        </a>
+        <a href="/openday">
+            <Icon code="ebcc" color={current_view == 'openday' ? 'var(--foreground-primary)' : 'var(--foreground-secondary)'} />
+        </a>
+        <a href="/map">
+            <Icon code="e0c8" color={current_view == 'map' ? 'var(--foreground-primary)' : 'var(--foreground-secondary)'} />
+        </a>
     </nav>
 </header>
 
 <style>
-  header {
-    width: 100%;
-    height: 3rem;
+    header {
+        width: 100%;
+        height: 3.8rem;
 
-    background-color: var(--background-primary);
+        position: sticky;
+        top: 0;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-  }
+        background-color: var(--background-primary);
 
-  /* header:first-child {
-    padding-left: .8rem;
-  }
-  header:last-child {
-    padding-right: .8rem;
-  } */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
 
-  header > span {
-    width: 40px;
-    height: 40px;
+    a { 
+        text-decoration-line: unset;
 
-    background-color: white;
-    color: var(--tint-orange);
-  }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-  a:hover span {
-    color: var(--tint-orange);
-  }
+    header > a {
+        height: calc(100% - 1rem);
+        padding: 0.5rem 1rem;
+        aspect-ratio: 1;
+    }
 
-  header > nav {
-    display: flex;
-    gap: 0.6rem;
-  }
+    header > a > img {
+        height: 100%;
+    }
+
+    header > nav {
+        padding: 0 1rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    a:hover span {
+        color: var(--tint-orange);
+    }
+
+    span {
+        font-size: 2.3rem;
+    }
+
+    /* For tablets: */
+    @media only screen and (min-width: 600px) {
+        span {
+            font-size: 2.5rem;
+        }
+    }
+
+    /* For desktop: */
+    @media only screen and (min-width: 768px) {
+        header {
+            height: 4rem;
+        }
+
+        span {
+            font-size: 3rem;
+        }
+    }
 </style>

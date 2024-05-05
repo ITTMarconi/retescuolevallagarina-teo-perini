@@ -7,10 +7,14 @@ const path = require('path')
 
 const database = new Database()
 const app = express()
+
 const PORT = 25565
 
 app.use(express.static(__dirname))
 app.use(express.json())
+
+/** @type {boolean} */
+let isDatabaseReady = false;
 
 app.listen(PORT, () => {
 	console.log("Starting backend...")
@@ -19,6 +23,8 @@ app.listen(PORT, () => {
 		console.log(`Error fetching from disk, exiting...`)
 		exit(1);
 	}
+
+    isDatabaseReady = true;
 
 	console.log(`Backend ready at http://localhost:${PORT}/`)
 })
@@ -98,9 +104,16 @@ app.get('/updateDB', (req, res) => {
 
 	if (database.fetchFromDisk()) {
 		res.sendStatus(500)
+        isDatabaseReady = false;
 	} else {
 		res.sendStatus(418)
 	}
+})
+
+app.get('/healthcheck', (req, res) => {
+    if(isDatabaseReady) {
+	    res.sendStatus(200)
+    }
 })
 
 app.get('*', (req, res) => {

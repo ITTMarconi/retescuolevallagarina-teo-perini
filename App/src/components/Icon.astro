@@ -4,16 +4,15 @@ import "../styles/common.css"
 interface Props {
   code: string;
   color: string;
-  icon_size: string;
 }
 
-const { code, color, icon_size, ...rest } = Astro.props;
+const { code, color, ...rest } = Astro.props;
 ---
 
-<style define:vars={{ color, icon_size }}>
+<style define:vars={{ color }}>
   span {
     color: var(--color);
-    font-size: var(--icon_size);
+    /* font-size: var(--icon_size); */
   }
 </style>
 
