@@ -9,8 +9,13 @@ import { SERVER_ADDRESS, SERVER_PORT } from '../../../constants';
 
 const { sede } = Astro.params;
 
-const SEDE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/sede/${sede}`);
-const SEDE: Sede = await SEDE_RAW.json();
+const SEDI_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/sedi`);
+const SEDI: Sede[] = await SEDI_RAW.json();
+
+const SEDE: Sede = SEDI.find(s => s.codice_MIUR === sede)
+const SIMILAR_SEDI: Sede[] = SEDI
+.filter(s => s.codice_MIUR !== sede)
+.filter(s => s.tag === SEDE.tag);
 
 const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/institute/${sede}`);
 const INSTITUTE: Institute = await INSTITUTE_RAW.json();
@@ -24,7 +29,7 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
     <main>
         <header>
             <div>
-                <h2>{SEDE.name}</h2>
+                <h2>{SEDE.name} <hr /> </h2>
                 <!-- <span>{SEDE.tag}</span> -->
 
                 <nav>
@@ -46,53 +51,61 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
         <span>Dirigente: {SEDE.dirigente}</span>
         <span>Direttore: {SEDE.direttore}</span>
 
-        <hr />
-
         <span>Descrizione: {SEDE.descrizione}</span>
 
-        <hr />
+        <!-- <hr /> -->
 
-        <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
+        <div>
+            <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
+        </div>
 
-        <hr />
+        <article>
+            <section>
+                <h2 class="font-regular">Altri {SEDE.tag.slice(0, -1).concat("i")}</h2>
+                <hr />
 
-        TODO: altre scuole, eg. stesso istituto, stesso tipo (tag)
+                <div> {
+                    SIMILAR_SEDI.map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)
+                } </div>
+            </section>
+
+            <section>
+                <h2 class="font-regular">Stesso istituto</h2>
+                <hr />
+                <div> {
+            INSTITUTE.sedi.map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)
+                } </div>
+            </section>
+        </article>
         
     </main>
 
     <footer>
-        <span>
-            mail
-            
-            <br />
-
-            <table> {
+        <table>
+            <th colspan="2">E-Mails <hr /></th>
+            {
                 SEDE.contacts.mail.map(mail => <tr>
                     <td>{mail.description}</td>
                     <td><a href={`mailto:${mail.mail}`}>{mail.mail}</a></td>
                 </tr>)
-            } </table>
-        </span>
+            }
+        </table>
 
-        <span>
-            numeri di telefono
-
-            <br />
-
-            <table> {
+        <table> 
+            <th colspan="2">Numeri di Telefono <hr /></th>
+            {
                 SEDE.contacts.phone.map(phone => <tr>
                     <td>{phone.description}</td>
                     <td><a href={`tel:${phone.numero}`}>{phone.numero}</a></td>
                 </tr>)
-            } </table>
-        </span>
-
+            }
+        </table>
     </footer>
 </Layout>
 
 <style>
     main {
-        padding: 2rem;
+        padding: 1rem;
 
         border-radius: 0.6rem;
         outline: 0.15rem solid var(--foreground-tertiary);
@@ -113,15 +126,27 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
         flex-wrap: nowrap;
     }
 
+    main > header > div {
+        flex-basis: 100%;
+    }
+
+    main > header > div > h2 {
+        padding: .8rem 0 0 0;
+        width: 100%;
+        text-align: center;
+    }
+
     header > img {
         height: 12rem;
-
         /* padding: 0.5rem 1rem; */
+
+        display: none;
+
         border-radius: 0.8rem;
     }
 
     header > div {
-        padding: 0.5rem 1rem;
+        /* padding: 0.5rem 1rem; */
 
         color: unset;
         text-decoration-line: unset;
@@ -160,7 +185,7 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
     }
 
     nav > button {
-        padding: 0.4rem;
+        padding: 0.2rem 0;
 
         border: unset;
         background-color: unset;
@@ -187,39 +212,162 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
     }
 
     button > span:first-child {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
     }
 
     button > span:nth-child(2) {
+        font-size: .9rem;
         transition: 200ms;
     }
 
 /* ************************************************* */
 
+    main > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div > video {
+        border-radius: 0.6rem;
+        outline: 0.15rem solid var(--foreground-tertiary);
+        width: 90%;
+    }
+
+/* ************************************************* */
+
+    main > article {
+        /* outline: 1px solid black; */
+
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+    }
+
+    article > section {
+        /* outline: 1px solid green; */
+        padding: 2rem;
+    }
+
+    section > h2 {
+        font-size: 1.8rem;
+    }
+    section > hr {
+        margin: 0.5rem 0 0.8rem 0;
+
+        border: 1.5px solid var(--tint-orange);
+        border-radius: 20px;
+
+        color: var(--tint-orange);
+    }
+    section > div {
+        /* outline: 1px solid pink; */
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+    }
+
+    section > div > a {
+        padding: .4rem 0 .4rem .6rem;
+        font-size: 1.1rem;
+        transition: 200ms;
+    }
+
+    section > div > a:hover {
+        color: var(--tint-orange);
+        /* transition: 100ms; */
+    }
+
+/* ************************************************* */
+
     footer {
-        padding: 3rem 0 2rem 0;
+        padding: 3rem 0 4rem 0;
         /* bottom: 0; */
 
         background-color: var(--background-secondary);
 
         display: flex;
         flex-wrap: nowrap;
+        flex-direction: column;
         justify-content: space-evenly;
-        gap: .1rem;
+        gap: 2rem;
     }
 
-    footer > span > table > tbody > tr > td {
+    th {
+        text-align: center;
+        font-weight: 500;
+    }
+
+    tr > td {
+        padding: .4rem .4rem;
+    }
+
+    tr > td:first-child {
+        padding-right: .5rem;
         text-align: right;
     }
 
+    tr > td:last-child {
+        padding-left: .5rem;
+    }
+
 /* ************************************************* */
-    video {
-        width: 400px;
+
+    hr {
+        width: 12rem;
+
+        color: var(--background-primary);
+
+        border: 1.5px solid var(--background-primary);
+        border-radius: 20px;
     }
 
     a {
         /* TODO: Get a better color for this */
         color: var(--background-primary);
         text-decoration: underline;
+    }
+
+/* ************************************************* */
+
+    /* For tablets: */
+    @media only screen and (min-width: 500px) {
+        main {
+            padding: 2rem;
+        }
+
+        main > header > div {
+            /* padding: 1.4rem 0 0 0; */
+        }
+
+        header > img {
+            display: block !important;
+        }
+
+        nav > button {
+            padding: 0.4rem;
+        }
+
+        button > span:first-child {
+            font-size: 2.4rem;
+        }
+
+        footer {
+            padding: 3rem 0 2rem 0;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 0;
+        }
+    }
+
+    /* For desktop: */
+    @media only screen and (min-width: 768px) {
+        main {
+            padding: 2rem;
+        }
     }
 </style>
