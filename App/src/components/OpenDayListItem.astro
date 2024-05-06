@@ -1,0 +1,118 @@
+---
+import type { Openday, Orario } from '../../../Data/types';
+
+interface Props {
+  openday: Openday;
+}
+
+const { openday } = Astro.props;
+
+function getDay(orario: Date) {
+  let out_time: string = "";
+  const time: number = new Date(orario).getDate()
+  if(time < 10) out_time += "0";
+  out_time += time;
+  return out_time;
+}
+
+function getMonth(orario: Date) {
+  let out_time: string = "";
+  const time: number = new Date(orario).getMonth() + 1
+  if(time < 10) out_time += "0";
+  out_time += time;
+  return out_time;
+}
+
+function getYear(orario: Date) {
+  return new Date(orario).getFullYear().toString().substring(2, 4)
+}
+
+function getHours(orario: Date) {
+  let out_time: string = "";
+  const time: number = new Date(orario).getHours()
+  if(time < 10) out_time += "0";
+  out_time += time;
+  return out_time;
+}
+
+function getMinutes(orario: Date) {
+  let out_time: string = "";
+  const time: number = new Date(orario).getMinutes()
+  if(time < 10) out_time += "0";
+  out_time += time;
+  return out_time;
+}
+---
+
+{
+  openday.orari.map(orario => (
+    <section>
+      <div>
+        <span>{getDay(orario.inizio_orario)}</span>
+        <span>{getMonth(orario.inizio_orario)}/{getYear(orario.inizio_orario)}</span>
+      </div>
+
+      <div>
+        <span>{orario.attivita} - {getHours(orario.inizio_orario)}:{getMinutes(orario.inizio_orario)} - {getHours(orario.fine_orario)}:{getMinutes(orario.fine_orario)}</span>
+        <span>{orario.descrizione}</span>
+      </div>
+    </section>
+  ))
+}
+
+<style>
+  section {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1rem;
+  }
+
+  section > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  section > div:first-child {
+    min-height: 4.4rem;
+    min-width: 4.4rem;
+
+    max-height: 4.4rem;
+    max-width: 4.4rem;
+
+    color: var(--foreground-primary);
+
+    background-color: var(--background-primary);
+    border-radius: 100%;
+
+    align-items: center;
+    gap: 0.1rem;
+  }
+
+  section > div:first-child > span:first-child {
+    font-size: 1.8rem;
+  }
+
+  section > div:first-child > span:last-child {
+    font-size: 1rem;
+  }
+
+  section > div:last-child {
+    flex-basis: 100%;
+    align-items: flex-start;
+  }
+
+  section > div:last-child > span:first-child {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  section > div:last-child > span:last-child {
+    font-size: 1rem;
+  }
+</style>

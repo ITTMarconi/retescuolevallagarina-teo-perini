@@ -85,6 +85,12 @@ module.exports = class Database {
 			let institute_opendays;
 			try {
 				institute_opendays = JSON.parse(institute_openday_raw.toString());
+				institute_opendays.orari.forEach(orario => {
+					//@ts-ignore
+					orario.inizio_orario = new Date(orario.inizio_orario)
+					//@ts-ignore
+					orario.fine_orario = new Date(orario.fine_orario)
+				})
 			} catch (error) {
 				console.error(`Could not parse '${institute_id}' open_day file\n${error}`);
 				return true;

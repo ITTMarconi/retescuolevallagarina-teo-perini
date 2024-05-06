@@ -53,7 +53,7 @@ export type Orario = {
     fine_orario: Date
 }
 
-export type OpenDay = {
-    sede_id: string;
+export type Openday = {
+    codice_MIUR: string;
     orari: Array<Orario>;
 }

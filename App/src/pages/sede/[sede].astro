@@ -73,7 +73,9 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
                 <h2 class="font-regular">Stesso istituto</h2>
                 <hr />
                 <div> {
-                    INSTITUTE.sedi.filter(sede => sede.codice_MIUR === SEDE.codice_MIUR).map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)
+                    INSTITUTE.sedi
+                    .filter(sede => sede.name !== SEDE.name)
+                    .map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)
                 } </div>
             </section>
         </article>

@@ -1,8 +1,84 @@
 ---
+import { getMainSede, type Institute, type Openday } from '../../../Data/types';
+import { SERVER_ADDRESS, SERVER_PORT } from '../../constants';
 import Navbar from '../components/Navbar.astro';
+import OpenDays from '../components/OpenDays.astro';
 import Layout from '../layouts/Layout.astro';
+
+const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/instituti`);
+const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();
+console.log(`Loaded ${INSTITUTES.length} institutes`);
 ---
 
 <Layout>
   <Navbar current_view="openday" />
+
+  <main>
+    {
+      INSTITUTES.map(institute => 
+        <article>
+          <a href={`/sede/${institute.codice_MIUR}`}>
+            <h2 class="font-regular">{getMainSede(institute).name}</h2>
+          </a>
+          <hr />
+          <OpenDays codice_MIUR={institute.codice_MIUR} />
+        </article>
+      )
+    }
+  </main>
 </Layout>
+
+<style>
+  main {
+    padding: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8rem;
+  }
+
+  main > article {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1rem;
+  }
+
+  article > a {
+      padding: .4rem 0 .4rem .6rem;
+      font-size: 1.1rem;
+      transition: 200ms;
+  }
+
+  article > a:hover {
+      color: var(--tint-orange);
+      /* transition: 100ms; */
+  }
+
+  article > a > h2 {
+    font-size: 1.8rem;
+  }
+
+  article > a {
+      /* TODO: Get a better color for this */
+      color: var(--background-primary);
+      text-decoration: underline;
+  }
+
+  article > hr {
+      width: 75%;
+      margin: 0.5rem 0 0.8rem 0;
+
+      border: 1.5px solid var(--tint-orange);
+      border-radius: 20px;
+
+      color: var(--tint-orange);
+  }
+</style>
