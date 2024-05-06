@@ -105,6 +105,9 @@ console.log(`Loaded ${INSTITUTES.length} institutes`);
                 const popupContent = `
     <div class="markerContent">${SEDE.name}</div>
     <div class="popupButtons">
+        <button onclick="window.open('https://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}')">
+            <span class="material-symbols-outlined">&#xf06a</span>
+        </button>
         <button onclick="window.open('${SEDE.website}', '_blank')">
             <span class="material-symbols-outlined">&#xf728</span>
         </button>
