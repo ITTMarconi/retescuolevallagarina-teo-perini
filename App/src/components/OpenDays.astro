@@ -15,7 +15,9 @@ const { codice_MIUR } = Astro.props;
 ---
 
 <article>
-  {OPENDAYS.filter(openday => openday.codice_MIUR === codice_MIUR).map(openday => <OpenDay openday={openday} />)}
+  {OPENDAYS
+  .filter(openday => openday.codice_MIUR === codice_MIUR)
+  .map(openday => <OpenDay openday={openday} />)}
 </article>
 
 <style>
