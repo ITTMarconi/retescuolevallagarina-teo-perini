@@ -42,16 +42,24 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
                         <Icon code="e0c8" color="var(--foreground-secondary)" />
                         <span>{SEDE.posizione.indirizzo}</span>
                     </button>
+
+                    <div>
+                        <Icon code="e7fd" color="var(--foreground-secondary)" />
+                        <span>{SEDE.dirigente}</span>
+                    </div>
+                    
+                    <div>
+                        <Icon code="e7fd" color="var(--foreground-secondary)" />
+                        <span>{SEDE.direttore}</span>
+                    </div>
                 </nav>
             </div>
 
             <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.logo_url}`} alt="" />
         </header>
 
-        <span>Dirigente: {SEDE.dirigente}</span>
-        <span>Direttore: {SEDE.direttore}</span>
-
-        <span>Descrizione: {SEDE.descrizione}</span>
+        
+        
 
         <!-- <hr /> -->
 
@@ -186,7 +194,7 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
         gap: .1rem;
     }
 
-    nav > button {
+    nav > button, nav > div {
         padding: 0.2rem 0;
 
         border: unset;
@@ -199,11 +207,11 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
         cursor: pointer;
     }
 
-    nav > button:hover span {
+    nav > button:hover, nav > div:hover span {
         color: var(--tint-orange);
     }
 
-    nav > button:hover span:nth-child(2) {
+    nav > button:hover, nav > div:hover span:nth-child(2) {
         text-decoration: underline;
         transition: 200ms;
     }
@@ -213,11 +221,11 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
         color: var(--background-primary);
     }
 
-    button > span:first-child {
+    button > span:first-child, nav > span:first-child {
         font-size: 2.5rem;
     }
 
-    button > span:nth-child(2) {
+    button > span:nth-child(2), nav > span:nth-child(2) {
         font-size: .9rem;
         transition: 200ms;
     }
@@ -351,11 +359,11 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
             display: block !important;
         }
 
-        nav > button {
+        nav > button, nav > div {
             padding: 0.4rem;
         }
 
-        button > span:first-child {
+        button > span:first-child, div > span:first-child {
             font-size: 2.4rem;
         }
 
