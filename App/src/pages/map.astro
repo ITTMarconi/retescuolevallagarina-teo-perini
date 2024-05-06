@@ -1,22 +1,171 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import Layout from '../layouts/Layout.astro';
+import type { Institute } from "../../../Data/types";
+import { SERVER_ADDRESS, SERVER_PORT } from "../../constants";
+import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
+import "../styles/common.css";
+
+const INSTITUTES_RAW = await fetch(
+    `http://${SERVER_ADDRESS}:${SERVER_PORT}/instituti`,
+);
+const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();
+console.log(`Loaded ${INSTITUTES.length} institutes`);
 ---
 
 <Layout>
     <Navbar current_view="map" />
 
     <main>
-        <iframe
-            src="https://www.google.com/maps/embed/v1/MAP_MODE?key=YOUR_API_KEY&PARAMETERS"
-            frameborder="0" style="border:0"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen>
-        </iframe>
+        <div id="mapdiv"></div>
+
+        <script
+            is:inline
+            src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"
+        ></script>
+
+        <script is:inline define:vars={{ INSTITUTES }}>
+            var db = { dati: [] };
+            db.dati = INSTITUTES.map((institute) => {
+                const SEDE = institute.sedi.find(
+                    (sede) => sede.codice_MIUR === institute.codice_MIUR,
+                );
+
+                return {
+                    latitudine: SEDE.posizione.latitudine,
+                    longitudine: SEDE.posizione.longitudine,
+                    codice_MIUR: SEDE.codice_MIUR,
+                };
+            });
+
+            // creazione della mappa
+            map = new OpenLayers.Map("mapdiv");
+            map.addLayer(new OpenLayers.Layer.OSM());
+
+            // conversione del sistema di riferimento/proiezione
+            epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+            projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
+
+            var lonLat = new OpenLayers.LonLat(
+                11.0339548,
+                45.8891176,
+            ).transform(epsg4326, projectTo);
+
+            // visualizzazione della mappa con relativo zoom
+            var zoom = 13;
+            map.setCenter(lonLat, zoom);
+            //--------------------------------------------------------------------------------------------------------------------------
+            // livello dove posizionare i 'markers'
+            var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+
+            // lettura dei dati, posizionamento alle coordinate di latitudine e longitudine
+            for (var i = 0; i < db.dati.length; i++) {
+                // Define markers as "features" of the vector layer:
+                var feature = new OpenLayers.Feature.Vector(
+                    new OpenLayers.Geometry.Point(
+                        db.dati[i].longitudine,
+                        db.dati[i].latitudine,
+                    ).transform(epsg4326, projectTo),
+                    { codice_MIUR: db.dati[i].codice_MIUR },
+                    {
+                        externalGraphic: "marker.png",
+                        graphicHeight: 21,
+                        graphicWidth: 20,
+                        graphicXOffset: -12,
+                        graphicYOffset: -25,
+                    },
+                );
+                vectorLayer.addFeatures(feature);
+            }
+            // viene aggiunto un nuovo livello alla mappa (livello dei marker)
+            map.addLayer(vectorLayer);
+            //--------------------------------------------------------------------------------------------------------------------------
+            // gestione dei popup al clic del mouse
+            //Add a selector control to the vectorLayer with popup functions
+            var controls = {
+                selector: new OpenLayers.Control.SelectFeature(vectorLayer, {
+                    onSelect: createPopup,
+                    onUnselect: destroyPopup,
+                }),
+            };
+
+            function createPopup(feature) {
+                // Extract variables
+                const CODICE_MIUR = feature.attributes.codice_MIUR;
+                console.log(INSTITUTES[0]);
+                console.log(CODICE_MIUR);
+                const INSTITUTE = INSTITUTES.find(
+                    (institute) => institute.codice_MIUR === CODICE_MIUR,
+                );
+                const SEDE = INSTITUTE.sedi.find(
+                    (sede) => sede.codice_MIUR == CODICE_MIUR,
+                );
+
+                console.log(SEDE);
+                // Create popup content using template literals
+                const popupContent = `
+    <div class="markerContent">${SEDE.name}</div>
+    <div class="popupButtons">
+        <button onclick="window.open('${SEDE.website}', '_blank')">
+            <span class="material-symbols-outlined">&#xf728</span>
+        </button>
+        <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=${SEDE.posizione.indirizzo}', '_blank')">
+            <span class="material-symbols-outlined">&#xe0c8</span>
+        </button>
+    </div>
+  `;
+
+                // Create the popup
+                feature.popup = new OpenLayers.Popup.FramedCloud(
+                    "pop",
+                    feature.geometry.getBounds().getCenterLonLat(),
+                    null,
+                    popupContent,
+                    null,
+                    true,
+                    function () {
+                        controls["selector"].unselectAll();
+                    },
+                );
+
+                // Add the popup to the map
+                map.addPopup(feature.popup);
+            }
+
+            function destroyPopup(feature) {
+                feature.popup.destroy();
+                feature.popup = null;
+            }
+
+            map.addControl(controls["selector"]);
+            controls["selector"].activate();
+            //----------------------------------------------------------------------------------------------------------------------------
+        </script>
     </main>
 </Layout>
 
 <style>
+    button:hover span {
+        color: var(--tint-orange);
+    }
+    button:active span {
+        /* TODO: Find nicer color */
+        color: var(--background-primary);
+    }
+
+    button > span {
+        font-size: 2.2rem;
+    }
+
+    span {
+        color: var(--foreground-secondary);
+        /* font-size: var(--icon_size); */
+        transition: 200ms;
+    }
+
+    span:hover {
+        transition: 100ms;
+    }
+
     main {
         padding: 2% 2% 0 2%;
 
@@ -24,12 +173,14 @@ import Layout from '../layouts/Layout.astro';
         height: 90%;
     }
 
-    iframe {
+    div {
         width: 100%;
         height: 100%;
 
         border-radius: 1rem;
-        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+        box-shadow:
+            rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+            rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
         /* outline: 0.3rem solid var(--foreground-tertiary); */
     }
 </style>
