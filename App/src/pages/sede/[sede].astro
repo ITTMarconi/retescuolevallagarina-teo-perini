@@ -21,6 +21,7 @@ const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/insti
 const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
 console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
+console.log(SEDE.direttore)
 ---
 
 <Layout>
@@ -43,15 +44,21 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
                         <span>{SEDE.posizione.indirizzo}</span>
                     </button>
 
-                    <div>
-                        <Icon code="e7fd" color="var(--foreground-secondary)" />
-                        <span>{SEDE.dirigente}</span>
-                    </div>
+                    {
+                        (typeof SEDE.dirigente === "string") &&
+                        <div>
+                            <Icon code="e7fd" color="var(--foreground-secondary)" />
+                            <span>{SEDE.dirigente}</span>
+                        </div>
+                    }
                     
-                    <div>
-                        <Icon code="e7fd" color="var(--foreground-secondary)" />
-                        <span>{SEDE.direttore}</span>
-                    </div>
+                    {
+                        (typeof SEDE.direttore === "string") &&
+                        <div>
+                            <Icon code="e7fd" color="var(--foreground-secondary)" />
+                            <span>{SEDE.direttore}</span>
+                        </div>
+                    }
                 </nav>
             </div>
 
@@ -97,7 +104,7 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
                 SEDE.contacts.mail.map(mail => <tr>
                     <td>{mail.description}</td>
                     <td><a href={`mailto:${mail.mail}`}>{mail.mail}</a></td>
-                </tr>)
+                  </tr>)
             }
         </table>
 
@@ -127,8 +134,8 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
         gap: 1rem;
     }
 
-    main > header {
-        /* outline: 1px solid green; */
+  main > header {
+    /* outline: 1px solid green; */
 
         display: flex;
         justify-content: space-between;
@@ -194,6 +201,7 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
         gap: .1rem;
     }
 
+
     nav > button, nav > div {
         padding: 0.2rem 0;
 
@@ -203,15 +211,14 @@ console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
         display: flex;
         align-items: center;
         gap: 1rem;
+    }
 
+    nav > button:hover {
+        color: var(--tint-orange);
         cursor: pointer;
     }
 
-    nav > button:hover, nav > div:hover span {
-        color: var(--tint-orange);
-    }
-
-    nav > button:hover, nav > div:hover span:nth-child(2) {
+    nav > button:hover span:nth-child(2) {
         text-decoration: underline;
         transition: 200ms;
     }

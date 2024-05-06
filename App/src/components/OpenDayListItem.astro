@@ -42,12 +42,21 @@ function getMinutes(orario: Date) {
   out_time += time;
   return out_time;
 }
+
+function hasPassed(orario: Date): boolean {
+  let date1 = new Date(orario).getTime();
+  let now = new Date(Date.now()).getTime();
+
+  return now > date1;
+}
 ---
 
 {
-  openday.orari.map(orario => (
+  openday.orari
+  // .filter(orario => )
+  .map(orario => (
     <section>
-      <div>
+      <div style={`background-color: ${hasPassed(orario.inizio_orario) ? "var(--tint-red)" : "var(--background-primary)"};`}>
         <span>{getDay(orario.inizio_orario)}</span>
         <span>
           {getMonth(orario.inizio_orario)}/{getYear(orario.inizio_orario)}
