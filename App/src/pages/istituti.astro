@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import type { Institute, Sede } from '../../../Data/types.ts';
 import { getMainSede } from '../../../Data/types.ts';
 import SchoolListItem from '../components/SchoolListItem.astro';
-import { SERVER_ADDRESS, SERVER_PORT } from '../../constants';
+import { SERVER_ADDRESS, SERVER_PORT } from '../../../Data/constants.ts';
 
 const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/instituti`);
 const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();

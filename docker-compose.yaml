@@ -4,7 +4,7 @@ services:
         image: made/made-app
         build: ./App
         ports:
-            - "1234:1234"
+            - "8080:80"
         depends_on:
             server:
                 condition: service_healthy

@@ -1,43 +1,39 @@
 # MaDe Progetto Scuole
 
+## Preview
+
 > **BROKEN STUFF**
 >
 > - App dockerfile doesn't work because it relys upon Server to be up to build astro stuff
-> - Docker-compose doesn't work for the same reason as above
 
 ## Running project
 
 Notes:
 
-- Server ip and port are `192.168.4.20:25565`
-- App ip and port are `192.168.4.69:1234`
+- Default Server ip and port are `localhost:25565`
+- Default App ip and port are `YOUR_LOCAL_IP:1234`
+- If you want to set a custom server address and port \
+  you just need to edit `/Data/constants.ts` AND `/Data/constants.js` \
+  (Yes, I know, annoying)
 
-### Using Docker Compose
-
-Start:
-
-```bash
-docker-compose up -d
-```
-
-### Running single instances
-
-#### With docker
+### Running dev
 
 ```bash
-docker network create --subnet 192.168.4.0/24 made-net
-cd ./Server && ./run.sh
-cd ./App && ./run.sh
+# Start server
+cd ./Server
+npm install
+node index.js &
+
+cd ..
+
+# Start app
+cd ./App 
+npm install
+npm run dev -- --host
 ```
 
-> Tip
-> The run script in the root of the project should do the things above
+## Design concepts and notes
 
-#### The Good 'old way
+![Desktop landing page](/Design/images/landing_desktop.png)
 
-```bash
-cd ./App && npm run dev
-cd ./Server && node index.js
-```
-
-Design prototype [here](https://www.figma.com/file/soIM6stdzrFZcPKNfm7TLa/Figma-basics?type=design&node-id=1669%3A162202&mode=design&t=N0ED0ERf8inSXvcZ-1)
+![Mobile overview](/Design/images/mobile.png)

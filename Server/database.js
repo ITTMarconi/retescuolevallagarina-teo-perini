@@ -10,13 +10,13 @@ const fs = require('fs');
 /** @typedef {import("../Data/types").Sede} Sede */
 /** @typedef {import("../Data/types").Institute} Institute */
 /** @typedef {import("../Data/types").Orario} Orario */
-/** @typedef {import("../Data/types").OpenDay} OpenDay */
+/** @typedef {import("../Data/types").Openday} Openday */
 
 module.exports = class Database {
 	/** @type {Array<Institute>} */
 	_institutes_database = [];
 
-	/** @type {Array<OpenDay>} */
+	/** @type {Array<Openday>} */
 	_opendays_database = [];
 
 	/** @returns {boolean} - returns true if an error occurred */
@@ -24,7 +24,7 @@ module.exports = class Database {
 		/** @type {Array<Institute>} */
 		let institute_db_swap = [];
 
-		/** @type {Array<OpenDay>} */
+		/** @type {Array<Openday>} */
 		let opendays_db_swap = [];
 
 
@@ -38,7 +38,7 @@ module.exports = class Database {
 		try {
 			ISTITUTE_DIR = fs.readdirSync(INSTITUTES_PATH);
 		} catch (error) {
-			console.error(`Could not read '${INSTITUTES_PATH}' directory\n${error}`);
+			console.error(`[DATABASE] Could not read '${INSTITUTES_PATH}' directory\n${error}`);
 			return true;
 		}
 
@@ -55,7 +55,7 @@ module.exports = class Database {
 			try {
 				institute_data_raw = fs.readFileSync(INSTITUTE_DATA_PATH)
 			} catch (error) {
-				console.error(`Could not read '${INSTITUTE_DATA_PATH}' file\n${error}`);
+			    console.error(`[DATABASE] Could not read '${INSTITUTE_DATA_PATH}' file\n${error}`);
 				return true;
 			}
 
@@ -64,7 +64,7 @@ module.exports = class Database {
 			try {
 				institute_data = JSON.parse(institute_data_raw.toString());
 			} catch (error) {
-				console.error(`Could not parse '${institute_id}' data file\n${error}`);
+				console.error(`[DATABASE] Could not parse '${institute_id}' data file\n${error}`);
 				return true;
 			}
 			institute_db_swap.push(institute_data);
@@ -77,11 +77,11 @@ module.exports = class Database {
 			try {
 				institute_openday_raw = fs.readFileSync(INSTITUTE_OPENDAY_PATH)
 			} catch (error) {
-				console.error(`Could not read '${INSTITUTE_OPENDAY_PATH}' file\n${error}`);
+				console.error(`[DATABASE] Could not read '${INSTITUTE_OPENDAY_PATH}' file\n${error}`);
 				return true;
 			}
 
-			/** @type {OpenDay} */
+			/** @type {Openday} */
 			let institute_opendays;
 			try {
 				institute_opendays = JSON.parse(institute_openday_raw.toString());
@@ -92,7 +92,7 @@ module.exports = class Database {
 					orario.fine_orario = new Date(orario.fine_orario)
 				})
 			} catch (error) {
-				console.error(`Could not parse '${institute_id}' open_day file\n${error}`);
+				console.error(`[DATABASE] Could not parse '${institute_id}' open_day file\n${error}`);
 				return true;
 			}
 			opendays_db_swap.push(institute_opendays);
@@ -102,7 +102,7 @@ module.exports = class Database {
 			if (fs.existsSync(LOGO_PATH)) {
 				institute_data.logo_url = LOGO_PATH;
 			} else {
-				console.warn(`File '${LOGO_PATH}' does not exist`)
+				console.warn(`[DATABASE] File '${LOGO_PATH}' does not exist`)
 			}
 
 			//* Video
@@ -110,14 +110,14 @@ module.exports = class Database {
 			if (fs.existsSync(VIDEO_PATH)) {
 				institute_data.video_url = VIDEO_PATH;
 			} else {
-				console.warn(`File '${VIDEO_PATH}' does not exist`)
+				console.warn(`[DATABASE] File '${VIDEO_PATH}' does not exist`)
 			}
 		})
 
 		this._institutes_database = institute_db_swap;
 		this._opendays_database = opendays_db_swap;
-		console.info(`Loaded ${this._institutes_database.length} institutes`)
-		console.info(`Loaded ${this._opendays_database.length} opendays`)
+		console.info(`[DATABASE] Loaded ${this._institutes_database.length} institutes`)
+		console.info(`[DATABASE] Loaded ${this._opendays_database.length} opendays`)
 		return false;
 	}
 
@@ -126,7 +126,7 @@ module.exports = class Database {
 		return this._institutes_database;
 	}
 
-	/** @returns {Array<OpenDay>} */
+	/** @returns {Array<Openday>} */
 	getOpenDays() {
 		return this._opendays_database;
 	}
@@ -135,12 +135,12 @@ module.exports = class Database {
 	 * @param id {string}
 	 * @returns {Sede | null} */
 	getSedeByID(id) {
-		console.log("Requested sede: " + id);
+		console.log(`[DATABASE] Requested sede (${id}), searching...`);
 
 		for (const institute of this._institutes_database) {
 			for (const sede of institute.sedi) {
 				if (sede.codice_MIUR === id) {
-					console.log("Found sede!");
+		            console.log(`[DATABASE] Found sede!`);
 					return sede;
 				}
 			}
@@ -153,12 +153,12 @@ module.exports = class Database {
 	 * @param id {string}
 	 * @returns {Institute | null} */
 	getInstituteByID(id) {
-		console.log("Requested istitute: " + id);
+		console.log(`[DATABASE] Requested institute (${id}), searching...`);
 
 		for (const institute of this._institutes_database) {
 			for (const sede of institute.sedi) {
 				if (sede.codice_MIUR === id) {
-					console.log("Found institute!");
+		            console.log(`[DATABASE] Found institute!`);
 					return institute;
 				}
 			}

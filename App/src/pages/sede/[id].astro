@@ -1,27 +1,31 @@
 ---
-export const prerender = false;
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Icon from '../../components/Icon.astro';
 
 import type { Institute, Sede } from '../../../../Data/types';
-import { SERVER_ADDRESS, SERVER_PORT } from '../../../constants';
 
-const { sede } = Astro.params;
+declare function require(name:string);
+import { SERVER_ADDRESS, SERVER_PORT } from '../../../../Data/constants.ts';
 
-const SEDI_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/sedi`);
-const SEDI: Sede[] = await SEDI_RAW.json();
+export async function getStaticPaths() {
+    const SEDI_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/sedi`);
+    const SEDI: Sede[] = await SEDI_RAW.json();
 
-const SEDE: Sede = SEDI.find(s => s.codice_MIUR === sede)
+    return SEDI.map(sede => {
+        return { params: { id: sede.codice_MIUR }, props: { SEDE: sede, SEDI: SEDI }}
+    })
+}
+
+const { SEDI, SEDE } = Astro.props;
+const { id } = Astro.params;
+
 const SIMILAR_SEDI: Sede[] = SEDI
-.filter(s => s.codice_MIUR !== sede)
+.filter(s => s.codice_MIUR !== id)
 .filter(s => s.tag === SEDE.tag);
 
-const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/institute/${sede}`);
+const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/institute/${id}`);
 const INSTITUTE: Institute = await INSTITUTE_RAW.json();
-
-console.log(`Loaded sede ${SEDE.name} (${SEDE.codice_MIUR})`);
-console.log(SEDE.direttore)
 ---
 
 <Layout>

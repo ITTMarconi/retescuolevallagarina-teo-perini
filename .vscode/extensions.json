@@ -20,6 +20,7 @@
         "redhat.vscode-yaml",
         "astro-build.astro-vscode",
         "bierner.markdown-preview-github-styles",
-        "simonsiefke.svg-preview"
+        "simonsiefke.svg-preview",
+        "ms-azuretools.vscode-docker"
     ]
 }
