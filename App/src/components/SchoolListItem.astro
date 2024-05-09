@@ -19,12 +19,12 @@ const MAIN_SEDE: Sede = getMainSede(institute)!;
         </a>
 
         <nav>
-            <button id={`btn-${institute.codice_MIUR}`}>
-                <Icon code="f06a" color="var(--foreground-secondary)" />
-            </button>
-
             <button onclick={`window.open("${MAIN_SEDE.website}", "_blank")`}>
                 <Icon code="f728" color="var(--foreground-secondary)" />
+            </button>
+
+            <button id={`btn-${institute.codice_MIUR}`}>
+                <Icon code="f06a" color="var(--foreground-secondary)" />
             </button>
 
             <button onclick={`window.open("https://www.google.com/maps/search/?api=1&query=${MAIN_SEDE.posizione.indirizzo}", "_blank")`}>

@@ -5,7 +5,7 @@ import Icon from '../../components/Icon.astro';
 
 import type { Institute, Sede } from '../../../../Data/types';
 
-declare function require(name:string);
+declare function require(name: string);
 import { SERVER_ADDRESS, SERVER_PORT } from '../../../../Data/constants.ts';
 
 export async function getStaticPaths() {
@@ -13,16 +13,14 @@ export async function getStaticPaths() {
     const SEDI: Sede[] = await SEDI_RAW.json();
 
     return SEDI.map(sede => {
-        return { params: { id: sede.codice_MIUR }, props: { SEDE: sede, SEDI: SEDI }}
-    })
+        return { params: { id: sede.codice_MIUR }, props: { SEDE: sede, SEDI: SEDI } };
+    });
 }
 
 const { SEDI, SEDE } = Astro.props;
 const { id } = Astro.params;
 
-const SIMILAR_SEDI: Sede[] = SEDI
-.filter(s => s.codice_MIUR !== id)
-.filter(s => s.tag === SEDE.tag);
+const SIMILAR_SEDI: Sede[] = SEDI.filter(s => s.codice_MIUR !== id).filter(s => s.tag === SEDE.tag);
 
 const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/institute/${id}`);
 const INSTITUTE: Institute = await INSTITUTE_RAW.json();
@@ -34,91 +32,88 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
     <main>
         <header>
             <div>
-                <h2>{SEDE.name} <hr /> </h2>
-                <!-- <span>{SEDE.tag}</span> -->
+                <h2>{SEDE.name} <hr /></h2>
 
-                <nav>
-                    <button onclick={`window.open("${SEDE.website}", "_blank")`}>
-                        <Icon code="f728" color="var(--foreground-secondary)" />
-                        <span>{SEDE.website}</span>
-                    </button>
+                <section>
+                    <nav>
+                        <button onclick={`window.open("${SEDE.website}", "_blank")`}>
+                            <Icon code="f728" color="var(--foreground-secondary)" />
+                            <span>{SEDE.website}</span>
+                        </button>
 
-                    <button onclick={`window.open("https://www.google.com/maps/search/?api=1&query=${SEDE.posizione.indirizzo}", "_blank")`}>
-                        <Icon code="e0c8" color="var(--foreground-secondary)" />
-                        <span>{SEDE.posizione.indirizzo}</span>
-                    </button>
+                        <button onclick={`window.open("https://www.google.com/maps/search/?api=1&query=${SEDE.posizione.indirizzo}", "_blank")`}>
+                            <Icon code="e0c8" color="var(--foreground-secondary)" />
+                            <span>{SEDE.posizione.indirizzo}</span>
+                        </button>
 
-                    {
-                        (typeof SEDE.dirigente === "string") &&
-                        <div>
-                            <Icon code="e7fd" color="var(--foreground-secondary)" />
-                            <span>{SEDE.dirigente}</span>
-                        </div>
-                    }
-                    
-                    {
-                        (typeof SEDE.direttore === "string") &&
-                        <div>
-                            <Icon code="e7fd" color="var(--foreground-secondary)" />
-                            <span>{SEDE.direttore}</span>
-                        </div>
-                    }
-                </nav>
+                        {
+                            typeof SEDE.dirigente === 'string' && (
+                                <div>
+                                    <Icon code="e7fd" color="var(--foreground-secondary)" />
+                                    <span>{SEDE.dirigente}</span>
+                                </div>
+                            )
+                        }
+
+                        {
+                            typeof SEDE.direttore === 'string' && (
+                                <div>
+                                    <Icon code="e7fd" color="var(--foreground-secondary)" />
+                                    <span>{SEDE.direttore}</span>
+                                </div>
+                            )
+                        }
+                    </nav>
+
+                    <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.logo_url}`} alt="" />
+                </section>
             </div>
 
-            <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.logo_url}`} alt="" />
-        </header>
-
-        
-        
-
-        <!-- <hr /> -->
-
-        <div>
             <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
-        </div>
+        </header>
 
         <article>
             <section>
-                <h2 class="font-regular">Altri {SEDE.tag.slice(0, -1).concat("i")}</h2>
+                <h2 class="font-regular">Altri {SEDE.tag.slice(0, -1).concat('i')}</h2>
                 <hr />
 
-                <div> {
-                    SIMILAR_SEDI.map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)
-                } </div>
+                <div>{SIMILAR_SEDI.map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)}</div>
             </section>
 
             <section>
                 <h2 class="font-regular">Stesso istituto</h2>
                 <hr />
-                <div> {
-                    INSTITUTE.sedi
-                    .filter(sede => sede.name !== SEDE.name)
-                    .map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)
-                } </div>
+                <div>{INSTITUTE.sedi.filter(sede => sede.name !== SEDE.name).map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)}</div>
             </section>
         </article>
-        
     </main>
 
     <footer>
         <table>
             <th colspan="2">E-Mails <hr /></th>
             {
-                SEDE.contacts.mail.map(mail => <tr>
-                    <td>{mail.description}</td>
-                    <td><a href={`mailto:${mail.mail}`}>{mail.mail}</a></td>
-                  </tr>)
+                SEDE.contacts.mail.map(mail => (
+                    <tr>
+                        <td>{mail.description}</td>
+                        <td>
+                            <a href={`mailto:${mail.mail}`}>{mail.mail}</a>
+                        </td>
+                    </tr>
+                ))
             }
         </table>
 
-        <table> 
+        <table>
             <th colspan="2">Numeri di Telefono <hr /></th>
             {
-                SEDE.contacts.phone.map(phone => <tr>
-                    <td>{phone.description}</td>
-                    <td><a href={`tel:${phone.numero}`}>{phone.numero}</a></td>
-                </tr>)
+                SEDE.contacts.phone.map(phone => (
+                    <tr>
+                        <td>{phone.description}</td>
+                        <td>
+                            <a href={`tel:${phone.numero}`}>{phone.numero}</a>
+                        </td>
+                    </tr>
+                ))
             }
         </table>
     </footer>
@@ -138,36 +133,66 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         gap: 1rem;
     }
 
-  main > header {
-    /* outline: 1px solid green; */
+    main > header {
+        flex-basis: 100%;
 
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    header > div {
+        flex-basis: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
         flex-wrap: nowrap;
     }
 
-    main > header > div {
-        flex-basis: 100%;
+    header > video {
+        width: 90%;
+        margin: 2rem  0 1rem 0;
+
+        border-radius: 0.4rem;
+        outline: 0.15rem solid var(--foreground-tertiary);
     }
 
-    main > header > div > h2 {
-        padding: .8rem 0 0 0;
+
+    div > h2 {
         width: 100%;
+
+        padding: 0.8rem 0 0 0;
+
         text-align: center;
     }
 
-    header > img {
+    div > section {
+        width: 90%;
+        margin: 1rem 0 0 0;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        flex-wrap: nowrap;
+    }
+
+    section > img {
         height: 12rem;
         /* padding: 0.5rem 1rem; */
-
-        display: none;
+        /* display: none; */
 
         border-radius: 0.8rem;
     }
 
-    header > div {
-        /* padding: 0.5rem 1rem; */
+    /* ************************************************* */
+
+    /* header > div {
+        padding: 0.5rem 1rem;
 
         color: unset;
         text-decoration-line: unset;
@@ -176,18 +201,17 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         flex-direction: column;
         flex-wrap: nowrap;
         gap: 1.6rem;
-    }
+    } */
 
-    header > div > span:first-child {
-    }
+    /* header > div > span:first-child {
+    } */
 
-    header > div > span:nth-child(2) {
+    /* header > div > span:nth-child(2) {
         width: fit-content;
 
         padding: 0.4rem 1rem;
 
         color: var(--background-primary);
-        /* outline: 2px solid var(--background-primary); */
         border-radius: 2rem;
 
         font-size: 1rem;
@@ -196,17 +220,17 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
         display: flex;
         justify-content: center;
-    }
+    } */
 
-    header > div > nav {
+    /* header > div > nav {
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
-        gap: .1rem;
-    }
+        gap: 0.1rem;
+    } */
 
-
-    nav > button, nav > div {
+    nav > button,
+    nav > div {
         padding: 0.2rem 0;
 
         border: unset;
@@ -232,30 +256,18 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         color: var(--background-primary);
     }
 
-    button > span:first-child, nav > span:first-child {
+    button > span:first-child,
+    nav > span:first-child {
         font-size: 2.5rem;
     }
 
-    button > span:nth-child(2), nav > span:nth-child(2) {
-        font-size: .9rem;
+    button > span:nth-child(2),
+    nav > span:nth-child(2) {
+        font-size: 0.9rem;
         transition: 200ms;
     }
 
-/* ************************************************* */
-
-    main > div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    div > video {
-        border-radius: 0.6rem;
-        outline: 0.15rem solid var(--foreground-tertiary);
-        width: 90%;
-    }
-
-/* ************************************************* */
+    /* ************************************************* */
 
     main > article {
         /* outline: 1px solid black; */
@@ -278,10 +290,10 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
     section > hr {
         margin: 0.5rem 0 0.8rem 0;
 
+        color: var(--tint-orange);
+
         border: 1.5px solid var(--tint-orange);
         border-radius: 20px;
-
-        color: var(--tint-orange);
     }
     section > div {
         /* outline: 1px solid pink; */
@@ -294,7 +306,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
     }
 
     section > div > a {
-        padding: .4rem 0 .4rem .6rem;
+        padding: 0.4rem 0 0.4rem 0.6rem;
         font-size: 1.1rem;
         transition: 200ms;
     }
@@ -304,7 +316,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         /* transition: 100ms; */
     }
 
-/* ************************************************* */
+    /* ************************************************* */
 
     footer {
         padding: 3rem 0 4rem 0;
@@ -325,19 +337,19 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
     }
 
     tr > td {
-        padding: .4rem .4rem;
+        padding: 0.4rem 0.4rem;
     }
 
     tr > td:first-child {
-        padding-right: .5rem;
+        padding-right: 0.5rem;
         text-align: right;
     }
 
     tr > td:last-child {
-        padding-left: .5rem;
+        padding-left: 0.5rem;
     }
 
-/* ************************************************* */
+    /* ************************************************* */
 
     hr {
         width: 12rem;
@@ -354,7 +366,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         text-decoration: underline;
     }
 
-/* ************************************************* */
+    /* ************************************************* */
 
     /* For tablets: */
     @media only screen and (min-width: 500px) {
@@ -370,11 +382,13 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
             display: block !important;
         }
 
-        nav > button, nav > div {
+        nav > button,
+        nav > div {
             padding: 0.4rem;
         }
 
-        button > span:first-child, div > span:first-child {
+        button > span:first-child,
+        div > span:first-child {
             font-size: 2.4rem;
         }
 
