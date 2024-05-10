@@ -15,6 +15,11 @@ export type Position = {
     latitudine: string
     longitudine: string
 }
+export enum Tag {
+    Liceo = "liceo",
+    Tecnico = "tecnico",
+    Professionale = "professionale"
+}
 export type Sede = {
     codice_MIUR: string
 
@@ -28,20 +33,19 @@ export type Sede = {
     contacts: Contacts
 
     posizione: Position
-    tag: string
+    tag: Tag
 }
+
+///////////////////////////////////////
+
 export type Institute = {
     codice_MIUR: string
+    sedi: Array<Sede>
+
+    // Server loaded
     logo_url: string
     video_url: string
-    sedi: Array<Sede>
-}
-
-export function getMainSede(institute: Institute): Sede | null {
-    const sede = institute.sedi.find(sede => sede.codice_MIUR === institute.codice_MIUR)
-    if(typeof sede == "undefined") return null;
-
-    return sede;
+    openDays: OpenDays | null
 }
 
 ///////////////////////////////////////
@@ -53,7 +57,7 @@ export type Orario = {
     fine_orario: Date
 }
 
-export type Openday = {
+export type OpenDays = {
     codice_MIUR: string;
     orari: Array<Orario>;
 }

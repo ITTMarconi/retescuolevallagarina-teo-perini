@@ -10,167 +10,149 @@ const fs = require('fs');
 /** @typedef {import("../Data/types").Sede} Sede */
 /** @typedef {import("../Data/types").Institute} Institute */
 /** @typedef {import("../Data/types").Orario} Orario */
-/** @typedef {import("../Data/types").Openday} Openday */
+/** @typedef {import("../Data/types").OpenDays} OpenDays */
 
 module.exports = class Database {
-	/** @type {Array<Institute>} */
-	_institutes_database = [];
+    /** @type {Array<Institute>} */
+    _database = [];
 
-	/** @type {Array<Openday>} */
-	_opendays_database = [];
+    /** @returns {boolean} - returns true if an error occurred */
+    fetchFromDisk() {
+        /** @type {Array<Institute>} */
+        let database_swap = [];
 
-	/** @returns {boolean} - returns true if an error occurred */
-	fetchFromDisk() {
-		/** @type {Array<Institute>} */
-		let institute_db_swap = [];
+        //* Read folder
+        /** @type {Array<string>} */
+        let ISTITUTE_DIR;
 
-		/** @type {Array<Openday>} */
-		let opendays_db_swap = [];
+        /** @type {string} */
+        const INSTITUTES_PATH = "../Data/Istituti";
 
+        try {
+            ISTITUTE_DIR = fs.readdirSync(INSTITUTES_PATH);
+        } catch (error) {
+            console.error(`[DATABASE] Could not read '${INSTITUTES_PATH}' directory\n${error}`);
+            return true;
+        }
 
-		//* Read folder
-		/** @type {Array<string>} */
-		let ISTITUTE_DIR;
+        //@ts-ignore
+        ISTITUTE_DIR.forEach(institute_id => {
+            /** @type {string} */
+            const INSTITUTE_PATH = path.join(INSTITUTES_PATH, institute_id)
 
-		/** @type {string} */
-		const INSTITUTES_PATH = "../Data/Istituti";
+            //* Institute Data
+            const INSTITUTE_DATA_PATH = path.join(INSTITUTE_PATH, "data.json")
 
-		try {
-			ISTITUTE_DIR = fs.readdirSync(INSTITUTES_PATH);
-		} catch (error) {
-			console.error(`[DATABASE] Could not read '${INSTITUTES_PATH}' directory\n${error}`);
-			return true;
-		}
+            /** @type {Buffer} */
+            let institute_data_raw;
+            try {
+                institute_data_raw = fs.readFileSync(INSTITUTE_DATA_PATH)
+            } catch (error) {
+                console.error(`[DATABASE] Could not read '${INSTITUTE_DATA_PATH}' file\n${error}`);
+                return true;
+            }
 
-		//@ts-ignore
-		ISTITUTE_DIR.forEach(institute_id => {
-			/** @type {string} */
-			const INSTITUTE_PATH = path.join(INSTITUTES_PATH, institute_id)
+            /** @type {Institute} */
+            let institute_data;
+            try {
+                institute_data = JSON.parse(institute_data_raw.toString());
+            } catch (error) {
+                console.error(`[DATABASE] Could not parse '${institute_id}' data file\n${error}`);
+                return true;
+            }
 
-			//* Institute Data
-			const INSTITUTE_DATA_PATH = path.join(INSTITUTE_PATH, "data.json")
+            //* Logo
+            const LOGO_PATH = path.join(INSTITUTE_PATH, "logo.png")
+            if (fs.existsSync(LOGO_PATH)) {
+                institute_data.logo_url = LOGO_PATH;
+            } else {
+                console.warn(`[DATABASE] File '${LOGO_PATH}' does not exist`)
+            }
 
-			/** @type {Buffer} */
-			let institute_data_raw;
-			try {
-				institute_data_raw = fs.readFileSync(INSTITUTE_DATA_PATH)
-			} catch (error) {
-			    console.error(`[DATABASE] Could not read '${INSTITUTE_DATA_PATH}' file\n${error}`);
-				return true;
-			}
+            //* Video
+            const VIDEO_PATH = path.join(INSTITUTE_PATH, "video.mp4")
+            if (fs.existsSync(VIDEO_PATH)) {
+                institute_data.video_url = VIDEO_PATH;
+            } else {
+                console.warn(`[DATABASE] File '${VIDEO_PATH}' does not exist`)
+            }
 
-			/** @type {Institute} */
-			let institute_data;
-			try {
-				institute_data = JSON.parse(institute_data_raw.toString());
-			} catch (error) {
-				console.error(`[DATABASE] Could not parse '${institute_id}' data file\n${error}`);
-				return true;
-			}
-			institute_db_swap.push(institute_data);
+            //* OpenDays
+            const INSTITUTE_OPENDAY_PATH = path.join(INSTITUTE_PATH, "open_day.json")
 
-			//* Open day Data
-			const INSTITUTE_OPENDAY_PATH = path.join(INSTITUTE_PATH, "open_day.json")
+            /** @type {Buffer} */
+            let institute_openday_raw;
+            try {
+                institute_openday_raw = fs.readFileSync(INSTITUTE_OPENDAY_PATH)
+            } catch (error) {
+                console.error(`[DATABASE] Could not read '${INSTITUTE_OPENDAY_PATH}' file\n${error}`);
+                return true;
+            }
 
-			/** @type {Buffer} */
-			let institute_openday_raw;
-			try {
-				institute_openday_raw = fs.readFileSync(INSTITUTE_OPENDAY_PATH)
-			} catch (error) {
-				console.error(`[DATABASE] Could not read '${INSTITUTE_OPENDAY_PATH}' file\n${error}`);
-				return true;
-			}
+            /** @type {OpenDays | null} */
+            let institute_opendays = null;
+            try {
+                institute_opendays = JSON.parse(institute_openday_raw.toString());
 
-			/** @type {Openday} */
-			let institute_opendays;
-			try {
-				institute_opendays = JSON.parse(institute_openday_raw.toString());
-				institute_opendays.orari.forEach(orario => {
-					//@ts-ignore
-					orario.inizio_orario = new Date(orario.inizio_orario)
-					//@ts-ignore
-					orario.fine_orario = new Date(orario.fine_orario)
-				})
-			} catch (error) {
-				console.error(`[DATABASE] Could not parse '${institute_id}' open_day file\n${error}`);
-				return true;
-			}
-			opendays_db_swap.push(institute_opendays);
+            } catch (error) {
+                console.error(`[DATABASE] Could not parse '${institute_id}' open_day file\n${error}`);
+                return true;
+            }
 
-			//* Logo
-			const LOGO_PATH = path.join(INSTITUTE_PATH, "logo.png")
-			if (fs.existsSync(LOGO_PATH)) {
-				institute_data.logo_url = LOGO_PATH;
-			} else {
-				console.warn(`[DATABASE] File '${LOGO_PATH}' does not exist`)
-			}
+            institute_data.openDays = institute_opendays;
+            database_swap.push(institute_data);
+        })
 
-			//* Video
-			const VIDEO_PATH = path.join(INSTITUTE_PATH, "video.mp4")
-			if (fs.existsSync(VIDEO_PATH)) {
-				institute_data.video_url = VIDEO_PATH;
-			} else {
-				console.warn(`[DATABASE] File '${VIDEO_PATH}' does not exist`)
-			}
-		})
+        this._database = database_swap;
+        console.info(`[DATABASE] Loaded ${this._database.length} institutes`)
+        return false;
+    }
 
-		this._institutes_database = institute_db_swap;
-		this._opendays_database = opendays_db_swap;
-		console.info(`[DATABASE] Loaded ${this._institutes_database.length} institutes`)
-		console.info(`[DATABASE] Loaded ${this._opendays_database.length} opendays`)
-		return false;
-	}
+    /** @returns {Array<Institute>} */
+    getInstitutes() {
+        return this._database;
+    }
 
-	/** @returns {Array<Institute>} */
-	getInstitutes() {
-		return this._institutes_database;
-	}
+    /** 
+     * @param id {string}
+     * @returns {Sede | null} */
+    getSedeByID(id) {
+        console.log(`[DATABASE] Requested sede (${id}), searching...`);
 
-	/** @returns {Array<Openday>} */
-	getOpenDays() {
-		return this._opendays_database;
-	}
+        for (const institute of this._database) {
+            for (const sede of institute.sedi) {
+                if (sede.codice_MIUR === id) {
+                    console.log(`[DATABASE] Found sede!`);
+                    return sede;
+                }
+            }
+        }
 
-	/** 
-	 * @param id {string}
-	 * @returns {Sede | null} */
-	getSedeByID(id) {
-		console.log(`[DATABASE] Requested sede (${id}), searching...`);
+        return null;
+    }
 
-		for (const institute of this._institutes_database) {
-			for (const sede of institute.sedi) {
-				if (sede.codice_MIUR === id) {
-		            console.log(`[DATABASE] Found sede!`);
-					return sede;
-				}
-			}
-		}
+    /** 
+     * @param id {string}
+     * @returns {Institute | null} */
+    getInstituteByID(id) {
+        console.log(`[DATABASE] Requested institute (${id}), searching...`);
 
-		return null;
-	}
+        for (const institute of this._database) {
+            for (const sede of institute.sedi) {
+                if (sede.codice_MIUR === id) {
+                    console.log(`[DATABASE] Found institute!`);
+                    return institute;
+                }
+            }
+        }
 
-	/** 
-	 * @param id {string}
-	 * @returns {Institute | null} */
-	getInstituteByID(id) {
-		console.log(`[DATABASE] Requested institute (${id}), searching...`);
+        return null;
+    }
 
-		for (const institute of this._institutes_database) {
-			for (const sede of institute.sedi) {
-				if (sede.codice_MIUR === id) {
-		            console.log(`[DATABASE] Found institute!`);
-					return institute;
-				}
-			}
-		}
+    // 	getSchool(id)
+    // 	getInstitute(id)
 
-		return null;
-	}
-
-	// 	getSchool(id)
-	// 	getInstitute(id)
-
-	// 	searchSchool(name)
-	// 	searchInstitute(name)
+    // 	searchSchool(name)
+    // 	searchInstitute(name)
 }
 

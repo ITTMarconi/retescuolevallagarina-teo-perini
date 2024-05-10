@@ -1,0 +1,126 @@
+---
+import { hasPassed, getDay, getMonth, getYear, getHours, getMinutes } from '../scripts/DateUtils';
+import { type OpenDays } from '../../../Data/types';
+
+interface Props {
+    openDays: OpenDays;
+}
+
+const { openDays } = Astro.props;
+---
+
+<article>
+    {
+        openDays.orari.map(orario => (
+            <section>
+                <div style={`background-color: ${hasPassed(orario.inizio_orario) ? 'var(--tint-red)' : 'var(--background-primary)'};`}>
+                    <span>{getDay(orario.inizio_orario)}</span>
+                    <span>
+                        {getMonth(orario.inizio_orario)}/{getYear(orario.inizio_orario)}
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        {orario.attivita} - {getHours(orario.inizio_orario)}:{getMinutes(orario.inizio_orario)} - {getHours(orario.fine_orario)}:{getMinutes(orario.fine_orario)}
+                    </span>
+                    <span>{orario.descrizione}</span>
+                </div>
+            </section>
+        ))
+    }
+</article>
+
+<style>
+    article {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+
+        gap: 2rem;
+    }
+
+    article > section {
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        gap: 1.5rem;
+    }
+
+    section > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    section > div:first-child {
+        padding: 0.8rem 0.2rem;
+        width: 3rem;
+
+        color: var(--foreground-primary);
+
+        background-color: var(--background-primary);
+        border-radius: 2rem;
+
+        align-items: center;
+        gap: 0.1rem;
+    }
+
+    section > div:first-child > span:first-child {
+        font-size: 1.8rem;
+    }
+
+    section > div:first-child > span:last-child {
+        font-size: 1rem;
+    }
+
+    section > div:last-child {
+        /* flex-basis: 100%; */
+        align-items: flex-start;
+
+        gap: 0.5rem;
+    }
+
+    section > div:last-child > span:first-child {
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    section > div:last-child > span:last-child {
+        max-width: 45ch;
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    /* For desktop: */
+    @media only screen and (min-width: 768px) {
+        section > div:first-child {
+            padding: 0;
+            min-height: 3rem;
+            min-width: 3rem;
+
+            max-height: 3rem;
+            max-width: 3rem;
+
+            border-radius: 4rem;
+
+            min-height: 4.4rem;
+            min-width: 4.4rem;
+
+            max-height: 4.4rem;
+            max-width: 4.4rem;
+        }
+    }
+
+    /* For wide-desktop: */
+    @media only screen and (min-width: 1536px) {
+    }
+</style>

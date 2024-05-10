@@ -1,50 +1,35 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import Layout from '../layouts/Layout.astro';
-import type { Institute, Sede } from '../../../Data/types.ts';
-import { getMainSede } from '../../../Data/types.ts';
-import SchoolListItem from '../components/SchoolListItem.astro';
 import { SERVER_ADDRESS, SERVER_PORT } from '../../../Data/constants.ts';
+import { Tag, type Institute } from '../../../Data/types.ts';
+import { getMainSede } from '../scripts/Utils';
+
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import SchoolListItem from '../components/SchoolListItem.astro';
 
 const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/instituti`);
 const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();
 console.log(`Loaded ${INSTITUTES.length} institutes`);
-
-const LICEI: Institute[] = INSTITUTES.filter(institute => getMainSede(institute)?.tag === 'liceo');
-const TECNICI: Institute[] = INSTITUTES.filter(institute => getMainSede(institute)?.tag === 'tecnico');
-const PROFESSIONALI: Institute[] = INSTITUTES.filter(institute => getMainSede(institute)?.tag === 'professionale');
 ---
 
 <Layout>
     <Navbar current_view="istituti" />
 
     <main>
-        <article>
-            <h2 class="font-regular">Licei ({LICEI.length})</h2>
-            <hr />
+        {
+            Object.values(Tag).map(tag => (
+                <article>
+                    <h2 class="font-regular">{tag}</h2>
+                    <hr />
 
-            <div>
-                {LICEI.map(institute => <SchoolListItem institute={institute} />)}
-            </div>
-        </article>
-
-        <article>
-            <h2 class="font-regular">Tecnici ({TECNICI.length})</h2>
-            <hr />
-
-            <div>
-                {TECNICI.map(institute => <SchoolListItem institute={institute} />)}
-            </div>
-        </article>
-
-        <article>
-            <h2 class="font-regular">Professionali ({PROFESSIONALI.length})</h2>
-            <hr />
-
-            <div>
-                {PROFESSIONALI.map(institute => <SchoolListItem institute={institute} />)}
-            </div>
-        </article>
+                    <div>
+                        {INSTITUTES.filter(institute => getMainSede(institute)?.tag === tag).map(institute => (
+                            <SchoolListItem institute={institute} />
+                        ))}
+                    </div>
+                </article>
+            ))
+        }
     </main>
 </Layout>
 
@@ -57,6 +42,7 @@ const PROFESSIONALI: Institute[] = INSTITUTES.filter(institute => getMainSede(in
     }
 
     main > article > h2 {
+        text-transform: capitalize;
         font-size: 1.8rem;
     }
 
@@ -77,9 +63,9 @@ const PROFESSIONALI: Institute[] = INSTITUTES.filter(institute => getMainSede(in
         gap: 1rem;
     }
 
-
     /* For desktop: */
-    @media only screen and (min-width: 768px) {}
+    @media only screen and (min-width: 768px) {
+    }
 
     /* For wide-desktop: */
     @media only screen and (min-width: 1536px) {

@@ -1,95 +1,103 @@
 ---
-import { getMainSede, type Institute, type Openday } from '../../../Data/types';
+import { type Institute } from '../../../Data/types';
 import { SERVER_ADDRESS, SERVER_PORT } from '../../../Data/constants.ts';
+import { getMainSede } from '../scripts/Utils';
+
 import Navbar from '../components/Navbar.astro';
-import OpenDays from '../components/OpenDays.astro';
+import OpenDaysList from '../components/OpenDaysList.astro';
 import Layout from '../layouts/Layout.astro';
 
 const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/instituti`);
 const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();
-console.log(`Loaded ${INSTITUTES.length} institutes`);
+
+console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
 ---
 
 <Layout>
-  <Navbar current_view="openday" />
+    <Navbar current_view="openday" />
 
-  <main>
-    {
-      INSTITUTES.map(institute => 
-        <article>
-          <a href={`/sede/${institute.codice_MIUR}`}>
-            <h2 class="font-regular">{getMainSede(institute).name}</h2>
-          </a>
-          <hr />
-          <OpenDays codice_MIUR={institute.codice_MIUR} />
-        </article>
-      )
-    }
-  </main>
+    <main>
+        {
+            INSTITUTES.map(
+                institute =>
+                    institute.openDays.orari.length > 0 && (
+                        <article>
+                            <a href={`/sede/${institute.codice_MIUR}`}>
+                                <h2 class="font-regular">{getMainSede(institute).name}</h2>
+                            </a>
+                            <hr />
+                            <OpenDaysList openDays={institute.openDays} />
+                        </article>
+                    ),
+            )
+        }
+    </main>
 </Layout>
 
 <style>
-  main {
-    padding: 1rem;
-    /* padding: 5rem; */
+    main {
+        padding: 1rem;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-    gap: 8rem;
-  }
+        gap: 8rem;
+    }
 
-  main > article {
-    padding: 1rem;
-    /* width: 100%; */
-    flex-basis: 100%;
+    main > article {
+        padding: 1rem;
+        /* width: 100%; */
+        /* flex-basis: 100%; */
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-    gap: 1rem;
-  }
+        gap: 1rem;
+    }
 
-  article > a {
-      padding: .4rem 0 .4rem .6rem;
-      font-size: 1.1rem;
-      transition: 200ms;
-  }
+    article > a {
+        padding: 0.4rem 0 0.4rem 0.6rem;
+        font-size: 1.1rem;
+        transition: 200ms;
+    }
 
-  article > a:hover {
-      color: var(--tint-orange);
-      /* transition: 100ms; */
-  }
+    article > a:hover {
+        color: var(--tint-orange);
+        /* transition: 100ms; */
+    }
 
-  article > a > h2 {
-    font-size: 1.8rem;
-  }
+    article > a > h2 {
+        max-width: 30ch;
 
-  article > a {
-      /* TODO: Get a better color for this */
-      color: var(--background-primary);
-      text-decoration: underline;
-  }
+        font-size: 1.8rem;
+        text-align: center;
+    }
 
-  article > hr {
-      width: 75%;
-      margin: 0.5rem 0 0.8rem 0;
+    article > a {
+        /* TODO: Get a better color for this */
+        color: var(--background-primary);
+        text-decoration: underline;
+    }
 
-      border: 1.5px solid var(--tint-orange);
-      border-radius: 20px;
+    article > hr {
+        width: 75%;
+        margin: 0.5rem 0 0.8rem 0;
 
-      color: var(--tint-orange);
-  }
+        border: 1.5px solid var(--tint-orange);
+        border-radius: 20px;
 
-  /* For desktop: */
-  @media only screen and (min-width: 768px) {
-  }
+        color: var(--tint-orange);
+    }
 
-  /* For wide-desktop: */
-  @media only screen and (min-width: 1536px) {
-  }
+    /* For desktop: */
+    @media only screen and (min-width: 768px) {
+    }
+
+    /* For wide-desktop: */
+    @media only screen and (min-width: 1536px) {
+    }
 </style>

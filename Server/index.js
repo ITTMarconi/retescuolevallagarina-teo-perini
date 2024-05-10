@@ -69,13 +69,6 @@ app.get('/sede/:id', (req, res) => {
     res.json(SEDE);
 })
 
-app.get('/opendays', (req, res) => {
-    console.log(`[${req.hostname}] (/opendays) Requested opendays...`)
-
-    const opendays = database.getOpenDays();
-    res.json(opendays);
-})
-
 app.get('/updateDB', (req, res) => {
     console.warn(`[${req.hostname}] (/updateDB) Updating database`)
 

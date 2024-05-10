@@ -1,12 +1,11 @@
 ---
+import { SERVER_ADDRESS, SERVER_PORT } from '../../../../Data/constants.ts';
+import type { Institute, Sede } from '../../../../Data/types';
+import OpenDaysList from '../../components/OpenDaysList.astro';
+
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Icon from '../../components/Icon.astro';
-
-import type { Institute, Sede } from '../../../../Data/types';
-
-declare function require(name: string);
-import { SERVER_ADDRESS, SERVER_PORT } from '../../../../Data/constants.ts';
 
 export async function getStaticPaths() {
     const SEDI_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/sedi`);
@@ -71,6 +70,13 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
             <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
         </header>
+
+        <section>
+            <h2 class="font-regular">Open day</h2>
+            <hr />
+
+            <OpenDaysList openDays={INSTITUTE.openDays}/>
+        </section>
 
         <article>
             <section>
@@ -154,12 +160,11 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
     header > video {
         width: 90%;
-        margin: 2rem  0 1rem 0;
+        margin: 2rem 0 1rem 0;
 
         border-radius: 0.4rem;
         outline: 0.15rem solid var(--foreground-tertiary);
     }
-
 
     div > h2 {
         width: 100%;
@@ -267,8 +272,14 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         transition: 200ms;
     }
 
-    /* ************************************************* */
+    /* ************* ******************* */
 
+    main > section {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
     main > article {
         /* outline: 1px solid black; */
 
@@ -278,8 +289,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         flex-wrap: nowrap;
     }
 
-    article > section {
-        /* outline: 1px solid green; */
+    section {
         padding: 2rem;
     }
 
@@ -303,6 +313,8 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         justify-content: space-evenly;
         align-items: flex-start;
         flex-wrap: nowrap;
+
+        gap: .3rem;
     }
 
     section > div > a {
