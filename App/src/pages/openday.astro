@@ -17,6 +17,7 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
     <Navbar current_view="openday" />
 
     <main>
+        <section>
         {
             INSTITUTES.map(
                 institute =>
@@ -24,13 +25,14 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
                         <article>
                             <a href={`/sede/${institute.codice_MIUR}`}>
                                 <h2 class="font-regular">{getMainSede(institute).name}</h2>
+                                <hr />
                             </a>
-                            <hr />
                             <OpenDaysList openDays={institute.openDays} />
                         </article>
                     ),
             )
         }
+        </section>
     </main>
 </Layout>
 
@@ -39,29 +41,46 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
         padding: 1rem;
 
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-
-        gap: 8rem;
     }
 
-    main > article {
-        padding: 1rem;
-        /* width: 100%; */
-        /* flex-basis: 100%; */
+    main > section {
+        width: fit-content;
 
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+
+        gap: 2rem;
+    }
+
+    section > article {
+        /* width: 100%; */
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+        align-items: flex-start;
 
         gap: 1rem;
     }
 
     article > a {
         padding: 0.4rem 0 0.4rem 0.6rem;
+
+        /* TODO: Get a better color for this */
+        color: var(--background-primary);
         font-size: 1.1rem;
+        text-decoration: underline;
+
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
         transition: 200ms;
     }
 
@@ -77,13 +96,7 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
         text-align: center;
     }
 
-    article > a {
-        /* TODO: Get a better color for this */
-        color: var(--background-primary);
-        text-decoration: underline;
-    }
-
-    article > hr {
+    a > hr {
         width: 75%;
         margin: 0.5rem 0 0.8rem 0;
 
@@ -95,6 +108,17 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
 
     /* For desktop: */
     @media only screen and (min-width: 768px) {
+        main {
+            align-items: center;
+        }
+
+        section {
+            gap: 4rem;
+        }
+
+        section > article {
+            /* align-items: center; */
+        }
     }
 
     /* For wide-desktop: */
