@@ -9,7 +9,8 @@ import SchoolListItem from '../components/SchoolListItem.astro';
 
 const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/instituti`);
 const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();
-console.log(`Loaded ${INSTITUTES.length} institutes`);
+
+console.log(`[BUILD] (istituti.astro) Loaded ${INSTITUTES.length} institutes`);
 ---
 
 <Layout>
@@ -19,7 +20,7 @@ console.log(`Loaded ${INSTITUTES.length} institutes`);
         {
             Object.values(Tag).map(tag => (
                 <article>
-                    <h2 class="font-regular">{tag}</h2>
+                    <h2 class="font-regular"> {tag.slice(0, -1).concat('i')} </h2>
                     <hr />
 
                     <div>
@@ -70,7 +71,8 @@ console.log(`Loaded ${INSTITUTES.length} institutes`);
     /* For wide-desktop: */
     @media only screen and (min-width: 1536px) {
         main {
-            padding: 2rem 0 0 0;
+            padding: 2rem;
+
             display: flex;
             align-items: flex-start;
             justify-content: center;
