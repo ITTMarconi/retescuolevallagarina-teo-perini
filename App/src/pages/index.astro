@@ -6,7 +6,13 @@ import '../styles/common.css';
 
 <Layout>
     <main>
-        <h1 class="font-bold">DIREZIONE <br /> FUTURO</h1>
+        <h1 class="font-bold">
+            DIREZIONE <br />
+            <span class="font-bold">
+                FUTURO
+                <img src="/logo_sito.svg" alt="" srcset="" />
+            </span>
+        </h1>
 
         <nav>
             <a href="/istituti">
@@ -35,11 +41,24 @@ import '../styles/common.css';
         padding: 1.2rem 1rem;
     }
 
-    h1 {
+    h1, h1 > span {
         height: 25%;
         font-size: 3rem;
         text-align: center;
         color: var(--foreground-primary);
+    }
+
+    h1 > span {
+        margin: 0.5rem 0 0 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 > span > img {
+        margin: 0 0 0 0.4rem;
+        height: 3rem;
     }
 
     nav {
@@ -81,9 +100,14 @@ import '../styles/common.css';
 
     /* For tablets: */
     @media only screen and (min-width: 600px) {
-        h1 {
+        h1, h1 > span {
             font-size: 4.5rem;
         }
+
+        h1 > span > img {
+            height: 4rem;
+        }
+
         span:first-child {
             font-size: 9rem;
         }
@@ -95,14 +119,16 @@ import '../styles/common.css';
 
     /* For desktop: */
     @media only screen and (min-width: 768px) {
-        h1 {
-            font-size: 4.5rem;
+        h1, h1 > span {
+            font-size: 6.5rem;
         }
+
+        h1 > span > img {
+            height: 6rem;
+        }
+
         span:first-child {
             font-size: 10rem;
-        }
-        nav {
-            flex-direction: row;
         }
     }
 </style>
