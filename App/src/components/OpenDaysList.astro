@@ -15,15 +15,11 @@ const { openDays } = Astro.props;
             <section>
                 <div style={`background-color: ${hasPassed(orario.inizio_orario) ? 'var(--tint-red)' : 'var(--background-primary)'};`}>
                     <span>{getDay(orario.inizio_orario)}</span>
-                    <span>
-                        {getMonth(orario.inizio_orario)}/{getYear(orario.inizio_orario)}
-                    </span>
+                    <span> {getMonth(orario.inizio_orario)}/{getYear(orario.inizio_orario)} </span>
                 </div>
 
                 <div>
-                    <span>
-                        {orario.attivita} - {getHours(orario.inizio_orario)}:{getMinutes(orario.inizio_orario)} - {getHours(orario.fine_orario)}:{getMinutes(orario.fine_orario)}
-                    </span>
+                    <span>{orario.attivita} - {getHours(orario.inizio_orario)}:{getMinutes(orario.inizio_orario)} - {getHours(orario.fine_orario)}:{getMinutes(orario.fine_orario)} </span>
                     <span>{orario.descrizione}</span>
                 </div>
             </section>
@@ -33,20 +29,16 @@ const { openDays } = Astro.props;
 
 <style>
     article {
-        width: 100%;
-
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         flex-wrap: nowrap;
 
         gap: 2rem;
     }
 
     article > section {
-        width: 100%;
-
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -95,28 +87,28 @@ const { openDays } = Astro.props;
     }
 
     section > div:last-child > span:last-child {
-        max-width: 45ch;
+        max-width: 25ch;
+
         font-size: 1rem;
         line-height: 1.5rem;
+        text-wrap: wrap;
+
+        overflow-wrap: break-word;
     }
 
     /* For desktop: */
     @media only screen and (min-width: 768px) {
         section > div:first-child {
-            padding: 0;
-            min-height: 3rem;
-            min-width: 3rem;
+            height: 4.4rem;
+            width: 4.4rem;
 
-            max-height: 3rem;
-            max-width: 3rem;
+            padding: 0;
 
             border-radius: 4rem;
+        }
 
-            min-height: 4.4rem;
-            min-width: 4.4rem;
-
-            max-height: 4.4rem;
-            max-width: 4.4rem;
+        section > div:last-child > span:last-child {
+            max-width: 45ch;
         }
     }
 
