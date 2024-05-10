@@ -1,15 +1,15 @@
 ---
-import type { Institute } from "../../../Data/types";
-import { SERVER_ADDRESS, SERVER_PORT } from "../../../Data/constants.ts";
-import Navbar from "../components/Navbar.astro";
-import Layout from "../layouts/Layout.astro";
-import "../styles/common.css";
+import '../styles/common.css';
 
-const INSTITUTES_RAW = await fetch(
-    `http://${SERVER_ADDRESS}:${SERVER_PORT}/instituti`,
-);
+import { SERVER_ADDRESS, SERVER_PORT } from '../../../Data/constants.ts';
+import type { Institute } from '../../../Data/types';
+
+import Navbar from '../components/Navbar.astro';
+import Layout from '../layouts/Layout.astro';
+
+const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/instituti`);
 const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();
-console.log(`Loaded ${INSTITUTES.length} institutes`);
+console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
 ---
 
 <Layout>
@@ -17,158 +17,97 @@ console.log(`Loaded ${INSTITUTES.length} institutes`);
 
     <main>
         <div id="mapdiv"></div>
-
-        <script
-            is:inline
-            src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"
-        ></script>
-
-        <script is:inline define:vars={{ INSTITUTES }}>
-            var db = { dati: [] };
-            db.dati = INSTITUTES.map((institute) => {
-                const SEDE = institute.sedi.find(
-                    (sede) => sede.codice_MIUR === institute.codice_MIUR,
-                );
-
-                return {
-                    latitudine: SEDE.posizione.latitudine,
-                    longitudine: SEDE.posizione.longitudine,
-                    codice_MIUR: SEDE.codice_MIUR,
-                };
-            });
-
-            // creazione della mappa
-            map = new OpenLayers.Map("mapdiv");
-            map.addLayer(new OpenLayers.Layer.OSM());
-
-            // conversione del sistema di riferimento/proiezione
-            epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
-            projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
-
-            var lonLat = new OpenLayers.LonLat(
-                11.0339548,
-                45.8891176,
-            ).transform(epsg4326, projectTo);
-
-            // visualizzazione della mappa con relativo zoom
-            var zoom = 13;
-            map.setCenter(lonLat, zoom);
-            //--------------------------------------------------------------------------------------------------------------------------
-            // livello dove posizionare i 'markers'
-            var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
-
-            // lettura dei dati, posizionamento alle coordinate di latitudine e longitudine
-            for (var i = 0; i < db.dati.length; i++) {
-                // Define markers as "features" of the vector layer:
-                var feature = new OpenLayers.Feature.Vector(
-                    new OpenLayers.Geometry.Point(
-                        db.dati[i].longitudine,
-                        db.dati[i].latitudine,
-                    ).transform(epsg4326, projectTo),
-                    { codice_MIUR: db.dati[i].codice_MIUR },
-                    {
-                        externalGraphic: "marker.png",
-                        graphicHeight: 21,
-                        graphicWidth: 20,
-                        graphicXOffset: -12,
-                        graphicYOffset: -25,
-                    },
-                );
-                vectorLayer.addFeatures(feature);
-            }
-            // viene aggiunto un nuovo livello alla mappa (livello dei marker)
-            map.addLayer(vectorLayer);
-            //--------------------------------------------------------------------------------------------------------------------------
-            // gestione dei popup al clic del mouse
-            //Add a selector control to the vectorLayer with popup functions
-            var controls = {
-                selector: new OpenLayers.Control.SelectFeature(vectorLayer, {
-                    onSelect: createPopup,
-                    onUnselect: destroyPopup,
-                }),
-            };
-
-            function createPopup(feature) {
-                // Extract variables
-                const CODICE_MIUR = feature.attributes.codice_MIUR;
-                console.log(INSTITUTES[0]);
-                console.log(CODICE_MIUR);
-                const INSTITUTE = INSTITUTES.find(
-                    (institute) => institute.codice_MIUR === CODICE_MIUR,
-                );
-                const SEDE = INSTITUTE.sedi.find(
-                    (sede) => sede.codice_MIUR == CODICE_MIUR,
-                );
-
-                console.log(SEDE);
-                // Create popup content using template literals
-                const popupContent = `
-    <div class="markerContent">${SEDE.name}</div>
-    <div class="popupButtons">
-        <button onclick="window.open('https://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}')">
-            <span class="material-symbols-outlined">&#xf06a</span>
-        </button>
-        <button onclick="window.open('${SEDE.website}', '_blank')">
-            <span class="material-symbols-outlined">&#xf728</span>
-        </button>
-        <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=${SEDE.posizione.indirizzo}', '_blank')">
-            <span class="material-symbols-outlined">&#xe0c8</span>
-        </button>
-    </div>
-  `;
-
-                // Create the popup
-                feature.popup = new OpenLayers.Popup.FramedCloud(
-                    "pop",
-                    feature.geometry.getBounds().getCenterLonLat(),
-                    null,
-                    popupContent,
-                    null,
-                    true,
-                    function () {
-                        controls["selector"].unselectAll();
-                    },
-                );
-
-                // Add the popup to the map
-                map.addPopup(feature.popup);
-            }
-
-            function destroyPopup(feature) {
-                feature.popup.destroy();
-                feature.popup = null;
-            }
-
-            map.addControl(controls["selector"]);
-            controls["selector"].activate();
-            //----------------------------------------------------------------------------------------------------------------------------
-        </script>
     </main>
 </Layout>
 
-<style>
-    button:hover span {
-        color: var(--tint-orange);
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script>
+<script is:inline define:vars={{ INSTITUTES }}>
+    // Insert data
+    let db = { dati: [] };
+    db.dati = INSTITUTES.map(institute => {
+        const SEDE = institute.sedi.find(sede => sede.codice_MIUR === institute.codice_MIUR);
+
+        return {
+            latitudine: SEDE.posizione.latitudine,
+            longitudine: SEDE.posizione.longitudine,
+            codice_MIUR: SEDE.codice_MIUR,
+        };
+    });
+
+    // Set map config
+    let map = new OpenLayers.Map('mapdiv');
+    map.addLayer(new OpenLayers.Layer.OSM());
+
+    const ZOOM = 15;
+    let epsg4326 = new OpenLayers.Projection('EPSG:4326');
+    let projectTo = map.getProjectionObject();
+    let center_point = new OpenLayers.LonLat(11.0339548, 45.8891176).transform(epsg4326, projectTo);
+    map.setCenter(center_point, ZOOM);
+
+    // Set markers
+    const MARKER_DATA = {
+        externalGraphic: 'marker.png',
+        graphicHeight: 21,
+        graphicWidth: 20,
+        graphicXOffset: -12,
+        graphicYOffset: -25,
+    };
+
+    let marker_layer = new OpenLayers.Layer.Vector('Overlay');
+    for (const data of db.dati) {
+        let point = new OpenLayers.Geometry.Point(data.longitudine, data.latitudine).transform(epsg4326, projectTo);
+        let marker = new OpenLayers.Feature.Vector(point, { codice_MIUR: data.codice_MIUR }, MARKER_DATA);
+        marker_layer.addFeatures(marker);
     }
-    button:active span {
-        /* TODO: Find nicer color */
-        color: var(--background-primary);
+    map.addLayer(marker_layer);
+
+    // Set controls
+    let controls = {
+        selector: new OpenLayers.Control.SelectFeature(marker_layer, {
+            onSelect: createPopup,
+            onUnselect: destroyPopup,
+        }),
+    };
+
+    function createPopup(feature) {
+        const CODICE_MIUR = feature.attributes.codice_MIUR;
+        const INSTITUTE = INSTITUTES.find(institute => institute.codice_MIUR === CODICE_MIUR);
+        const SEDE = INSTITUTE.sedi.find(sede => sede.codice_MIUR == CODICE_MIUR);
+
+        const CONTENT = `
+            <article>
+                <span>${SEDE.name}</span>
+                <nav>
+                    <button onclick="window.open('${SEDE.website}', '_blank')">
+                        <span class="material-symbols-outlined">&#xf728</span>
+                    </button>
+
+                    <button onclick="window.open('/sede/${SEDE.codice_MIUR}', '_parent')">
+                        <span class="material-symbols-outlined">&#xe7ee</span>
+                    </button>
+
+                    <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=${SEDE.posizione.indirizzo}', '_blank')">
+                        <span class="material-symbols-outlined">&#xe0c8</span>
+                    </button>
+                </nav>
+            </article>
+        `;
+
+        // Add popup
+        feature.popup = new OpenLayers.Popup.FramedCloud('pop', feature.geometry.getBounds().getCenterLonLat(), null, CONTENT, null, true, () => controls['selector'].unselectAll());
+        map.addPopup(feature.popup);
     }
 
-    button > span {
-        font-size: 2.2rem;
+    function destroyPopup(feature) {
+        feature.popup.destroy();
+        feature.popup = null;
     }
 
-    span {
-        color: var(--foreground-secondary);
-        /* font-size: var(--icon_size); */
-        transition: 200ms;
-    }
+    map.addControl(controls['selector']);
+    controls['selector'].activate();
+</script>
 
-    span:hover {
-        transition: 100ms;
-    }
-
+<style is:inline>
     main {
         padding: 2% 2% 0 2%;
 
@@ -176,7 +115,7 @@ console.log(`Loaded ${INSTITUTES.length} institutes`);
         height: 90%;
     }
 
-    div {
+    main > div {
         width: 100%;
         height: 100%;
 
@@ -184,6 +123,60 @@ console.log(`Loaded ${INSTITUTES.length} institutes`);
         box-shadow:
             rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
             rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-        /* outline: 0.3rem solid var(--foreground-tertiary); */
+    }
+
+    article > span {
+        text-wrap: wrap;
+        text-align: center;
+
+        font-size: 1.2rem;
+    }
+    article > nav {
+        padding: 0.5rem 1.5rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 0.2rem;
+    }
+
+    nav > button {
+        padding: 0.4rem;
+
+        border: unset;
+        background-color: unset;
+
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+
+        cursor: pointer;
+    }
+
+    nav > button:hover button > span {
+        color: var(--tint-orange);
+    }
+
+    nav > button:active button > span {
+        /* TODO: Find nicer color */
+        color: var(--background-primary);
+    }
+
+    button > span {
+        font-size: 3rem;
+    }
+
+
+    /* Icon style */
+    button > span {
+        color: var(--foreground-secondary);
+        /* font-size: var(--icon_size); */
+        transition: 200ms;
+    }
+
+    button > span:hover {
+        color: var(--tint-orange);
+        transition: 100ms;
     }
 </style>
