@@ -1,14 +1,14 @@
 # Cleaning
-echo "Cleaning..."
+echo "Cleaning... (App)"
 docker rm -f made-app_instance
 docker image rm -f made-app
 
 # Building
-echo "Building..."
+echo "Building... (App)"
 docker build --progress=plain -t made-app . 
 
 # Running
-echo "Running..."
+echo "Running... (App)"
 docker run -it \
-    -p 8080:80 \
+    -p 80:80 \
     --name made-app_instance made-app

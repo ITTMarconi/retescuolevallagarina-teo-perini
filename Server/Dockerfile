@@ -1,13 +1,13 @@
 FROM node:22-alpine3.18
 
-WORKDIR /MaDe
+WORKDIR /MaDe/Data
+COPY ../Data .
 
-WORKDIR ./Server
+WORKDIR /MaDe/Server
 COPY . .
 
 RUN npm install
 
-VOLUME [ "/MaDe/Data" ]
 EXPOSE 25565
 
 HEALTHCHECK --interval=5m --timeout=5s \

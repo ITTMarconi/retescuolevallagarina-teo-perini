@@ -36,6 +36,7 @@ Notes:
 - If you want to set a custom server address and port \
   you just need to edit `/Data/constants.ts` AND `/Data/constants.js` \
   (Yes, I know, annoying, but is JS fault)
+- Remember to open the firewall port for `TCP:25565`!
 
 ### Running dev
 
