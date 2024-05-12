@@ -56,6 +56,11 @@ npm run dev -- --host
 ### Running production (by hand)
 
 ```bash
+# Set local ip !!!
+vim Data/constants.js
+vim Data/constants.ts
+### 
+
 # Start server
 cd ./Server
 npm install
@@ -69,11 +74,10 @@ npm install
 npm run build
 
 # Start app
-docker run -it  \
--m type=bind,src=./dist/,dst=/usr/share/nginx/html \
--m type=bind,src=../nginx/nginx.conf,dst=/etc/nginx/nginx.conf \
+docker run -d \
+-v /$(pwd)/dist:/usr/share/nginx/html \
 --name webapp \
--p 8080:80 \
+-p 80:80 \
 nginx
 ```
 
