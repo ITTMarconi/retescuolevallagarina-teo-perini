@@ -2,7 +2,7 @@ version: "3"
 services:
     app:
         image: made/made-app
-        build: ./App
+        build: .
         ports:
             - "80:80"
         depends_on:
@@ -10,9 +10,9 @@ services:
                 condition: service_healthy
                 restart: true
         restart: always
-        networks:
-            pipe:
-                ipv4_address: 192.168.4.69
+        # networks:
+        #     pipe:
+        #         ipv4_address: 192.168.4.69
 
     server:
         image: made/made-server
@@ -29,13 +29,13 @@ services:
             retries: 3
             start_period: 40s
             start_interval: 5s
-        networks:
-            pipe:
-                ipv4_address: 192.168.4.20
+        # networks:
+        #     pipe:
+        #         ipv4_address: 192.168.4.20
 
-networks:
-    pipe:
-        ipam:
-            driver: default
-            config:
-                - subnet: "192.168.4.0/24"
+# networks:
+#     pipe:
+#         ipam:
+#             driver: default
+#             config:
+#                 - subnet: "192.168.4.0/24"
