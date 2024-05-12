@@ -11,5 +11,5 @@ docker build --progress=plain -t made-app .
 echo "Running... (App)"
 docker run -it \
     -p 80:80 \
-    -v /$(pwd)/../Data:/MaDe/Data \
+    -v /$(pwd)/Data:/MaDe/Data \
     --name made-app_instance made-app

@@ -89,12 +89,36 @@ nginx
 cd ./Server
 ./run.sh
 
-cd ..
+# Test if it's up and running
+curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
 
 # Build and start app
-cd ./App 
+cd ..
 ./run.sh
+
+# Test if app it's running
+curl http://<SERVER_IP>/
 ```
+
+### Troubleshooting
+
+#### App build failed fetch failed
+
+Make sure you have the server up and running before starting the application
+
+#### Server address not available
+
+You probably forgot another instance running, check and retry
+
+> You can use `sudo lsof -i :25565` to find processes using the port
+
+OR
+
+If you are running the server docker container you need to set SERVER_IP to "localhost" and then do a backflip
+
+#### Images don't render when connected to App in LAN
+
+The server manages media distribution, check your firewall if you have the required port open (default TCP:25565)
 
 ## Design concepts
 

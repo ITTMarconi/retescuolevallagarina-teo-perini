@@ -4,14 +4,14 @@ FROM node:22-alpine3.18 AS build
 # Start server
 VOLUME /MaDe/Data
 WORKDIR /MaDe/Server
-COPY ../Server .
+COPY ./Server .
 
 RUN [ "node", "index.js", "&" ]
 
 
 # Build app
 WORKDIR /MaDe/App
-COPY . ./App
+COPY ./App ./App
 
 RUN [ "npm", "install" ]
 RUN [ "npm", "run", "build" ]
