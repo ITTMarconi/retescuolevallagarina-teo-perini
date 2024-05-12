@@ -70,8 +70,8 @@ npm run build
 
 # Start app
 docker run -it  \
--v ./dist/:/usr/share/nginx/html \
--v ../nginx/nginx.conf:/etc/nginx/nginx.conf \
+-m type=bind,src=./dist/,dst=/usr/share/nginx/html \
+-m type=bind,src=../nginx/nginx.conf,dst=/etc/nginx/nginx.conf \
 --name webapp \
 -p 8080:80 \
 nginx
