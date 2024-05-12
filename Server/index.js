@@ -16,7 +16,7 @@ app.use(express.json())
 /** @type {boolean} */
 let isDatabaseReady = false;
 
-app.listen(SERVER_PORT, SERVER_ADDRESS, () => {
+app.listen(SERVER_PORT, () => {
     console.log("Starting backend...")
 
     if (database.fetchFromDisk()) {

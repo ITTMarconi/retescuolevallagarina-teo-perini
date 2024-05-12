@@ -2,10 +2,10 @@ FROM node:22-alpine3.18 AS build
 
 
 # Start server
-VOLUME /MaDe/Data
 WORKDIR /MaDe/Server
 COPY ./Server .
 
+VOLUME /MaDe/Data
 RUN [ "node", "index.js", "&" ]
 
 
