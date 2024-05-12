@@ -11,4 +11,5 @@ docker build --progress=plain -t made-server .
 echo "Running... (Server)"
 docker run -it \
     -p 25565:25565 \
+    -v /$(pwd)/../Data:/MaDe/Data \
     --name made-server_instance made-server

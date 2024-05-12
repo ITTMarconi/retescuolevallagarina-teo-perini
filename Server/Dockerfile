@@ -1,8 +1,6 @@
 FROM node:22-alpine3.18
 
-WORKDIR /MaDe/Data
-COPY ../Data .
-
+VOLUME /MaDe/Data
 WORKDIR /MaDe/Server
 COPY . .
 
