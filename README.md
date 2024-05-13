@@ -33,6 +33,7 @@ Requirements:
 
 - node (reccomended v19.5.0)
 - docker (optional)
+- docker-compose (optional)
 
 Notes:
 
@@ -110,14 +111,37 @@ curl http://<SERVER_IP>/
 ### Using docker compose
 
 ```bash
+# Set ip and port!!!
+vi Data/constants.js
+vi Data/constants.ts
+#####
+
+# Build and start server
+cd Server
+./server_run.sh
+
+# DO NOT STOP SERVER
+
+# check if the server is on
+curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
+
+cd ..
+
 # Build app
-cd ../App
+cd App
 npm install
 npm run build
 
-docker compose up
+cd ..
 
-# Test if the server is up and running
+
+# Kill server
+docker stop made-server_instance
+
+
+docker-compose up
+
+# Test if server is up and running
 curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
 
 # Test if app it's running
