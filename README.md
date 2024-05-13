@@ -17,13 +17,13 @@ Mobile overview
 
 ## Missing / TODO
 
-- [ ] Astro build workaround
 - [ ] Full Docker support
+- [x] Astro build workaround
 
 - [ ] Finish README
-  - [ ] Add preview screenshots
   - [ ] Add guide to add new school
-  - [ ] Add instruction to run project
+  - [x] Add preview screenshots
+  - [x] Add instruction to run project
 
 - [ ] Make video
 
