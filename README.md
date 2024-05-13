@@ -29,6 +29,11 @@ Mobile overview
 
 ## Running project
 
+Requirements:
+
+- node (reccomended v19.5.0)
+- docker (optional)
+
 Notes:
 
 - Default Server ip and port are `localhost:25565`
@@ -92,9 +97,28 @@ cd ./Server
 # Test if it's up and running
 curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
 
-# Build and start app
-cd ..
+# Build app
+cd ../App
+npm install
+npm run build
 ./app_run.sh
+
+# Test if app it's running
+curl http://<SERVER_IP>/
+```
+
+### Using docker compose
+
+```bash
+# Build app
+cd ../App
+npm install
+npm run build
+
+docker compose up
+
+# Test if the server is up and running
+curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
 
 # Test if app it's running
 curl http://<SERVER_IP>/
