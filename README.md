@@ -112,6 +112,7 @@ curl http://<SERVER_IP>/
 
 > There is a launch script that does just this,
 > check in the root of the project
+> `chmod +x launch.sh && ./launch.sh`
 
 ```bash
 # Set ip and port!!!
