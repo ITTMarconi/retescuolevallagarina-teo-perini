@@ -19,8 +19,6 @@ cd ..
 # Build app
 cd App
 npm install
-
-rm -rf ./dist
 npm run build
 
 cd ..
@@ -29,7 +27,7 @@ cd ..
 # Kill server
 docker stop made-server_instance
 
-
+docker-compose build
 docker-compose up
 
 # # Test if server is up and running
