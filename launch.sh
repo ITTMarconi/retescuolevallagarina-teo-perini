@@ -19,6 +19,8 @@ cd ..
 # Build app
 cd App
 npm install
+
+rm -rf ./dist
 npm run build
 
 cd ..
