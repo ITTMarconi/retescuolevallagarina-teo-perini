@@ -110,6 +110,9 @@ curl http://<SERVER_IP>/
 
 ### Using docker compose
 
+> There is a launch script that does just this,
+> check in the root of the project
+
 ```bash
 # Set ip and port!!!
 vi Data/constants.js
