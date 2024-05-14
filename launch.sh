@@ -5,12 +5,14 @@ vi Data/constants.ts
 
 # Build and start server
 cd Server
+
+chmod +x server_run.sh
 ./server_run.sh
 
 # DO NOT STOP SERVER
 
 # check if the server is on
-curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
+# curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
 
 cd ..
 
