@@ -1,5 +1,5 @@
 /** @type {string} */
-const SERVER_ADDRESS = "192.168.1.16";
+const SERVER_ADDRESS = "retescuolevallagarina.it";
 
 /** @type {number} */
 const SERVER_PORT = 25565;
