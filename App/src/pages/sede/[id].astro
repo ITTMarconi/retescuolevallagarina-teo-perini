@@ -27,12 +27,14 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
 <Layout>
     <Navbar />
-
+    
     <main>
         <header>
             <h2 class="font-regular">{SEDE.name} <hr /></h2>
-
+            
             <section>
+                <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.logo_url}`} alt="" />
+                
                 <nav>
                     <button onclick={`window.open("${SEDE.website}", "_blank")`}>
                         <Icon code="f728" color="var(--foreground-secondary)" />
@@ -46,7 +48,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
                     {
                         typeof SEDE.dirigente === 'string' && (
-                            <div>
+                            <div title="Referente orientamento">
                                 <Icon code="e7fd" color="var(--foreground-secondary)" />
                                 <span>{SEDE.dirigente}</span>
                             </div>
@@ -63,14 +65,14 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
                     }
                 </nav>
 
-                <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.logo_url}`} alt="" />
             </section>
 
         </header>
-
+        
+        
         <section>
             <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
-
+            
             <div>
                 <h2 class="font-regular">Open day</h2>
                 <hr />
@@ -79,7 +81,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
             </div>
         </section>
 
-        <article>
+        <!-- <article>
             <section>
                 <h2 class="font-regular">Stesso istituto</h2>
                 <hr />
@@ -92,7 +94,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
                 <div>{SIMILAR_SEDI.map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)}</div>
             </section>
-        </article>
+        </article> -->
     </main>
 
     <footer>
@@ -309,6 +311,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         flex-direction: column;
         justify-content: space-evenly;
         gap: 2rem;
+        overflow-x:hidden;
     }
 
     th {
@@ -397,7 +400,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
         main > article {
             flex-wrap: nowrap;
-            flex-direction: row-reverse;
+            flex-direction: column;
         }
 
         /************************/
@@ -419,14 +422,14 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         main > section {
             max-width: 70rem;
 
-            flex-direction: row-reverse;
+            flex-direction: column;
             align-items: center;
             justify-content: space-between;
         }
 
-        section > video {
+        /* section > video {
             width: 45%;
-        }
+        } */
 
     }
 </style>
