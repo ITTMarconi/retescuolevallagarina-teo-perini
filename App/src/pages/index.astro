@@ -14,6 +14,8 @@ import '../styles/common.css';
             </span>
         </h1>
 
+        <span><i class="font-regular">Orientamento per la scelta della scuola superiore a Rovereto</i></span>
+
         <nav>
             <a href="/istituti">
                 <Icon code="e7ee" color="var(--foreground-secondary)" />
@@ -21,11 +23,11 @@ import '../styles/common.css';
             </a>
             <a href="/openday">
                 <Icon code="ebcc" color="var(--foreground-secondary)" />
-                <span class="font-light">Open Days</span>
+                <span class="font-light">Incontri e <br>Open Days</span>
             </a>
             <a href="/map">
                 <Icon code="e55b" color="var(--foreground-secondary)" />
-                <span class="font-light">Mappa scuole</span>
+                <span class="font-light">Mappa Scuole</span>
             </a>
         </nav>
     </main>
@@ -39,18 +41,21 @@ import '../styles/common.css';
     main {
         height: calc(100% - 2.4rem);
         padding: 1.2rem 1rem;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
     }
-
+    
     h1, h1 > span {
-        height: 25%;
         font-size: 3rem;
         text-align: center;
         color: var(--foreground-primary);
+        line-height: 3.5rem;
     }
 
     h1 > span {
-        margin: 0.5rem 0 0 0;
-
         display: flex;
         align-items: center;
         justify-content: center;
@@ -59,6 +64,14 @@ import '../styles/common.css';
     h1 > span > img {
         margin: 0 0 0 0.4rem;
         height: 3rem;
+    }
+
+    main > span {
+        margin: 0 2rem;
+
+        font-size: 1rem;
+        color: var(--foreground-secondary);
+        text-align: center;
     }
 
     nav {
@@ -93,7 +106,6 @@ import '../styles/common.css';
     }
     span:last-child {
         font-size: 1.3rem;
-        text-transform: capitalize;
         font-weight: 500;
         color: var(--foreground-secondary);
     }
@@ -102,6 +114,11 @@ import '../styles/common.css';
     @media only screen and (min-width: 600px) {
         h1, h1 > span {
             font-size: 4.5rem;
+            line-height: 7rem;
+        }
+
+        main > span {
+            font-size: 2rem;
         }
 
         h1 > span > img {
@@ -121,6 +138,11 @@ import '../styles/common.css';
     @media only screen and (min-width: 768px) {
         h1, h1 > span {
             font-size: 6.5rem;
+            line-height: 7.5rem;
+        }
+
+        h1 {
+            margin-bottom: 3rem;
         }
 
         h1 > span > img {
