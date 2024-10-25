@@ -1,4 +1,4 @@
-> ⚠️ BROKEN STUFF
+> /!\ BROKEN STUFF
 > App dockerfile doesn't work (yet) because it relys upon Server to be up to build astro stuff
 
 # MaDe Progetto Scuole
