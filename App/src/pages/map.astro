@@ -13,15 +13,29 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
 ---
 
 <Layout>
-    <Navbar current_view="map" />
+    <Navbar current_view="map"/>
 
     <main>
-        <div id="mapdiv"></div>
+        <!-- <div id="mapdiv"></div> -->
+        <div id="map"></div>
     </main>
 </Layout>
 
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<!-- <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script> -->
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 <script is:inline define:vars={{ INSTITUTES }}>
+
+    var map = L.map('map').setView([45.890599305249125, 11.03896173214287], 12);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 16,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+</script>
+
+<!-- <script is:inline define:vars={{ INSTITUTES }}>
     // Insert data
     let db = { dati: [] };
     db.dati = INSTITUTES.map(institute => {
@@ -46,7 +60,7 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
 
     // Set markers
     const MARKER_DATA = {
-        externalGraphic: 'marker.png',
+        externalGraphic: 'map/marker.png',
         graphicHeight: 21,
         graphicWidth: 20,
         graphicXOffset: -12,
@@ -105,19 +119,23 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
 
     map.addControl(controls['selector']);
     controls['selector'].activate();
-</script>
+</script> -->
 
 <style is:inline>
     main {
-        padding: 2% 2% 0 2%;
+        padding: 2% 1% 1% 2%;
 
         width: 96%;
         height: 90%;
     }
 
+    #map {
+        height:100%;
+    }
+
     main > div {
         width: 100%;
-        height: 100%;
+        height: 90%;
 
         border-radius: 1rem;
         box-shadow:
