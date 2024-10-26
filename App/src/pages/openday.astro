@@ -17,14 +17,12 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
     <Navbar current_view="openday" />
 
     <main>
-
-        <article>
+        <article class="hoverable">
             <div>
                 <h1 class="font-regular">Appuntamento territoriale</h1>
 
                 <span>
                     Mercoledì 13 novembre 2024
-                    <!-- TODO: Load volantino on server  -->
                     <a href="volantino_scuole.pdf" target="_blank">Link al volantino</a>
                 </span>
             </div>
@@ -33,48 +31,38 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
 
         </article>
 
-        <section>
         {
-            INSTITUTES.map(
-                institute =>
-                    institute.openDays.orari.length > 0 && (
-                        <article>
-                            <a href={`/sede/${institute.codice_MIUR}`}>
-                                <h2 class="font-regular">{getMainSede(institute).name}</h2>
-                                <hr />
-                            </a>
-                            <OpenDaysList openDays={institute.openDays} />
-                        </article>
-                    ),
+            INSTITUTES.map(institute =>
+                institute.openDays.orari.length > 0 && (
+                    <article>
+                        <a href={`/sede/${institute.codice_MIUR}`}>
+                            <h2 class="font-regular">{getMainSede(institute).name}</h2>
+                            <hr />
+                        </a>
+                        <OpenDaysList openDays={institute.openDays} />
+                    </article>
+                ),
             )
         }
-        </section>
     </main>
 </Layout>
 
 <style>
     main {
-        padding: 1rem;
-
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
+    /* Banner */
+    /* ******************************************************************************** */
+
     main > article {
-        max-width: 50ch;
+        width: calc(100% - 4rem);
 
-        padding: 1.5rem 2rem;
-        margin: 1rem 0 2rem 0;
-
-        border-radius: 1rem;
-
-        color: var(--background-primary);
-        background-color: var(--background-tertiary);
-        
-        outline: 0.15rem solid var(--foreground-secondary);
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        padding: 2rem;
+        margin-bottom: 1rem;
     }
 
     main > article > p {
@@ -97,36 +85,11 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
         align-items: center;
     }
 
-    main > section {
-        width: fit-content;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-
-        gap: 4rem;
-    }
-
-    section > article {
-        /* width: 100%; */
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        /* align-items: center; */
-        align-items: flex-start;
-
-        gap: 1rem;
-    }
+    /* Openday Istituti */
+    /* ******************************************************************************** */
 
     a {
-        /* TODO: Get a better color for this */
-        color: var(--background-primary);
-        font-size: 1.1rem;
         text-decoration: underline;
-
-        transition: 200ms;       
     }
 
     article > a {
@@ -138,11 +101,6 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
         align-items: center;
     }
 
-    a:hover {
-        color: var(--tint-orange);
-        /* transition: 100ms; */
-    }
-
     article > a > h2 {
         max-width: 30ch;
 
@@ -151,36 +109,22 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
     }
 
     a > hr {
-        width: 75%;
-        margin: 0.5rem 0 0.8rem 0;
-
-        border: 1.5px solid var(--tint-orange);
-        border-radius: 20px;
-
-        color: var(--tint-orange);
+        width: 80%;
     }
 
     /* For desktop: */
     @media only screen and (min-width: 768px) {
-        main {
-            align-items: center;
+
+        main > article {
+            max-width: 80ch;
         }
 
         main > article > div > span {
             flex-direction: row;
             gap: 1rem;
         }
-
-        section {
-            gap: 4rem;
-        }
-
-        section > article {
-            /* align-items: center; */
-        }
     }
 
     /* For wide-desktop: */
-    @media only screen and (min-width: 1536px) {
-    }
+    @media only screen and (min-width: 1536px) { }
 </style>

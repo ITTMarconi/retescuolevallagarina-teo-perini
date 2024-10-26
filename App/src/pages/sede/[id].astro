@@ -30,19 +30,23 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
     <main>
         <header>
-            <h2 class="font-regular">{SEDE.name} <hr /></h2>
+            <h2 class="font-regular">{SEDE.name}</h2>
+            <hr />
 
             <section>
+
+                <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.logo_url}`} alt="" />
+
                 <nav>
-                    <button onclick={`window.open("${SEDE.website}", "_blank")`}>
+                    <a href={SEDE.website} target="_blank">
                         <Icon code="f728" color="var(--foreground-secondary)" />
                         <span>{SEDE.website}</span>
-                    </button>
+                    </a>
 
-                    <button onclick={`window.open("https://www.google.com/maps/search/?api=1&query=${SEDE.posizione.indirizzo}", "_blank")`}>
+                    <a href={`https://www.google.com/maps/search/?api=1&query=${SEDE.posizione.indirizzo}`} target="_blank">
                         <Icon code="e0c8" color="var(--foreground-secondary)" />
                         <span>{SEDE.posizione.indirizzo}</span>
-                    </button>
+                    </a>
 
                     {
                         typeof SEDE.dirigente === 'string' && (
@@ -62,37 +66,23 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
                         )
                     }
                 </nav>
-
-                <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.logo_url}`} alt="" />
             </section>
 
         </header>
 
+        <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
+
+        <div>
+            <h2 class="font-regular">Open day</h2>
+            <hr />
+
+            <OpenDaysList openDays={INSTITUTE.openDays} />
+        </div>
+
         <section>
-            <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
-
-            <div>
-                <h2 class="font-regular">Open day</h2>
-                <hr />
-
-                <OpenDaysList openDays={INSTITUTE.openDays} />
-            </div>
+            <h2 class="font-regular">Altre sedi</h2> <hr />
+            <div>{INSTITUTE.sedi.filter(sede => sede.name !== SEDE.name).map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)}</div>
         </section>
-
-        <article>
-            <section>
-                <h2 class="font-regular">Stesso istituto</h2>
-                <hr />
-                <div>{INSTITUTE.sedi.filter(sede => sede.name !== SEDE.name).map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)}</div>
-            </section>
-
-            <section>
-                <h2 class="font-regular">Altri {SEDE.tag.slice(0, -1).concat('i')}</h2>
-                <hr />
-
-                <div>{SIMILAR_SEDI.map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)}</div>
-            </section>
-        </article>
     </main>
 
     <footer>
@@ -138,6 +128,9 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         gap: 1rem;
     }
 
+    /* Header */
+    /* -------------------------------------------------------------------------------- */
+
     main > header {
         flex-basis: 100%;
 
@@ -147,8 +140,11 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         flex-wrap: wrap;
     }
 
+    header > hr {
+        width: 60%;
+    }
+
     header > h2 {
-        flex-basis: 100%;
         width: 100%;
 
         padding: 0.8rem 0 0 0;
@@ -162,7 +158,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
 
         flex-wrap: nowrap;
@@ -172,9 +168,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         display: none;
     }
 
-    /* ************************************************* */
-
-    nav > button,
+    nav > a,
     nav > div {
         padding: 0.2rem 0;
 
@@ -186,93 +180,38 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         gap: 1rem;
     }
 
-    nav > button > span:last-child {
+    nav > a > span:last-child {
         text-decoration: underline;
     }
 
-    nav > button:hover {
-        color: var(--tint-orange);
-        cursor: pointer;
-    }
-
-    nav > button:hover span:nth-child(2) {
-        text-decoration: underline;
-        transition: 200ms;
-    }
-
-    nav > button:active span {
-        /* TODO: Find nicer color */
-        color: var(--background-primary);
-    }
-
-    button > span:first-child,
+    a > span:first-child,
     div > span:first-child {
         font-size: 2.5rem;
     }
 
-    button > span:nth-child(2),
+    a > span:nth-child(2),
     div > span:nth-child(2) {
         font-size: 0.9rem;
-        transition: 200ms;
     }
 
-    /* ******************************** */
+    /* Video */
+    /* -------------------------------------------------------------------------------- */
 
-    /* * > section {} */
+    main > video {
+        width: 90%;
+        margin: 0 0 2rem 0;
+    }
+
+    /* Altre sedi */
+    /* -------------------------------------------------------------------------------- */
+
+    main > section {
+        padding: 2rem;
+    }
+
     section > h2 {
         font-size: 1.4rem;
         text-transform: capitalize;
-    }
-
-    section > hr {
-        margin: 0.5rem 0 0.8rem 0;
-
-        color: var(--tint-orange);
-
-        border: 1.5px solid var(--tint-orange);
-        border-radius: 20px;
-    }
-
-    /*****/
-
-    main > section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    section > video {
-        width: 90%;
-        margin: 0 0 2rem 0;
-
-        border-radius: 0.4rem;
-        outline: 0.15rem solid var(--foreground-tertiary);
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    }
-
-    main > section > div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    section > div > h2 {
-        width: fit-content;
-    }
-
-    /*****/
-
-    main > article {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: flex-start;
-        flex-wrap: wrap;
-    }
-
-    article > section {
-        padding: 2rem;
     }
 
     section > div {
@@ -288,19 +227,15 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
     section > div > a {
         padding: 0.4rem 0 0.4rem 0.6rem;
         font-size: 1.1rem;
-        transition: 200ms;
+        text-decoration: underline;
     }
 
-    section > div > a:hover {
-        color: var(--tint-orange);
-        /* transition: 100ms; */
-    }
 
-    /* ************************************************* */
+    /* Footer */
+    /* -------------------------------------------------------------------------------- */
 
     footer {
         padding: 3rem 0 4rem 0;
-        /* bottom: 0; */
 
         background-color: var(--background-secondary);
 
@@ -329,24 +264,19 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         padding-left: 0.5rem;
     }
 
-    /* ************************************************* */
-
-    hr {
+    footer hr {
         width: 12rem;
 
         color: var(--background-primary);
-
         border: 1.5px solid var(--background-primary);
-        border-radius: 20px;
     }
 
-    a {
-        /* TODO: Get a better color for this */
-        color: var(--background-primary);
+    footer a {
         text-decoration: underline;
     }
 
-    /* ************************************************* */
+    /* Queries */
+    /* -------------------------------------------------------------------------------- */
 
     /* For tablets: */
     @media only screen and (min-width: 500px) {
@@ -358,21 +288,18 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
             font-size: 1.8rem;
         }
 
-        /*******/
-
-        nav > button,
+        nav > a,
         nav > div {
             padding: 0.4rem;
         }
 
-        button > span:first-child,
+        a > span:first-child,
         div > span:first-child {
             font-size: 2.4rem;
         }
 
         /*******/
 
-        main > header > section {}
         section > img {
             display: block;
             height: 12rem;
@@ -385,22 +312,15 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
             text-transform: capitalize;
         }
 
-        section > video {
+        main > video {
             margin: 2rem 0 4rem 0;
         }
 
         main > section {
             margin: 0rem 0 2rem 0;
-        }
-
-        /************************/
-
-        main > article {
             flex-wrap: nowrap;
             flex-direction: row-reverse;
         }
-
-        /************************/
 
         footer {
             padding: 3rem 0 2rem 0;
@@ -424,9 +344,8 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
             justify-content: space-between;
         }
 
-        section > video {
+        main > video {
             width: 45%;
         }
-
     }
 </style>

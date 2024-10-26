@@ -9,10 +9,11 @@ interface Props {
 const { code, color, ...rest } = Astro.props;
 ---
 
+<span class="material-symbols-outlined" {...rest}>&#x{code}</span>
+
 <style define:vars={{ color }}>
   span {
     color: var(--color);
-    /* font-size: var(--icon_size); */
     transition: 200ms;
   }
 
@@ -21,4 +22,3 @@ const { code, color, ...rest } = Astro.props;
   }
 </style>
 
-<span class="material-symbols-outlined" {...rest}>&#x{code}</span>
