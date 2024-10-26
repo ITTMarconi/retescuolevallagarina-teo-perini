@@ -1,0 +1,41 @@
+{
+    "nome": "NOME ISTIUTO",
+    "codice_MIUR": "ID ISTITUTO",
+    "sedi": [
+        {
+            "codice_MIUR": "CODICE MIUR",
+            "nome": "NOME SEDE",
+
+            "responsabile_orientamento": "NOME",
+
+            "posizione": {
+                "indirizzo": "INDIRIZZO SEDE",
+                "latitudine": "LATITUDINE SEDE",
+                "longitudine": "LONGITUDINE SEDE"
+            },
+
+            "indirizzi": [
+                {
+                    "nome": "NOME INDIRIZZO",
+                    "link": "LINK INDIRIZZO"
+                }
+            ],
+
+            "website": "SITO WEB SEDE",
+            "contacts": {
+                "mail": [
+                    {
+                        "description": "SEGRETERIA",
+                        "mail": "MAIL SEGRETERIA"
+                    }
+                ],
+                "phone": [
+                    {
+                        "description": "TELEFONO",
+                        "numero": "NUMERO DI TELEFONO"
+                    }
+                ]
+            }
+        }
+    ]
+}
