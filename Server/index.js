@@ -30,8 +30,8 @@ app.listen(SERVER_PORT, () => {
     console.log(`Backend ready at http://${SERVER_ADDRESS}:${SERVER_PORT}/`)
 })
 
-app.get('/instituti', (req, res) => {
-    console.log(`[${req.ip ?? '??'}] (/instituti) Requested all institutes`)
+app.get('/istituti', (req, res) => {
+    console.log(`[${req.ip ?? '??'}] (/istituti) Requested all institutes`)
 
     const institutes = database.getInstitutes();
     res.json(institutes);
@@ -49,11 +49,11 @@ app.get('/sedi', (req, res) => {
     res.json(sedi);
 })
 
-app.get('/institute/:id', (req, res) => {
+app.get('/istituto/:id', (req, res) => {
     /** @type {string} */
     const INSTITUTE_ID = req.params.id;
 
-    console.log(`[${req.ip ?? '??'}] (/institute/${INSTITUTE_ID}) Requested institute`)
+    console.log(`[${req.ip ?? '??'}] (/istituto/${INSTITUTE_ID}) Requested institute`)
 
     const INSTITUTE = database.getInstituteByID(INSTITUTE_ID);
     res.json(INSTITUTE);
@@ -99,5 +99,6 @@ app.get('/healthcheck', (req, res) => {
 })
 
 app.get('*', (req, res) => {
+    console.log(`Someone hitted an invalid endpoint... '${req.url}'`)
     res.status(404).send(`EndPoint not existant --- Se vuoi connetterti alla pagina web visita 'https://${SERVER_ADDRESS}'`)
 })

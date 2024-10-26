@@ -21,7 +21,7 @@ const { id } = Astro.params;
 
 const SIMILAR_SEDI: Sede[] = SEDI.filter(s => s.codice_MIUR !== id).filter(s => s.tag === SEDE.tag);
 
-const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/institute/${id}`);
+const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/istituto/${id}`);
 const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 ---
 

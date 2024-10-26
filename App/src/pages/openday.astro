@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar.astro';
 import OpenDaysList from '../components/OpenDaysList.astro';
 import Layout from '../layouts/Layout.astro';
 
-const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/instituti`);
+const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/istituti`);
 const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();
 
 console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
