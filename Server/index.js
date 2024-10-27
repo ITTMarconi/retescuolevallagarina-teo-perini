@@ -20,7 +20,7 @@ app.listen(SERVER_PORT, () => {
     console.log("Starting backend...")
 
     if (database.fetchFromDisk()) {
-        console.error("[DATABASE] Error fetching from disk, exiting...")
+        console.error("\x1B[31m[DATABASE] Error fetching from disk, exiting...\x1B[0m")
         exit(1);
     }
 
@@ -70,13 +70,13 @@ app.get('/sede/:id', (req, res) => {
 })
 
 app.get('/updateDB', (req, res) => {
-    console.warn(`[${req.ip ?? '??'}] (/updateDB) Updating database`)
+    console.warn(`\x1B[33m[${req.ip ?? '??'}] (/updateDB) Updating database\x1B[0m`)
 
     if (database.fetchFromDisk())
 	{
         res.sendStatus(500)
         isDatabaseReady = false;
-        console.error(`[${req.ip ?? '??'}] (/updateDB) Failed!`)
+        console.error(`\x1B[31m[${req.ip ?? '??'}] (/updateDB) Failed!, using backup data...\x1B[0m`)
     } else {
         res.sendStatus(200)
         isDatabaseReady = true;
@@ -88,12 +88,12 @@ app.get('/healthcheck', (req, res) => {
     if (isDatabaseReady)
 	{
         res.status(200).send("ok")
-        console.info(`[${req.ip ?? '??'}] (HEALTH) Ok`)
+        console.info(`\x1B[34m[${req.ip ?? '??'}] (HEALTH) Ok\x1B[0m`)
     }
 	else
 	{
         res.status(500).send("Database not ready")
-		console.error(`[${req.ip ?? '??'}] (HEALTH) Database not ready!`)
+		console.error(`\x1B[31m[${req.ip ?? '??'}] (HEALTH) Database not ready!\x1B[0m`)
     }
 
 })
