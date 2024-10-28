@@ -1,29 +1,31 @@
-{
-    "codice_MIUR": "TNIS009009",
-    "orari": [
-        {
-            "inizio_orario": "2024-11-23T10:00:00+01:00",
-            "fine_orario": "2024-11-23T12:30:00+01:00",
-            "attivita": "Open day",
-            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
-        },
-        {
-            "inizio_orario": "2024-12-05T18:00:00+01:00",
-            "fine_orario": "2024-12-05T20:00:00+01:00",
-            "attivita": "Open day",
-            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
-        },
-        {
-            "inizio_orario": "2024-12-14T10:00:00+01:00",
-            "fine_orario": "2024-12-14T12:30:00+01:00",
-            "attivita": "Open day",
-            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
-        },
-        {
-            "inizio_orario": "2025-01-10T18:00:00+01:00",
-            "fine_orario": "2025-01-10T20:00:00+01:00",
-            "attivita": "Open day",
-            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
-        }
-    ]
-}
+[
+    {
+        "codice_MIUR": "TNIS009009",
+        "orari": [
+            {
+                "inizio_orario": "2024-11-23T10:00:00+01:00",
+                "fine_orario": "2024-11-23T12:30:00+01:00",
+                "attivita": "Open day",
+                "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
+            },
+            {
+                "inizio_orario": "2024-12-05T18:00:00+01:00",
+                "fine_orario": "2024-12-05T20:00:00+01:00",
+                "attivita": "Open day",
+                "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
+            },
+            {
+                "inizio_orario": "2024-12-14T10:00:00+01:00",
+                "fine_orario": "2024-12-14T12:30:00+01:00",
+                "attivita": "Open day",
+                "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
+            },
+            {
+                "inizio_orario": "2025-01-10T18:00:00+01:00",
+                "fine_orario": "2025-01-10T20:00:00+01:00",
+                "attivita": "Open day",
+                "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
+            }
+        ]
+    }
+]

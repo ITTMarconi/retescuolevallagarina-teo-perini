@@ -18,11 +18,11 @@
             "indirizzi_studi": [
                 {
                     "nome": "Indirizzo linguistico",
-                    "link": "https://www.arcivescoviletrento.it/wp-content/uploads/2021/10/tabella-orario.pdf"
+                    "link": "www.arcivescoviletrento.it/wp-content/uploads/2021/10/tabella-orario.pdf"
                 }
             ],
 
-			"website": "https://www.arcivescoviletrento.it",
+			"website": "www.arcivescoviletrento.it",
 			"contacts": {
 				"mail": [
 					{

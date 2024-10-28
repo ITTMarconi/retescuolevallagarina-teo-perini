@@ -1,86 +1,76 @@
 {
   "nome": "Istituto Tecnico Tecnologico 'G. Marconi'",
-  "codice_MIUR": "TNTF02000G",
+  "sede_principale_MIUR": "TNTF02000G",
+  
   "sedi": [
-    {
-      "codice_MIUR": "TNTF02000G",
-      "name": "Istituto Tecnico Tecnologico 'G. Marconi'",
-      "dirigente": "Daniela Depentori",
-      "descrizione": "",
-      "tag": "tecnico",
-      "posizione": {
-        "indirizzo": "Via Monti, 1 - 38068 Rovereto",
-        "latitudine": "45.911303",
-        "longitudine": "11.041517"
-      },
-      "website": "https://www.marconirovereto.it",
-      "contacts": {
-        "mail": [
-          {
-            "description": "istituto",
-            "mail": "marconi@pec.provincia.tn.it"
-          },
-          {
-            "description": "segreteria",
-            "mail": "segr.itimarconi@scuole.provincia.tn.it"
-          },
-          {
-            "description": "dirigenza",
-            "mail": "dir.itimarconi@scuole.provincia.tn.it"
-          }
-        ],
-        "phone": [
-          {
-            "description": "telefono",
-            "numero": "+39 0464 411400"
-          },
-          {
-            "description": "fax",
-            "numero": "+39 0464 419130"
-          }
-        ]
-      }
-    },
-    {
-      "codice_MIUR": "TNTF020501",
-      "name": "Istituto Tecnico Tecnologico 'G. Marconi' Serale",
-      "dirigente": "Daniela Depentori",
-      "descrizione": "",
-      "tag": "tecnico",
-      "posizione": {
-        "indirizzo": "Via Monti, 1 - 38068 Rovereto",
-        "latitudine": "45.91112141952386",
-        "longitudine": "11.042719652063543"
-      },
-      "website": "https://www.marconirovereto.it",
-      "contacts": {
-        "mail": [
-          {
-            "description": "istituto",
-            "mail": "marconi@pec.provincia.tn.it"
-          },
-          {
-            "description": "segreteria",
-            "mail": "segr.itimarconi@scuole.provincia.tn.it"
-          },
-          {
-            "description": "dirigenza",
-            "mail": "dir.itimarconi@scuole.provincia.tn.it"
-          }
-        ],
-        "phone": [
-          {
-            "description": "telefono",
-            "numero": "+39 0464 411400"
-          },
-          {
-            "description": "fax",
-            "numero": "+39 0464 419130"
-          }
-        ]
-      }
-    }
-  ]
+		{
+			"nome": "Istituto Tecnico Tecnologico 'G. Marconi'",
+			"codice_MIUR": "TNTF02000G",
+
+			"responsabile_orientamento": "Eugenio Berti",
+
+			"posizione": {
+				"indirizzo": "Via Monti, 1 - 38068 Rovereto",
+				"latitudine": "45.911303",
+				"longitudine": "11.041517"
+			},
+
+            "indirizzi_studi": [
+                {
+                    "nome": "Biennio propedeutico",
+					"link": "www.marconirovereto.it/indirizzo-di-studio/biennio/"
+                },
+                {
+                    "nome": "Meccatronica ed Energia",
+                    "link": "www.marconirovereto.it/indirizzo-di-studio/meccatronica/"
+                },
+                {
+                    "nome": "Automazione e Robotica Industriale ",
+                    "link": "www.marconirovereto.it/indirizzo-di-studio/elettronica-automazione/"
+                },
+                {
+                    "nome": "Informatica",
+                    "link": "www.marconirovereto.it/indirizzo-di-studio/informatica/"
+                },
+                {
+                    "nome": "Quadriennale GET4stream ",
+                    "link": "www.marconirovereto.it/indirizzo-di-studio/quadriennale/"
+                }
+            ],
+
+			"website": "www.marconirovereto.it",
+			"contacts": {
+				"mail": [
+                    {
+                        "description": "orientamento",
+                        "mail": "orientamento@marconirovereto.it"
+                    },
+					{
+						"description": "istituto",
+						"mail": "marconi@pec.provincia.tn.it"
+					},
+					{
+						"description": "segreteria",
+						"mail": "segr.itimarconi@scuole.provincia.tn.it"
+					},
+					{
+						"description": "dirigenza",
+						"mail": "dir.itimarconi@scuole.provincia.tn.it"
+					}
+				],
+				"phone": [
+					{
+						"description": "telefono",
+						"numero": "+39 0464 411400"
+					},
+					{
+						"description": "fax",
+						"numero": "+39 0464 419130"
+					}
+				]
+			}
+		}
+	]
 }
 
 

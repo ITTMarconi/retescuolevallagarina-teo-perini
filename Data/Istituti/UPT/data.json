@@ -1,69 +1,54 @@
 {
-  "nome": "C.F.P. U.P.T. - Scuola delle Professioni per il Terziario",
-  "codice_MIUR": "TNFP000001",
-  "sedi": [
-    {
-      "codice_MIUR": "TNFP000001",
-      "name": "C.F.P. U.P.T. - Scuola delle Professioni per il Terziario",
-      "dirigente": "Walter Iori",
-      "descrizione": "",
-      "tag": "professionale",
-      "posizione": {
-        "indirizzo": "Via Pasqui, 10 - 38068 ROVERETO",
-        "latitudine": "45.89826946898197", 
-        "longitudine": "11.037105815828692"
-      },
-      "website": "https://www.cfp-upt.it",
-      "contacts": {
-        "mail": [
-          {
-            "description": "istituto",
-            "mail": "cfp-upt@pec.it"
-          },
-          {
-            "description": "segreteria",
-            "mail": "segreteria.rovereto@cfp-upt.it"
-          }
-        ],
-        "phone": [
-          {
-            "description": "telefono",
-            "numero": "+39 0464 630050"
-          }
-        ]
-      }
-    },
-    {
-      "codice_MIUR": "TNFP000001",
-      "name": "Settore Servizi",
-      "dirigente": "Walter Iori",
-      "descrizione": "",
-      "tag": "professionale",
-      "posizione": {
-        "indirizzo": "Via Pasqui, 10 - 38068 ROVERETO",
-        "latitudine": "45.89826946898197", 
-        "longitudine": "11.037105815828692"
-      },
-      "website": "https://www.cfp-upt.it",
-      "contacts": {
-        "mail": [
-          {
-            "description": "istituto",
-            "mail": "cfp-upt@pec.it"
-          },
-          {
-            "description": "segreteria",
-            "mail": "segreteria.rovereto@cfp-upt.it"
-          }
-        ],
-        "phone": [
-          {
-            "description": "telefono",
-            "numero": "+39 0464 630050"
-          }
-        ]
-      }
+	"nome": "C.F.P. U.P.T. - Scuola delle Professioni per il Terziario",
+	"sede_principale_MIUR": "TNFP000001",
 
-    }
-  ]
+	"sedi": [
+		{
+			"nome": "UPT Scuola delle Professioni per il Terziario Rovereto",
+			"codice_MIUR": "TNFP000001",
+
+            "responsabile_orientamento": "Elena Mondini",
+
+			"posizione": {
+				"indirizzo": "Via Pasqui, 10 - 38068 ROVERETO",
+				"latitudine": "45.89826946898197", 
+				"longitudine": "11.037105815828692"
+			},
+
+            "indirizzi_studi": [
+                {
+                    "nome": "OPERATORE AI SERVIZI D'IMPRESA",
+                    "link": "www.cfpupt.it/orientamentorovereto"
+                },
+                {
+                    "nome": "OPERATORE AI SERVIZI DI VENDITA",
+                    "link": "www.cfpupt.it/orientamentorovereto"
+                }
+            ],
+
+			"website": "www.cfpupt.it/sede-di-rovereto",
+			"contacts": {
+				"mail": [
+                    {
+                        "description": "orientamento",
+                        "mail": "elena.mondini@cfp-upt.it"
+                    },
+					{
+						"description": "istituto",
+						"mail": "cfp-upt@pec.it"
+					},
+					{
+						"description": "segreteria",
+						"mail": "segreteria.rovereto@cfp-upt.it"
+					}
+				],
+				"phone": [
+					{
+						"description": "telefono",
+						"numero": "+39 0464 630050"
+					}
+				]
+			}
+		}
+	]
 }

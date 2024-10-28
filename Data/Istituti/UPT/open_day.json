@@ -1,23 +1,19 @@
-{
-    "codice_MIUR": "TNFP000001",
-    "orari": [
-        {
-            "inizio_orario": "2023-12-02T09:30:00+01:00",
-            "fine_orario": "2023-12-02T12:30:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "Open day e laboratori esperienziali"
-        },
-        {
-            "inizio_orario": "2024-01-02T09:30:00+01:00",
-            "fine_orario": "2024-01-02T12:30:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "Open day e laboratori esperienziali"
-        },
-        {
-            "inizio_orario": "2024-05-25T09:30:00+01:00",
-            "fine_orario": "2024-05-25T12:30:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "Open day e laboratori esperienziali"
-        }
-    ]
-}
+[
+    {
+        "codice_MIUR": "TNFP000001",
+        "orari": [
+            {
+                "inizio_orario": "2024-12-07T09:30:00+01:00",
+                "fine_orario": "2024-12-07T12:30:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Open day e laboratori esperienziali, in presenza"
+            },
+            {
+                "inizio_orario": "2025-01-18T09:30:00+01:00",
+                "fine_orario": "2025-01-18T12:30:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Open day e laboratori esperienziali, in presenza"
+            }
+        ]
+    }
+]

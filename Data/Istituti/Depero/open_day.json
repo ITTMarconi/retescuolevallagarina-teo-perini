@@ -1,23 +1,25 @@
-{
-    "codice_MIUR": "TNSD020011",
-    "orari": [
-        {
-            "inizio_orario": "2024-11-16T10:00:00+01:00",
-            "fine_orario": "2024-11-16T12:30:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "Presentazione dell'offerta formativa e visita alla scuola presso succursale del biennio, via Balista 2. Prenotazione obbligatoria al link https://lc.cx/pF94a4"
-        },
-        {
-            "inizio_orario": "2024-12-07T10:00:00+01:00",
-            "fine_orario": "2024-12-07T12:30:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "Presentazione dell'offerta formativa e visita alla scuola presso succursale del biennio, via Balista 2. Prenotazione obbligatoria al link https://lc.cx/pF94a4"
-        },
-        {
-            "inizio_orario": "2025-01-18T10:00:00+01:00",
-            "fine_orario": "2025-01-18T13:00:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "Presentazione dell'offerta formativa e visita alla scuola presso la sede del Triennio, via delle Fosse 9.  Prenotazione obbligatoria al link https://lc.cx/pF94a4"
-        }
-    ]
-}
+[
+    {
+        "codice_MIUR": "TNSD020011",
+        "orari": [
+            {
+                "inizio_orario": "2024-11-16T10:00:00+01:00",
+                "fine_orario": "2024-11-16T12:30:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Presentazione dell'offerta formativa e visita alla scuola presso succursale del biennio, via Balista 2. Prenotazione obbligatoria al link https://lc.cx/pF94a4"
+            },
+            {
+                "inizio_orario": "2024-12-07T10:00:00+01:00",
+                "fine_orario": "2024-12-07T12:30:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Presentazione dell'offerta formativa e visita alla scuola presso succursale del biennio, via Balista 2. Prenotazione obbligatoria al link https://lc.cx/pF94a4"
+            },
+            {
+                "inizio_orario": "2025-01-18T10:00:00+01:00",
+                "fine_orario": "2025-01-18T13:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Presentazione dell'offerta formativa e visita alla scuola presso la sede del Triennio, via delle Fosse 9.  Prenotazione obbligatoria al link https://lc.cx/pF94a4"
+            }
+        ]
+    }
+]

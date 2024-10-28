@@ -17,12 +17,12 @@
 
             "indirizzi_studi": [
                 {
-                    "nome": "https://domir.edu.it/servizio/percorsi-di-studio/",
-                    "link": "https://domir.edu.it/servizio/percorsi-di-studio/"
+                    "nome": "domir.edu.it/servizio/percorsi-di-studio/",
+                    "link": "domir.edu.it/servizio/percorsi-di-studio/"
                 },
                 {
-                    "nome": "https://domir.edu.it/servizio/percorsi-di-studio/",
-                    "link": "https://domir.edu.it/indirizzo-di-studio/indirizzo-professionale-servizi-per-la-sanita-e-lassistenza-sociale/"
+                    "nome": "domir.edu.it/servizio/percorsi-di-studio/",
+                    "link": "domir.edu.it/indirizzo-di-studio/indirizzo-professionale-servizi-per-la-sanita-e-lassistenza-sociale/"
                 }
             ],
 

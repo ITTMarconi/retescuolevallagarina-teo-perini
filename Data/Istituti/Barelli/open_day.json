@@ -1,41 +1,43 @@
-{
-    "codice_MIUR": "TNCF005001",
-    "orari": [
-        {
-            "inizio_orario": "2024-12-07T14:00:00+01:00",
-            "fine_orario": "2024-12-07T15:00:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
-        },
-        {
-            "inizio_orario": "2024-12-07T15:00:00+01:00",
-            "fine_orario": "2024-12-07T16:00:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
-        },
-        {
-            "inizio_orario": "2024-12-07T16:00:00+01:00",
-            "fine_orario": "2024-12-07T17:00:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
-        },
-        {
-            "inizio_orario": "2025-01-18T14:00:00+01:00",
-            "fine_orario": "2025-01-18T15:00:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
-        },
-        {
-            "inizio_orario": "2025-01-18T15:00:00+01:00",
-            "fine_orario": "2025-01-18T16:00:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
-        },
-        {
-            "inizio_orario": "2025-01-18T16:00:00+01:00",
-            "fine_orario": "2025-01-18T17:00:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
-        }
-    ]
-}
+[
+    {
+        "codice_MIUR": "TNCF005001",
+        "orari": [
+            {
+                "inizio_orario": "2024-12-07T14:00:00+01:00",
+                "fine_orario": "2024-12-07T15:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
+            },
+            {
+                "inizio_orario": "2024-12-07T15:00:00+01:00",
+                "fine_orario": "2024-12-07T16:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
+            },
+            {
+                "inizio_orario": "2024-12-07T16:00:00+01:00",
+                "fine_orario": "2024-12-07T17:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
+            },
+            {
+                "inizio_orario": "2025-01-18T14:00:00+01:00",
+                "fine_orario": "2025-01-18T15:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
+            },
+            {
+                "inizio_orario": "2025-01-18T15:00:00+01:00",
+                "fine_orario": "2025-01-18T16:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
+            },
+            {
+                "inizio_orario": "2025-01-18T16:00:00+01:00",
+                "fine_orario": "2025-01-18T17:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "In presenza. Presentazione dell'offerta formativa e visita della scuola. Prenotazione sul sito della scuola"
+            }
+        ]
+    }
+]

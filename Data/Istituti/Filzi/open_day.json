@@ -1,41 +1,43 @@
-{
-    "codice_MIUR": "TNPM02000E",
-    "orari": [
-        {
-            "inizio_orario": "2024-11-15T18:00:00+01:00",
-            "fine_orario": "2024-11-15T20:30:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "Presentazione della scuola a studenti e genitori e attività “Fra di noi..”, in presenza. Prenotazioni sul sito della scuola sezione Orientamento in entrata."
-        },
-        {
-            "inizio_orario": "2024-11-21T14:30:00+01:00",
-            "fine_orario": "2024-11-21T17:00:00+01:00",
-            "attivita": "Pomeriggio al Filzi",
-            "descrizione": "Attività e laboratori per soli studenti, in presenza.  Prenotazioni sul sito della scuola sezione Orientamento in entrata"
-        },
-        {
-            "inizio_orario": "2024-11-30T09:00:00+01:00",
-            "fine_orario": "2024-11-30T12:30:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "Presentazione della scuola a studenti e genitori e attività “Fra di noi..”. Prenotazioni sul sito della scuola sezione Orientamento in entrata."
-        },
-        {
-            "inizio_orario": "2024-12-10T18:00:00+01:00",
-            "fine_orario": "2024-12-10T20:30:00+01:00",
-            "attivita": "Open Day",
-            "descrizione": "Presentazione della scuola a studenti e genitori e attività”Fra di noi..”Prenotazioni sul sito della scuola sezione Orientamento in entrata"
-        },
-        {
-            "inizio_orario": "2024-12-14T09:00:00+01:00",
-            "fine_orario": "2024-12-14T12:00:00+01:00",
-            "attivita": "Mattinata al Filzi",
-            "descrizione": "Attività e laboratori per soli studenti, in presenza.  Prenotazioni sul sito della scuola sezione Orientamento in entrata"
-        },
-        {
-            "inizio_orario": "2025-01-11T09:00:00+01:00",
-            "fine_orario": "2025-01-11T12:00:00+01:00",
-            "attivita": "Mattinata al Filzi",
-            "descrizione": "Presentazione della scuola a studenti e genitori, in presenza. Prenotazioni sul sito della scuola sezione Orientamento in entrata."
-        }
-    ]
-}
+[
+    {
+        "codice_MIUR": "TNPM02000E",
+        "orari": [
+            {
+                "inizio_orario": "2024-11-15T18:00:00+01:00",
+                "fine_orario": "2024-11-15T20:30:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Presentazione della scuola a studenti e genitori e attività “Fra di noi..”, in presenza. Prenotazioni sul sito della scuola sezione Orientamento in entrata."
+            },
+            {
+                "inizio_orario": "2024-11-21T14:30:00+01:00",
+                "fine_orario": "2024-11-21T17:00:00+01:00",
+                "attivita": "Pomeriggio al Filzi",
+                "descrizione": "Attività e laboratori per soli studenti, in presenza.  Prenotazioni sul sito della scuola sezione Orientamento in entrata"
+            },
+            {
+                "inizio_orario": "2024-11-30T09:00:00+01:00",
+                "fine_orario": "2024-11-30T12:30:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Presentazione della scuola a studenti e genitori e attività “Fra di noi..”. Prenotazioni sul sito della scuola sezione Orientamento in entrata."
+            },
+            {
+                "inizio_orario": "2024-12-10T18:00:00+01:00",
+                "fine_orario": "2024-12-10T20:30:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Presentazione della scuola a studenti e genitori e attività”Fra di noi..”Prenotazioni sul sito della scuola sezione Orientamento in entrata"
+            },
+            {
+                "inizio_orario": "2024-12-14T09:00:00+01:00",
+                "fine_orario": "2024-12-14T12:00:00+01:00",
+                "attivita": "Mattinata al Filzi",
+                "descrizione": "Attività e laboratori per soli studenti, in presenza.  Prenotazioni sul sito della scuola sezione Orientamento in entrata"
+            },
+            {
+                "inizio_orario": "2025-01-11T09:00:00+01:00",
+                "fine_orario": "2025-01-11T12:00:00+01:00",
+                "attivita": "Mattinata al Filzi",
+                "descrizione": "Presentazione della scuola a studenti e genitori, in presenza. Prenotazioni sul sito della scuola sezione Orientamento in entrata."
+            }
+        ]
+    }
+]

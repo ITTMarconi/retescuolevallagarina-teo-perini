@@ -18,19 +18,19 @@
 			"indirizzi_studi": [
 				{
 					"nome": "Grafica",
-					"link": "https://www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Grafica.pdf"
+					"link": "www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Grafica.pdf"
 				},
 				{
 					"nome": "Design per l'innovazione",
-					"link": "https://www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Design.pdf"
+					"link": "www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Design.pdf"
 				},
 				{
 					"nome": "Audiovisivo multimediale",
-					"link": "https://www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Audiovisivo.pdf"
+					"link": "www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Audiovisivo.pdf"
 				}
 			],
 
-			"website": "https://www.istitutodellearti.tn.it",
+			"website": "www.istitutodellearti.tn.it",
 			"contacts": {
 				"mail": [
 					{
@@ -76,7 +76,7 @@
 
             "indirizzi_studi": [ ],
 
-			"website": "https://www.istitutodellearti.tn.it",
+			"website": "www.istitutodellearti.tn.it",
 			"contacts": {
 				"mail": [
 					{
@@ -122,7 +122,7 @@
 
             "indirizzi_studi": [ ], 
 
-			"website": "https://www.istitutodellearti.tn.it",
+			"website": "www.istitutodellearti.tn.it",
 			"contacts": {
 				"mail": [
 					{
