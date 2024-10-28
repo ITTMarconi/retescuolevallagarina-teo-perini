@@ -1,6 +1,6 @@
 ---
 import { SERVER_ADDRESS, SERVER_PORT } from '../../../../Data/constants.ts';
-import type { Institute, Sede } from '../../../../Data/types';
+import type { Institute, OpenDays, Sede } from '../../../../Data/types';
 import OpenDaysList from '../../components/OpenDaysList.astro';
 
 import Layout from '../../layouts/Layout.astro';
@@ -12,17 +12,18 @@ export async function getStaticPaths() {
     const SEDI: Sede[] = await SEDI_RAW.json();
 
     return SEDI.map(sede => {
-        return { params: { id: sede.codice_MIUR }, props: { SEDE: sede, SEDI: SEDI } };
+        return { params: { id: sede.codice_MIUR }, props: { SEDE: sede } };
     });
 }
 
-const { SEDI, SEDE } = Astro.props;
+const { SEDE } = Astro.props;
 const { id } = Astro.params;
-
-const SIMILAR_SEDI: Sede[] = SEDI.filter(s => s.codice_MIUR !== id).filter(s => s.tag === SEDE.tag);
 
 const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/istituto/${id}`);
 const INSTITUTE: Institute = await INSTITUTE_RAW.json();
+
+const OPENDAYS_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/opendays/${id}`);
+const OPENDAYS: OpenDays = await OPENDAYS_RAW.json();
 ---
 
 <Layout>
@@ -30,7 +31,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
     
     <main>
         <header>
-            <h2 class="font-regular">{SEDE.name}</h2>
+            <h2 class="font-regular">{SEDE.nome}</h2>
             <hr />
 
             <section>
@@ -49,19 +50,10 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
                     </a>
 
                     {
-                        typeof SEDE.dirigente === 'string' && (
-                            <div title="Referente orientamento">
+                        typeof SEDE.responsabile_orientamento === 'string' && (
+                            <div title="Responsabile orientamento">
                                 <Icon code="e7fd" color="var(--foreground-secondary)" />
-                                <span>{SEDE.dirigente}</span>
-                            </div>
-                        )
-                    }
-
-                    {
-                        typeof SEDE.direttore === 'string' && (
-                            <div>
-                                <Icon code="e7fd" color="var(--foreground-secondary)" />
-                                <span>{SEDE.direttore}</span>
+                                <span>Responsabile orientamento: {SEDE.responsabile_orientamento}</span>
                             </div>
                         )
                     }
@@ -72,22 +64,35 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
 
         <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
 
-        <div>
+        <section>
             <h2 class="font-regular">Open day</h2>
             <hr />
 
-            <OpenDaysList openDays={INSTITUTE.openDays} />
-        </div>
-
-        <section>
-            <h2 class="font-regular">Altre sedi</h2> <hr />
-            <div>{INSTITUTE.sedi.filter(sede => sede.name !== SEDE.name).map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.name}</a>)}</div>
+            <OpenDaysList openDays={OPENDAYS} />
         </section>
+
+        {
+            INSTITUTE.sedi.filter(sede => sede.codice_MIUR !== SEDE.codice_MIUR).length > 0 && (
+                <section>
+                    <h2 class="font-regular">Altre sedi</h2>
+                    <hr />
+
+                    <div>
+                        {
+                            INSTITUTE.sedi
+                            .filter(sede => sede.codice_MIUR !== SEDE.codice_MIUR)
+                            .map(sede => <a href={`/sede/${sede.codice_MIUR}`}>{sede.nome}</a>)
+                        }
+                    </div>
+
+                </section>
+            )
+        }
     </main>
 
     <footer>
         <table>
-            <th colspan="2">E-Mails <hr /></th>
+            <th colspan="2"><div>E-Mails <hr /></div></th>
             {
                 SEDE.contacts.mail.map(mail => (
                     <tr>
@@ -101,7 +106,7 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
         </table>
 
         <table>
-            <th colspan="2">Numeri di Telefono <hr /></th>
+            <th colspan="2"> <div>Numeri di Telefono <hr /></div></th>
             {
                 SEDE.contacts.phone.map(phone => (
                     <tr>
@@ -248,8 +253,17 @@ const INSTITUTE: Institute = await INSTITUTE_RAW.json();
     }
 
     th {
+        width: 100%;
+
         text-align: center;
         font-weight: 500;
+    }
+
+    th > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     tr > td {

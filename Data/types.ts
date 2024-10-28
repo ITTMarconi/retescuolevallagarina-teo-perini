@@ -15,37 +15,33 @@ export type Position = {
     latitudine: string
     longitudine: string
 }
-export enum Tag {
-    Liceo = "liceo",
-    Tecnico = "tecnico",
-    Professionale = "professionale"
+export type IndirizzoStudi = {
+    nome: string
+    link: string
 }
 export type Sede = {
+    nome: string
     codice_MIUR: string
 
-    name: string
-    descrizione: string
+    responsabile_orientamento: string
+    posizione: Position
 
-    dirigente: string
-    direttore: string
+    indirizzi_studi: Array<IndirizzoStudi>
 
     website: string
     contacts: Contacts
-
-    posizione: Position
-    tag: Tag
 }
 
 ///////////////////////////////////////
 
 export type Institute = {
-    codice_MIUR: string
+    nome: string
+    sede_principale_MIUR: string
     sedi: Array<Sede>
 
     // Server loaded
     logo_url: string
     video_url: string
-    openDays: OpenDays | null
 }
 
 ///////////////////////////////////////

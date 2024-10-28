@@ -1,7 +1,9 @@
 ---
-import { type Institute } from '../../../Data/types';
+import '../styles/common.css';
+
+import { type Institute, type OpenDays } from '../../../Data/types';
 import { SERVER_ADDRESS, SERVER_PORT } from '../../../Data/constants.ts';
-import { getMainSede } from '../scripts/Utils';
+import { getSedeOfOpenDay } from '../scripts/Utils';
 
 import Navbar from '../components/Navbar.astro';
 import OpenDaysList from '../components/OpenDaysList.astro';
@@ -10,7 +12,11 @@ import Layout from '../layouts/Layout.astro';
 const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/istituti`);
 const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();
 
+const ALL_OPENDAYS_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/opendays`);
+const ALL_OPENDAYS: OpenDays[] = await ALL_OPENDAYS_RAW.json();
+
 console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
+console.log(`[BUILD] (openday.astro) Loaded ${ALL_OPENDAYS.length} opendays`);
 ---
 
 <Layout>
@@ -32,14 +38,15 @@ console.log(`[BUILD] (openday.astro) Loaded ${INSTITUTES.length} institutes`);
         </article>
 
         {
-            INSTITUTES.map(institute =>
-                institute.openDays.orari.length > 0 && (
+            ALL_OPENDAYS
+            .filter(openday => getSedeOfOpenDay(INSTITUTES, openday.codice_MIUR) != null)
+            .map(opendays => opendays.orari.length > 0 && (
                     <article>
-                        <a href={`/sede/${institute.codice_MIUR}`}>
-                            <h2 class="font-regular">{getMainSede(institute).name}</h2>
+                        <a href={`/sede/${opendays.codice_MIUR}`}>
+                            <h2 class="font-regular">{getSedeOfOpenDay(INSTITUTES, opendays.codice_MIUR).nome}</h2>
                             <hr />
                         </a>
-                        <OpenDaysList openDays={institute.openDays} />
+                        <OpenDaysList openDays={opendays} />
                     </article>
                 ),
             )

@@ -49,6 +49,13 @@ app.get('/sedi', (req, res) => {
     res.json(sedi);
 })
 
+app.get('/opendays', (req, res) => {
+    console.log(`[${req.ip ?? '??'}] (/istituti) Requested all opendays`)
+
+    const opendays = database.getOpenDays();
+    res.json(opendays);
+})
+
 app.get('/istituto/:id', (req, res) => {
     /** @type {string} */
     const INSTITUTE_ID = req.params.id;
@@ -67,6 +74,16 @@ app.get('/sede/:id', (req, res) => {
 
     const SEDE = database.getSedeByID(SEDE_ID);
     res.json(SEDE);
+})
+
+app.get('/opendays/:id', (req, res) => {
+    /** @type {string} */
+    const OPENDAY_ID = req.params.id;
+
+    console.log(`[${req.ip ?? '??'}] (/opendays/${OPENDAY_ID}) Requested openday...`)
+
+    const OPENDAYS = database.getOpenDayByID(OPENDAY_ID);
+    res.json(OPENDAYS);
 })
 
 app.get('/updateDB', (req, res) => {

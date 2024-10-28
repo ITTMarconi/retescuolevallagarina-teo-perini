@@ -1,6 +1,8 @@
 ---
+import '../styles/common.css';
+
 import { SERVER_ADDRESS, SERVER_PORT } from '../../../Data/constants.ts';
-import { Tag, type Institute } from '../../../Data/types.ts';
+import { type Institute } from '../../../Data/types.ts';
 import { getMainSede } from '../scripts/Utils';
 
 import Layout from '../layouts/Layout.astro';
@@ -18,17 +20,10 @@ console.log(`[BUILD] (istituti.astro) Loaded ${INSTITUTES.length} institutes`);
 
     <main>
         {
-            Object.values(Tag).map(tag => (
-                <article>
-                    <h2 class="font-regular"> {tag.slice(0, -1).concat('i')} </h2>
-                    <hr />
-
-                    <div>
-                        {INSTITUTES.filter(institute => getMainSede(institute)?.tag === tag).map(institute => (
-                            <SchoolListItem institute={institute} />
-                        ))}
-                    </div>
-                </article>
+            INSTITUTES.map(institute => (
+                <div>
+                    <SchoolListItem institute={institute} />
+                </div>
             ))
         }
     </main>
@@ -36,41 +31,31 @@ console.log(`[BUILD] (istituti.astro) Loaded ${INSTITUTES.length} institutes`);
 
 <style>
 
-    main > article {
+    main {
         padding-bottom: 2rem;
-    }
-
-    main > article > h2 {
-        text-transform: capitalize;
-        font-size: 1.8rem;
-    }
-
-    main > article > hr { }
-
-    main > article > div {
-        /* border: 1px solid red; */
 
         display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    main > div {
+        flex-basis: 48%;
     }
 
     /* For desktop: */
-    @media only screen and (min-width: 768px) {
-    }
+    @media only screen and (min-width: 768px) { }
 
     /* For wide-desktop: */
     @media only screen and (min-width: 1536px) {
         main {
-            padding: 2rem;
-
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
+            max-width: 180rem;
         }
 
-        main > article {
-            max-width: 1000px;
+        main > div {
+            flex-basis: 30%;
         }
     }
 </style>

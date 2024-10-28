@@ -14,8 +14,6 @@
     /* font light */
     font-family: "azo-sans-web", sans-serif;
     font-weight: 300;
-
-    scrollbar-gutter:both-edges ;
 }
 
 main {
@@ -28,9 +26,13 @@ h1, h2 {
     padding: 0;
 }
 
-a,
-a:visited,
 a:-webkit-any-link {
+    color: var(--background-primary);
+    text-decoration: unset;
+    transition: 200ms;
+}
+
+a, a:visited {
     color: var(--background-primary);
     text-decoration: unset;
     transition: 200ms;
