@@ -63,80 +63,94 @@
 			}
 		},
 		{
+			"nome": "Liceo Artistico Vittoria",
 			"codice_MIUR": "TNSD02000X",
-			"name": "Liceo Artistico Vittoria",
-			"dirigente": "Daniela Simoncelli",
-			"descrizione": "",
-			"tag": "liceo",
+
+			"responsabile_orientamento": "Chiara Miorelli",
+
 			"posizione": {
 				"indirizzo": "Via Zambra, 3 - 38121 TRENTO",
 				"latitudine": "46.092990552099664", 
 				"longitudine": "11.119974844305837"
 			},
+
+            "indirizzi_studi": [ ],
+
 			"website": "https://www.istitutodellearti.tn.it",
 			"contacts": {
 				"mail": [
-				{
-					"description": "istituto",
-					"mail": "vittoria@pec.provincia.tn.it"
-				},
-				{
-					"description": "segreteria",
-					"mail": "info@istitutodellearti.tn.it"
-				},
-				{
-					"description": "dirigenza",
-					"mail": "dir.istitutodellearti@scuole.provincia.tn.it"
-				}
+					{
+						"description": "orientamento",
+						"mail": "orientamento.depero@liceodellearti.tn.it"
+					},
+					{
+						"description": "istituto",
+						"mail": "vittoria@pec.provincia.tn.it"
+					},
+					{
+						"description": "segreteria",
+						"mail": "info@istitutodellearti.tn.it"
+					},
+					{
+						"description": "dirigenza",
+						"mail": "dir.istitutodellearti@scuole.provincia.tn.it"
+					}
 				],
 				"phone": [
-				{
-					"description": "telefono",
-					"numero": "+39 0461 824422"
-				},
-				{
-					"description": "fax",
-					"numero": "+39 0461 824345"
-				}
+					{
+						"description": "telefono",
+						"numero": "+39 0461 824422"
+					},
+					{
+						"description": "fax",
+						"numero": "+39 0461 824345"
+					}
 				]
 			}
 		},
 		{
+			"nome": "Liceo Musicale Coreutico",
 			"codice_MIUR": "TNSD02000X",
-			"name": "Liceo Musicale Coreutico",
-			"dirigente": "Daniela Simoncelli",
-			"descrizione": "",
-			"tag": "liceo",
+
+			"responsabile_orientamento": "Chiara Miorelli",
+
 			"posizione": {
 				"indirizzo": "Vicolo S Maria Maddalena, 16 - 38122 TRENTO",
 				"latitudine": "46.06909347331769", 
 				"longitudine": "11.127059452184977"
 			},
+
+            "indirizzi_studi": [ ], 
+
 			"website": "https://www.istitutodellearti.tn.it",
 			"contacts": {
 				"mail": [
-				{
-					"description": "istituto",
-					"mail": "info.bonporti@istitutodellearti.tn.it"
-				},
-				{
-					"description": "segreteria",
-					"mail": "info@istitutodellearti.tn.it"
-				},
-				{
-					"description": "dirigenza",
-					"mail": "dir.istitutodellearti@scuole.provincia.tn.it"
-				}
+					{
+						"description": "orientamento",
+						"mail": "orientamento.depero@liceodellearti.tn.it"
+					},
+					{
+						"description": "istituto",
+						"mail": "info.bonporti@istitutodellearti.tn.it"
+					},
+					{
+						"description": "segreteria",
+						"mail": "info@istitutodellearti.tn.it"
+					},
+					{
+						"description": "dirigenza",
+						"mail": "dir.istitutodellearti@scuole.provincia.tn.it"
+					}
 				],
 				"phone": [
-				{
-					"description": "telefono",
-					"numero": "+39 0461 260648"
-				},
-				{
-					"description": "fax",
-					"numero": "+39 0461 824345"
-				}
+					{
+						"description": "telefono",
+						"numero": "+39 0461 260648"
+					},
+					{
+						"description": "fax",
+						"numero": "+39 0461 824345"
+					}
 				]
 			}
 		}

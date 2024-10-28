@@ -2,34 +2,28 @@
     "codice_MIUR": "TNIS009009",
     "orari": [
         {
-            "inizio_orario": "2023-11-25T10:00:00+01:00",
-            "fine_orario": "2023-11-25T12:30:00+01:00",
-            "attivita": "Scuola Aperta",
-            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Futuro studente. Compilare il Modulo Google https://forms.gle/BGS1XEDq9TFbF7uA7"
+            "inizio_orario": "2024-11-23T10:00:00+01:00",
+            "fine_orario": "2024-11-23T12:30:00+01:00",
+            "attivita": "Open day",
+            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
         },
         {
-            "inizio_orario": "2023-12-06T18:00:00+01:00",
-            "fine_orario": "2023-12-06T20:30:00+01:00",
-            "attivita": "Scuola Aperta",
-            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Futuro studente. Compilare il Modulo Google https://forms.gle/BGS1XEDq9TFbF7uA7"
+            "inizio_orario": "2024-12-05T18:00:00+01:00",
+            "fine_orario": "2024-12-05T20:00:00+01:00",
+            "attivita": "Open day",
+            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
         },
         {
-            "inizio_orario": "2023-12-16T10:00:00+01:00",
-            "fine_orario": "2023-12-16T12:30:00+01:00",
-            "attivita": "Scuola Aperta",
-            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Futuro studente. Compilare il Modulo Google https://forms.gle/BGS1XEDq9TFbF7uA7"
+            "inizio_orario": "2024-12-14T10:00:00+01:00",
+            "fine_orario": "2024-12-14T12:30:00+01:00",
+            "attivita": "Open day",
+            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
         },
         {
-            "inizio_orario": "2024-01-13T10:00:00+01:00",
-            "fine_orario": "2024-01-13T12:30:00+01:00",
-            "attivita": "Scuola Aperta",
-            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Futuro studente. Compilare il Modulo Google https://forms.gle/BGS1XEDq9TFbF7uA7"
-        },
-        {
-            "inizio_orario": "2024-01-17T18:00:00+01:00",
-            "fine_orario": "2024-01-17T20:00:00+01:00",
-            "attivita": "Collegamento MEET",
-            "descrizione": "Collegamento MEET, con prenotazione sul sito della scuola nella sezione Futuro studente. Compilare il Modulo https://forms.gle/BGS1XEDq9TFbF7uA7"
+            "inizio_orario": "2025-01-10T18:00:00+01:00",
+            "fine_orario": "2025-01-10T20:00:00+01:00",
+            "attivita": "Open day",
+            "descrizione": "In presenza, con prenotazione sul sito della scuola nella sezione Servizi/Futuri studenti"
         }
     ]
 }

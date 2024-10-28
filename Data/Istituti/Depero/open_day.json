@@ -2,22 +2,22 @@
     "codice_MIUR": "TNSD020011",
     "orari": [
         {
-            "inizio_orario": "2023-12-02T10:30:00+01:00",
-            "fine_orario": "2023-12-02T12:30:00+01:00",
+            "inizio_orario": "2024-11-16T10:00:00+01:00",
+            "fine_orario": "2024-11-16T12:30:00+01:00",
             "attivita": "Open Day",
-            "descrizione": "Appuntamento presso la sede del BIENNIO in via Balista, 1. Presentazione dell’offerta formativa e visita alla scuola."
+            "descrizione": "Presentazione dell'offerta formativa e visita alla scuola presso succursale del biennio, via Balista 2. Prenotazione obbligatoria al link https://lc.cx/pF94a4"
         },
         {
-            "inizio_orario": "2023-12-15T18:00:00+01:00",
-            "fine_orario": "2023-12-02T20:00:00+01:00",
+            "inizio_orario": "2024-12-07T10:00:00+01:00",
+            "fine_orario": "2024-12-07T12:30:00+01:00",
             "attivita": "Open Day",
-            "descrizione": "Appuntamento presso la sede del BIENNIO in via Balista, 1. Presentazione dell’offerta formativa e visita alla scuola."
+            "descrizione": "Presentazione dell'offerta formativa e visita alla scuola presso succursale del biennio, via Balista 2. Prenotazione obbligatoria al link https://lc.cx/pF94a4"
         },
         {
-            "inizio_orario": "2024-01-20T14:30:00+01:00",
-            "fine_orario": "2024-01-20T16:30:00+01:00",
+            "inizio_orario": "2025-01-18T10:00:00+01:00",
+            "fine_orario": "2025-01-18T13:00:00+01:00",
             "attivita": "Open Day",
-            "descrizione": "Appuntamento presso la sede del TRIENNIO In via delle Fosse, 9. Visita agli spazi della scuola con mostra dei lavori svolti dai ragazzi del triennio nei diversi indirizzi del liceo."
+            "descrizione": "Presentazione dell'offerta formativa e visita alla scuola presso la sede del Triennio, via delle Fosse 9.  Prenotazione obbligatoria al link https://lc.cx/pF94a4"
         }
     ]
 }
