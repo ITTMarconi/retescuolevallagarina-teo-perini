@@ -20,7 +20,7 @@ app.listen(SERVER_PORT, () => {
     console.log("Starting backend...")
 
     if (database.fetchFromDisk()) {
-        console.error("[DATABASE] Error fetching from disk, exiting...")
+        console.error("\x1B[31m[DATABASE] Error fetching from disk, exiting...\x1B[0m")
         exit(1);
     }
 
@@ -30,8 +30,8 @@ app.listen(SERVER_PORT, () => {
     console.log(`Backend ready at http://${SERVER_ADDRESS}:${SERVER_PORT}/`)
 })
 
-app.get('/instituti', (req, res) => {
-    console.log(`[${req.ip ?? '??'}] (/instituti) Requested all institutes`)
+app.get('/istituti', (req, res) => {
+    console.log(`[${req.ip ?? '??'}] (/istituti) Requested all institutes`)
 
     const institutes = database.getInstitutes();
     res.json(institutes);
@@ -49,11 +49,11 @@ app.get('/sedi', (req, res) => {
     res.json(sedi);
 })
 
-app.get('/institute/:id', (req, res) => {
+app.get('/istituto/:id', (req, res) => {
     /** @type {string} */
     const INSTITUTE_ID = req.params.id;
 
-    console.log(`[${req.ip ?? '??'}] (/institute/${INSTITUTE_ID}) Requested institute`)
+    console.log(`[${req.ip ?? '??'}] (/istituto/${INSTITUTE_ID}) Requested institute`)
 
     const INSTITUTE = database.getInstituteByID(INSTITUTE_ID);
     res.json(INSTITUTE);
@@ -70,13 +70,13 @@ app.get('/sede/:id', (req, res) => {
 })
 
 app.get('/updateDB', (req, res) => {
-    console.warn(`[${req.ip ?? '??'}] (/updateDB) Updating database`)
+    console.warn(`\x1B[33m[${req.ip ?? '??'}] (/updateDB) Updating database\x1B[0m`)
 
     if (database.fetchFromDisk())
 	{
         res.sendStatus(500)
         isDatabaseReady = false;
-        console.error(`[${req.ip ?? '??'}] (/updateDB) Failed!`)
+        console.error(`\x1B[31m[${req.ip ?? '??'}] (/updateDB) Failed!, using backup data...\x1B[0m`)
     } else {
         res.sendStatus(200)
         isDatabaseReady = true;
@@ -88,16 +88,17 @@ app.get('/healthcheck', (req, res) => {
     if (isDatabaseReady)
 	{
         res.status(200).send("ok")
-        console.info(`[${req.ip ?? '??'}] (HEALTH) Ok`)
+        console.info(`\x1B[34m[${req.ip ?? '??'}] (HEALTH) Ok\x1B[0m`)
     }
 	else
 	{
         res.status(500).send("Database not ready")
-		console.error(`[${req.ip ?? '??'}] (HEALTH) Database not ready!`)
+		console.error(`\x1B[31m[${req.ip ?? '??'}] (HEALTH) Database not ready!\x1B[0m`)
     }
 
 })
 
 app.get('*', (req, res) => {
+    console.log(`Someone hitted an invalid endpoint... '${req.url}'`)
     res.status(404).send(`EndPoint not existant --- Se vuoi connetterti alla pagina web visita 'https://${SERVER_ADDRESS}'`)
 })

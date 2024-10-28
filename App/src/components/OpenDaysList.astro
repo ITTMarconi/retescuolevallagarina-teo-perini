@@ -31,8 +31,7 @@ const { openDays } = Astro.props;
     article {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
+        justify-content: space-between;
         flex-wrap: nowrap;
 
         gap: 2rem;
@@ -52,6 +51,9 @@ const { openDays } = Astro.props;
         flex-direction: column;
         justify-content: center;
     }
+
+    /* Ball */
+    /* ******************************************************************************** */
 
     section > div:first-child {
         padding: 0.8rem 0.2rem;
@@ -74,20 +76,23 @@ const { openDays } = Astro.props;
         font-size: 1rem;
     }
 
-    section > div:last-child {
-        /* flex-basis: 100%; */
+    /* Description */
+    /* ******************************************************************************** */
+
+    section > div:nth-child(2) {
+        flex-basis: 100%;
         align-items: flex-start;
 
         gap: 0.5rem;
     }
 
-    section > div:last-child > span:first-child {
+    section > div:nth-child(2) > span:first-child {
         font-size: 1.3rem;
         font-weight: 500;
     }
 
-    section > div:last-child > span:last-child {
-        max-width: 25ch;
+    section > div:nth-child(2) > span:last-child {
+        /* max-width: 25ch; */
 
         font-size: 1rem;
         line-height: 1.5rem;
@@ -99,20 +104,19 @@ const { openDays } = Astro.props;
     /* For desktop: */
     @media only screen and (min-width: 768px) {
         section > div:first-child {
-            height: 4.4rem;
-            width: 4.4rem;
+            height: 5rem;
+            width: 5.5rem;
 
             padding: 0;
 
             border-radius: 4rem;
         }
 
-        section > div:last-child > span:last-child {
-            max-width: 45ch;
+        section > div:nth-child(2) > span:last-child {
+            max-width: 50ch;
         }
     }
 
     /* For wide-desktop: */
-    @media only screen and (min-width: 1536px) {
-    }
+    @media only screen and (min-width: 1536px) { }
 </style>

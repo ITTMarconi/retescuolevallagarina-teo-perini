@@ -1,3 +1,4 @@
+
 export function getDay(orario: Date) {
   let out_time: string = '';
   const time: number = new Date(orario).getDate();

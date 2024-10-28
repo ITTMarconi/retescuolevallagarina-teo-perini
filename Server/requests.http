@@ -1,6 +1,6 @@
 ###
 
-GET http://localhost:25565/instituti
+GET http://localhost:25565/istituti
 
 ###
 
@@ -12,7 +12,7 @@ GET http://localhost:25565/updateDB
 
 ###
 
-get http://localhost:25565/institute/TNTD020009
+get http://localhost:25565/istituto/TNTD020009
 
 ###
 
