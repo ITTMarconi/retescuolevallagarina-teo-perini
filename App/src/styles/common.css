@@ -15,7 +15,7 @@
     font-family: "azo-sans-web", sans-serif;
     font-weight: 300;
 
-    scrollbar-gutter: stable;
+    scrollbar-gutter:both-edges ;
 }
 
 main {

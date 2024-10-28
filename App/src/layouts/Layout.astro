@@ -25,7 +25,10 @@ const { ...rest } = Astro.props;
     <title>Direzione futuro</title>
   </head>
   <body {...rest}>
-    <slot />
+    
+    <div>
+      <slot />
+    </div>
 
     <footer title="Teo ama python"> Made with &lt;3 & HTML </footer>
   </body>
@@ -50,12 +53,24 @@ const { ...rest } = Astro.props;
 
   body {
     width: 100%;
-    height: calc(100% - 2rem);
+    height:100%;
     
     background-color: var(--foreground-primary);
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
 
+  body > div {
+    width: 100%;
+    flex-basis: 100%;
+  }
+  
   footer {
+    width: 100%;
+
     padding: 0.5rem;
     text-align: center;
     color: var(--background-secondary);
