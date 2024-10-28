@@ -1,169 +1,66 @@
 {
-  "nome": "Istituto di Formazione Professionale Alberghiero",
-  "codice_MIUR": "TNCF011001",
-  "sedi": [
-    {
-      "codice_MIUR": "TNCF011001",
-      "name": "Istituto di Formazione Professionale Alberghiero",
-      "dirigente": "Vito Rovigo",
-      "direttore": "Cazzani Daniela",
-      "descrizione": "",
-      "tag": "professionale",
-      "posizione": {
-        "indirizzo": "Viale Dei Colli, 17 - 38068 ROVERETO",
-        "latitudine": "45.89080798116856", 
-        "longitudine": "11.048049058366294"
-      },
-      "website": "https://www.alberghierorovereto.it",
-      "contacts": {
-        "mail": [
-          {
-            "description": "istituto",
-            "mail": "ifpa.rovereto@pec.provincia.tn.it"
-          },
-          {
-            "description": "segreteria",
-            "mail": "segr.ifpa.rovereto@scuole.provincia.tn.it"
-          },
-          {
-            "description": "dirigenza",
-            "mail": "dir.ifpa.rovereto@scuole.provincia.tn.it"
-          }
-        ],
-        "phone": [
-          {
-            "description": "telefono",
-            "numero": "+39 0464 439164"
-          },
-          {
-            "description": "fax",
-            "numero": "+39 0464 435851"
-          }
-        ]
-      }
+	"nome": "Istituto di Formazione Professionale Alberghiero",
+	"sede_principale_MIUR": "TNCF011001",
 
-    },
-    {
-      "codice_MIUR": "TNCF011001",
-      "name": "Settore Industria e Artigianato",
-      "dirigente": "Vito Rovigo",
-      "direttore": "Cazzani Daniela",
-      "descrizione": "",
-      "tag":  "professionale" ,
-      "posizione": {
-        "indirizzo": "Viale Dei Colli, 17 - 38068 ROVERETO",
-        "latitudine": "45.89080798116856", 
-        "longitudine": "11.048049058366294"
-      },
-      "website": "https://www.alberghierorovereto.it",
-      "contacts": {
-        "mail": [
-          {
-            "description": "istituto",
-            "mail": "ifpa.rovereto@pec.provincia.tn.it"
-          },
-          {
-            "description": "segreteria",
-            "mail": "segr.ifpa.rovereto@scuole.provincia.tn.it"
-          },
-          {
-            "description": "dirigenza",
-            "mail": "dir.ifpa.rovereto@scuole.provincia.tn.it"
-          }
-        ],
-        "phone": [
-          {
-            "description": "telefono",
-            "numero": "+39 0464 439164"
-          },
-          {
-            "description": "fax",
-            "numero": "+39 0464 435851"
-          }
-        ]
-      }
+	"sedi": [
+		{
+			"nome": "Istituto di Formazione Professionale Alberghiero",
+			"codice_MIUR": "TNCF011001",
+			
+            "responsabile_orientamento": "Susy Severi",
 
-    },
-    {
-      "codice_MIUR": "TNCF011001",
-      "name": "Settore Servizi",
-      "dirigente": "Vito Rovigo",
-      "direttore": "Cazzani Daniela",
-      "descrizione": "",
-      "tag":  "professionale" ,
-      "posizione": {
-        "indirizzo": "Viale Dei Colli, 17 - 38068 ROVERETO",
-        "latitudine": "45.89080798116856", 
-        "longitudine": "11.048049058366294"
-      },
-      "website": "https://www.alberghierorovereto.it",
-      "contacts": {
-        "mail": [
-          {
-            "description": "istituto",
-            "mail": "ifpa.rovereto@pec.provincia.tn.it"
-          },
-          {
-            "description": "segreteria",
-            "mail": "segr.ifpa.rovereto@scuole.provincia.tn.it"
-          },
-          {
-            "description": "dirigenza",
-            "mail": "dir.ifpa.rovereto@scuole.provincia.tn.it"
-          }
-        ],
-        "phone": [
-          {
-            "description": "telefono",
-            "numero": "+39 0464 439164"
-          },
-          {
-            "description": "fax",
-            "numero": "+39 0464 435851"
-          }
-        ]
-      }
-    },
-    {
-      "codice_MIUR": "TNCF011001",
-      "name": "Settore Servizi Serale",
-      "dirigente": "Vito Rovigo",
-      "direttore": "Cazzani Daniela",
-      "descrizione": "",
-      "tag": "professionale",
-      "posizione": {
-        "indirizzo": "Viale Dei Colli, 17 - 38068 ROVERETO",
-        "latitudine": "45.89080798116856", 
-        "longitudine": "11.048049058366294"
-      },
-      "website": "https://www.alberghierorovereto.it",
-      "contacts": {
-        "mail": [
-          {
-            "description": "istituto",
-            "mail": "ifpa.rovereto@pec.provincia.tn.it"
-          },
-          {
-            "description": "segreteria",
-            "mail": "segr.ifpa.rovereto@scuole.provincia.tn.it"
-          },
-          {
-            "description": "dirigenza",
-            "mail": "dir.ifpa.rovereto@scuole.provincia.tn.it"
-          }
-        ],
-        "phone": [
-          {
-            "description": "telefono",
-            "numero": "+39 0464 439164"
-          },
-          {
-            "description": "fax",
-            "numero": "+39 0464 435851"
-          }
-        ]
-      }
+			"posizione": {
+				"indirizzo": "Viale Dei Colli, 17 - 38068 ROVERETO",
+				"latitudine": "45.89080798116856",
+				"longitudine": "11.048049058366294"
+			},
 
-    }
-  ]
+            "indirizzi_studi": [
+                {
+                    "nome": "Indirizzo della panificazione e di pasticceria",
+                    "link": "https://www.alberghierorovereto.it/formazione/qualifica/3-op-panificazione-e-pasticceria/"
+                },
+                {
+                    "nome": "Indirizzo di cucina",
+                    "link": "https://www.alberghierorovereto.it/formazione/qualifica/gastronomia-e-arte-bianca/"
+                },
+                {
+                    "nome": "Indirizzo dei servizi di sala e bar",
+                    "link": "https://www.alberghierorovereto.it/formazione/qualifica/accoglienza-e-ospitalita/"
+                }
+            ],
+
+			"website": "https://www.alberghierorovereto.it",
+			"contacts": {
+				"mail": [
+					{
+						"description": "orientamento",
+						"mail": "ifparovereto.orientamento@scuole.provincia.tn.it"
+					},
+					{
+						"description": "istituto",
+						"mail": "ifpa.rovereto@pec.provincia.tn.it"
+					},
+					{
+						"description": "segreteria",
+						"mail": "segr.ifpa.rovereto@scuole.provincia.tn.it"
+					},
+					{
+						"description": "dirigenza",
+						"mail": "dir.ifpa.rovereto@scuole.provincia.tn.it"
+					}
+				],
+				"phone": [
+					{
+						"description": "telefono",
+						"numero": "+39 0464 439164"
+					},
+					{
+						"description": "fax",
+						"numero": "+39 0464 435851"
+					}
+				]
+			}
+		}
+	]
 }

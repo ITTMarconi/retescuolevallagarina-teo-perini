@@ -64,7 +64,12 @@ function do_obj_match(lhs, rhs, path, depth)
     {
         // console.info(`\x1B[34m${indent}Evaluating array...\x1B[0m`)
         
-        if(rhs_keys[0] !== '0') {
+        if(rhs_keys[0] === undefined)
+        {
+            return true;
+        }
+        else if (rhs_keys[0] !== '0')
+        {
             console.error(`\x1B[31m${indent}Mismatched type, found array but evaluating object\x1B[0m`)
             return false;
         }
@@ -72,37 +77,39 @@ function do_obj_match(lhs, rhs, path, depth)
         for(let i = 0; i < rhs.length; ++i)
         {
             let sub = rhs[i]
-            match = do_obj_match(lhs['0'], sub, `${path}[${i}]`, depth + 1)
+            if(!do_obj_match(lhs['0'], sub, `${path}[${i}]`, depth + 1)) return false;
         }
     }
     else
     {
         /* Warn for missing keys */
-        lhs_keys.filter(key => !rhs_keys.includes(key))
-           .forEach(key => {
-               console.error(`\x1B[31m${indent}Missing key '${key}' while validating obj at '${path}'\x1B[0m`)
-           })
+        for(let key of lhs_keys.filter(key => !rhs_keys.includes(key)))
+        {
+            console.error(`\x1B[31m${indent}Missing key '${key}' while validating obj at '${path}'\x1B[0m`)
+            return false;
+        }
 
         /* Warn for extra keys */
-        rhs_keys.filter(key => !lhs_keys.includes(key))
-           .forEach(key => {
-               console.warn(`\x1B[33m${indent}Extra key '${key}' while validating obj at '${path}'\x1B[0m`)
-           })
+        for(let key of rhs_keys.filter(key => !lhs_keys.includes(key)))
+        {
+            console.warn(`\x1B[33m${indent}Extra key '${key}' while validating obj at '${path}'\x1B[0m`)
+            return false;
+        }
 
-        lhs_keys.filter(key => rhs_keys.includes(key))
-           .forEach(key => {
-                    if(typeof lhs[key] != typeof rhs[key]) {
-                        console.error(`\x1B[31m${indent}Mismatched type, found '${typeof rhs[key]}' but evaluating as '${lhs[key]}'\x1B[0m`)
-                        return false;
-                    }
+        for(let key of lhs_keys.filter(key => rhs_keys.includes(key)))
+        {
+            if(typeof lhs[key] != typeof rhs[key]) {
+                console.error(`\x1B[31m${indent}Mismatched type, found '${typeof rhs[key]}' but evaluating as '${lhs[key]}'\x1B[0m`)
+                return false;
+            }
 
-                   if(typeof lhs[key] == 'object') {
-                        // console.log(`${indent}Key '${key}' detected as obj`)
-                       match = do_obj_match(lhs[key], rhs[key], `${path}.${key}`, depth + 1)
-                //    } else {
-                //        console.log(`${indent}Same key '${key}' at '${path}'`)
-                   }
-           })
+            if(typeof lhs[key] == 'object') {
+                // console.log(`${indent}Key '${key}' detected as obj`)
+                match = do_obj_match(lhs[key], rhs[key], `${path}.${key}`, depth + 1)
+        //    } else {
+        //        console.log(`${indent}Same key '${key}' at '${path}'`)
+            }
+        }
     }
 
     return match;
@@ -159,7 +166,7 @@ module.exports = class Database {
 
             /** @type {Institute | true} */
             let institute_data = read_JSON_from_file(INSTITUTE_DATA_PATH)
-            if(is_valid_institute_data(institute_data_fmt, institute_data)) {
+            if(!is_valid_institute_data(institute_data_fmt, institute_data)) {
                 console.error(`\x1B[31m[DATABASE] Insitute data does not conform to example file\x1B[31m`);
                 return true;
             }

@@ -1,10 +1,11 @@
 {
     "nome": "NOME ISTIUTO",
-    "codice_MIUR": "ID ISTITUTO",
+    "sede_principale_MIUR": "ID ISTITUTO",
+
     "sedi": [
         {
-            "codice_MIUR": "CODICE MIUR",
             "nome": "NOME SEDE",
+            "codice_MIUR": "CODICE MIUR",
 
             "responsabile_orientamento": "NOME",
 
@@ -14,7 +15,7 @@
                 "longitudine": "LONGITUDINE SEDE"
             },
 
-            "indirizzi": [
+            "indirizzi_studi": [
                 {
                     "nome": "NOME INDIRIZZO",
                     "link": "LINK INDIRIZZO"

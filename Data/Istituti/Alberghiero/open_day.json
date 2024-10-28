@@ -2,16 +2,16 @@
     "codice_MIUR": "TNCF011001",
     "orari": [
         {
-            "inizio_orario": "2023-12-01T14:30:00+01:00",
-            "fine_orario": "2023-12-01T17:30:00+01:00",
+            "inizio_orario": "2024-12-06T14:30:00+01:00",
+            "fine_orario": "2024-12-06T17:30:00+01:00",
             "attivita": "Open Day",
-            "descrizione": "Ai fini organizzativi è gradita la prenotazione sul Modulo https://forms.gle/dD2R3CnzwjJBSWSE6. Link pubblicato sul sito: www.alberghierorovereto.it"
+            "descrizione": "È gradita la prenotazione sul modulo https://forms.gle/2FwJqMkTXqqeWeDZA"
         },
         {
-            "inizio_orario": "2023-12-16T14:30:00+01:00",
-            "fine_orario": "2023-12-16T17:30:00+01:00",
+            "inizio_orario": "2024-12-14T10:00:00+01:00",
+            "fine_orario": "2024-12-14T13:00:00+01:00",
             "attivita": "Open Day",
-            "descrizione": "Ai fini organizzativi è gradita la prenotazione sul Modulo https://forms.gle/dD2R3CnzwjJBSWSE6. Link pubblicato sul sito: www.alberghierorovereto.it"
+            "descrizione": "È gradita la prenotazione sul modulo https://forms.gle/2FwJqMkTXqqeWeDZA"
         }
     ]
 }
