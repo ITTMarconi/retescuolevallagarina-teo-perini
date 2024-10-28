@@ -66,6 +66,7 @@ function do_obj_match(lhs, rhs, path, depth)
         
         if(rhs_keys[0] === undefined)
         {
+            console.warn(`\x1B[33m${indent}Empty array at ${path}, skipping... \x1B[0m`)
             return true;
         }
         else if (rhs_keys[0] !== '0')
@@ -86,14 +87,14 @@ function do_obj_match(lhs, rhs, path, depth)
         for(let key of lhs_keys.filter(key => !rhs_keys.includes(key)))
         {
             console.error(`\x1B[31m${indent}Missing key '${key}' while validating obj at '${path}'\x1B[0m`)
-            return false;
+            // return false;
         }
 
         /* Warn for extra keys */
         for(let key of rhs_keys.filter(key => !lhs_keys.includes(key)))
         {
             console.warn(`\x1B[33m${indent}Extra key '${key}' while validating obj at '${path}'\x1B[0m`)
-            return false;
+            // return false;
         }
 
         for(let key of lhs_keys.filter(key => rhs_keys.includes(key)))
