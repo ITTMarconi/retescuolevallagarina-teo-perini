@@ -13,6 +13,11 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
 ---
 
 <Layout>
+    
+    <!-- Leaflet map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <Navbar current_view="map"/>
 
     <main>
@@ -21,22 +26,9 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
     </main>
 </Layout>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-<!-- <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script> -->
-<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
 <script is:inline define:vars={{ INSTITUTES }}>
 
-    var map = L.map('map').setView([45.890599305249125, 11.03896173214287], 12);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 16,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-</script>
-
-<!-- <script is:inline define:vars={{ INSTITUTES }}>
-    // Insert data
+    // take data from the db
     let db = { dati: [] };
     db.dati = INSTITUTES.map(institute => {
         const SEDE = institute.sedi.find(sede => sede.codice_MIUR === institute.codice_MIUR);
@@ -47,79 +39,36 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
             codice_MIUR: SEDE.codice_MIUR,
         };
     });
+    // console.log(db);
 
-    // Set map config
-    let map = new OpenLayers.Map('mapdiv');
-    map.addLayer(new OpenLayers.Layer.OSM());
+    // create map
+    var map = L.map('map').setView([45.90022, 11.0392], 14);
+    // build map
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 17,
+    minZoom: 8,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
 
-    const ZOOM = 15;
-    let epsg4326 = new OpenLayers.Projection('EPSG:4326');
-    let projectTo = map.getProjectionObject();
-    let center_point = new OpenLayers.LonLat(11.0339548, 45.8891176).transform(epsg4326, projectTo);
-    map.setCenter(center_point, ZOOM);
+    // create pin with popup
+    for(data of db.dati){
+        //console.log(data);
+        // find institute
+        let istituto = INSTITUTES.find(institute => institute.codice_MIUR === data.codice_MIUR);
 
-    // Set markers
-    const MARKER_DATA = {
-        externalGraphic: 'map/marker.png',
-        graphicHeight: 21,
-        graphicWidth: 20,
-        graphicXOffset: -12,
-        graphicYOffset: -25,
-    };
+        // create popup html text
+        let popup = '<u><a href="/sede/' + data.codice_MIUR + '" class="font-regular">' + istituto.nome + '</a></u>'
 
-    let marker_layer = new OpenLayers.Layer.Vector('Overlay');
-    for (const data of db.dati) {
-        let point = new OpenLayers.Geometry.Point(data.longitudine, data.latitudine).transform(epsg4326, projectTo);
-        let marker = new OpenLayers.Feature.Vector(point, { codice_MIUR: data.codice_MIUR }, MARKER_DATA);
-        marker_layer.addFeatures(marker);
+        // create marker with popup
+        L.marker([data.latitudine, data.longitudine]).addTo(map)
+            .bindPopup(popup)
     }
-    map.addLayer(marker_layer);
+</script>
 
-    // Set controls
-    let controls = {
-        selector: new OpenLayers.Control.SelectFeature(marker_layer, {
-            onSelect: createPopup,
-            onUnselect: destroyPopup,
-        }),
-    };
-
-    function createPopup(feature) {
-        const CODICE_MIUR = feature.attributes.codice_MIUR;
-        const INSTITUTE = INSTITUTES.find(institute => institute.codice_MIUR === CODICE_MIUR);
-        const SEDE = INSTITUTE.sedi.find(sede => sede.codice_MIUR == CODICE_MIUR);
-
-        const CONTENT = `
-            <article>
-                <span>${SEDE.name}</span>
-                <nav>
-                    <button onclick="window.open('${SEDE.website}', '_blank')">
-                        <span class="material-symbols-outlined">&#xf728</span>
-                    </button>
-
-                    <button onclick="window.open('/sede/${SEDE.codice_MIUR}', '_parent')">
-                        <span class="material-symbols-outlined">&#xe7ee</span>
-                    </button>
-
-                    <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=${SEDE.posizione.indirizzo}', '_blank')">
-                        <span class="material-symbols-outlined">&#xe0c8</span>
-                    </button>
-                </nav>
-            </article>
-        `;
-
-        // Add popup
-        feature.popup = new OpenLayers.Popup.FramedCloud('pop', feature.geometry.getBounds().getCenterLonLat(), null, CONTENT, null, true, () => controls['selector'].unselectAll());
-        map.addPopup(feature.popup);
-    }
-
-    function destroyPopup(feature) {
-        feature.popup.destroy();
-        feature.popup = null;
-    }
-
-    map.addControl(controls['selector']);
-    controls['selector'].activate();
-</script> -->
+<script is:inline>
+    // update map, simulating a window resize event, to avoid loading problem
+    window.dispatchEvent(new Event('resize'))
+</script>
 
 <style is:inline>
     main {
