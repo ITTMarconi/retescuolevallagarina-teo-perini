@@ -47,6 +47,14 @@ function load_institute_data_format()
     return example_data;
 }
 
+/** @returns {Object | true} - returns example data format */
+function load_opendays_data_format()
+{
+    let example_data = read_JSON_from_file(`${DATA_PATH}/example/new_open_days.json`)
+    if(example_data === true) return true;
+    return example_data;
+}
+
 /** 
  * @param lhs {Object} - fmt obj
  * @param rhs {Object} - data obj
@@ -126,18 +134,40 @@ function is_valid_institute_data(format, data)
     return do_obj_match(format, data, "istituto", 1)
 }
 
+/** 
+ * @param format {Object}
+ * @param data {Object}
+ * @returns {boolean} - returns true if an error occurred */
+function is_valid_opendays_data(format, data)
+{
+    return do_obj_match(format, data, "openday", 1)
+}
+
+
 module.exports = class Database {
     /** @type {Array<Institute>} */
-    _database = [];
+    _database_istituti = [];
+
+    /** @type {Array<OpenDays>} */
+    _database_opendays = [];
 
     /** @returns {boolean} - returns true if an error occurred */
     fetchFromDisk() {
         /** @type {Array<Institute>} */
-        let database_swap = [];
+        let database_istituti_swap = [];
+
+        /** @type {Array<OpenDays>} */
+        let database_opendays_swap = [];
 
         const institute_data_fmt = load_institute_data_format();
         if(institute_data_fmt === true) {
             console.error("\x1B[31m[DATABASE] Failed to load institute data format\x1B[0m")
+            return true;
+        }
+
+        const opendays_data_fmt = load_opendays_data_format();
+        if(opendays_data_fmt === true) {
+            console.error("\x1B[31m[DATABASE] Failed to load opendays data format\x1B[0m")
             return true;
         }
 
@@ -160,13 +190,14 @@ module.exports = class Database {
             /** @type {string} */
             const INSTITUTE_PATH = path.join(INSTITUTES_PATH, institute_id)
 
-            console.info(`\n\x1B[34m[DATABASE] Loading institute data at '${INSTITUTE_PATH}'\x1B[0m`)
+            console.info(`\x1B[34m[DATABASE] Loading institute data at '${INSTITUTE_PATH}'\x1B[0m`)
 
             //* Institute Data
             const INSTITUTE_DATA_PATH = path.join(INSTITUTE_PATH, "data.json")
 
             /** @type {Institute | true} */
             let institute_data = read_JSON_from_file(INSTITUTE_DATA_PATH)
+            // TODO: Rimuovere negazione per far si che il database crashi in caso di problemi con validazione
             if(!is_valid_institute_data(institute_data_fmt, institute_data)) {
                 console.error(`\x1B[31m[DATABASE] Insitute data does not conform to example file\x1B[31m`);
                 return true;
@@ -192,22 +223,34 @@ module.exports = class Database {
             //* OpenDays
             const INSTITUTE_OPENDAY_PATH = path.join(INSTITUTE_PATH, "open_day.json")
 
-            /** @type {OpenDays | true} */
+            /** @type {Array<OpenDays> | true} */
             let institute_opendays = read_JSON_from_file(INSTITUTE_OPENDAY_PATH)
+            if(!is_valid_opendays_data(opendays_data_fmt, institute_opendays)) {
+                console.error(`\x1B[31m[DATABASE] OpenDays data does not conform to example file\x1B[31m`);
+                return true;
+            }
             if(institute_opendays == true) return true;
 
-            institute_data.openDays = institute_opendays;
-            database_swap.push(institute_data);
+            database_opendays_swap.push(...institute_opendays);
+            database_istituti_swap.push(institute_data);
         }
 
-        this._database = database_swap;
-        console.info(`\x1B[34m[DATABASE] Loaded ${this._database.length} institutes\x1B[0m`)
+        this._database_opendays = database_opendays_swap
+        this._database_istituti = database_istituti_swap
+
+        console.info(`\x1B[34m[DATABASE] Loaded ${this._database_istituti.length} institutes\x1B[0m`)
+        console.info(`\x1B[34m[DATABASE] Loaded ${this._database_opendays.length} opendays\x1B[0m`)
         return false;
     }
 
     /** @returns {Array<Institute>} */
     getInstitutes() {
-        return this._database;
+        return this._database_istituti;
+    }
+
+    /** @returns {Array<OpenDays>} */
+    getOpenDays() {
+        return this._database_opendays;
     }
 
     /** 
@@ -216,7 +259,7 @@ module.exports = class Database {
     getSedeByID(id) {
         console.log(`[DATABASE] Requested sede (${id}), searching...`);
 
-        for (const institute of this._database) {
+        for (const institute of this._database_istituti) {
             for (const sede of institute.sedi) {
                 if (sede.codice_MIUR === id) {
                     console.log(`[DATABASE] Found sede!`);
@@ -234,12 +277,28 @@ module.exports = class Database {
     getInstituteByID(id) {
         console.log(`[DATABASE] Requested institute (${id}), searching...`);
 
-        for (const institute of this._database) {
+        for (const institute of this._database_istituti) {
             for (const sede of institute.sedi) {
                 if (sede.codice_MIUR === id) {
                     console.log(`[DATABASE] Found institute!`);
                     return institute;
                 }
+            }
+        }
+
+        return null;
+    }
+
+    /** 
+     * @param id {string}
+     * @returns {OpenDays | null} */
+    getOpenDayByID(id) {
+        console.log(`[DATABASE] Requested opendays of '${id}', searching...`);
+
+        for (const opendays of this._database_opendays) {
+            if (opendays.codice_MIUR === id) {
+                console.log(`[DATABASE] Found OpenDay!`);
+                return opendays;
             }
         }
 

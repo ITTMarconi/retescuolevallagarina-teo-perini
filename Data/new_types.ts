@@ -42,7 +42,6 @@ export type Institute = {
     // Server loaded
     logo_url: string
     video_url: string
-    openDays: OpenDays | null
 }
 
 ///////////////////////////////////////
