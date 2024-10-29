@@ -12,7 +12,7 @@ const SEDE: Sede = getMainSede(institute)!;
 ---
 
 <a href={`/sede/${SEDE.codice_MIUR}`} class="hoverable">
-    <img src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${institute.logo_url}`} alt="" srcset="" />
+    <img src={institute.logo_url} alt="" srcset="" />
     <span>{SEDE.nome}</span>
 </a>
 

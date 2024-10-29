@@ -2,5 +2,7 @@ dist/
 .astro/
 node_modules/
 
+App/public/media
+
 *.log*
 .env*

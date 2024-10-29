@@ -40,8 +40,8 @@ export type Institute = {
     sedi: Array<Sede>
 
     // Server loaded
-    logo_url: string
-    video_url: string
+    logo_url: string | null
+    video_url: string | null
 }
 
 ///////////////////////////////////////

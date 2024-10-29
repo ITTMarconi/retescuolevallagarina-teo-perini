@@ -131,7 +131,7 @@ function do_obj_match(lhs, rhs, path, depth)
  * @returns {boolean} - returns true if an error occurred */
 function is_valid_institute_data(format, data)
 {
-    return do_obj_match(format, data, "istituto", 1)
+    return !do_obj_match(format, data, "istituto", 1)
 }
 
 /** 
@@ -140,7 +140,53 @@ function is_valid_institute_data(format, data)
  * @returns {boolean} - returns true if an error occurred */
 function is_valid_opendays_data(format, data)
 {
-    return do_obj_match(format, data, "openday", 1)
+    return !do_obj_match(format, data, "openday", 1)
+}
+
+/** 
+ * @param path {string}
+ * @returns {boolean} - returns true if an error occurred */
+function mkdir(path) {
+    if(!fs.existsSync(path)) {
+        console.log(`Folder not found, creating at ${path}...`)
+
+        try {
+            fs.mkdirSync(path, { recursive: true })
+        } catch (error) {
+            console.error(`\x1B[31mFailed to create folder at '${path}': ${error}\x1B[0m`);
+            return true;
+        }
+    }
+    
+    if(!fs.existsSync(path)) {
+        console.error(`\x1B[31m[DATABASE] Failed to create folder at '${path}' with unknown error\x1B[0m`);
+        return true;
+    }
+
+    return false;
+}
+
+/** 
+ * @param file_path {string}
+ * @param folder_path {string}
+ * @param dst_name {string}
+ * @returns {boolean} - returns true if an error occurred */
+function copy_file_to_folder(file_path, folder_path, dst_name) {
+    try {
+        if(mkdir(folder_path)) {
+            console.error(`\x1B[31m[DATABASE] Failed to create file path while copying '${file_path}' to '${folder_path}'\x1B[0m`)
+            return true;
+        }
+
+        fs.copyFileSync(file_path, `${folder_path}/${dst_name}`)
+    } catch (error) {
+        console.error(`\x1B[31m[DATABASE] Failed to copy file from '${file_path}' to '${folder_path}': ${error}\x1B[0m`)
+        return true;
+    }
+
+    console.log(`Copied file at '${file_path}' to '${folder_path}'`)
+
+    return false;
 }
 
 
@@ -197,8 +243,7 @@ module.exports = class Database {
 
             /** @type {Institute | true} */
             let institute_data = read_JSON_from_file(INSTITUTE_DATA_PATH)
-            // TODO: Rimuovere negazione per far si che il database crashi in caso di problemi con validazione
-            if(!is_valid_institute_data(institute_data_fmt, institute_data)) {
+            if(is_valid_institute_data(institute_data_fmt, institute_data)) {
                 console.error(`\x1B[31m[DATABASE] Insitute data does not conform to example file\x1B[31m`);
                 return true;
             }
@@ -207,16 +252,20 @@ module.exports = class Database {
             //* Logo
             const LOGO_PATH = path.join(INSTITUTE_PATH, "logo.png")
             if (fs.existsSync(LOGO_PATH)) {
+                console.log(LOGO_PATH)
                 institute_data.logo_url = LOGO_PATH;
             } else {
+                institute_data.logo_url = null;
                 console.warn(`\x1B[33m[DATABASE] File '${LOGO_PATH}' does not exist\x1B[0m`)
             }
 
             //* Video
             const VIDEO_PATH = path.join(INSTITUTE_PATH, "video.mp4")
             if (fs.existsSync(VIDEO_PATH)) {
+                console.log(VIDEO_PATH)
                 institute_data.video_url = VIDEO_PATH;
             } else {
+                institute_data.video_url = null;
                 console.warn(`\x1B[33m[DATABASE] File '${VIDEO_PATH}' does not exist\x1B[0m`)
             }
 
@@ -225,7 +274,7 @@ module.exports = class Database {
 
             /** @type {Array<OpenDays> | true} */
             let institute_opendays = read_JSON_from_file(INSTITUTE_OPENDAY_PATH)
-            if(!is_valid_opendays_data(opendays_data_fmt, institute_opendays)) {
+            if(is_valid_opendays_data(opendays_data_fmt, institute_opendays)) {
                 console.error(`\x1B[31m[DATABASE] OpenDays data does not conform to example file\x1B[31m`);
                 return true;
             }
@@ -240,6 +289,42 @@ module.exports = class Database {
 
         console.info(`\x1B[34m[DATABASE] Loaded ${this._database_istituti.length} institutes\x1B[0m`)
         console.info(`\x1B[34m[DATABASE] Loaded ${this._database_opendays.length} opendays\x1B[0m`)
+
+        if(this.exportMedia()) {
+            console.error(`\x1B[31m[DATABASE] Failed to export media\x1B[0m`);
+            return true;
+        }
+
+        return false;
+    }
+
+    /** @returns {boolean} - true if error */
+    exportMedia() {
+        console.log("Exporting media...")
+
+        const MEDIA_PATH = `../App/public/media`
+
+
+        for(let istituto of this._database_istituti) {
+            if(istituto.logo_url != null) {
+                if(copy_file_to_folder(istituto.logo_url, `${MEDIA_PATH}/${istituto.sede_principale_MIUR}`, 'logo.png')) {
+                    console.error(`\x1B[31m[DATABASE] Failed to copy file '${istituto.logo_url}' to '${MEDIA_PATH}/${istituto.sede_principale_MIUR}'\x1B[0m`);
+                    return true;
+                }
+
+                istituto.logo_url = `media/${istituto.sede_principale_MIUR}/logo.png`
+            }
+
+            if(istituto.video_url != null) {
+                if(copy_file_to_folder(istituto.video_url, `${MEDIA_PATH}/${istituto.sede_principale_MIUR}`, 'video.mp4')) {
+                    console.error(`\x1B[31m[DATABASE] Failed to copy file '${istituto.logo_url}' to '${MEDIA_PATH}/${istituto.sede_principale_MIUR}'\x1B[0m`);
+                    return true;
+                }
+
+                istituto.video_url = `media/${istituto.sede_principale_MIUR}/video.mp4`
+            }
+        }
+
         return false;
     }
 
