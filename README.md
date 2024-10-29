@@ -1,4 +1,4 @@
-> /!\ BROKEN STUFF
+> /!\ BROKEN STUFF \
 > L'app per funzionare deve essere prima buildata in locale \
 > _dovevamo usare nix, non docker..._
 
@@ -8,7 +8,7 @@ Sito web realizzato in collaborazione con il Liceo Artistico Depero,
 lo scopo del sito è di centralizzare le informazioni sulle scuole superiori
 disponibili nel territorio di Rovereto in un unico luogo
 
-## Preview
+## Preview (old)
 
 Istituti page
 ![Istituti page](.screenshots/istituti_desktop.png)
@@ -27,8 +27,8 @@ Notes:
 
 - Default Server ip and port are `localhost:25565`
 - Default App ip and port are `YOUR_LOCAL_IP:4321`
-- If you want to set a custom server address and port \
-  you need to edit `/Data/constants.ts` AND `/Data/constants.js` \
+- If you want to set a custom server address and port
+  you need to edit `/Data/constants.ts` AND `/Data/constants.js`
 
 ### Running dev
 
