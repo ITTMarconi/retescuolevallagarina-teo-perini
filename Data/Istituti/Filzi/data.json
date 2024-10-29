@@ -13,7 +13,18 @@
 				"longitudine": "11.038272"
 			},
 
-			"website": "www.liceofilzi.it",
+			"indirizzi_studi": [
+				{
+					"nome": "Liceo Economico Sociale",
+					"link": "https://www.liceofilzi.it/indirizzo-di-studio/liceo-economico-sociale/"
+				},
+				{
+					"nome": "Liceo delle Scienze Umane",
+					"link": "https://www.liceofilzi.it/indirizzo-di-studio/liceo-delle-scienze-umane/"
+				}
+			],
+
+			"website": "https://www.liceofilzi.it",
 			"contacts": {
 				"mail": [
                     {

@@ -18,27 +18,27 @@
             "indirizzi_studi": [
                 {
                     "nome": "Biennio propedeutico",
-					"link": "www.marconirovereto.it/indirizzo-di-studio/biennio/"
+					"link": "https://www.marconirovereto.it/indirizzo-di-studio/biennio/"
                 },
                 {
                     "nome": "Meccatronica ed Energia",
-                    "link": "www.marconirovereto.it/indirizzo-di-studio/meccatronica/"
+                    "link": "https://www.marconirovereto.it/indirizzo-di-studio/meccatronica/"
                 },
                 {
                     "nome": "Automazione e Robotica Industriale ",
-                    "link": "www.marconirovereto.it/indirizzo-di-studio/elettronica-automazione/"
+                    "link": "https://www.marconirovereto.it/indirizzo-di-studio/elettronica-automazione/"
                 },
                 {
                     "nome": "Informatica",
-                    "link": "www.marconirovereto.it/indirizzo-di-studio/informatica/"
+                    "link": "https://www.marconirovereto.it/indirizzo-di-studio/informatica/"
                 },
                 {
                     "nome": "Quadriennale GET4stream ",
-                    "link": "www.marconirovereto.it/indirizzo-di-studio/quadriennale/"
+                    "link": "https://www.marconirovereto.it/indirizzo-di-studio/quadriennale/"
                 }
             ],
 
-			"website": "www.marconirovereto.it",
+			"website": "https://www.marconirovereto.it",
 			"contacts": {
 				"mail": [
                     {

@@ -18,15 +18,15 @@
             "indirizzi_studi": [
                 {
                     "nome": "OPERATORE AI SERVIZI D'IMPRESA",
-                    "link": "www.cfpupt.it/orientamentorovereto"
+                    "link": "https://www.cfpupt.it/orientamentorovereto"
                 },
                 {
                     "nome": "OPERATORE AI SERVIZI DI VENDITA",
-                    "link": "www.cfpupt.it/orientamentorovereto"
+                    "link": "https://www.cfpupt.it/orientamentorovereto"
                 }
             ],
 
-			"website": "www.cfpupt.it/sede-di-rovereto",
+			"website": "https://www.cfpupt.it/sede-di-rovereto",
 			"contacts": {
 				"mail": [
                     {
