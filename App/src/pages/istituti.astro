@@ -31,18 +31,18 @@ console.log(`[BUILD] (istituti.astro) Loaded ${INSTITUTES.length} institutes`);
 
 <style>
     main {
-        width: calc(100% - 4rem);
-        padding: 2rem;
+        width: calc(100% - 2rem);
+        padding: 1rem;
 
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        gap: 2rem;
+        gap: 1rem;
     }
 
     main > div {
-        flex-basis: 48%;
+        flex-basis: 100%;
     }
 
     /* For desktop: */
@@ -51,10 +51,13 @@ console.log(`[BUILD] (istituti.astro) Loaded ${INSTITUTES.length} institutes`);
     /* For wide-desktop: */
     @media only screen and (min-width: 1536px) {
         main {
-            max-width: 180rem;
+            width: calc(100% - 4rem);
+            padding: 2rem;
+            gap: 2rem;
         }
 
         main > div {
+            max-width: 80rem;
             flex-basis: 30%;
         }
     }
