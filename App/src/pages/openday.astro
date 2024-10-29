@@ -28,7 +28,8 @@ console.log(`[BUILD] (openday.astro) Loaded ${ALL_OPENDAYS.length} opendays`);
                 <h1 class="font-regular">Appuntamento territoriale</h1>
 
                 <span>
-                    Mercoledì 13 novembre 2024 18.00 - 21.00
+                    Mercoledì 13 novembre 2024 <br>
+                    18.00 - 21.00
                     <a href="volantino_scuole.pdf" target="_blank">Link al volantino</a>
                 </span>
             </div>
@@ -63,16 +64,28 @@ console.log(`[BUILD] (openday.astro) Loaded ${ALL_OPENDAYS.length} opendays`);
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        gap: 2rem;
     }
 
     /* Banner */
     /* ******************************************************************************** */
 
-    main > article {
-        width: calc(100% - 4rem);
-
+    main > article:first-child {
+        width: calc(100% - 2rem);
         padding: 2rem;
-        margin-bottom: 1rem;
+    }
+    main > article {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    main > article > div > h1 {
+        text-align: center;
+    }
+
+    main > article > div > span {
+        text-align: center;
     }
 
     main > article > p {
@@ -129,8 +142,19 @@ console.log(`[BUILD] (openday.astro) Loaded ${ALL_OPENDAYS.length} opendays`);
     /* For desktop: */
     @media only screen and (min-width: 768px) {
 
+        main > article:first-child {
+            width: calc(100% - 2rem);
+            padding: 2rem;
+        }
         main > article {
             max-width: 80ch;
+
+            width: calc(100% - 4rem);
+            padding: 2rem;
+        }
+
+        main > article > div > span {
+            text-align: right;
         }
 
         main > article > div > span {
