@@ -16,10 +16,10 @@
     font-weight: 300;
 }
 
-main {
+/* main {
     width: calc(100% - 4rem);
     padding: 2rem;
-}
+} */
 
 h1, h2 {
     margin: 0;
