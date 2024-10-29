@@ -50,7 +50,7 @@ const OPENDAYS: OpenDays = await OPENDAYS_RAW.json();
                     </a>
 
                     {
-                        typeof SEDE.responsabile_orientamento === 'string' && (
+                        typeof SEDE.responsabile_orientamento === 'string' && SEDE.responsabile_orientamento.length > 0 && (
                             <div title="Responsabile orientamento">
                                 <Icon code="e7fd" color="var(--foreground-secondary)" />
                                 <span>Responsabile orientamento: {SEDE.responsabile_orientamento}</span>

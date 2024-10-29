@@ -9,11 +9,11 @@ interface Props {
 const { openDays } = Astro.props;
 ---
 
-<article>
+<article id={`open-days-list-${openDays.codice_MIUR}`}>
     {
         openDays.orari.map(orario => (
-            <section>
-                <div style={`background-color: ${hasPassed(orario.inizio_orario) ? 'var(--tint-red)' : 'var(--background-primary)'};`}>
+            <section data-orario={orario.inizio_orario}>
+                <div>
                     <span>{getDay(orario.inizio_orario)}</span>
                     <span> {getMonth(orario.inizio_orario)}/{getYear(orario.inizio_orario)} </span>
                 </div>
@@ -26,6 +26,19 @@ const { openDays } = Astro.props;
         ))
     }
 </article>
+
+<script is:inline define:vars={{ hasPassed, openDays }}>
+    var now = new Date();
+
+    const OPEN_DAYS_ARTICLE = document.getElementById(`open-days-list-${openDays.codice_MIUR}`);
+    for (const SECTION_EL of OPEN_DAYS_ARTICLE.children) {
+        let dataora = Date.parse(SECTION_EL.getAttribute("data-orario"));
+        let color = dataora < now ? 'var(--tint-red)' : 'var(--background-primary)';
+        
+        SECTION_EL.children[0].setAttribute('style', 'background-color:' + color + ';')
+    }
+
+</script>
 
 <style>
     article {
