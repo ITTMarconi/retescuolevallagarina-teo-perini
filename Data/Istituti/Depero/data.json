@@ -18,19 +18,19 @@
 			"indirizzi_studi": [
 				{
 					"nome": "Grafica",
-					"link": "www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Grafica.pdf"
+					"link": "https://www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Grafica.pdf"
 				},
 				{
 					"nome": "Design per l'innovazione",
-					"link": "www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Design.pdf"
+					"link": "https://www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Design.pdf"
 				},
 				{
 					"nome": "Audiovisivo multimediale",
-					"link": "www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Audiovisivo.pdf"
+					"link": "https://www.liceodellearti.tn.it/wp-content/uploads/2023/11/Depero-Audiovisivo.pdf"
 				}
 			],
 
-			"website": "www.istitutodellearti.tn.it",
+			"website": "https://www.istitutodellearti.tn.it",
 			"contacts": {
 				"mail": [
 					{
@@ -54,98 +54,6 @@
 					{
 						"description": "telefono",
 						"numero": "+39 0464 438836"
-					},
-					{
-						"description": "fax",
-						"numero": "+39 0461 824345"
-					}
-				]
-			}
-		},
-		{
-			"nome": "Liceo Artistico Vittoria",
-			"codice_MIUR": "TNSD02000X",
-
-			"responsabile_orientamento": "Chiara Miorelli",
-
-			"posizione": {
-				"indirizzo": "Via Zambra, 3 - 38121 TRENTO",
-				"latitudine": "46.092990552099664", 
-				"longitudine": "11.119974844305837"
-			},
-
-            "indirizzi_studi": [ ],
-
-			"website": "www.istitutodellearti.tn.it",
-			"contacts": {
-				"mail": [
-					{
-						"description": "orientamento",
-						"mail": "orientamento.depero@liceodellearti.tn.it"
-					},
-					{
-						"description": "istituto",
-						"mail": "vittoria@pec.provincia.tn.it"
-					},
-					{
-						"description": "segreteria",
-						"mail": "info@istitutodellearti.tn.it"
-					},
-					{
-						"description": "dirigenza",
-						"mail": "dir.istitutodellearti@scuole.provincia.tn.it"
-					}
-				],
-				"phone": [
-					{
-						"description": "telefono",
-						"numero": "+39 0461 824422"
-					},
-					{
-						"description": "fax",
-						"numero": "+39 0461 824345"
-					}
-				]
-			}
-		},
-		{
-			"nome": "Liceo Musicale Coreutico",
-			"codice_MIUR": "TNSD02000X",
-
-			"responsabile_orientamento": "Chiara Miorelli",
-
-			"posizione": {
-				"indirizzo": "Vicolo S Maria Maddalena, 16 - 38122 TRENTO",
-				"latitudine": "46.06909347331769", 
-				"longitudine": "11.127059452184977"
-			},
-
-            "indirizzi_studi": [ ], 
-
-			"website": "www.istitutodellearti.tn.it",
-			"contacts": {
-				"mail": [
-					{
-						"description": "orientamento",
-						"mail": "orientamento.depero@liceodellearti.tn.it"
-					},
-					{
-						"description": "istituto",
-						"mail": "info.bonporti@istitutodellearti.tn.it"
-					},
-					{
-						"description": "segreteria",
-						"mail": "info@istitutodellearti.tn.it"
-					},
-					{
-						"description": "dirigenza",
-						"mail": "dir.istitutodellearti@scuole.provincia.tn.it"
-					}
-				],
-				"phone": [
-					{
-						"description": "telefono",
-						"numero": "+39 0461 260648"
 					},
 					{
 						"description": "fax",

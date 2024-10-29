@@ -17,16 +17,16 @@
 
             "indirizzi_studi": [
                 {
-                    "nome": "domir.edu.it/servizio/percorsi-di-studio/",
-                    "link": "domir.edu.it/servizio/percorsi-di-studio/"
+                    "nome": "Tecnico Economico Turistico",
+                    "link": "https://domir.edu.it/indirizzo-di-studio/indirizzo-tecnico-economico-turismo/"
                 },
                 {
-                    "nome": "domir.edu.it/servizio/percorsi-di-studio/",
-                    "link": "domir.edu.it/indirizzo-di-studio/indirizzo-professionale-servizi-per-la-sanita-e-lassistenza-sociale/"
+                    "nome": "Professionale servizi per la sanità e l'assistenza sociale",
+                    "link": "https://domir.edu.it/indirizzo-di-studio/indirizzo-professionale-servizi-per-la-sanita-e-lassistenza-sociale/"
                 }
             ],
 
-			"website": "www.domir.edu.it",
+			"website": "https://www.domir.edu.it",
 			"contacts": {
 				"mail": [
 					{

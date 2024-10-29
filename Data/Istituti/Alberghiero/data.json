@@ -18,19 +18,19 @@
             "indirizzi_studi": [
                 {
                     "nome": "Indirizzo della panificazione e di pasticceria",
-                    "link": "www.alberghierorovereto.it/formazione/qualifica/3-op-panificazione-e-pasticceria/"
+                    "link": "https://www.alberghierorovereto.it/formazione/qualifica/3-op-panificazione-e-pasticceria/"
                 },
                 {
                     "nome": "Indirizzo di cucina",
-                    "link": "www.alberghierorovereto.it/formazione/qualifica/gastronomia-e-arte-bianca/"
+                    "link": "https://www.alberghierorovereto.it/formazione/qualifica/gastronomia-e-arte-bianca/"
                 },
                 {
                     "nome": "Indirizzo dei servizi di sala e bar",
-                    "link": "www.alberghierorovereto.it/formazione/qualifica/accoglienza-e-ospitalita/"
+                    "link": "https://www.alberghierorovereto.it/formazione/qualifica/accoglienza-e-ospitalita/"
                 }
             ],
 
-			"website": "www.alberghierorovereto.it",
+			"website": "https://www.alberghierorovereto.it",
 			"contacts": {
 				"mail": [
 					{

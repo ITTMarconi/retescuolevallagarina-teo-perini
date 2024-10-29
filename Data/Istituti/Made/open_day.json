@@ -9,6 +9,35 @@
                 "descrizione": "Presentazione indirizzi, visita alla scuola, in presenza"
             },
             {
+                "inizio_orario": "2024-11-22T18:00:00+01:00",
+                "fine_orario": "2024-11-22T20:00:00+01:00",
+                "attivita": "Open Night",
+                "descrizione": "Presentazione indirizzi, visita alla scuola, in presenza"
+            },
+            {
+                "inizio_orario": "2024-12-14T15:00:00+01:00",
+                "fine_orario": "2024-12-14T18:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Presentazione indirizzi, visita alla scuola, in presenza"
+            },
+            {
+                "inizio_orario": "2025-01-11T15:00:00+01:00",
+                "fine_orario": "2025-01-11T18:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Presentazione indirizzi, visita alla scuola, in presenza"
+            }
+        ]
+    },
+    {
+        "codice_MIUR": "TNCF002001-B",
+        "orari": [
+            {
+                "inizio_orario": "2024-10-26T15:00:00+01:00",
+                "fine_orario": "2024-10-26T18:00:00+01:00",
+                "attivita": "Open Day",
+                "descrizione": "Presentazione indirizzi, visita alla scuola, in presenza"
+            },
+            {
                 "inizio_orario": "2024-11-23T15:00:00+01:00",
                 "fine_orario": "2024-11-23T18:00:00+01:00",
                 "attivita": "Open Day",

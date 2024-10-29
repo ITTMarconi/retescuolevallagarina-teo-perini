@@ -18,27 +18,27 @@
             "indirizzi_studi": [
                 {
                     "nome": "Liceo classico",
-					"link": "liceorosmini.eu/indirizzo-di-studio/liceo-classico/"
+					"link": "https://liceorosmini.eu/indirizzo-di-studio/liceo-classico/"
                 },
                 {
                     "nome": "Liceo linguistico",
-                    "link": "liceorosmini.eu/indirizzo-di-studio/liceo-linguistico/"
+                    "link": "https://liceorosmini.eu/indirizzo-di-studio/liceo-linguistico/"
                 },
                 {
                     "nome": "Liceo scientifico tradizionale",
-                    "link": "liceorosmini.eu/indirizzo-di-studio/liceo-scientifico/"
+                    "link": "https://liceorosmini.eu/indirizzo-di-studio/liceo-scientifico/"
                 },
                 {
                     "nome": "Liceo scientifico delle scienze applicate",
-                    "link": "liceorosmini.eu/indirizzo-di-studio/liceo-scientifico-scienze-applicate/"
+                    "link": "https://liceorosmini.eu/indirizzo-di-studio/liceo-scientifico-scienze-applicate/"
                 },
                 {
                     "nome": "Liceo scientifico sportivo",
-                    "link": "liceorosmini.eu/indirizzo-di-studio/liceo-scientifico-sportivo/"
+                    "link": "https://liceorosmini.eu/indirizzo-di-studio/liceo-scientifico-sportivo/"
                 }
             ],
 
-			"website": "www.liceorosmini.eu",
+			"website": "https://www.liceorosmini.eu",
 			"contacts": {
 				"mail": [
                     {

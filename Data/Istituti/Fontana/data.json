@@ -13,49 +13,42 @@
 				"longitudine": "11.042651600484701"
 			},
 
-			"website": "www.fgfontana.eu",
-			"contacts": {
-				"mail": [
-					{
-						"description": "orientamento",
-						"mail": "???"
-					},
-					{
-						"description": "istituto",
-						"mail": "fontana@pec.provincia.tn.it"
-					},
-					{
-						"description": "segreteria",
-						"mail": "segr.fontana@scuole.provincia.tn.it"
-					},
-					{
-						"description": "dirigenza",
-						"mail": "dir.fontana@scuole.provincia.tn.it"
-					}
-				],
-				"phone": [
-					{
-						"description": "telefono",
-						"numero": "+39 0464 436100"
-					},
-					{
-						"description": "fax",
-						"numero": "+39 0464 434116"
-					}
-				]
-			}
-		},
-		{
-			"nome": "Istituto Tecnologico per il settore economico serale",
-			"codice_MIUR": "TNTD02050P",
+			"indirizzi_studi": [
+				{
+					"nome": "Indirizzo Tecnologico Costruzioni, Ambiente e Territorio",
+					"link": "https://fgfontana.eu/indirizzo-di-studio/costruzioni-ambiente-e-territorio/"
+				},
+				{
+					"nome": "Indirizzo Tencologico Chimica, Materiali e Biotecnologie - articolazione Biotecnologie Ambientali",
+					"link": "https://fgfontana.eu/indirizzo-di-studio/chimica-materiali-e-biotecnologie-articolazione-biotecnologie-ambientali/"
+				},
+				{
+					"nome": "Indirizzo Tecnologico Tecnologie del Legno nelle Costruzioni",
+					"link": "https://fgfontana.eu/indirizzo-di-studio/tecnologie-del-legno-nelle-costruzioni/"
+				},
+				{
+					"nome": "Indirizzo Tecnologico Quadriennale CAT 4.0",
+					"link": "https://fgfontana.eu/indirizzo-di-studio/indirizzo-quadriennale-cat-4-0/"
+				},
+				{
+					"nome": "Indirizzo Economico Relazioni Internazionali per il Marketing",
+					"link": "https://fgfontana.eu/indirizzo-di-studio/indirizzo-relazioni-internazionali-per-il-marketing/"
+				},
+				{
+					"nome": "Indirizzo Economico Sistemi Informativi Aziendali",
+					"link": "https://fgfontana.eu/indirizzo-di-studio/indirizzo-sistemi-informativi-aziendali/"
+				},
+				{
+					"nome": "Indirizzo Economico Amministrazione Finanza e Marketing - Curvatura Sportiva",
+					"link": "https://fgfontana.eu/indirizzo-di-studio/indirizzo-sport-business-management/"
+				},
+				{
+					"nome": "Indirizzo Economico Amministrazione Finanza e marketing",
+					"link": "https://fgfontana.eu/indirizzo-di-studio/indirizzo-amministrazione-finanza-e-marketing/"
+				}
+			],
 
-			"posizione": {
-				"indirizzo": "Via Del Teatro, 4 - 38068 ROVERETO",
-				"latitudine": "45.893601249611514", 
-				"longitudine": "11.042651600484701"
-			},
-
-			"website": "www.fgfontana.eu",
+			"website": "https://www.fgfontana.eu",
 			"contacts": {
 				"mail": [
 					{
