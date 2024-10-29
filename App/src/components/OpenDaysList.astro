@@ -20,7 +20,7 @@ const { openDays } = Astro.props;
 
                 <div>
                     <span>{orario.attivita} - {getHours(orario.inizio_orario)}:{getMinutes(orario.inizio_orario)} - {getHours(orario.fine_orario)}:{getMinutes(orario.fine_orario)} </span>
-                    <span>{orario.descrizione}</span>
+                    <span id={`open-day-${orario.inizio_orario}`}>{orario.descrizione}</span>
                 </div>
             </section>
         ))
@@ -37,6 +37,15 @@ const { openDays } = Astro.props;
         
         SECTION_EL.children[0].setAttribute('style', 'background-color:' + color + ';')
     }
+
+    openDays.orari.map(orario => {
+        let descr = orario.descrizione;
+        if(descr.includes('https://')){
+            let url = descr.split(' ').filter(word => word.startsWith('https://'));
+            descr = descr.replace(url[0], `<u><a href="${url}">link</a></u>` );
+            document.getElementById(`open-day-${orario.inizio_orario}`).innerHTML = descr;
+        }
+    });
 
 </script>
 
@@ -110,8 +119,6 @@ const { openDays } = Astro.props;
         font-size: 1rem;
         line-height: 1.5rem;
         text-wrap: wrap;
-        word-break: break-all;
-
         overflow-wrap: break-word;
     }
 
