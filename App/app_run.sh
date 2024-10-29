@@ -3,9 +3,14 @@ echo "Cleaning... (App)"
 docker rm -f made-app_instance
 docker image rm -f made-app
 
+if [ ! -d "./public/media" ]; then
+	echo "Media is not included!!"
+	exit 1
+fi
+
 # Building
 echo "Building... (App)"
-docker build --progress=plain -t made-app . 
+docker build --progress=plain -t made-app .
 
 # Running
 echo "Running... (App)"

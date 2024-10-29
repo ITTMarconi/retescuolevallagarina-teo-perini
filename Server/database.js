@@ -3,7 +3,8 @@
 const path = require('path')
 const fs = require('fs');
 
-const DATA_PATH = "../Data"
+const PROOT = path.dirname(__dirname)
+const DATA_PATH = `${PROOT}/Data`
 
 /** @typedef {import("../Data/types").Mail} Mail */
 /** @typedef {import("../Data/types").Phone} Phone */
@@ -143,7 +144,7 @@ function is_valid_opendays_data(format, data)
     return !do_obj_match(format, data, "openday", 1)
 }
 
-/** 
+/**
  * @param path {string}
  * @returns {boolean} - returns true if an error occurred */
 function mkdir(path) {
@@ -157,7 +158,7 @@ function mkdir(path) {
             return true;
         }
     }
-    
+
     if(!fs.existsSync(path)) {
         console.error(`\x1B[31m[DATABASE] Failed to create folder at '${path}' with unknown error\x1B[0m`);
         return true;
@@ -166,7 +167,7 @@ function mkdir(path) {
     return false;
 }
 
-/** 
+/**
  * @param file_path {string}
  * @param folder_path {string}
  * @param dst_name {string}
@@ -300,7 +301,7 @@ module.exports = class Database {
     exportMedia() {
         console.log("Exporting media...")
 
-        const MEDIA_PATH = `../App/public/media`
+        const MEDIA_PATH = `${PROOT}/App/public/media`
 
 
         for(let istituto of this._database_istituti) {

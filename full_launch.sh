@@ -18,6 +18,12 @@ cd ..
 # Build app
 echo -e "\n\033[36mBuilding application...\033[0m\n"
 cd App
+
+if [ ! -d "./public/media" ]; then
+	echo "(App) Media is not included!!"
+	exit 1
+fi
+
 npm install
 npm run build
 
