@@ -10,6 +10,9 @@ echo "Check to have properly set ip and port!!!"
 echo -e "\n\033[36mBuilding and starting the server...\033[0m\n"
 cd Server
 
+npm install
+node index.js export-media
+
 chmod +x server_run.sh
 ./server_run.sh
 

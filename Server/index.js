@@ -16,6 +16,23 @@ app.use(express.json())
 /** @type {boolean} */
 let isDatabaseReady = false;
 
+for (let i = 0; i < process.argv.length; i++) {
+	if(process.argv[i] == "export-media") {
+
+		if (database.fetchFromDisk()) {
+			console.error("\x1B[31m[DATABASE] Error fetching from disk, exiting...\x1B[0m")
+			exit(1);
+		}
+
+		if(database.exportMedia()) {
+			console.error(`\x1B[31m[DATABASE] Failed to export media\x1B[0m`);
+			exit(1);
+		}
+
+		exit(0);
+	}
+}
+
 app.listen(SERVER_PORT, () => {
     console.log("Starting backend...")
 
@@ -23,6 +40,8 @@ app.listen(SERVER_PORT, () => {
         console.error("\x1B[31m[DATABASE] Error fetching from disk, exiting...\x1B[0m")
         exit(1);
     }
+
+	database.updatePathesToRelative();
 
     console.log("[DATABASE] Fetching successfull!")
     isDatabaseReady = true;

@@ -289,13 +289,15 @@ module.exports = class Database {
         console.info(`\x1B[34m[DATABASE] Loaded ${this._database_istituti.length} institutes\x1B[0m`)
         console.info(`\x1B[34m[DATABASE] Loaded ${this._database_opendays.length} opendays\x1B[0m`)
 
-        if(this.exportMedia()) {
-            console.error(`\x1B[31m[DATABASE] Failed to export media\x1B[0m`);
-            return true;
-        }
-
         return false;
     }
+
+	updatePathesToRelative() {
+		for(let istituto of this._database_istituti) {
+			if(istituto.logo_url != null) istituto.logo_url = `/media/${istituto.sede_principale_MIUR}/logo.png`
+			if(istituto.video_url != null) istituto.video_url = `/media/${istituto.sede_principale_MIUR}/video.mp4`
+		}
+	}
 
     /** @returns {boolean} - true if error */
     exportMedia() {
@@ -310,8 +312,6 @@ module.exports = class Database {
                     console.error(`\x1B[31m[DATABASE] Failed to copy file '${istituto.logo_url}' to '${MEDIA_PATH}/${istituto.sede_principale_MIUR}'\x1B[0m`);
                     return true;
                 }
-
-                istituto.logo_url = `/media/${istituto.sede_principale_MIUR}/logo.png`
             }
 
             if(istituto.video_url != null) {
@@ -319,8 +319,6 @@ module.exports = class Database {
                     console.error(`\x1B[31m[DATABASE] Failed to copy file '${istituto.logo_url}' to '${MEDIA_PATH}/${istituto.sede_principale_MIUR}'\x1B[0m`);
                     return true;
                 }
-
-                istituto.video_url = `/media/${istituto.sede_principale_MIUR}/video.mp4`
             }
         }
 
