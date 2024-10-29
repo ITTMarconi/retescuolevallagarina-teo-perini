@@ -29,13 +29,11 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
 
     // take data from the db
     let db = { dati: [] };
-    db.dati = INSTITUTES.map(institute => {
-        const SEDE = institute.sedi.find(sede => sede.codice_MIUR === institute.codice_MIUR);
-
+    db.dati = INSTITUTES.map(institute => institute.sedi).flat().map(sede => {
         return {
-            latitudine: SEDE.posizione.latitudine,
-            longitudine: SEDE.posizione.longitudine,
-            codice_MIUR: SEDE.codice_MIUR,
+            latitudine: sede.posizione.latitudine,
+            longitudine: sede.posizione.longitudine,
+            codice_MIUR: sede.codice_MIUR,
         };
     });
     // console.log(db);
@@ -52,21 +50,21 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
     // create pin with popup
     for(data of db.dati){
         //console.log(data);
+
         // find institute
-        let istituto = INSTITUTES.find(institute => institute.codice_MIUR === data.codice_MIUR);
+        let sede = INSTITUTES.map(institute => institute.sedi).flat().find(sede => sede.codice_MIUR === data.codice_MIUR);
 
         // create popup html text
-        let popup = '<u><a href="/sede/' + data.codice_MIUR + '" class="font-regular">' + istituto.nome + '</a></u>'
+        let popup = '<u><a href="/sede/' + sede.codice_MIUR + '" class="font-regular">' + sede.nome + '</a></u>'
 
         // create marker with popup
-        L.marker([data.latitudine, data.longitudine]).addTo(map)
-            .bindPopup(popup)
+        L.marker([data.latitudine, data.longitudine]).addTo(map).bindPopup(popup)
     }
 </script>
 
 <script is:inline>
     // update map, simulating a window resize event, to avoid loading problem
-    window.dispatchEvent(new Event('resize'))
+    window.dispatchEvent(new Event('resize'));
 </script>
 
 <style is:inline>
