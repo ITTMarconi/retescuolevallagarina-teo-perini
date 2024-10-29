@@ -95,14 +95,14 @@ function do_obj_match(lhs, rhs, path, depth)
         for(let key of lhs_keys.filter(key => !rhs_keys.includes(key)))
         {
             console.error(`\x1B[31m${indent}Missing key '${key}' while validating obj at '${path}'\x1B[0m`)
-            // return false;
+            return false;
         }
 
         /* Warn for extra keys */
         for(let key of rhs_keys.filter(key => !lhs_keys.includes(key)))
         {
             console.warn(`\x1B[33m${indent}Extra key '${key}' while validating obj at '${path}'\x1B[0m`)
-            // return false;
+            return false;
         }
 
         for(let key of lhs_keys.filter(key => rhs_keys.includes(key)))
@@ -252,7 +252,6 @@ module.exports = class Database {
             //* Logo
             const LOGO_PATH = path.join(INSTITUTE_PATH, "logo.png")
             if (fs.existsSync(LOGO_PATH)) {
-                console.log(LOGO_PATH)
                 institute_data.logo_url = LOGO_PATH;
             } else {
                 institute_data.logo_url = null;
@@ -262,7 +261,6 @@ module.exports = class Database {
             //* Video
             const VIDEO_PATH = path.join(INSTITUTE_PATH, "video.mp4")
             if (fs.existsSync(VIDEO_PATH)) {
-                console.log(VIDEO_PATH)
                 institute_data.video_url = VIDEO_PATH;
             } else {
                 institute_data.video_url = null;
@@ -312,7 +310,7 @@ module.exports = class Database {
                     return true;
                 }
 
-                istituto.logo_url = `media/${istituto.sede_principale_MIUR}/logo.png`
+                istituto.logo_url = `/media/${istituto.sede_principale_MIUR}/logo.png`
             }
 
             if(istituto.video_url != null) {
@@ -321,7 +319,7 @@ module.exports = class Database {
                     return true;
                 }
 
-                istituto.video_url = `media/${istituto.sede_principale_MIUR}/video.mp4`
+                istituto.video_url = `/media/${istituto.sede_principale_MIUR}/video.mp4`
             }
         }
 

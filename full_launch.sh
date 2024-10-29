@@ -13,9 +13,7 @@ cd Server
 chmod +x server_run.sh
 ./server_run.sh
 
-
 cd ..
-
 
 # Build app
 echo -e "\n\033[36mBuilding application...\033[0m\n"

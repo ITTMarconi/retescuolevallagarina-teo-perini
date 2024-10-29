@@ -62,7 +62,7 @@ const OPENDAYS: OpenDays = await OPENDAYS_RAW.json();
 
         </header>
 
-        <video src={`http://${SERVER_ADDRESS}:${SERVER_PORT}/${INSTITUTE.video_url}`} controls></video>
+        <video src={INSTITUTE.video_url} controls></video>
 
         <article>
             {
