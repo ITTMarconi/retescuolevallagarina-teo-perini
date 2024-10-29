@@ -28,12 +28,12 @@ console.log(`[BUILD] (openday.astro) Loaded ${ALL_OPENDAYS.length} opendays`);
                 <h1 class="font-regular">Appuntamento territoriale</h1>
 
                 <span>
-                    Mercoledì 13 novembre 2024
+                    Mercoledì 13 novembre 2024 18.00 - 21.00
                     <a href="volantino_scuole.pdf" target="_blank">Link al volantino</a>
                 </span>
             </div>
 
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod suscipit, laudantium beatae officiis officia laboriosam.</p>
+            <p>Presentazione generale dell'offerta formativa di tutti gli istituti superiori della Vallagarina presso la Scuola media Negrelli di Rovereto</p>
 
         </article>
 
@@ -78,6 +78,10 @@ console.log(`[BUILD] (openday.astro) Loaded ${ALL_OPENDAYS.length} opendays`);
     main > article > p {
         margin: 1.2rem 0 0 0;
         text-align: center;
+    }
+
+    main > article > p, main > article > div > span > a {
+        line-height: 1.5rem;
     }
 
     main > article > div {
