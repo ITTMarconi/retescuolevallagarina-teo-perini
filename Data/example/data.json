@@ -1,16 +1,13 @@
 {
     "nome": "NOME ISTIUTO",
-    "codice_MIUR": "ID ISTITUTO",
+    "sede_principale_MIUR": "ID ISTITUTO",
+
     "sedi": [
         {
+            "nome": "NOME SEDE",
             "codice_MIUR": "CODICE MIUR",
-            "name": "NOME SEDE",
 
-            "dirigente": "NOME DIRIGENTE",
-            "direttore": "NOME DIRETTORE",
-
-            "descrizione": "Lorem ipsium...",
-            "tag": "liceo || tecnico || professionale",
+            "responsabile_orientamento": "NOME",
 
             "posizione": {
                 "indirizzo": "INDIRIZZO SEDE",
@@ -18,12 +15,19 @@
                 "longitudine": "LONGITUDINE SEDE"
             },
 
+            "indirizzi_studi": [
+                {
+                    "nome": "NOME INDIRIZZO",
+                    "link": "LINK INDIRIZZO"
+                }
+            ],
+
             "website": "SITO WEB SEDE",
             "contacts": {
                 "mail": [
                     {
-                        "description": "SEGRETERIA",
-                        "mail": "MAIL SEGRETERIA"
+                        "description": "orientamento",
+                        "mail": ""
                     }
                 ],
                 "phone": [

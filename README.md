@@ -1,5 +1,6 @@
 > /!\ BROKEN STUFF
-> App dockerfile doesn't work (yet) because it relys upon Server to be up to build astro stuff
+> L'app per funzionare deve essere prima buildata in locale \
+> _dovevamo usare nix, non docker..._
 
 # MaDe Progetto Scuole
 
@@ -10,22 +11,10 @@ disponibili nel territorio di Rovereto in un unico luogo
 ## Preview
 
 Istituti page
-![Istituti page](/Design/result/desktop/istituti_desktop.png)
+![Istituti page](.screenshots/istituti_desktop.png)
 
 Mobile overview
-![Mobile overview](/Design/result/desktop/opendays_desktop.png)
-
-## Missing / TODO
-
-- [ ] Full Docker support
-- [x] Astro build workaround
-
-- [ ] Finish README
-  - [ ] Add guide to add new school
-  - [x] Add preview screenshots
-  - [x] Add instruction to run project
-
-- [ ] Make video
+![Mobile overview](.screenshots/opendays_desktop.png)
 
 ## Running project
 
@@ -33,16 +22,13 @@ Requirements:
 
 - node (reccomended v19.5.0)
 - docker (optional)
-- docker-compose (optional)
 
 Notes:
 
 - Default Server ip and port are `localhost:25565`
-- Default App ip and port are `YOUR_LOCAL_IP:1234`
+- Default App ip and port are `YOUR_LOCAL_IP:4321`
 - If you want to set a custom server address and port \
-  you just need to edit `/Data/constants.ts` AND `/Data/constants.js` \
-  (Yes, I know, annoying, but is JS fault)
-- Remember to open the firewall port for `TCP:25565`!
+  you need to edit `/Data/constants.ts` AND `/Data/constants.js` \
 
 ### Running dev
 
@@ -55,7 +41,7 @@ node index.js &
 cd ..
 
 # Start app
-cd ./App 
+cd ./App
 npm install
 npm run dev -- --host
 ```
@@ -66,7 +52,7 @@ npm run dev -- --host
 # Set local ip !!!
 vim Data/constants.js
 vim Data/constants.ts
-### 
+###
 
 # Start server
 cd ./Server
@@ -76,9 +62,11 @@ node index.js &
 cd ..
 
 # Build app
-cd ./App 
+cd ./App
 npm install
 npm run build
+
+# You may now kill the server
 
 # Start app
 docker run -d \
@@ -88,68 +76,18 @@ docker run -d \
 nginx
 ```
 
-### Building image and running container (on local network)
+### Using the build scripts
 
 ```bash
 # Build and start server
 cd ./Server
 ./server_run.sh
 
-# Test if it's up and running
-curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
-
 # Build app
 cd ../App
 npm install
 npm run build
 ./app_run.sh
-
-# Test if app it's running
-curl http://<SERVER_IP>/
-```
-
-### Using docker compose
-
-> There is a launch script that does just this,
-> check in the root of the project
-> `chmod +x launch.sh && ./launch.sh`
-
-```bash
-# Set ip and port!!!
-vi Data/constants.js
-vi Data/constants.ts
-#####
-
-# Build and start server
-cd Server
-./server_run.sh
-
-# DO NOT STOP SERVER
-
-# check if the server is on
-curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
-
-cd ..
-
-# Build app
-cd App
-npm install
-npm run build
-
-cd ..
-
-
-# Kill server
-docker stop made-server_instance
-
-
-docker-compose up
-
-# Test if server is up and running
-curl http://<SERVER_IP>:<SERVER_PORT>/Data/Istituti/Arcivescovile/data.json
-
-# Test if app it's running
-curl http://<SERVER_IP>/
 ```
 
 ### Troubleshooting
@@ -162,7 +100,7 @@ Make sure you have the server up and running before starting the application
 
 You probably forgot another instance running, check and retry
 
-> You can use `sudo lsof -i :25565` to find processes using the port
+> You can use `sudo lsof -i :25565` (on windows) to find processes using the port
 
 #### Images don't render when connected to App in LAN
 
@@ -171,7 +109,7 @@ The server manages media distribution, check your firewall if you have the requi
 ## Design concepts
 
 Desktop landing page
-![Desktop landing page](/Design/prototype/desktop/landing_desktop.png)
+![Desktop landing page](.screenshots/landing_desktop.png)
 
 Mobile overview
-![Mobile overview](/Design/prototype/mobile/mobile.png)
+![Mobile overview](.screenshots/mobile.png)

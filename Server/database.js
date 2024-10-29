@@ -15,7 +15,7 @@ const DATA_PATH = "../Data"
 /** @typedef {import("../Data/types").OpenDays} OpenDays */
 
 /**
- * @param {string} path 
+ * @param {string} path
  * @returns {Object | true} - returns json object or true */
 function read_JSON_from_file(path)
 {
@@ -42,7 +42,7 @@ function read_JSON_from_file(path)
 /** @returns {Object | true} - returns example data format */
 function load_institute_data_format()
 {
-    let example_data = read_JSON_from_file(`${DATA_PATH}/example/new_data.json`)
+    let example_data = read_JSON_from_file(`${DATA_PATH}/example/data.json`)
     if(example_data === true) return true;
     return example_data;
 }
@@ -50,12 +50,12 @@ function load_institute_data_format()
 /** @returns {Object | true} - returns example data format */
 function load_opendays_data_format()
 {
-    let example_data = read_JSON_from_file(`${DATA_PATH}/example/new_open_days.json`)
+    let example_data = read_JSON_from_file(`${DATA_PATH}/example/open_days.json`)
     if(example_data === true) return true;
     return example_data;
 }
 
-/** 
+/**
  * @param lhs {Object} - fmt obj
  * @param rhs {Object} - data obj
  * @param path {string}
@@ -71,7 +71,7 @@ function do_obj_match(lhs, rhs, path, depth)
     if(lhs_keys[0] === '0')
     {
         // console.info(`\x1B[34m${indent}Evaluating array...\x1B[0m`)
-        
+
         if(rhs_keys[0] === undefined)
         {
             console.warn(`\x1B[33m${indent}Empty array at ${path}, skipping... \x1B[0m`)
@@ -125,7 +125,7 @@ function do_obj_match(lhs, rhs, path, depth)
 }
 
 
-/** 
+/**
  * @param format {Object}
  * @param data {Object}
  * @returns {boolean} - returns true if an error occurred */
@@ -134,7 +134,7 @@ function is_valid_institute_data(format, data)
     return !do_obj_match(format, data, "istituto", 1)
 }
 
-/** 
+/**
  * @param format {Object}
  * @param data {Object}
  * @returns {boolean} - returns true if an error occurred */
@@ -338,7 +338,7 @@ module.exports = class Database {
         return this._database_opendays;
     }
 
-    /** 
+    /**
      * @param id {string}
      * @returns {Sede | null} */
     getSedeByID(id) {
@@ -356,7 +356,7 @@ module.exports = class Database {
         return null;
     }
 
-    /** 
+    /**
      * @param id {string}
      * @returns {Institute | null} */
     getInstituteByID(id) {
@@ -374,7 +374,7 @@ module.exports = class Database {
         return null;
     }
 
-    /** 
+    /**
      * @param id {string}
      * @returns {OpenDays | null} */
     getOpenDayByID(id) {
