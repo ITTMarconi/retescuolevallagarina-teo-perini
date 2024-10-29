@@ -9,6 +9,6 @@ docker build --progress=plain -t made-app .
 
 # Running
 echo "Running... (App)"
-docker run -it \
+docker run -d \
     -p 80:80 \
     --name made-app_instance made-app
