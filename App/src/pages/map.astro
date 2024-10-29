@@ -70,14 +70,18 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
 <style is:inline>
 
     main {
-        padding: 2% 1% 1% 2%;
+        height: calc(100% - 4rem);
+        width: 100%;
 
-        width: 96%;
-        height: calc(90% - 2rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
     }
 
     #map {
-        height:100%;
+        height: calc(100% - 2rem);
+        width: calc(100% - 2rem);
     }
 
     main > div {
