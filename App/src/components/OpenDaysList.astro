@@ -42,7 +42,7 @@ const { openDays } = Astro.props;
         let descr = orario.descrizione;
         if(descr.includes('https://')){
             let url = descr.split(' ').filter(word => word.startsWith('https://'));
-            descr = descr.replace(url[0], `<u><a href="${url}">link</a></u>` );
+            descr = descr.replace(url[0], `<u><a href="${url}" target="_blank">link</a></u>` );
             document.getElementById(`open-day-${orario.inizio_orario}`).innerHTML = descr;
         }
     });
