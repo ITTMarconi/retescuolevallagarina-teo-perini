@@ -18,7 +18,7 @@ console.log(`[BUILD] (istituti.astro) Loaded ${INSTITUTES.length} institutes`);
 <Layout>
     <Navbar current_view="istituti" />
 
-    <main>
+    <main id="institute-list">
         {
             INSTITUTES.map(institute => (
                 <div>
@@ -28,6 +28,26 @@ console.log(`[BUILD] (istituti.astro) Loaded ${INSTITUTES.length} institutes`);
         }
     </main>
 </Layout>
+
+<script is:inline>
+    
+    let main = document.getElementById('institute-list');
+    let childrens = main.children;
+    let mixedChildren = [];
+    
+    for(child of childrens){
+        do {
+        numerocas = Math.floor(Math.random() * childrens.length);
+        } while(mixedChildren[numerocas]!= null);
+        mixedChildren[numerocas] = child;
+    };
+    
+    main.innerHTML = '';
+
+    mixedChildren.forEach(child => {
+        main.appendChild(child);
+    });
+</script>
 
 <style>
     main {
