@@ -1,17 +1,14 @@
 ---
-import { SERVER_ADDRESS, SERVER_PORT } from '../../../Data/constants.ts';
-import type { Institute, Sede } from '../../../Data/types';
-import { getMainSede } from '../scripts/Utils';
+import { type Institute } from '../../../Data/types';
 
 interface Props {
     institute: Institute;
 }
 
 const { institute } = Astro.props;
-const SEDE: Sede = getMainSede(institute)!;
 ---
 
-<a href={`/sede/${SEDE.codice_MIUR}`} class="hoverable">
+<a href={`/sede/${institute.sede_principale_MIUR}`} class="hoverable">
     <img src={institute.logo_url} alt="" srcset="" />
     <span>{institute.nome}</span>
 </a>
