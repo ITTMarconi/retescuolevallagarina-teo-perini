@@ -3,7 +3,6 @@ import '../styles/common.css';
 
 import { SERVER_ADDRESS, SERVER_PORT } from '../../../Data/constants.ts';
 import { type Institute } from '../../../Data/types.ts';
-import { getMainSede } from '../scripts/Utils';
 
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
@@ -19,6 +18,9 @@ console.log(`[BUILD] (istituti.astro) Loaded ${INSTITUTES.length} institutes`);
     <Navbar current_view="istituti" />
 
     <main id="institute-list">
+    </main>
+
+    <stash id="institute-stash" style="display: none;">
         {
             INSTITUTES.map(institute => (
                 <div>
@@ -26,27 +28,56 @@ console.log(`[BUILD] (istituti.astro) Loaded ${INSTITUTES.length} institutes`);
                 </div>
             ))
         }
-    </main>
+    </stash>
 </Layout>
 
 <script is:inline>
-    
-    let main = document.getElementById('institute-list');
-    let childrens = main.children;
-    let mixedChildren = [];
-    
-    for(child of childrens){
-        do {
-        numerocas = Math.floor(Math.random() * childrens.length);
-        } while(mixedChildren[numerocas]!= null);
-        mixedChildren[numerocas] = child;
-    };
-    
-    main.innerHTML = '';
 
-    mixedChildren.forEach(child => {
-        main.appendChild(child);
-    });
+    function isNaN(n) {
+        return n != n
+    }
+
+    function random(seed)
+    {
+        var x = Math.sin(seed++) * 10000; 
+        return x - Math.floor(x);
+    }
+
+    function shuffle(array, seed)
+    {
+        let t;
+        let len = array.length;
+        let rand;
+
+        while (len > 0) {
+            rand = Math.floor(random(seed) * len--);
+
+            /* Swap */
+            t = array[len];
+            array[len] = array[rand];
+            array[rand] = t;
+
+            ++seed
+        }
+
+        return array;
+    }
+
+    const STASH_EL = document.getElementById('institute-stash');
+    const INSTITUTE_DIV_ELS = Array.from(STASH_EL.children);
+
+    const MAIN_EL = document.getElementById('institute-list');
+    const SEED_KEY = 'seed'
+
+    /** @type {number | string | null} */
+    let seed = Number(window.sessionStorage.getItem(SEED_KEY))
+    if(seed == 0 || isNaN(seed)) {
+        seed = Math.floor(Math.random() * 1000);
+        window.sessionStorage.setItem(SEED_KEY, seed)
+    }
+    
+    shuffle(INSTITUTE_DIV_ELS, seed);
+    INSTITUTE_DIV_ELS.forEach(institute => MAIN_EL.appendChild(institute))
 </script>
 
 <style>
