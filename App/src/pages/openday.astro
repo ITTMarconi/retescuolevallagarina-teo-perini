@@ -1,13 +1,19 @@
 ---
 import '../styles/common.css';
 
-import { type Institute, type OpenDays } from '../../../Data/types';
+import type { Institute, OpenDays, Sede } from '../../../Data/types';
 import { SERVER_ADDRESS, SERVER_PORT } from '../../../Data/constants.ts';
-import { getSedeOfOpenDay } from '../scripts/Utils';
 
 import Navbar from '../components/Navbar.astro';
 import OpenDaysList from '../components/OpenDaysList.astro';
 import Layout from '../layouts/Layout.astro';
+
+function getSedeOfOpenDay(institutes: Institute[], codice_MIUR: string): Sede | null {
+    const sede = institutes.map(institute => institute.sedi).flat().find(sede => sede.codice_MIUR == codice_MIUR)
+    if (typeof sede == "undefined") return null;
+
+    return sede
+}
 
 const INSTITUTES_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/istituti`);
 const INSTITUTES: Institute[] = await INSTITUTES_RAW.json();

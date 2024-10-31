@@ -34,10 +34,3 @@ export function getMinutes(orario: Date) {
   out_time += time;
   return out_time;
 }
-
-export function hasPassed(orario: Date): boolean {
-  let date1 = new Date(orario).getTime();
-  let now = new Date(Date.now()).getTime();
-
-  return now > date1;
-}
