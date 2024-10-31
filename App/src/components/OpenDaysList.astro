@@ -1,12 +1,26 @@
 ---
-import { hasPassed, getDay, getMonth, getYear, getHours, getMinutes } from '../scripts/DateUtils';
+import { getDay, getMonth, getYear, getHours, getMinutes } from '../scripts/DateUtils';
 import { type OpenDays } from '../../../Data/types';
 
 interface Props {
     openDays: OpenDays;
 }
 
-const { openDays } = Astro.props;
+let { openDays } = Astro.props;
+
+for(let i = 0; i < openDays.orari.length; ++i)
+{
+    let orario = openDays.orari[i];
+
+    let desc = orario.descrizione;
+    if(!desc.includes('https://')) continue;
+
+    let url = desc.split(' ').filter(word => word.startsWith('https://'))[0];
+    if(typeof url !== 'string') continue;
+
+    desc = desc.replace(url, `<a href="${url}" target="_blank" style="text-decoration:underline;">link</a>`);
+    openDays.orari[i].descrizione = desc;
+}
 ---
 
 <article id={`open-days-list-${openDays.codice_MIUR}`}>
@@ -20,33 +34,21 @@ const { openDays } = Astro.props;
 
                 <div>
                     <span>{orario.attivita} - {getHours(orario.inizio_orario)}:{getMinutes(orario.inizio_orario)} - {getHours(orario.fine_orario)}:{getMinutes(orario.fine_orario)} </span>
-                    <span id={`open-day-${orario.inizio_orario}`}>{orario.descrizione}</span>
+                    <span> <Fragment set:html={orario.descrizione} /> </span>
                 </div>
             </section>
         ))
     }
 </article>
 
-<script is:inline define:vars={{ hasPassed, openDays }}>
+<script is:inline define:vars={{ openDays }}>
     var now = new Date();
-
     const OPEN_DAYS_ARTICLE = document.getElementById(`open-days-list-${openDays.codice_MIUR}`);
     for (const SECTION_EL of OPEN_DAYS_ARTICLE.children) {
         let dataora = Date.parse(SECTION_EL.getAttribute("data-orario"));
         let color = dataora < now ? 'var(--tint-red)' : 'var(--background-primary)';
-        
-        SECTION_EL.children[0].setAttribute('style', 'background-color:' + color + ';')
+        SECTION_EL.children[0].setAttribute('style', `background-color: ${color};`)
     }
-
-    openDays.orari.map(orario => {
-        let descr = orario.descrizione;
-        if(descr.includes('https://')){
-            let url = descr.split(' ').filter(word => word.startsWith('https://'));
-            descr = descr.replace(url[0], `<u><a href="${url}" target="_blank">link</a></u>` );
-            document.getElementById(`open-day-${orario.inizio_orario}`).innerHTML = descr;
-        }
-    });
-
 </script>
 
 <style>
