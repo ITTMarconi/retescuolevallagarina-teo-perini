@@ -1,5 +1,8 @@
 FROM node:22-alpine3.18
 
+RUN apk add --no-cache alpine-conf && \
+    setup-timezone -z Europe/Rome
+
 WORKDIR /MaDe/Server
 COPY . .
 
