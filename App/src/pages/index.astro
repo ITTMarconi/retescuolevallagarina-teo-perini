@@ -124,6 +124,11 @@ import Layout from '../layouts/Layout.astro';
         nav span:first-child {
             font-size: 10rem;
             color: var(--foreground-secondary);
+            transition: all 0.3s;
+        }
+        nav span:first-child:hover {
+            color: var(--foreground-primary);
+            transform: scale(1.1);
         }
         a:nth-child(even) {
           align-self: flex-end;
@@ -146,3 +151,28 @@ import Layout from '../layouts/Layout.astro';
       }
     }
 </style>
+
+<!-- JavaScript for enhanced touch handling -->
+<script>
+  const foregroundSecondary = getComputedStyle(document.documentElement).getPropertyValue('--foreground-secondary'); 
+  const foregroundPrimary = getComputedStyle(document.documentElement).getPropertyValue('--foreground-primary'); 
+
+    document.querySelectorAll('nav span:first-child').forEach(symbol => {
+        // Prevent default touch behavior
+      // symbol.addEventListener('touchstart', (e) => {
+      //        e.preventDefault();
+      //   }, { passive: false });
+
+        // Optional: Add custom touch feedback
+        symbol.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(1.1)';
+            this.style.color = foregroundPrimary;
+        });
+
+        symbol.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+            this.style.color = foregroundSecondary;
+        });
+    });
+</script>
+
