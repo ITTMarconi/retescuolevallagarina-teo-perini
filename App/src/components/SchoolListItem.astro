@@ -8,7 +8,7 @@ interface Props {
 const { institute } = Astro.props;
 ---
 
-<a href={`/sede/${institute.sede_principale_MIUR}`} class="hoverable">
+<a href={`/sede/${institute.sede_principale_MIUR}/`} class="hoverable">
     <img src={institute.logo_url} alt="" srcset="" />
     <span>{institute.nome}</span>
 </a>

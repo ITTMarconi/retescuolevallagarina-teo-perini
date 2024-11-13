@@ -55,7 +55,7 @@ console.log(`[BUILD] (map.astro) Loaded ${INSTITUTES.length} institutes`);
         let sede = INSTITUTES.map(institute => institute.sedi).flat().find(sede => sede.codice_MIUR === data.codice_MIUR);
 
         // create popup html text
-        let popup = '<u><a href="/sede/' + sede.codice_MIUR + '" class="font-regular">' + sede.nome + '</a></u>'
+      let popup = '<u><a href="/sede/' + sede.codice_MIUR + '/" class="font-regular">' + sede.nome + '</a></u>'
 
         // create marker with popup
         L.marker([data.latitudine, data.longitudine]).addTo(map).bindPopup(popup)
