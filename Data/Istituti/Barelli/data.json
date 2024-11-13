@@ -1,49 +1,49 @@
 {
-    "nome": "CFP Opera Armida Barelli",
-    "sede_principale_MIUR": "TNCF005001",
+  "nome": "CFP Opera Armida Barelli",
+  "sede_principale_MIUR": "TNCF005001",
 
-    "sedi": [
-        {
-            "nome": "CFP Opera Armida Barelli",
-            "codice_MIUR": "TNCF005001",
+  "sedi": [
+    {
+      "nome": "CFP Opera Armida Barelli",
+      "codice_MIUR": "TNCF005001",
 
-            "responsabile_orientamento": "",
+      "responsabile_orientamento": "Donatella Sartori",
 
-            "posizione": {
-                "indirizzo": "Via Setaioli, 5 - 38068 ROVERETO",
-                "latitudine": "45.887305", 
-                "longitudine": "11.042172"
-            },
+      "posizione": {
+        "indirizzo": "Via Setaioli, 5 - 38068 ROVERETO",
+        "latitudine": "45.887305",
+        "longitudine": "11.042172"
+      },
 
-            "indirizzi_studi": [ ],
+      "indirizzi_studi": [],
 
-            "website": "https://www.operaarmidabarelli.org",
-            "contacts": {
-                "mail": [
-                    {
-                        "description": "orientamento",
-                        "mail": "orientamentorovereto@operaarmidabarelli.org"
-                    },
-                    {
-                        "description": "istituto",
-                        "mail": "cfprovereto@pec.operaarmidabarelli.org"
-                    },
-                    {
-                        "description": "segreteria",
-                        "mail": "cfprovereto@operaarmidabarelli.org"
-                    }
-                ],
-                "phone": [
-                    {
-                        "description": "telefono",
-                        "numero": "+39 0464 433771"
-                    },
-                    {
-                        "description": "fax",
-                        "numero": "+39 0464 431711"
-                    }
-                ]
-            }
-        }
-    ]
+      "website": "https://www.operaarmidabarelli.org",
+      "contacts": {
+        "mail": [
+          {
+            "description": "orientamento",
+            "mail": "orientamentorovereto@operaarmidabarelli.org"
+          },
+          {
+            "description": "istituto",
+            "mail": "cfprovereto@pec.operaarmidabarelli.org"
+          },
+          {
+            "description": "segreteria",
+            "mail": "cfprovereto@operaarmidabarelli.org"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 433771"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 431711"
+          }
+        ]
+      }
+    }
+  ]
 }
