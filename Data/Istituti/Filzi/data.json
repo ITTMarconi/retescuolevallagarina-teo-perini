@@ -1,62 +1,62 @@
 {
-	"nome": "Liceo delle Scienze Umane 'F. Filzi'",
-	"sede_principale_MIUR": "TNPM02000E",
+  "nome": "Liceo delle Scienze Umane 'F. Filzi'",
+  "sede_principale_MIUR": "TNPM02000E",
 
-	"sedi": [
-		{
-			"nome": "Liceo delle Scienze Umane 'F. Filzi'",
-			"codice_MIUR": "TNPM02000E",
+  "sedi": [
+    {
+      "nome": "Liceo delle Scienze Umane 'F. Filzi'",
+      "codice_MIUR": "TNPM02000E",
 
-			"responsabile_orientamento": "",
+      "responsabile_orientamento": "Marta Manica",
 
-			"posizione": {
-				"indirizzo": "Corso Rosmini, 61 - 38068 ROVERETO",
-				"latitudine": "45.891207", 
-				"longitudine": "11.038272"
-			},
+      "posizione": {
+        "indirizzo": "Corso Rosmini, 61 - 38068 ROVERETO",
+        "latitudine": "45.891207",
+        "longitudine": "11.038272"
+      },
 
-			"indirizzi_studi": [
-				{
-					"nome": "Liceo Economico Sociale",
-					"link": "https://www.liceofilzi.it/indirizzo-di-studio/liceo-economico-sociale/"
-				},
-				{
-					"nome": "Liceo delle Scienze Umane",
-					"link": "https://www.liceofilzi.it/indirizzo-di-studio/liceo-delle-scienze-umane/"
-				}
-			],
+      "indirizzi_studi": [
+        {
+          "nome": "Liceo Economico Sociale",
+          "link": "https://www.liceofilzi.it/indirizzo-di-studio/liceo-economico-sociale/"
+        },
+        {
+          "nome": "Liceo delle Scienze Umane",
+          "link": "https://www.liceofilzi.it/indirizzo-di-studio/liceo-delle-scienze-umane/"
+        }
+      ],
 
-			"website": "https://www.liceofilzi.it",
-			"contacts": {
-				"mail": [
-                    {
-                        "description": "orientamento",
-                        "mail": "???"
-                    },
-					{
-						"description": "istituto",
-						"mail": "filzi@pec.provincia.tn.it"
-					},
-					{
-						"description": "segreteria",
-						"mail": "segr.isup.filzi@scuole.provincia.tn.it"
-					},
-					{
-						"description": "dirigenza",
-						"mail": "dir.isup.filzi@scuole.provincia.tn.it"
-					}
-				],
-				"phone": [
-					{
-						"description": "telefono",
-						"numero": "+39 0464 421223"
-					},
-					{
-						"description": "fax",
-						"numero": "+39 0464 433003"
-					}
-				]
-			}
-		}
-	]
+      "website": "https://www.liceofilzi.it",
+      "contacts": {
+        "mail": [
+          {
+            "description": "orientamento",
+            "mail": "orientafilzi@liceofilzi.it"
+          },
+          {
+            "description": "istituto",
+            "mail": "filzi@pec.provincia.tn.it"
+          },
+          {
+            "description": "segreteria",
+            "mail": "segr.isup.filzi@scuole.provincia.tn.it"
+          },
+          {
+            "description": "dirigenza",
+            "mail": "dir.isup.filzi@scuole.provincia.tn.it"
+          }
+        ],
+        "phone": [
+          {
+            "description": "telefono",
+            "numero": "+39 0464 421223"
+          },
+          {
+            "description": "fax",
+            "numero": "+39 0464 433003"
+          }
+        ]
+      }
+    }
+  ]
 }
