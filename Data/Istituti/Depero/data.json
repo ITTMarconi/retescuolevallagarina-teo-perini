@@ -1,10 +1,10 @@
 {
-	"nome": "Istituto delle Arti",
+	"nome": "Liceo delle Arti Depero",
 	"sede_principale_MIUR": "TNSD020011",
 
 	"sedi": [
 		{
-			"nome": "Liceo Artistico Depero",
+			"nome": "Liceo delle Arti Depero",
 			"codice_MIUR": "TNSD020011",
 
 			"responsabile_orientamento": "Chiara Miorelli",
@@ -30,7 +30,7 @@
 				}
 			],
 
-			"website": "https://www.istitutodellearti.tn.it",
+			"website": "https://www.liceodellearti.tn.it",
 			"contacts": {
 				"mail": [
 					{
@@ -39,15 +39,11 @@
 					},
 					{
 						"description": "istituto",
-						"mail": "info.depero@istitutodellearti.tn.it"
+						"mail": "info@liceodellearti.tn.it"
 					},
 					{
 						"description": "segreteria",
-						"mail": "info@istitutodellearti.tn.it"
-					},
-					{
-						"description": "dirigenza",
-						"mail": "dir.istitutodellearti@scuole.provincia.tn.it"
+						"mail": "segreteria.depero@liceodellearti.tn.it"
 					}
 				],
 				"phone": [
