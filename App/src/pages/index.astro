@@ -7,15 +7,11 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
     <main>
-        <h1 class="font-bold">
-            DIREZIONE <br />
-            <span class="font-bold">
-                FUTURO
-                <img src="/logo_sito.svg" alt="" srcset="" />
-            </span>
+        <h1 class="font-regular">
+          <span>Direzione Futuro <img src="/logo_sito.svg" alt="" srcset="" /></span>
         </h1>
 
-        <span><i class="font-regular">Orientamento per la scelta della scuola superiore a Rovereto</i></span>
+        <p class="font-regular"><span class="font-regular">Orientamento</span> per la scelta della <span class="font-regular">scuola superiore</span> a <span class="font-regular">Rovereto</span></p>
 
         <nav>
       <a href="/istituti/">
@@ -49,10 +45,13 @@ import Layout from '../layouts/Layout.astro';
     }
     
     h1, h1 > span {
-        font-size: 3rem;
-        text-align: center;
-        color: var(--foreground-primary);
-        line-height: 3.5rem;
+        align-self: flex-start;
+        text-transform: uppercase;
+        font-size: 1.8rem;
+        text-align: left;
+        color: var(--foreground-secondary);
+        line-height: 1.5rem;
+        margin-top: 0.6rem;
     }
 
     h1 > span {
@@ -61,27 +60,32 @@ import Layout from '../layouts/Layout.astro';
         justify-content: center;
     }
 
-    h1 > span > img {
+    h1 > span> img {
         margin: 0 0 0 0.4rem;
-        height: 3rem;
+        height: 1.5rem;
     }
 
-    main > span {
-        margin: 0 2rem;
+    main > p {
+        margin: 3rem 0rem;
+        align-self: flex-start;
+        font-size: 2.7rem;
 
-        font-size: 1rem;
         color: var(--foreground-secondary);
-        text-align: center;
+        text-align: left;
+    }
+
+    main > p > span {
+        color: var(--foreground-primary);
+      font-weight: 900;
     }
 
     nav {
         width: 100%;
-        height: 75%;
-
+        height: 40%;
+        margin-top: 4rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-wrap: wrap;
 
         flex-direction: column;
         gap: 1em 4em;
@@ -100,11 +104,11 @@ import Layout from '../layouts/Layout.astro';
         color: var(--tint-orange);
     }
 
-    span:first-child {
-        font-size: 6rem;
+    nav span:first-child {
+        font-size: 8rem;
         color: var(--foreground-secondary);
     }
-    span:last-child {
+    nav span:last-child {
         font-size: 1.3rem;
         font-weight: 500;
         color: var(--foreground-secondary);
@@ -112,45 +116,33 @@ import Layout from '../layouts/Layout.astro';
 
     /* For tablets: */
     @media only screen and (min-width: 600px) {
-        h1, h1 > span {
-            font-size: 4.5rem;
-            line-height: 7rem;
-        }
-
-        main > span {
-            font-size: 2rem;
-        }
-
-        h1 > span > img {
-            height: 4rem;
-        }
-
-        span:first-child {
-            font-size: 9rem;
-        }
 
         nav {
-            flex-direction: row;
+          flex-direction: row;
+          margin-top: 1rem;
         }
+        nav span:first-child {
+            font-size: 10rem;
+            color: var(--foreground-secondary);
+        }
+        a:nth-child(even) {
+          align-self: flex-end;
+        }
+        main > p, main > h1 {
+          margin-left: 3rem;
+        }
+          
     }
 
     /* For desktop: */
     @media only screen and (min-width: 768px) {
-        h1, h1 > span {
-            font-size: 6.5rem;
-            line-height: 7.5rem;
-        }
+      nav {
+        height: 50%;
+      }
 
-        h1 {
-            margin-bottom: 3rem;
-        }
-
-        h1 > span > img {
-            height: 6rem;
-        }
-
-        span:first-child {
-            font-size: 10rem;
-        }
+      nav span:first-child {
+          font-size: 12rem;
+          color: var(--foreground-secondary);
+      }
     }
 </style>
