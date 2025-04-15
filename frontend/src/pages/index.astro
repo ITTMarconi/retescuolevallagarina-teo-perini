@@ -1,8 +1,186 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import "../styles/common.css";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Icon from "../components/Icon.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout />
+<Layout>
+  <main>
+    <h1 class="font-regular">
+      <span>Direzione Futuro <img src="/logo_sito.svg" alt="" srcset="" /></span
+      >
+    </h1>
+
+    <p class="font-regular">
+      <span class="font-regular">Orientamento</span> per la scelta della <span
+        class="font-regular">scuola superiore</span
+      > a <span class="font-regular">Rovereto</span>
+    </p>
+
+    <nav>
+      <a href="/istituti/">
+        <Icon code="e7ee" color="var(--foreground-secondary)" />
+        <span>Istituti</span>
+      </a>
+      <a href="/openday/" id="openday">
+        <Icon code="ebcc" color="var(--foreground-secondary)" />
+        <span class="font-light">Incontri e <br />Open Days</span>
+      </a>
+      <a href="/map/">
+        <Icon code="e55b" color="var(--foreground-secondary)" />
+        <span class="font-light">Mappa Scuole</span>
+      </a>
+    </nav>
+  </main>
+</Layout>
+
+<style>
+  main {
+    width: calc(100% - 2rem);
+    height: calc(100% - 2.4rem);
+    padding: 1.2rem 1rem;
+
+    background-color: var(--background-primary);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  h1,
+  h1 > span {
+    align-self: flex-start;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    text-align: left;
+    color: var(--foreground-secondary);
+    line-height: 1.5rem;
+    margin-top: 0.6rem;
+  }
+
+  h1 > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 > span > img {
+    margin: 0 0 0 0.4rem;
+    height: 2rem;
+  }
+
+  main > p {
+    margin: 3rem 0rem;
+    align-self: flex-start;
+    font-size: 2.7rem;
+
+    color: var(--foreground-secondary);
+    text-align: left;
+  }
+
+  main > p > span {
+    color: var(--foreground-primary);
+    font-weight: 900;
+  }
+
+  nav {
+    width: 100%;
+    height: 30%;
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+    gap: 1em 4em;
+  }
+
+  a {
+    text-align: center;
+    margin: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    text-decoration-line: unset;
+  }
+
+  a:hover span {
+    color: var(--tint-orange);
+  }
+
+  nav span:first-child {
+    font-size: 8rem;
+    color: var(--foreground-secondary);
+  }
+  nav span:last-child {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--foreground-secondary);
+  }
+
+  /* For tablets: */
+  @media only screen and (min-width: 600px) {
+    nav {
+      flex-direction: row;
+      margin-top: 1rem;
+    }
+    nav span:first-child {
+      font-size: 10rem;
+      color: var(--foreground-secondary);
+      transition: all 0.3s;
+    }
+    nav span:first-child:hover {
+      color: var(--foreground-primary);
+      transform: scale(1.1);
+    }
+    a:nth-child(even) {
+      align-self: flex-end;
+    }
+    main > p,
+    main > h1 {
+      margin-left: 3rem;
+    }
+  }
+
+  /* For desktop: */
+  @media only screen and (min-width: 768px) {
+    nav {
+      height: 50%;
+    }
+
+    nav span:first-child {
+      font-size: 12rem;
+      color: var(--foreground-secondary);
+    }
+  }
+</style>
+
+<!-- JavaScript for enhanced touch handling -->
+<script>
+  const foregroundSecondary = getComputedStyle(
+    document.documentElement
+  ).getPropertyValue("--foreground-secondary");
+  const foregroundPrimary = getComputedStyle(
+    document.documentElement
+  ).getPropertyValue("--foreground-primary");
+
+  document.querySelectorAll("nav span:first-child").forEach((symbol) => {
+    // Prevent default touch behavior
+    // symbol.addEventListener('touchstart', (e) => {
+    //        e.preventDefault();
+    //   }, { passive: false });
+
+    // Optional: Add custom touch feedback
+    symbol.addEventListener("touchstart", function (this: HTMLElement) {
+      this.style.transform = "scale(1.1)";
+      this.style.color = foregroundPrimary;
+    });
+
+    symbol.addEventListener("touchend", function (this: HTMLElement) {
+      this.style.transform = "scale(1)";
+      this.style.color = foregroundSecondary;
+    });
+  });
+</script>
