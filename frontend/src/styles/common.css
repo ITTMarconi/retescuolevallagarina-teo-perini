@@ -1,0 +1,100 @@
+:root {
+  --background-primary: #3a737d;
+  --background-secondary: hsl(189, 30%, 90%);
+
+  --foreground-primary: #ffffff;
+  --foreground-secondary: #c0e1e7;
+  --foreground-tertiary: #f2f2f2;
+
+  --tint-orange: #f5ad70;
+  --tint-red: #f57070;
+}
+
+* {
+  /* font light */
+  font-family: "azo-sans-web", sans-serif;
+  font-weight: 300;
+}
+
+/* main {
+    width: calc(100% - 4rem);
+    padding: 2rem;
+} */
+
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+a:-webkit-any-link {
+  color: var(--background-primary);
+  text-decoration: unset;
+  transition: 200ms;
+}
+
+a,
+a:visited {
+  color: var(--background-primary);
+  text-decoration: unset;
+  transition: 200ms;
+}
+
+a:hover {
+  color: var(--tint-orange);
+  cursor: pointer;
+  transition: 100ms;
+}
+
+/* Tint icons */
+a:hover span:first-child {
+  color: var(--tint-orange);
+}
+
+a:active {
+  color: var(--background-primary);
+}
+
+a:active span {
+  color: var(--background-primary);
+}
+
+hr {
+  margin: 0.5rem 0 0.8rem 0;
+
+  border: 1.5px solid var(--tint-orange);
+  border-radius: 20px;
+
+  color: var(--tint-orange);
+}
+
+video {
+  border-radius: 0.4rem;
+  outline: 0.15rem solid var(--foreground-tertiary);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+/* font classes */
+.font-bold {
+  font-family: "azo-sans-web", sans-serif;
+  font-weight: 800;
+}
+
+.font-regular {
+  font-family: "azo-sans-web", sans-serif;
+  font-weight: 300;
+}
+
+.hoverable {
+  padding: 0.5rem 1rem;
+
+  border-radius: 0.6rem;
+  outline: 0.15rem solid var(--foreground-tertiary);
+  transition: 200ms;
+}
+
+.hoverable:hover {
+  outline: 0.15rem solid var(--foreground-secondary);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: 100ms;
+}
