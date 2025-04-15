@@ -6,3 +6,5 @@ App/public/media
 
 *.log*
 .env*
+frontend/.vscode/extensions.json
+frontend/.vscode/launch.json
