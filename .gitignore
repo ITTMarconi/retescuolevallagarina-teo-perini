@@ -8,3 +8,4 @@ App/public/media
 .env*
 frontend/.vscode/extensions.json
 frontend/.vscode/launch.json
+frontend/directus.oas.json

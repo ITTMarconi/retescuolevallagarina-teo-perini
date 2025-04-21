@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@directus/sdk": "^19.1.0",
     "astro": "^5.7.0"
   }
 }

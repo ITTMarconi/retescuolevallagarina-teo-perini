@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@directus/sdk':
+        specifier: ^19.1.0
+        version: 19.1.0
       astro:
         specifier: ^5.7.0
         version: 5.7.0(rollup@4.40.0)(typescript@5.8.3)
@@ -53,6 +56,10 @@ packages:
 
   '@capsizecss/unpack@2.4.0':
     resolution: {integrity: sha512-GrSU71meACqcmIUxPYOJvGKF0yryjN/L1aCuE9DViCTJI7bfkjgYDPD1zbNDcINJwSSP6UaBZY9GAbYDO7re0Q==}
+
+  '@directus/sdk@19.1.0':
+    resolution: {integrity: sha512-Nqem9BsvvGyVtAa69mGPtoMoMVkZxdIREdsWvvTzNF4/1XqaFfEiFL7PhtUNfc46/Nufus2+QUKYQbNiAWe3ZA==}
+    engines: {node: '>=22'}
 
   '@emnapi/runtime@1.4.3':
     resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
@@ -1509,6 +1516,8 @@ snapshots:
       fontkit: 2.0.4
     transitivePeerDependencies:
       - encoding
+
+  '@directus/sdk@19.1.0': {}
 
   '@emnapi/runtime@1.4.3':
     dependencies:
