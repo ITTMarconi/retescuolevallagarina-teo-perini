@@ -22,6 +22,14 @@ const { current_view } = Astro.props;
                     : "var(--foreground-secondary)"}
             />
         </a>
+        <a href="/calendar/">
+            <Icon
+                code="ebcc"
+                color={current_view == "calendar"
+                    ? "var(--foreground-primary)"
+                    : "var(--foreground-secondary)"}
+            />
+        </a>
         <a href="/openday/">
             <Icon
                 code="ebcc"

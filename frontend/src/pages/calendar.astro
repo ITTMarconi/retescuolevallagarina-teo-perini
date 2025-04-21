@@ -1,0 +1,163 @@
+---
+// sprc/pages/calendar.astro
+import Layout from "../layouts/Layout.astro"; // Assuming you have a base layout
+import InteractiveCalendar from "../components/InteractiveCalendar.astro";
+import type { components } from "../types/schema";
+import "../styles/common.css";
+
+import type { Institute, OpenDays, Sede } from "../../../Data/types";
+import { SERVER_ADDRESS, SERVER_PORT } from "../../../Data/constants.ts";
+
+import Navbar from "../components/Navbar.astro";
+import OpenDaysList from "../components/OpenDaysList.astro";
+
+type Event = components["schemas"]["ItemsEvents"];
+
+import { readItems, readSingleton } from "@directus/sdk";
+import directus from "../lib/directus";
+
+const { id } = Astro.params;
+
+const allEvents = await directus.request(
+    readItems("events", {
+        // @ts-expect-error: "*.*" is a valid Directus field selector
+        fields: ["*", "*.*"],
+    }),
+);
+type SiteSettings = components["schemas"]["ItemsSiteSettings"];
+const site_settings = await directus.request<SiteSettings>(
+    readSingleton("site_settings"),
+);
+---
+
+<Layout>
+    <Navbar current_view="calendar" />
+    <main>
+        <article class="hoverable">
+            <Fragment set:html={site_settings.open_days_intro} />
+        </article>
+
+        <h1>Calendario Scuole Aperte</h1>
+        <p>Eventi programmati nelle varie scuole</p>
+
+        {/* Use the imported Astro component */}
+        <InteractiveCalendar
+            events={allEvents}
+            initialYear={2024}
+            initialMonth={10}
+        />
+    </main>
+</Layout>
+
+<style>
+    main {
+        width: calc(100% - 4rem);
+        padding: 2rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        gap: 2rem;
+    }
+
+    /* Banner */
+    /* ******************************************************************************** */
+
+    main > article:first-child {
+        width: calc(100% - 2rem);
+        padding: 2rem;
+    }
+    main > article {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    main > article > div > h1 {
+        text-align: center;
+    }
+
+    main > article > div > span {
+        text-align: center;
+    }
+
+    main > article > p {
+        margin: 1.2rem 0 0 0;
+        text-align: center;
+    }
+
+    main > article > p,
+    main > article > div > span > a {
+        line-height: 1.5rem;
+    }
+
+    main > article > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    main > article > div > span {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Openday Istituti */
+    /* ******************************************************************************** */
+
+    a {
+        text-decoration: underline;
+    }
+
+    article > a {
+        padding: 0.4rem 0 0.4rem 0.6rem;
+
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    article > a > h2 {
+        max-width: 30ch;
+
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    a > hr {
+        width: 80%;
+    }
+
+    /* For desktop: */
+    @media only screen and (min-width: 768px) {
+        main > article:first-child {
+            width: calc(100% - 2rem);
+            padding: 2rem;
+        }
+        main > article {
+            max-width: 80ch;
+
+            width: calc(100% - 4rem);
+            padding: 2rem;
+        }
+
+        main > article > div > span {
+            text-align: right;
+        }
+
+        main > article > div > span {
+            flex-direction: row;
+            gap: 1rem;
+        }
+    }
+
+    /* For wide-desktop: */
+    @media only screen and (min-width: 1536px) {
+    }
+</style>

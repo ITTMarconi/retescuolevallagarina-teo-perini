@@ -1,0 +1,727 @@
+---
+// src/components/InteractiveCalendar.astro
+
+import { type components } from "../types/schema";
+import { PUBLIC_API_URL } from "astro:env/client";
+
+type Event = components["schemas"]["ItemsEvents"];
+
+export interface Props {
+    events: Event[];
+    initialYear?: number;
+    initialMonth?: number; // 0-indexed (0 = January, 11 = December)
+}
+
+const {
+    events,
+    initialYear = new Date().getFullYear(),
+    initialMonth = new Date().getMonth(),
+} = Astro.props;
+
+// --- Helper functions and data processing (Server-Side) ---
+const formatDate = (date: Date): string => {
+    return date.toISOString().split("T")[0];
+};
+
+//console.log(events);
+// --- Helper functions and data processing (Server-Side) ---
+const formatDateForLookup = (date: Date): string => {
+    // Format specifically for the keys in eventsByDate (YYYY-MM-DD)
+    return date.toISOString().split("T")[0];
+};
+
+// Group events by date (YYYY-MM-DD)
+const eventsByDate: Record<string, Event[]> = {};
+events.forEach((event) => {
+    try {
+        console.log("event", event);
+        // Use the full ISO string to create Date objects
+        const start = new Date(event.start_date!);
+        const end = new Date(event.end_date!);
+        console.log("start", start);
+        console.log("end", end);
+
+        // Handle potential invalid dates
+        if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+            console.warn(`Invalid date found for event: ${event.title}`);
+            return; // Skip this event
+        }
+
+        let current = new Date(start);
+        // Set current to the beginning of its day (local time) for consistent looping
+        current.setHours(0, 0, 0, 0);
+
+        // Create a loop end date based on the original end date
+        const loopEndDate = new Date(end);
+        // Set loopEndDate to the beginning of its day (local time) for comparison
+        loopEndDate.setHours(0, 0, 0, 0);
+
+        // Loop while the date part of current is less than or equal to the date part of end
+        while (current <= loopEndDate) {
+            console.log(event);
+            const dateStr = formatDateForLookup(current); // Use YYYY-MM-DD for key
+            if (!eventsByDate[dateStr]) {
+                eventsByDate[dateStr] = [];
+            }
+            // Push the *full* event object
+            eventsByDate[dateStr].push(event);
+            // Move to the next day
+            current.setDate(current.getDate() + 1);
+        }
+    } catch (e) {
+        console.error(`Error processing event date: ${event.title}`, e);
+    }
+});
+
+// Prepare data to be passed as attributes to the custom element
+const eventsJson = JSON.stringify(eventsByDate);
+
+console.log(eventsJson);
+
+// --- Component Template ---
+// This Astro component now *renders* the custom element tag
+// and includes the script that defines it.
+---
+
+{/* This Astro component renders the custom element tag */}
+<interactive-calendar
+    class="calendar-component-wrapper"
+    data-initial-year={initialYear}
+    data-initial-month={initialMonth}
+    data-events={eventsJson}
+>
+    {/* Simplified Placeholder - No .calendar-container here */}
+    <div
+        style="padding: 20px; text-align: center; font-family: sans-serif; border: 1px solid #ccc; border-radius: 8px; max-width: 900px; margin: 2em auto;"
+    >
+        Loading Calendar...
+    </div>
+    {/* The script will create the actual .calendar-container and modal */}
+</interactive-calendar>
+
+<script is:inline>
+    class InteractiveCalendar extends HTMLElement {
+        calendarGrid = null;
+        monthYearDisplay = null;
+        modalElement = null;
+        modalContent = null;
+        closeModalButton = null;
+        eventsByDate = {};
+        currentYear = 0;
+        currentMonth = 0;
+
+        // Formatting options for dates/times in the modal
+        dateTimeFormatter = new Intl.DateTimeFormat(undefined, {
+            // Use user's locale
+            dateStyle: "medium", // e.g., Nov 8, 2024
+            timeStyle: "short", // e.g., 5:00 PM
+        });
+        dateFormatter = new Intl.DateTimeFormat(undefined, {
+            dateStyle: "medium", // For all-day events
+        });
+
+        constructor() {
+            super();
+            // Bind methods to ensure 'this' context is correct
+            this.renderCalendar = this.renderCalendar.bind(this);
+            this.changeMonth = this.changeMonth.bind(this);
+            this.showEventDetails = this.showEventDetails.bind(this);
+            this.hideEventDetails = this.hideEventDetails.bind(this);
+            this.handleKeydown = this.handleKeydown.bind(this);
+        }
+
+        connectedCallback() {
+            if (this.querySelector(".calendar-container")) return; // Prevent re-init
+
+            // --- Build the ENTIRE structure, including modal ---
+            this.innerHTML = `
+            <div class="calendar-container">
+              <div class="calendar-header">
+                <button class="nav-button prev-month">&lt;</button>
+                <h2 class="month-year"></h2>
+                <button class="nav-button next-month">&gt;</button>
+              </div>
+              <div class="weekdays">
+                <div>Lun</div><div>Mar</div><div>Mer</div><div>Gio</div><div>Ven</div><div>Sab</div><div>Dom</div>
+              </div>
+              <div class="calendar-grid"></div>
+            </div>
+
+            <div class="modal-overlay" aria-hidden="true">
+                <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                    <button class="close-button" aria-label="Close modal">&times;</button>
+                    <h3 id="modal-title">Event Details</h3>
+                    <p><strong>Scuola:</strong> <span id="modal-school"></span></p>
+                    <p><strong>Descrizione:</strong> <span id="modal-description"></span></p>
+                    <p><strong>Inizia:</strong> <span id="modal-start"></span></p>
+                    <p><strong>Termina:</strong> <span id="modal-end"></span></p>
+                    <p><strong>Luogo:</strong> <span id="modal-location"></span></p>
+                </div>
+            </div>
+          `;
+            // --- End structure build ---
+
+            // Get references to ALL elements *within this custom element*
+            this.calendarGrid = this.querySelector(".calendar-grid");
+            this.monthYearDisplay = this.querySelector(".month-year");
+            const prevButton = this.querySelector(".prev-month");
+            const nextButton = this.querySelector(".next-month");
+            // Find modal elements using querySelector relative to 'this'
+            this.modalElement = this.querySelector(".modal-overlay");
+            this.modalContent = this.querySelector(".modal-content");
+            this.closeModalButton = this.querySelector(".close-button");
+
+            // Check if all essential elements were found
+            if (
+                !this.calendarGrid ||
+                !this.monthYearDisplay ||
+                !prevButton ||
+                !nextButton
+            ) {
+                console.error("Calendar elements could not be created!");
+                this.innerHTML = "<p>Error loading calendar structure.</p>";
+                return;
+            }
+            if (
+                !this.modalElement ||
+                !this.modalContent ||
+                !this.closeModalButton
+            ) {
+                console.error(
+                    "Modal elements could not be created within the custom element!",
+                );
+                // Don't necessarily wipe the whole component, maybe just disable modal functionality
+                this.modalElement = null; // Ensure modal functions won't run
+            }
+
+            // Get initial state and events data
+            this.currentYear = parseInt(
+                this.dataset.initialYear || new Date().getFullYear().toString(),
+            );
+            this.currentMonth = parseInt(
+                this.dataset.initialMonth || new Date().getMonth().toString(),
+            );
+            try {
+                this.eventsByDate = JSON.parse(this.dataset.events || "{}");
+            } catch (e) {
+                this.eventsByDate = {};
+                console.error("Failed to parse events data:", e);
+            }
+
+            // Add calendar navigation listeners
+            prevButton.addEventListener("click", () => this.changeMonth(-1));
+            nextButton.addEventListener("click", () => this.changeMonth(1));
+
+            // Add modal listeners *only if modal elements were found*
+            if (this.modalElement) {
+                this.closeModalButton.addEventListener(
+                    "click",
+                    this.hideEventDetails,
+                );
+                this.modalElement.addEventListener("click", (event) => {
+                    if (event.target === this.modalElement) {
+                        this.hideEventDetails();
+                    }
+                });
+            }
+
+            // Initial render
+            this.renderCalendar();
+        }
+
+        disconnectedCallback() {
+            // Clean up global event listeners when the element is removed
+            document.removeEventListener("keydown", this.handleKeydown);
+        }
+
+        handleKeydown(event) {
+            // Close modal on Escape key press
+            if (
+                event.key === "Escape" &&
+                this.modalElement?.getAttribute("aria-hidden") === "false"
+            ) {
+                this.hideEventDetails();
+            }
+        }
+
+        // Format date YYYY-MM-DD (for lookup keys)
+        formatDateForLookup(date) {
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, "0");
+            const day = date.getDate().toString().padStart(2, "0");
+            return `${year}-${month}-${day}`;
+        }
+
+        renderCalendar() {
+            if (!this.calendarGrid || !this.monthYearDisplay) return;
+            this.calendarGrid.innerHTML = ""; // Clear previous grid
+
+            const monthNames = [
+                "Gennaio",
+                "Febbraio",
+                "Marzo",
+                "Aprile",
+                "Maggio",
+                "Giugno",
+                "Luglio",
+                "Agosto",
+                "Settembre",
+                "Ottobre",
+                "Novembre",
+                "Dicembre",
+            ];
+            this.monthYearDisplay.textContent = `${monthNames[this.currentMonth]} ${this.currentYear}`;
+
+            const firstDayOfMonth = new Date(
+                this.currentYear,
+                this.currentMonth,
+                1,
+            );
+            const daysInMonth = new Date(
+                this.currentYear,
+                this.currentMonth + 1,
+                0,
+            ).getDate();
+            const dayOfWeek = firstDayOfMonth.getDay();
+            const startingDayOfWeek = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+
+            for (let i = 0; i < startingDayOfWeek; i++) {
+                const emptyCell = document.createElement("div");
+                emptyCell.classList.add("calendar-day", "empty");
+                this.calendarGrid.appendChild(emptyCell);
+            }
+
+            const todayStr = this.formatDateForLookup(new Date());
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement("div");
+                dayCell.classList.add("calendar-day");
+                const currentDate = new Date(
+                    this.currentYear,
+                    this.currentMonth,
+                    day,
+                );
+                const currentDateStr = this.formatDateForLookup(currentDate);
+
+                const dayNumber = document.createElement("span");
+                dayNumber.classList.add("day-number");
+                dayNumber.textContent = day.toString();
+                dayCell.appendChild(dayNumber);
+
+                if (currentDateStr === todayStr) dayCell.classList.add("today");
+
+                const eventsForDay = this.eventsByDate[currentDateStr] || [];
+                if (eventsForDay.length > 0) {
+                    dayCell.classList.add("has-events");
+                    const eventsList = document.createElement("ul");
+                    eventsList.classList.add("events-list");
+
+                    eventsForDay.forEach((event) => {
+                        const eventItem = document.createElement("li");
+                        eventItem.classList.add("event-item"); // Add class for styling/targeting
+                        // Display School Short Name + Event Title
+                        eventItem.textContent = `${event.school?.short_name || "Event"}: ${event.title}`;
+                        // Store full event data for the modal
+                        eventItem.dataset.event = JSON.stringify(event);
+                        // Add click listener to show details
+                        eventItem.addEventListener(
+                            "click",
+                            this.showEventDetails,
+                        );
+                        eventsList.appendChild(eventItem);
+                    });
+                    dayCell.appendChild(eventsList);
+                }
+                this.calendarGrid.appendChild(dayCell);
+            }
+        }
+
+        showEventDetails(clickEvent) {
+            // Check if modal is available before proceeding
+            if (!this.modalElement || !this.modalContent) {
+                console.warn("Modal not available, cannot show details.");
+                return;
+            }
+
+            const eventItem = clickEvent.currentTarget;
+            try {
+                const event = JSON.parse(eventItem.dataset.event);
+
+                // Populate Modal Content (Query relative to modalContent)
+                this.modalContent.querySelector("#modal-title").textContent =
+                    event.title;
+                this.modalContent.querySelector("#modal-school").innerHTML =
+                    `<a href="/sede/${event.school?.id}" target="_blank" rel="noopener noreferrer">${event.school?.name}</a>`;
+                const descriptionSpan =
+                    this.modalContent.querySelector("#modal-description");
+                // ... (Keep description handling logic)
+                if (event.description) {
+                    descriptionSpan.innerHTML = event.description;
+                } else {
+                    descriptionSpan.textContent = "No description available.";
+                }
+
+                const startDate = new Date(event.start_date);
+                const endDate = new Date(event.end_date);
+
+                // Check if it's an all-day event (starts at 00:00, ends at 00:00 next day or same day 23:59 etc.)
+                // This is a simple check, might need refinement based on exact data patterns
+                const isAllDay =
+                    startDate.getHours() === 0 &&
+                    startDate.getMinutes() === 0 &&
+                    endDate.getHours() === 0 &&
+                    endDate.getMinutes() === 0 &&
+                    endDate.getDate() === startDate.getDate() + 1; // Common pattern
+                const isSameDayNoTime =
+                    startDate.toDateString() === endDate.toDateString() &&
+                    startDate.getHours() === 0 &&
+                    startDate.getMinutes() === 0 &&
+                    endDate.getHours() === 0 &&
+                    endDate.getMinutes() === 0;
+
+                if (isAllDay || isSameDayNoTime) {
+                    this.modalContent.querySelector(
+                        "#modal-start",
+                    ).textContent = this.dateFormatter.format(startDate);
+                    this.modalContent.querySelector("#modal-end").textContent =
+                        ""; // Hide end date for single all-day
+                    this.modalContent.querySelector(
+                        "#modal-end",
+                    ).parentElement.style.display = "none";
+                } else {
+                    this.modalContent.querySelector(
+                        "#modal-start",
+                    ).textContent = this.dateTimeFormatter.format(startDate);
+                    this.modalContent.querySelector("#modal-end").textContent =
+                        this.dateTimeFormatter.format(endDate);
+                    this.modalContent.querySelector(
+                        "#modal-end",
+                    ).parentElement.style.display = "block";
+                }
+
+                this.modalContent.querySelector("#modal-location").textContent =
+                    event.location || "N/A";
+                // Add more fields here...
+
+                // Show the modal
+                this.modalElement.setAttribute("aria-hidden", "false");
+                this.modalElement.style.display = "flex"; // Use flex for centering
+                document.body.style.overflow = "hidden"; // Prevent background scrolling
+                document.addEventListener("keydown", this.handleKeydown); // Listen for Esc
+                this.modalContent.focus(); // Focus modal for accessibility
+            } catch (e) {
+                console.error("Failed to parse event data for modal:", e);
+            }
+        }
+
+        hideEventDetails() {
+            if (!this.modalElement) return;
+            this.modalElement.setAttribute("aria-hidden", "true");
+            this.modalElement.style.display = "none";
+            document.body.style.overflow = ""; // Restore background scrolling
+            document.removeEventListener("keydown", this.handleKeydown); // Stop listening for Esc
+        }
+
+        changeMonth(delta) {
+            this.currentMonth += delta;
+            if (this.currentMonth > 11) {
+                this.currentMonth = 0;
+                this.currentYear++;
+            } else if (this.currentMonth < 0) {
+                this.currentMonth = 11;
+                this.currentYear--;
+            }
+            this.renderCalendar();
+        }
+    }
+
+    // Define the custom element if it hasn't been defined already
+    if (!customElements.get("interactive-calendar")) {
+        customElements.define("interactive-calendar", InteractiveCalendar);
+    }
+</script>
+
+{/* Styles need significant updates for fluidity and modal */}
+<style is:global>
+    interactive-calendar {
+        display: block; /* The custom element itself */
+        position: relative; /* Needed if modal is positioned absolutely relative to it */
+    }
+
+    interactive-calendar .calendar-container {
+        /* Styles for the main calendar box */
+        font-family: sans-serif;
+        width: 100%;
+        max-width: 900px; /* Allow wider */
+        margin: 2em auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        box-sizing: border-box;
+        display: flex; /* Use flexbox for internal layout */
+        flex-direction: column;
+    }
+
+    interactive-calendar .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f4f4f4;
+        padding: 10px 15px;
+        border-bottom: 1px solid #ccc;
+        flex-shrink: 0; /* Prevent header from shrinking */
+    }
+
+    interactive-calendar .month-year {
+        margin: 0;
+        font-size: 1.2em;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+    interactive-calendar .nav-button {
+        background: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.2s;
+    }
+    interactive-calendar .nav-button:hover:not([disabled]) {
+        background-color: #eee;
+    }
+    interactive-calendar .nav-button:active:not([disabled]) {
+        background-color: #ddd;
+    }
+    interactive-calendar .nav-button[disabled] {
+        cursor: default;
+        opacity: 0.5;
+    }
+
+    interactive-calendar .weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        background-color: #f9f9f9;
+        border-bottom: 1px solid #eee;
+        flex-shrink: 0; /* Prevent shrinking */
+    }
+    interactive-calendar .weekdays div {
+        padding: 8px 5px;
+        font-weight: bold;
+        font-size: 0.9em;
+        color: #555;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    interactive-calendar .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        /* Let grid grow based on content */
+        /* grid-auto-rows: minmax(100px, auto); /* Example: min height, but auto grow */
+        border-bottom: none;
+        flex-grow: 1; /* Allow grid to take remaining space */
+        overflow: hidden; /* Hide overflow if absolutely needed, but prefer content determines size */
+    }
+
+    interactive-calendar .calendar-day {
+        border-right: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: 6px 5px; /* Adjust padding */
+        /* REMOVED min-height for fluidity */
+        position: relative;
+        font-size: 0.85em;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        box-sizing: border-box;
+        /* Add transition for smoother height changes? Optional */
+        /* transition: height 0.2s ease-in-out; */
+    }
+    interactive-calendar .calendar-day:nth-child(7n + 7) {
+        border-right: none;
+    }
+    interactive-calendar .calendar-day.empty {
+        background-color: #fafafa;
+        /* Ensure empty cells have *some* base height if needed, or rely on row height */
+        min-height: 30px; /* Small min-height for empty cells */
+    }
+
+    interactive-calendar .day-number {
+        font-weight: bold;
+        margin-bottom: 4px;
+        align-self: flex-start;
+        padding: 2px 4px;
+        border-radius: 50%;
+        min-width: 1.5em;
+        text-align: center;
+        flex-shrink: 0; /* Don't shrink day number */
+    }
+    interactive-calendar .calendar-day.today .day-number {
+        background-color: #007bff;
+        color: white;
+    }
+
+    interactive-calendar .events-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-top: 5px;
+        width: 100%;
+        font-size: 0.8em;
+        /* REMOVED max-height and overflow-y for fluidity */
+        flex-grow: 1; /* Allow list to take space */
+    }
+
+    interactive-calendar .events-list li.event-item {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        padding: 3px 5px; /* Slightly more padding */
+        border-radius: 3px;
+        margin-bottom: 4px; /* More spacing */
+        /* REMOVED white-space: nowrap */
+        /* Allow wrapping */
+        overflow-wrap: break-word; /* Break long words if necessary */
+        word-wrap: break-word; /* Older browsers */
+        word-break: break-word; /* Ensure breaks */
+        cursor: pointer; /* Indicate clickable */
+        transition: background-color 0.2s;
+    }
+    interactive-calendar .events-list li.event-item:hover {
+        background-color: #bce9f1;
+    }
+
+    /* --- Modal Styles --- */
+    .modal-overlay {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Enable scroll if needed (for modal content, not body) */
+        background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+        /* Use flex to center content */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto; /* Center horizontally */
+        padding: 25px;
+        border: 1px solid #888;
+        border-radius: 8px;
+        width: 90%; /* Responsive width */
+        max-width: 500px; /* Max width */
+        box-shadow:
+            0 4px 8px 0 rgba(0, 0, 0, 0.2),
+            0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        position: relative; /* For close button positioning */
+        animation: fadeIn 0.3s; /* Simple fade-in */
+    }
+
+    .modal-content strong {
+        font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .close-button {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+        font-weight: bold;
+        background: none;
+        border: none;
+        cursor: pointer;
+        line-height: 1;
+    }
+    .close-button:hover,
+    .close-button:focus {
+        color: black;
+        text-decoration: none;
+    }
+
+    .modal-content h3 {
+        margin-top: 0;
+        color: #333;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+    .modal-content p {
+        margin-bottom: 10px;
+        line-height: 1.5;
+        color: #555;
+    }
+    .modal-content p strong {
+        color: #333;
+    }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 700px) {
+        interactive-calendar .calendar-container {
+            max-width: 100%;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+        }
+        interactive-calendar .month-year {
+            font-size: 1.1em;
+        }
+        interactive-calendar .nav-button {
+            padding: 4px 8px;
+            font-size: 0.9em;
+        }
+        interactive-calendar .weekdays div {
+            font-size: 0.75em;
+            padding: 6px 2px;
+        }
+        interactive-calendar .calendar-day {
+            padding: 4px 3px;
+            font-size: 0.8em;
+        }
+        interactive-calendar .day-number {
+            min-width: 1.3em;
+            padding: 1px 3px;
+            margin-bottom: 2px;
+        }
+        interactive-calendar .events-list {
+            font-size: 0.75em;
+        }
+        interactive-calendar .events-list li.event-item {
+            padding: 2px 4px;
+            margin-bottom: 3px;
+        }
+    }
+    @media (max-width: 480px) {
+        interactive-calendar .weekdays div {
+            font-size: 0.65em;
+        } /* Abbreviate if needed */
+        interactive-calendar .month-year {
+            font-size: 1em;
+        }
+        .modal-content {
+            width: 95%;
+            padding: 20px;
+        }
+        .close-button {
+            font-size: 24px;
+            top: 8px;
+            right: 10px;
+        }
+    }
+</style>
