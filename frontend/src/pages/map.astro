@@ -1,0 +1,163 @@
+---
+import "../styles/common.css";
+
+import { SERVER_ADDRESS, SERVER_PORT } from "../../../Data/constants.ts";
+import type { Institute } from "../../../Data/types";
+
+import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
+import { readItems } from "@directus/sdk";
+import directus from "../lib/directus";
+const INSTITUTES = await directus.request(
+    readItems("schools", {
+        // @ts-expect-error: "*.*" is a valid Directus field selector
+        fields: ["*", "*.*"],
+    }),
+);
+---
+
+<Layout>
+    <!-- Leaflet map -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    />
+    <script
+        is:inline
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+    <Navbar current_view="map" />
+
+    <main>
+        <div id="map"></div>
+    </main>
+</Layout>
+
+<script is:inline define:vars={{ INSTITUTES }}>
+    // take data from the db
+    console.log(
+        "INSTITUTES:",
+        INSTITUTES.map((inst) => inst.position),
+    );
+
+    // create map
+    var map = L.map("map").setView([45.89765, 11.03963], 14);
+    // build map
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 17,
+        minZoom: 8,
+        attribution:
+            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    // create pin with popup
+    for (institute of INSTITUTES) {
+        //console.log(data);
+        if (!institute.position) continue;
+
+        // create popup html text
+        let popup =
+            '<u><a href="/sede/' +
+            institute.id +
+            '/" class="font-regular">' +
+            institute.name +
+            "</a></u>";
+
+        // create marker with popup
+        L.marker([
+            institute.position.coordinates[1],
+            institute.position.coordinates[0],
+        ])
+            .addTo(map)
+            .bindPopup(popup);
+    }
+</script>
+
+<script is:inline>
+    // update map, simulating a window resize event, to avoid loading problem
+    window.dispatchEvent(new Event("resize"));
+</script>
+
+<style is:inline>
+    main {
+        height: calc(100% - 4rem);
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #map {
+        height: calc(100% - 2rem);
+        width: calc(100% - 2rem);
+    }
+
+    main > div {
+        width: 100%;
+        height: 90%;
+
+        border-radius: 1rem;
+        box-shadow:
+            rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+            rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    }
+
+    article > span {
+        text-wrap: wrap;
+        text-align: center;
+
+        font-size: 1.2rem;
+    }
+    article > nav {
+        padding: 0.5rem 1.5rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 0.2rem;
+    }
+
+    nav > button {
+        padding: 0.4rem;
+
+        border: unset;
+        background-color: unset;
+
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+
+        cursor: pointer;
+    }
+
+    nav > button:hover button > span {
+        color: var(--tint-orange);
+    }
+
+    nav > button:active button > span {
+        /* TODO: Find nicer color */
+        color: var(--background-primary);
+    }
+
+    button > span {
+        font-size: 3rem;
+    }
+
+    /* Icon style */
+    button > span {
+        color: var(--foreground-secondary);
+        /* font-size: var(--icon_size); */
+        transition: 200ms;
+    }
+
+    button > span:hover {
+        color: var(--tint-orange);
+        transition: 100ms;
+    }
+</style>
