@@ -3,20 +3,30 @@ import "../styles/common.css";
 
 import Icon from "../components/Icon.astro";
 import Layout from "../layouts/Layout.astro";
+import { PUBLIC_API_URL } from "astro:env/client";
+import { readSingleton } from "@directus/sdk";
+import directus from "../lib/directus";
+import type { Schema, components } from "../types/schema";
+
+type SiteSettings = components["schemas"]["ItemsSiteSettings"];
+const site_settings = await directus.request<SiteSettings>(readSingleton("site_settings"));
+
 ---
 
 <Layout>
   <main>
     <h1 class="font-regular">
-      <span>Direzione Futuro <img src="/logo_sito.svg" alt="" srcset="" /></span
+      <span
+        >{site_settings.site_title}
+        <img
+          src={`${PUBLIC_API_URL}/assets/${site_settings.site_logo}`}
+          alt={`${site_settings.site_title} Logo`}
+          srcset=""
+        /></span
       >
     </h1>
 
-    <p class="font-regular">
-      <span class="font-regular">Orientamento</span> per la scelta della <span
-        class="font-regular">scuola superiore</span
-      > a <span class="font-regular">Rovereto</span>
-    </p>
+    <Fragment set:html={site_settings.welcome_message} />
 
     <nav>
       <a href="/istituti/">
@@ -25,7 +35,7 @@ import Layout from "../layouts/Layout.astro";
       </a>
       <a href="/openday/" id="openday">
         <Icon code="ebcc" color="var(--foreground-secondary)" />
-        <span class="font-light">Incontri e <br />Open Days</span>
+        <span class="font-light">Lista incontri e <br />Open Days</span>
       </a>
       <a href="/map/">
         <Icon code="e55b" color="var(--foreground-secondary)" />
@@ -34,6 +44,23 @@ import Layout from "../layouts/Layout.astro";
     </nav>
   </main>
 </Layout>
+
+<style is:global>
+  main > p {
+    margin: 3rem 0rem;
+    margin-left: 3rem;
+    align-self: flex-start;
+    font-size: 2.7rem;
+
+    color: var(--foreground-secondary);
+    text-align: left;
+  }
+
+  main > p > span {
+    color: var(--foreground-primary);
+    font-weight: 900;
+  }
+</style>
 
 <style>
   main {
@@ -69,20 +96,6 @@ import Layout from "../layouts/Layout.astro";
   h1 > span > img {
     margin: 0 0 0 0.4rem;
     height: 2rem;
-  }
-
-  main > p {
-    margin: 3rem 0rem;
-    align-self: flex-start;
-    font-size: 2.7rem;
-
-    color: var(--foreground-secondary);
-    text-align: left;
-  }
-
-  main > p > span {
-    color: var(--foreground-primary);
-    font-weight: 900;
   }
 
   nav {
