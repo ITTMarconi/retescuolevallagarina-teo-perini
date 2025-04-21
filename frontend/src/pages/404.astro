@@ -1,0 +1,30 @@
+---
+import "../styles/common.css";
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <main>
+    <h1>Pagina non trovata</h1>
+    <p>Redirezione automatica...</p>
+    <hr />
+
+    <p>Ritorna alla <a href="/">home</a> e riprova</p>
+  </main>
+</Layout>
+
+<script is:inline>
+  setTimeout(() => {
+    console.info("Redirecting... (maybe)");
+    window.open("/", "_parent");
+  }, 3000);
+</script>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+  }
+</style>
