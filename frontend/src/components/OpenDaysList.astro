@@ -1,0 +1,167 @@
+---
+import {
+    getDay,
+    getMonth,
+    getYear,
+    getHours,
+    getMinutes,
+} from "../scripts/DateUtils";
+import { type components } from "../types/schema";
+
+interface Props {
+    institute: components["schemas"]["ItemsSchools"];
+}
+
+let { institute } = Astro.props;
+
+let openDays = institute.events;
+
+if (!Array.isArray(openDays)) {
+    openDays = [];
+}
+---
+
+<article id={`open-days-list-${institute.miur_code}`}>
+    {
+        openDays.map((orario) => {
+            let now = new Date();
+            let start =
+                typeof orario !== "string" &&
+                typeof orario !== "undefined" &&
+                new Date(orario.start_date!);
+            start = start || new Date();
+            let end =
+                typeof orario !== "string" &&
+                typeof orario !== "undefined" &&
+                new Date(orario.end_date!);
+            end = end || new Date();
+            let className = start < now ? "past" : "future";
+            return (
+                typeof orario !== "string" &&
+                typeof orario !== "undefined" && (
+                    <section data-orario={orario.start_date}>
+                        <div class={className}>
+                            <span>{getDay(start)}</span>
+                            <span>
+                                {" "}
+                                {getMonth(start)}/
+                                {getYear(new Date(orario.start_date!))}{" "}
+                            </span>
+                        </div>
+
+                        <div>
+                            <span>
+                                {orario.title} - {getHours(start)}:{getMinutes(start)} - {getHours(end)}:{getMinutes(end)}{" "}
+                            </span>
+                            <span>
+                                {" "}
+                                <Fragment set:html={orario.description} />{" "}
+                            </span>
+                        </div>
+                    </section>
+                )
+            );
+        })
+    }
+</article>
+
+<style>
+    article {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+
+        gap: 2rem;
+    }
+
+    article > section {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        gap: 1.5rem;
+    }
+
+    section > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Ball */
+    /* ******************************************************************************** */
+
+    section > div:first-child {
+        padding: 0.8rem 0.2rem;
+        width: 3rem;
+
+        color: var(--foreground-primary);
+
+        border-radius: 2rem;
+
+        align-items: center;
+        gap: 0.1rem;
+    }
+
+    section > div:first-child > span:first-child {
+        font-size: 1.8rem;
+    }
+
+    section > div:first-child > span:last-child {
+        font-size: 1rem;
+    }
+
+    .past {
+        background-color: var(--tint-red);
+    }
+
+    .future {
+        background-color: var(--background-primary);
+    }
+
+    /* Description */
+    /* ******************************************************************************** */
+
+    section > div:nth-child(2) {
+        flex-basis: 100%;
+        align-items: flex-start;
+
+        gap: 0.5rem;
+    }
+
+    section > div:nth-child(2) > span:first-child {
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    section > div:nth-child(2) > span:last-child {
+        /* max-width: 25ch; */
+
+        font-size: 1rem;
+        line-height: 1.5rem;
+        text-wrap: wrap;
+        overflow-wrap: break-word;
+    }
+
+    /* For desktop: */
+    @media only screen and (min-width: 768px) {
+        section > div:first-child {
+            height: 5rem;
+            width: 5.5rem;
+
+            padding: 0;
+
+            border-radius: 4rem;
+        }
+
+        section > div:nth-child(2) > span:last-child {
+            max-width: 50ch;
+        }
+    }
+
+    /* For wide-desktop: */
+    @media only screen and (min-width: 1536px) {
+    }
+</style>
