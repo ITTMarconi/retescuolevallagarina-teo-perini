@@ -1,0 +1,52 @@
+---
+import { type components } from "../types/schema";
+import { PUBLIC_API_URL } from "astro:env/client";
+
+interface Props {
+    institute: components["schemas"]["ItemsSchools"];
+}
+
+const { institute } = Astro.props;
+---
+
+<a href={`/sede/${institute.id}/`} class="hoverable">
+    <img
+        src={// @ts-expect-error: id valid property
+        `${PUBLIC_API_URL}/assets/${institute.logo?.id}`}
+        alt={// @ts-expect-error: title valid property
+        `${institute.logo?.title}`}
+        srcset=""
+    />
+    <span>{institute.name}</span>
+</a>
+
+<style>
+    a {
+        padding: 0.5rem 1rem;
+
+        color: unset;
+
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+
+        gap: 1rem;
+    }
+
+    a:hover {
+        color: var(--background-primary);
+        text-decoration: underline;
+    }
+
+    a > img {
+        height: 4rem;
+    }
+
+    /* For tablets: */
+    @media only screen and (min-width: 600px) {
+    }
+
+    /* For desktop: */
+    @media only screen and (min-width: 768px) {
+    }
+</style>

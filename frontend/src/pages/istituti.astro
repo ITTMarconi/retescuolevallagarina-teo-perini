@@ -1,0 +1,118 @@
+---
+import "../styles/common.css";
+
+import Navbar from "../components/Navbar.astro";
+import SchoolListItem from "../components/SchoolListItem.astro";
+import Layout from "../layouts/Layout.astro";
+import { readItems } from "@directus/sdk";
+import directus from "../lib/directus";
+
+const INSTITUTES = await directus.request(
+    readItems("schools", {
+        // @ts-expect-error: "*.*" is a valid Directus field selector
+        fields: ["*", "*.*"],
+    }),
+);
+
+console.log(INSTITUTES.length);
+console.log(INSTITUTES[0].logo);
+---
+
+<Layout>
+    <Navbar current_view="istituti" />
+
+    <main id="institute-list"></main>
+
+    <stash id="institute-stash" style="display: none;">
+        {
+            INSTITUTES.filter((institute) => institute.main_campus).map(
+                (institute) => (
+                    <div>
+                        <SchoolListItem institute={institute} />
+                    </div>
+                ),
+            )
+        }
+    </stash>
+</Layout>
+
+<script is:inline>
+    function isNaN(n) {
+        return n != n;
+    }
+
+    function random(seed) {
+        var x = Math.sin(seed++) * 10000;
+        return x - Math.floor(x);
+    }
+
+    function shuffle(array, seed) {
+        let t;
+        let len = array.length;
+        let rand;
+
+        while (len > 0) {
+            rand = Math.floor(random(seed) * len--);
+
+            /* Swap */
+            t = array[len];
+            array[len] = array[rand];
+            array[rand] = t;
+
+            ++seed;
+        }
+
+        return array;
+    }
+
+    const STASH_EL = document.getElementById("institute-stash");
+    const INSTITUTE_DIV_ELS = Array.from(STASH_EL.children);
+
+    const MAIN_EL = document.getElementById("institute-list");
+    const SEED_KEY = "seed";
+
+    /** @type {number | string | null} */
+    let seed = Number(window.sessionStorage.getItem(SEED_KEY));
+    if (seed == 0 || isNaN(seed)) {
+        seed = Math.floor(Math.random() * 1000);
+        window.sessionStorage.setItem(SEED_KEY, seed);
+    }
+
+    shuffle(INSTITUTE_DIV_ELS, seed);
+    INSTITUTE_DIV_ELS.forEach((institute) => MAIN_EL.appendChild(institute));
+</script>
+
+<style>
+    main {
+        width: calc(100% - 2rem);
+        padding: 1rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    main > div {
+        flex-basis: 100%;
+    }
+
+    /* For desktop: */
+    @media only screen and (min-width: 768px) {
+    }
+
+    /* For wide-desktop: */
+    @media only screen and (min-width: 1536px) {
+        main {
+            width: calc(100% - 4rem);
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        main > div {
+            max-width: 80rem;
+            flex-basis: 30%;
+        }
+    }
+</style>
