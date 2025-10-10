@@ -23,7 +23,15 @@ if (!Array.isArray(openDays)) {
 
 <article id={`open-days-list-${institute.miur_code}`}>
     {
-        openDays.map((orario) => {
+  openDays.filter((orario) => {
+            let now = new Date();
+            let start =
+                typeof orario !== "string" &&
+                typeof orario !== "undefined" &&
+                new Date(orario.start_date!);
+            start = start || new Date();
+            return ( getMonth(start) > "08" && getYear(start) == getYear(now) ) || start > now;
+  }).map((orario) => {
             let now = new Date();
             let start =
                 typeof orario !== "string" &&
