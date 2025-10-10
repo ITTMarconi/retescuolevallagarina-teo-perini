@@ -352,18 +352,26 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
 
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 3rem;
   }
 
   main > article > section {
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   main > section {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   section > h2 {
@@ -371,11 +379,14 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
     text-transform: capitalize;
     padding: 0 1rem;
     box-sizing: border-box;
+    text-align: center;
+    width: 100%;
   }
 
   section > hr {
-    width: calc(100% - 2rem);
-    margin: 0 1rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     box-sizing: border-box;
   }
 
@@ -387,12 +398,21 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
     flex-wrap: nowrap;
     line-height: 1.5rem;
     gap: 0.8rem;
-    padding: 0 1rem;
+    padding: 0 1rem 0 2rem;
     box-sizing: border-box;
+    width: 100%;
+    max-width: 40rem;
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
+  section > ul li {
+    text-align: left;
+    width: auto;
+    padding-left: 0.5rem;
   }
 
   section > ul a {
-    padding-left: 1rem;
     font-size: 1.2rem;
     text-decoration: underline;
   }
@@ -461,22 +481,26 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
     display: grid;
     grid-template-columns: 1fr; /* 1 column on mobile */
     gap: 1.5rem;
-    padding: 0 1rem;
+    padding: 1rem;
   }
 
   .videos-grid figure {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.8rem;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
   }
 
   .videos-grid figcaption {
-    padding: 0;
+    padding: 0 0 0.3rem 0;
     box-sizing: border-box;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: inherit;
+    line-height: 1.4;
   }
 
   /* Use aspect-ratio to keep videos responsive */
@@ -493,7 +517,7 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
 
   .video-desc {
     font-size: 0.95rem;
-    color: var(--foreground-secondary);
+    color: inherit;
   }
 
   /* On tablets and larger, show 2 columns */
@@ -540,6 +564,10 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
       text-transform: capitalize;
     }
 
+    section > ul {
+      max-width: 50rem;
+    }
+
     main > section {
       margin: 0rem 0 2rem 0;
       flex-wrap: nowrap;
@@ -558,6 +586,18 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
   @media only screen and (min-width: 1440px) {
     main > header {
       max-width: 70rem;
+    }
+
+    main > article {
+      max-width: 70rem;
+    }
+
+    main > article > section {
+      max-width: 65rem;
+    }
+
+    section > ul {
+      max-width: 60rem;
     }
 
     main > section {

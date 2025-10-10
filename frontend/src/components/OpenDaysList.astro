@@ -74,11 +74,14 @@ if (!Array.isArray(openDays)) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: nowrap;
 
     gap: 2rem;
     padding: 1rem;
     width: 100%;
+    max-width: 45rem;
+    margin: 0 auto;
     box-sizing: border-box;
   }
 
@@ -87,6 +90,8 @@ if (!Array.isArray(openDays)) {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    width: 100%;
+    max-width: 40rem;
 
     gap: 1rem;
   }
@@ -154,6 +159,14 @@ if (!Array.isArray(openDays)) {
 
   /* For desktop: */
   @media only screen and (min-width: 768px) {
+    article {
+      max-width: 50rem;
+    }
+
+    article > section {
+      max-width: 48rem;
+    }
+
     section > div:first-child {
       height: 5rem;
       width: 5.5rem;
