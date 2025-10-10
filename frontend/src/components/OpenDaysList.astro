@@ -1,10 +1,11 @@
 ---
 import {
-    getDay,
-    getMonth,
-    getYear,
-    getHours,
-    getMinutes,
+  getDay,
+  getMonth,
+  getYear,
+  getFullYear,
+  getHours,
+  getMinutes,
 } from "../scripts/DateUtils";
 import { type components } from "../types/schema";
 
@@ -22,40 +23,36 @@ if (!Array.isArray(openDays)) {
 ---
 
 <article id={`open-days-list-${institute.miur_code}`}>
-    {
-  openDays.filter((orario) => {
-            let now = new Date();
-            let start =
-                typeof orario !== "string" &&
-                typeof orario !== "undefined" &&
-                new Date(orario.start_date!);
-            start = start || new Date();
-            return ( getMonth(start) > "08" && getYear(start) == getYear(now) ) || start > now;
-  }).map((orario) => {
-            let now = new Date();
-            let start =
-                typeof orario !== "string" &&
-                typeof orario !== "undefined" &&
-                new Date(orario.start_date!);
-            start = start || new Date();
-            let end =
-                typeof orario !== "string" &&
-                typeof orario !== "undefined" &&
-                new Date(orario.end_date!);
-            end = end || new Date();
-            let className = start < now ? "past" : "future";
-            return (
-                typeof orario !== "string" &&
-                typeof orario !== "undefined" && (
-                    <section data-orario={orario.start_date}>
-                        <div class={className}>
-                            <span>{getDay(start)}</span>
-                            <span>
-                                {" "}
-                                {getMonth(start)}/
-                                {getYear(new Date(orario.start_date!))}{" "}
-                            </span>
-                        </div>
+  {
+    openDays
+      .filter((orario: string | components["schemas"]["ItemsEvents"]) => {
+        if (!orario || typeof orario === "string") return false;
+
+        const now = new Date();
+        const start = new Date(orario.start_date!);
+        const currentYear = now.getFullYear();
+        const startYear = start.getFullYear();
+        const startMonth = start.getMonth() + 1; // JavaScript months are 0-indexed
+
+        // Show events from September onwards in current year, or future events
+        return (startMonth >= 9 && startYear === currentYear) || start > now;
+      })
+      .map((orario: string | components["schemas"]["ItemsEvents"]) => {
+        if (!orario || typeof orario === "string") return null;
+
+        const now = new Date();
+        const start = new Date(orario.start_date!);
+        const end = new Date(orario.end_date!);
+        const className = start < now ? "past" : "future";
+
+        return (
+          <section data-orario={orario.start_date}>
+            <div class={className}>
+              <span>{getDay(start)}</span>
+              <span>
+                {getMonth(start)}/{getYear(start)}
+              </span>
+            </div>
 
                         <div>
                             <span>
