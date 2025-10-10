@@ -9,6 +9,7 @@ import Icon from "../../components/Icon.astro";
 import { PUBLIC_API_URL } from "astro:env/client";
 import { readItem } from "@directus/sdk";
 import directus from "../../lib/directus";
+import { type components } from "../../types/schema";
 
 const { id } = Astro.params;
 
@@ -18,22 +19,18 @@ const { id } = Astro.params;
 // const OPENDAYS: OpenDays = await OPENDAYS_RAW.json();
 
 const INSTITUTE = await directus.request(
-    readItem("schools", id as string, {
-        // @ts-expect-error: "*.*" is a valid Directus field selector
-        fields: ["*", "*.*", "edu_links.educational_path.name"],
-    }),
+  readItem("schools", id as string, {
+    fields: ["*", "*.*", "edu_links.educational_path.name"],
+  })
 );
 
-let VIDEO = null;
-if (
-    Array.isArray(INSTITUTE.videos) &&
-    INSTITUTE.videos[0] &&
-    typeof INSTITUTE.videos[0] !== "string"
-) {
-    VIDEO = `${PUBLIC_API_URL}/assets/${INSTITUTE.videos[0]?.video_file}`;
-}
+const assetUrl = (fileId: string | null | undefined) =>
+  fileId ? `${PUBLIC_API_URL}/assets/${fileId}` : null;
 
-console.log(INSTITUTE);
+// Ensure videos is an array we can iterate safely
+const VIDEOS = Array.isArray(INSTITUTE.videos)
+  ? INSTITUTE.videos.filter((v: any) => v && typeof v !== "string")
+  : [];
 ---
 
 <Layout>
@@ -66,34 +63,68 @@ console.log(INSTITUTE);
                         <span>{INSTITUTE.address}</span>
                     </a>
 
-                    {
-                        typeof INSTITUTE.responsabile_orientamento ===
-                            "string" &&
-                            INSTITUTE.responsabile_orientamento.length > 0 && (
-                                <div title="Responsabile orientamento">
-                                    <Icon
-                                        code="e7fd"
-                                        color="var(--foreground-secondary)"
-                                    />
-                                    <span>
-                                        Responsabile orientamento:{" "}
-                                        {INSTITUTE.responsabile_orientamento}
-                                    </span>
-                                </div>
-                            )
-                    }
-                </nav>
-            </section>
-        </header>
-        {VIDEO && <video src={VIDEO} controls />}
-        <article>
-            {
-                typeof INSTITUTE.edu_links !== "string" &&
-                    INSTITUTE.edu_links &&
-                    INSTITUTE.edu_links.length > 0 && (
-                        <section>
-                            <h2 class="font-regular">Indirizzi</h2>
-                            <hr />
+          {
+            typeof INSTITUTE.responsabile_orientamento === "string" &&
+              INSTITUTE.responsabile_orientamento.length > 0 && (
+                <div title="Responsabile orientamento">
+                  <Icon code="e7fd" color="var(--foreground-secondary)" />
+                  <span>
+                    Responsabile orientamento:{" "}
+                    {INSTITUTE.responsabile_orientamento}
+                  </span>
+                </div>
+              )
+          }
+        </nav>
+      </section>
+    </header>
+    {
+      VIDEOS.length > 0 && (
+        <section>
+          <h2 class="font-regular">Video</h2>
+          <hr />
+
+          <div class="videos-grid">
+            {VIDEOS.map((v: components["schemas"]["ItemsVideos"]) => (
+              <figure>
+                <figcaption>{v.title}</figcaption>
+                {v.video_file ? (
+                  <video
+                    src={assetUrl(
+                      typeof v.video_file === "string"
+                        ? v.video_file
+                        : v.video_file?.id
+                    )}
+                    controls
+                  />
+                ) : v.youtube_id ? (
+                  <div class="youtube-wrapper">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${v.youtube_id}`}
+                      title={v.title || "YouTube video"}
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    />
+                  </div>
+                ) : (
+                  <p>No media available</p>
+                )}
+                {v.description && <p class="video-desc">{v.description}</p>}
+              </figure>
+            ))}
+          </div>
+        </section>
+      )
+    }
+    <article>
+      {
+        typeof INSTITUTE.edu_links !== "string" &&
+          INSTITUTE.edu_links &&
+          INSTITUTE.edu_links.length > 0 && (
+            <section>
+              <h2 class="font-regular">Indirizzi</h2>
+              <hr />
 
                             <ul>
                                 {INSTITUTE.edu_links &&
