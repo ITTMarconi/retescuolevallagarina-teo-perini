@@ -133,32 +133,46 @@ export default function MapComponent({ routes, selectedRouteId }) {
             <React.Fragment key={route.id}>
               {/* Render LineStrings as Polylines */}
               {lineStrings.map((geom, idx) => (
-                <Polyline
-                  key={`line-${route.id}-${idx}`}
-                  positions={geom.coordinates.map((coord) => [coord[1], coord[0]])}
-                  color={isSelected ? "#FF5722" : "#1976d2"}
-                  weight={isSelected ? 6 : 4}
-                  opacity={isSelected ? 1 : 0.5}
-                >
-                  <Popup>
-                    <div className={styles.popupContent}>
-                      <div className={styles.popupTitle}>{route.name}</div>
-                      {route.description && (
-                        <div
-                          className={styles.popupDescription}
-                          dangerouslySetInnerHTML={{ __html: route.description }}
-                        />
-                      )}
-                      <div>
-                        <em>Tipo: {route.transportation_type}</em>
-                        <br />
-                        <em>Tempo: {route.estimated_time_minutes} min</em>
-                        <br />
-                        <strong>Scuola: {route.school?.name}</strong>
+                <React.Fragment key={`line-fragment-${route.id}-${idx}`}>
+                  {/* Invisible wider polyline for easier clicking */}
+                  <Polyline
+                    key={`line-clickable-${route.id}-${idx}`}
+                    positions={geom.coordinates.map((coord) => [coord[1], coord[0]])}
+                    color="transparent"
+                    weight={15}
+                    opacity={0}
+                    interactive={true}
+                  >
+                    <Popup>
+                      <div className={styles.popupContent}>
+                        <div className={styles.popupTitle}>{route.name}</div>
+                        {route.description && (
+                          <div
+                            className={styles.popupDescription}
+                            dangerouslySetInnerHTML={{ __html: route.description }}
+                          />
+                        )}
+                        <div>
+                          <em>Tipo: {route.transportation_type}</em>
+                          <br />
+                          <em>Tempo: {route.estimated_time_minutes} min</em>
+                          <br />
+                          <strong>Scuola: {route.school?.name}</strong>
+                        </div>
                       </div>
-                    </div>
-                  </Popup>
-                </Polyline>
+                    </Popup>
+                  </Polyline>
+
+                  {/* Visible polyline */}
+                  <Polyline
+                    key={`line-visible-${route.id}-${idx}`}
+                    positions={geom.coordinates.map((coord) => [coord[1], coord[0]])}
+                    color={isSelected ? "#FF5722" : "#1976d2"}
+                    weight={isSelected ? 6 : 5}
+                    opacity={isSelected ? 1 : 0.7}
+                    interactive={false}
+                  />
+                </React.Fragment>
               ))}
 
               {/* Render start marker */}
