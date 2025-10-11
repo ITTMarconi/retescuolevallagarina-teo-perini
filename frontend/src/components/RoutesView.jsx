@@ -6,10 +6,12 @@ export default function RoutesView({ routes }) {
   const [selectedRouteId, setSelectedRouteId] = useState(null);
   const [showSchoolInfo, setShowSchoolInfo] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState(null);
+  const [selectedRoute, setSelectedRoute] = useState(null);
 
   const handleRouteClick = (route) => {
     setSelectedRouteId(route.id);
     setSelectedSchool(route.school);
+    setSelectedRoute(route);
     setShowSchoolInfo(true);
   };
 
@@ -89,6 +91,26 @@ export default function RoutesView({ routes }) {
           </li>
         ))}
       </ul>
+
+      {selectedRoute && selectedRoute.description && (
+        <div
+          style={{
+            marginTop: "1rem",
+            padding: "1rem",
+            background: "#fff3e0",
+            border: "1px solid #ff9800",
+            borderRadius: "8px",
+          }}
+        >
+          <h4 style={{ marginTop: 0, color: "#f57c00" }}>
+            Dettagli Percorso: {selectedRoute.name}
+          </h4>
+          <div
+            style={{ margin: "0.5rem 0", lineHeight: "1.6" }}
+            dangerouslySetInnerHTML={{ __html: selectedRoute.description }}
+          />
+        </div>
+      )}
 
       {showSchoolInfo && selectedSchool && (
         <div
