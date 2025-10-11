@@ -11,7 +11,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
-export default function MapComponent({ routes }) {
+export default function MapComponent({ routes, selectedRouteId }) {
   // Extract geometries from routes and calculate center
   const allCoordinates = [];
 
@@ -58,6 +58,7 @@ export default function MapComponent({ routes }) {
         {routes.map((route) => {
           if (!route.route_path?.geometries) return null;
 
+          const isSelected = selectedRouteId === route.id;
           const lineStrings = route.route_path.geometries.filter(
             (geom) => geom.type === "LineString"
           );
@@ -72,9 +73,9 @@ export default function MapComponent({ routes }) {
                 <Polyline
                   key={`line-${route.id}-${idx}`}
                   positions={geom.coordinates.map((coord) => [coord[1], coord[0]])}
-                  color="#1976d2"
-                  weight={4}
-                  opacity={0.7}
+                  color={isSelected ? "#FF5722" : "#1976d2"}
+                  weight={isSelected ? 6 : 4}
+                  opacity={isSelected ? 1 : 0.5}
                 >
                   <Popup>
                     <strong>{route.name}</strong>
