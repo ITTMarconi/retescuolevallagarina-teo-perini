@@ -16,7 +16,6 @@ export default function SchoolRoutesContainer({ schools, routes, apiUrl }) {
   return (
     <div className={styles.container}>
       <aside className={styles.sidebar}>
-        <h2 className={styles.sidebarTitle}>Scuole</h2>
         <ul className={styles.schoolList}>
           {schools.map((school) => (
             <li key={school.id} className={styles.schoolListItem}>
