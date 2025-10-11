@@ -1,18 +1,20 @@
 // src/components/RoutesView.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MapComponent from "./MapComponent.jsx";
 
 export default function RoutesView({ routes }) {
   const [selectedRouteId, setSelectedRouteId] = useState(null);
-  const [showSchoolInfo, setShowSchoolInfo] = useState(false);
-  const [selectedSchool, setSelectedSchool] = useState(null);
   const [selectedRoute, setSelectedRoute] = useState(null);
+
+  // Reset selection when routes change (e.g., when school filter changes)
+  useEffect(() => {
+    setSelectedRouteId(null);
+    setSelectedRoute(null);
+  }, [routes]);
 
   const handleRouteClick = (route) => {
     setSelectedRouteId(route.id);
-    setSelectedSchool(route.school);
     setSelectedRoute(route);
-    setShowSchoolInfo(true);
   };
 
   return (
@@ -25,7 +27,7 @@ export default function RoutesView({ routes }) {
 
       <h3 style={{ marginTop: "1rem" }}>Percorsi di Trasporto</h3>
       <p style={{ color: "#666", fontSize: "0.9rem" }}>
-        Clicca su un percorso per evidenziarlo sulla mappa e vedere i dettagli della scuola
+        Clicca su un percorso per evidenziarlo sulla mappa e vedere i dettagli
       </p>
 
       <ul
@@ -109,73 +111,6 @@ export default function RoutesView({ routes }) {
             style={{ margin: "0.5rem 0", lineHeight: "1.6" }}
             dangerouslySetInnerHTML={{ __html: selectedRoute.description }}
           />
-        </div>
-      )}
-
-      {showSchoolInfo && selectedSchool && (
-        <div
-          style={{
-            marginTop: "1rem",
-            padding: "1rem",
-            background: "#fff",
-            border: "1px solid #ddd",
-            borderRadius: "8px",
-          }}
-        >
-          <h4 style={{ marginTop: 0, color: "#1976d2" }}>
-            {selectedSchool.name}
-          </h4>
-          <div style={{ margin: "0.5rem 0" }}>
-            <span style={{ fontWeight: "bold", color: "#555" }}>Indirizzo:</span>{" "}
-            {selectedSchool.address || "N/D"}
-          </div>
-          <div style={{ margin: "0.5rem 0" }}>
-            <span style={{ fontWeight: "bold", color: "#555" }}>Telefono:</span>{" "}
-            {selectedSchool.phone || "N/D"}
-          </div>
-          <div style={{ margin: "0.5rem 0" }}>
-            <span style={{ fontWeight: "bold", color: "#555" }}>Email:</span>{" "}
-            {selectedSchool.email || "N/D"}
-          </div>
-          {selectedSchool.website_url && (
-            <div style={{ margin: "0.5rem 0" }}>
-              <span style={{ fontWeight: "bold", color: "#555" }}>
-                Sito Web:
-              </span>{" "}
-              <a
-                href={selectedSchool.website_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#1976d2" }}
-              >
-                {selectedSchool.website_url}
-              </a>
-            </div>
-          )}
-          <div style={{ margin: "0.5rem 0" }}>
-            <span style={{ fontWeight: "bold", color: "#555" }}>
-              Codice MIUR:
-            </span>{" "}
-            {selectedSchool.miur_code || "N/D"}
-          </div>
-          <div style={{ margin: "0.5rem 0" }}>
-            <span style={{ fontWeight: "bold", color: "#555" }}>Mensa:</span>{" "}
-            {selectedSchool.canteen ? "Sì" : "No"}
-          </div>
-          <div style={{ margin: "0.5rem 0" }}>
-            <span style={{ fontWeight: "bold", color: "#555" }}>Convitto:</span>{" "}
-            {selectedSchool.boarding ? "Sì" : "No"}
-          </div>
-          {selectedSchool.description && (
-            <div style={{ margin: "0.5rem 0" }}>
-              <span style={{ fontWeight: "bold", color: "#555" }}>
-                Descrizione:
-              </span>
-              <p style={{ margin: "0.25rem 0 0 0" }}>
-                {selectedSchool.description}
-              </p>
-            </div>
-          )}
         </div>
       )}
     </div>
