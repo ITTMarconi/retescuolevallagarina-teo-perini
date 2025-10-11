@@ -1,0 +1,337 @@
+---
+// src/pages/routes.astro
+import MapComponent from "../components/MapComponent.jsx";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Icon from "../components/Icon.astro";
+import { PUBLIC_API_URL } from "astro:env/client";
+import { readItem, readItems } from "@directus/sdk";
+import directus from "../lib/directus";
+
+// Function to fix UTF-8 encoding issues (when UTF-8 is incorrectly interpreted as Latin-1)
+function fixEncoding(str: string | null | undefined): string {
+  if (!str) return "";
+  try {
+    // Convert the string to bytes as if it was Latin-1, then decode as UTF-8
+    const bytes = new TextEncoder().encode(str);
+    const decoder = new TextDecoder("latin1");
+    const latin1String = decoder.decode(bytes);
+    const utf8Bytes = new Uint8Array(
+      latin1String.split("").map((c) => c.charCodeAt(0))
+    );
+    return new TextDecoder("utf-8").decode(utf8Bytes);
+  } catch (e) {
+    // If conversion fails, return original string
+    return str;
+  }
+}
+
+// Recursively fix encoding in objects
+function fixObjectEncoding(obj: any): any {
+  if (typeof obj === "string") {
+    return fixEncoding(obj);
+  }
+  if (Array.isArray(obj)) {
+    return obj.map((item) => fixObjectEncoding(item));
+  }
+  if (obj && typeof obj === "object") {
+    const fixed: any = {};
+    for (const [key, value] of Object.entries(obj)) {
+      fixed[key] = fixObjectEncoding(value);
+    }
+    return fixed;
+  }
+  return obj;
+}
+
+const schools = await directus.request(
+  readItems("schools", {
+    // @ts-expect-error: "*.*" is a valid Directus field selector
+    fields: ["*", "*.*"],
+  })
+);
+
+let routes: any[] = [];
+
+routes = await directus.request(
+  readItems("transport_routes", {
+    // @ts-expect-error: "*.*" is a valid Directus field selector
+    fields: ["*", "*.*"],
+  })
+);
+
+// Fix encoding for all routes
+routes = fixObjectEncoding(routes);
+
+console.log("Fetched routes:", JSON.stringify(routes[0], null, 2));
+let selectedSchoolId: string | null = "46942d76-5848-4ce9-8810-27eead208ba7";
+---
+
+<style>
+  .routes-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    min-height: 100vh;
+  }
+  .sidebar {
+    width: 250px;
+    background: #f8f8f8;
+    padding: 1rem;
+  }
+  .main-content {
+    flex: 1;
+    padding: 1rem;
+  }
+  @media (max-width: 700px) {
+    .routes-container {
+      flex-direction: column;
+    }
+    .sidebar {
+      width: 100%;
+      order: 2;
+      padding: 0.5rem;
+    }
+    .main-content {
+      order: 1;
+      padding: 0.5rem;
+    }
+  }
+  .school-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .school-list li {
+    margin-bottom: 0.5rem;
+  }
+  .school-btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    background: #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .school-btn.selected,
+  .school-btn:focus {
+    background: #1976d2;
+    color: #fff;
+  }
+  @media (max-width: 700px) {
+    .school-btn {
+      font-size: 1.1rem;
+      padding: 1rem;
+    }
+  }
+
+  .routes-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .route-item {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: #f5f5f5;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+
+  .route-item:hover {
+    background: #e8e8e8;
+  }
+
+  .route-item.selected {
+    background: #e3f2fd;
+    border-color: #1976d2;
+  }
+
+  .school-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: none;
+  }
+
+  .school-info.visible {
+    display: block;
+  }
+
+  .school-info h4 {
+    margin-top: 0;
+    color: #1976d2;
+  }
+
+  .info-row {
+    margin: 0.5rem 0;
+  }
+
+  .info-label {
+    font-weight: bold;
+    color: #555;
+  }
+</style>
+
+<div class="routes-container">
+  <aside class="sidebar">
+    <h2 style="font-size:1.2rem;">Schools</h2>
+    <ul class="school-list">
+      {
+        schools.map((school) => (
+          <li>
+            <button
+              class={`school-btn${selectedSchoolId === school.id ? " selected" : ""}`}
+            >
+              {school.name}
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </aside>
+  <main class="main-content">
+    <MapComponent client:only="react" routes={routes} />
+
+    <h3 style="margin-top:1rem;">Transport Routes</h3>
+    <p style="color: #666; font-size: 0.9rem;">
+      Click on a route to see school details
+    </p>
+
+    <ul class="routes-list" id="routes-list">
+      {
+        routes.map((route) => (
+          <li
+            class="route-item"
+            data-route-id={route.id}
+            data-school-data={JSON.stringify(route.school)}
+          >
+            <div>
+              <strong>{route.name}</strong>
+              {route.start_label && (
+                <span style="color: #666;"> • From: {route.start_label}</span>
+              )}
+            </div>
+            <div style="font-size: 0.9rem; color: #666; margin-top: 0.25rem;">
+              <span style="text-transform: capitalize;">
+                {route.transportation_type}
+              </span>
+              {" • "}
+              {route.estimated_time_minutes} min
+              {route.school?.short_name && (
+                <span> • To: {route.school.short_name}</span>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div id="school-info" class="school-info">
+      <h4 id="school-name">School Information</h4>
+      <div class="info-row">
+        <span class="info-label">Type:</span>
+        <span id="school-type"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Address:</span>
+        <span id="school-address"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Phone:</span>
+        <span id="school-phone"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Email:</span>
+        <span id="school-email"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Website:</span>
+        <a id="school-website" href="#" target="_blank" style="color: #1976d2;"
+        ></a>
+      </div>
+      <div class="info-row">
+        <span class="info-label">MIUR Code:</span>
+        <span id="school-miur"></span>
+      </div>
+      <div class="info-row" id="canteen-row">
+        <span class="info-label">Canteen:</span>
+        <span id="school-canteen"></span>
+      </div>
+      <div class="info-row" id="boarding-row">
+        <span class="info-label">Boarding:</span>
+        <span id="school-boarding"></span>
+      </div>
+      <div class="info-row" id="description-row">
+        <span class="info-label">Description:</span>
+        <p id="school-description" style="margin: 0.25rem 0 0 0;"></p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const routeItems = document.querySelectorAll(".route-item");
+    const schoolInfo = document.getElementById("school-info");
+
+    routeItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        // Remove selection from all items
+        routeItems.forEach((ri) => ri.classList.remove("selected"));
+
+        // Add selection to clicked item
+        item.classList.add("selected");
+
+        // Get school data
+        const schoolData = JSON.parse(
+          item.getAttribute("data-school-data") || "{}"
+        );
+
+        if (schoolData && schoolData.name) {
+          // Populate school info
+          document.getElementById("school-name").textContent = schoolData.name;
+          document.getElementById("school-address").textContent =
+            schoolData.address || "N/A";
+          document.getElementById("school-phone").textContent =
+            schoolData.phone || "N/A";
+          document.getElementById("school-email").textContent =
+            schoolData.email || "N/A";
+          document.getElementById("school-miur").textContent =
+            schoolData.miur_code || "N/A";
+          document.getElementById("school-canteen").textContent =
+            schoolData.canteen ? "Yes" : "No";
+          document.getElementById("school-boarding").textContent =
+            schoolData.boarding ? "Yes" : "No";
+
+          const websiteLink = document.getElementById("school-website");
+          if (schoolData.website_url) {
+            websiteLink.textContent = schoolData.website_url;
+            websiteLink.href = schoolData.website_url;
+            websiteLink.parentElement.style.display = "block";
+          } else {
+            websiteLink.parentElement.style.display = "none";
+          }
+
+          const descriptionElem = document.getElementById("school-description");
+          if (schoolData.description) {
+            descriptionElem.textContent = schoolData.description;
+            document.getElementById("description-row").style.display = "block";
+          } else {
+            document.getElementById("description-row").style.display = "none";
+          }
+
+          // Show the school info panel
+          schoolInfo.classList.add("visible");
+        }
+      });
+    });
+  });
+</script>
