@@ -3,7 +3,7 @@ import { useState } from "react";
 import RoutesView from "./RoutesView.jsx";
 import styles from "./SchoolRoutesContainer.module.css";
 
-export default function SchoolRoutesContainer({ schools, routes }) {
+export default function SchoolRoutesContainer({ schools, routes, apiUrl }) {
   const [selectedSchoolId, setSelectedSchoolId] = useState(
     schools[0]?.id || null
   );
@@ -26,7 +26,14 @@ export default function SchoolRoutesContainer({ schools, routes }) {
                   selectedSchoolId === school.id ? styles.active : ""
                 }`}
               >
-                {school.name}
+                {school.logo?.id && (
+                  <img
+                    src={`${apiUrl}/assets/${school.logo.id}`}
+                    alt={school.logo.title || school.name}
+                    className={styles.schoolLogo}
+                  />
+                )}
+                <span>{school.name}</span>
               </button>
             </li>
           ))}

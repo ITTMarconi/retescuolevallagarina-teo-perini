@@ -8,49 +8,74 @@
 }
 
 .sidebar {
-  width: 250px;
-  background: #f8f8f8;
+  width: 300px;
+  background: transparent;
   padding: 1rem;
 }
 
 .sidebarTitle {
   font-size: 1.2rem;
   margin: 0 0 1rem 0;
+  color: var(--background-primary);
 }
 
 .schoolList {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .schoolListItem {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
 .schoolButton {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   border: none;
-  background: #e0e0e0;
-  color: #000;
-  border-radius: 6px;
+  background: transparent;
+  color: var(--background-primary);
   cursor: pointer;
-  transition: background 0.2s;
+
+  /* Hoverable styles */
+  border-radius: 0.6rem;
+  outline: 0.15rem solid var(--foreground-tertiary);
+  transition: 200ms;
+
+  /* Flexbox for logo and text */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
 }
 
 .schoolButton:hover {
-  background: #d0d0d0;
+  outline: 0.15rem solid var(--foreground-secondary);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: 100ms;
+  color: var(--tint-orange);
 }
 
 .schoolButton.active {
-  background: #1976d2;
-  color: #fff;
+  background: var(--background-primary);
+  color: var(--foreground-primary);
+  outline: 0.15rem solid var(--background-primary);
 }
 
 .schoolButton.active:hover {
-  background: #1976d2;
+  background: var(--background-primary);
+  color: var(--foreground-primary);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.schoolLogo {
+  height: 4rem;
+  width: auto;
+  object-fit: contain;
 }
 
 .mainContent {
@@ -70,16 +95,12 @@
 
   .schoolList {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 0.5rem;
   }
 
-  .schoolListItem {
-    margin-bottom: 0;
-  }
-
   .schoolButton {
-    width: auto;
-    padding: 0.5rem 1rem;
+    width: 100%;
   }
 }
+
