@@ -204,8 +204,7 @@ export default function MapComponent({ routes, selectedRouteId }) {
                 >
                   <Popup>
                     <div className={styles.popupContent}>
-                      <div className={styles.popupTitle}>{route.name}</div>
-                      <div>Punto {idx + 1}</div>
+                      <div className={styles.popupTitle}>Cambio di modalità</div>
                     </div>
                   </Popup>
                 </Marker>
