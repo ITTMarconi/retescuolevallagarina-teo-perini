@@ -13,9 +13,10 @@ import { PUBLIC_API_URL } from "astro:env/client";
 const INSTITUTES = await directus.request(
   readItems("schools", {
     // @ts-expect-error: "*.*" is a valid Directus field selector
-    fields: ["*", "*.*"],
+    fields: ["*", "*.*", "edu_links.*"],
   })
 );
+console.log("INSTITUTES:", JSON.stringify(INSTITUTES, null, 2));
 ---
 
 <Layout>
@@ -65,9 +66,11 @@ const INSTITUTES = await directus.request(
     let indirizziHtml = "";
     if (institute.edu_links && institute.edu_links.length > 0) {
       indirizziHtml =
-        '<div style="margin-top: 0.5rem;"><strong>Indirizzi:</strong><ul style="margin: 0.25rem 0; padding-left: 1.5rem;">';
-      institute.edu_links.forEach((indirizzo) => {
-        indirizziHtml += `<li><a href="/sede/${institute.id}/" style="color: var(--background-primary);">${indirizzo.name}</a></li>`;
+        '<div style="margin-top: 0.5rem;padding-bottom: 0.5rem;"><strong>Indirizzi:</strong><ul style="margin: 0.25rem 0; padding-left: 1.5rem;">';
+      institute.edu_links.forEach((eduLink) => {
+        // Use the link_url from the edu_link object
+        const linkUrl = eduLink.link_url || `/sede/${institute.id}/`;
+        indirizziHtml += `<li><a href="${linkUrl}" style="color: var(--background-primary);" target="_blank" rel="noopener noreferrer">${eduLink.name}</a></li>`;
       });
       indirizziHtml += "</ul></div>";
     }
@@ -242,6 +245,21 @@ const INSTITUTES = await directus.request(
   .leaflet-popup-content {
     margin: 12px;
     line-height: 1.4;
+  }
+
+  /* Style the close button */
+  .leaflet-popup-close-button {
+    top: 8px !important;
+    right: 8px !important;
+    padding: 4px 0px !important;
+    font-size: 1.5rem !important;
+    color: #a00 !important;
+  }
+
+  .leaflet-popup-close-button:hover {
+    color: var(--tint-orange) !important;
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    border-radius: 4px;
   }
 
   .leaflet-popup-content a {
