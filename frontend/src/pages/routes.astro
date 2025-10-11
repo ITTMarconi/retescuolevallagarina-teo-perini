@@ -282,6 +282,8 @@ let selectedSchoolId: string | null = "46942d76-5848-4ce9-8810-27eead208ba7";
     const routeItems = document.querySelectorAll(".route-item");
     const schoolInfo = document.getElementById("school-info");
 
+    if (!schoolInfo) return;
+
     routeItems.forEach((item) => {
       item.addEventListener("click", () => {
         // Remove selection from all items
@@ -296,36 +298,53 @@ let selectedSchoolId: string | null = "46942d76-5848-4ce9-8810-27eead208ba7";
         );
 
         if (schoolData && schoolData.name) {
-          // Populate school info
-          document.getElementById("school-name").textContent = schoolData.name;
-          document.getElementById("school-address").textContent =
-            schoolData.address || "N/A";
-          document.getElementById("school-phone").textContent =
-            schoolData.phone || "N/A";
-          document.getElementById("school-email").textContent =
-            schoolData.email || "N/A";
-          document.getElementById("school-miur").textContent =
-            schoolData.miur_code || "N/A";
-          document.getElementById("school-canteen").textContent =
-            schoolData.canteen ? "Yes" : "No";
-          document.getElementById("school-boarding").textContent =
-            schoolData.boarding ? "Yes" : "No";
+          // Populate school info with null checks
+          const schoolName = document.getElementById("school-name");
+          const schoolAddress = document.getElementById("school-address");
+          const schoolPhone = document.getElementById("school-phone");
+          const schoolEmail = document.getElementById("school-email");
+          const schoolMiur = document.getElementById("school-miur");
+          const schoolCanteen = document.getElementById("school-canteen");
+          const schoolBoarding = document.getElementById("school-boarding");
+          const websiteLink = document.getElementById(
+            "school-website"
+          ) as HTMLAnchorElement | null;
+          const descriptionElem = document.getElementById("school-description");
+          const descriptionRow = document.getElementById("description-row");
 
-          const websiteLink = document.getElementById("school-website");
-          if (schoolData.website_url) {
-            websiteLink.textContent = schoolData.website_url;
-            websiteLink.href = schoolData.website_url;
-            websiteLink.parentElement.style.display = "block";
-          } else {
-            websiteLink.parentElement.style.display = "none";
+          if (schoolName) schoolName.textContent = schoolData.name;
+          if (schoolAddress)
+            schoolAddress.textContent = schoolData.address || "N/A";
+          if (schoolPhone) schoolPhone.textContent = schoolData.phone || "N/A";
+          if (schoolEmail) schoolEmail.textContent = schoolData.email || "N/A";
+          if (schoolMiur)
+            schoolMiur.textContent = schoolData.miur_code || "N/A";
+          if (schoolCanteen)
+            schoolCanteen.textContent = schoolData.canteen ? "Yes" : "No";
+          if (schoolBoarding)
+            schoolBoarding.textContent = schoolData.boarding ? "Yes" : "No";
+
+          if (websiteLink) {
+            if (schoolData.website_url) {
+              websiteLink.textContent = schoolData.website_url;
+              websiteLink.href = schoolData.website_url;
+              if (websiteLink.parentElement) {
+                websiteLink.parentElement.style.display = "block";
+              }
+            } else {
+              if (websiteLink.parentElement) {
+                websiteLink.parentElement.style.display = "none";
+              }
+            }
           }
 
-          const descriptionElem = document.getElementById("school-description");
-          if (schoolData.description) {
-            descriptionElem.textContent = schoolData.description;
-            document.getElementById("description-row").style.display = "block";
-          } else {
-            document.getElementById("description-row").style.display = "none";
+          if (descriptionElem && descriptionRow) {
+            if (schoolData.description) {
+              descriptionElem.textContent = schoolData.description;
+              descriptionRow.style.display = "block";
+            } else {
+              descriptionRow.style.display = "none";
+            }
           }
 
           // Show the school info panel
