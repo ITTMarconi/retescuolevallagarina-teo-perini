@@ -78,19 +78,24 @@ export default function MapComponent({ routes, selectedRouteId }) {
                   opacity={isSelected ? 1 : 0.5}
                 >
                   <Popup>
-                    <strong>{route.name}</strong>
-                    <br />
-                    {route.description && (
-                      <>
-                        {route.description}
-                        <br />
-                      </>
-                    )}
-                    <em>Type: {route.transportation_type}</em>
-                    <br />
-                    <em>Time: {route.estimated_time_minutes} min</em>
-                    <br />
-                    <strong>School: {route.school?.name}</strong>
+                    <div>
+                      <strong>{route.name}</strong>
+                      <br />
+                      {route.description && (
+                        <>
+                          <div
+                            dangerouslySetInnerHTML={{ __html: route.description }}
+                            style={{ margin: "0.5rem 0" }}
+                          />
+                          <br />
+                        </>
+                      )}
+                      <em>Tipo: {route.transportation_type}</em>
+                      <br />
+                      <em>Tempo: {route.estimated_time_minutes} min</em>
+                      <br />
+                      <strong>Scuola: {route.school?.name}</strong>
+                    </div>
                   </Popup>
                 </Polyline>
               ))}
@@ -101,11 +106,11 @@ export default function MapComponent({ routes, selectedRouteId }) {
                   position={[route.start.coordinates[1], route.start.coordinates[0]]}
                 >
                   <Popup>
-                    <strong>{route.start_label || "Start Point"}</strong>
+                    <strong>{route.start_label || "Punto di Partenza"}</strong>
                     <br />
-                    <em>Route: {route.name}</em>
+                    <em>Percorso: {route.name}</em>
                     <br />
-                    <strong>To: {route.school?.name}</strong>
+                    <strong>Verso: {route.school?.name}</strong>
                   </Popup>
                 </Marker>
               )}
@@ -119,7 +124,7 @@ export default function MapComponent({ routes, selectedRouteId }) {
                   <Popup>
                     <strong>{route.name}</strong>
                     <br />
-                    Point {idx + 1}
+                    Punto {idx + 1}
                   </Popup>
                 </Marker>
               ))}
