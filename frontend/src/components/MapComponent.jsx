@@ -89,14 +89,14 @@ export default function MapComponent({ routes, selectedRouteId }) {
   const uniqueSchools = Array.from(schoolsMap.values());
 
   // Debug: log school data
-  console.log("Routes with schools:", routes.map(r => ({
-    routeName: r.name,
-    schoolId: r.school?.id,
-    schoolName: r.school?.name,
-    hasPosition: !!r.school?.position,
-    positionCoords: r.school?.position?.coordinates
-  })));
-  console.log("Unique schools to render:", uniqueSchools.length);
+  // console.log("Routes with schools:", routes.map(r => ({
+  //   routeName: r.name,
+  //   schoolId: r.school?.id,
+  //   schoolName: r.school?.name,
+  //   hasPosition: !!r.school?.position,
+  //   positionCoords: r.school?.position?.coordinates
+  // })));
+  // console.log("Unique schools to render:", uniqueSchools.length);
 
   return (
     <div className={styles.mapContainer}>

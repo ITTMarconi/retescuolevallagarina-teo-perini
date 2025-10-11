@@ -38,8 +38,8 @@ events.forEach((event) => {
     // Use the full ISO string to create Date objects
     const start = new Date(event.start_date!);
     const end = new Date(event.end_date!);
-    console.log("start", start);
-    console.log("end", end);
+    // console.log("start", start);
+    // console.log("end", end);
 
     // Handle potential invalid dates
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {

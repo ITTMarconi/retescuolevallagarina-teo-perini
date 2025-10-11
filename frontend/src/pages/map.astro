@@ -41,10 +41,10 @@ const INSTITUTES = await directus.request(
 
 <script is:inline define:vars={{ INSTITUTES, PUBLIC_API_URL }}>
   // take data from the db
-  console.log(
-    "INSTITUTES:",
-    INSTITUTES.map((inst) => inst.position)
-  );
+  //   console.log(
+  //     "INSTITUTES:",
+  //     INSTITUTES.map((inst) => inst.position)
+  //   );
 
   // create map
   var map = L.map("map").setView([45.89765, 11.03963], 14);
@@ -61,13 +61,39 @@ const INSTITUTES = await directus.request(
     //console.log(data);
     if (!institute.position) continue;
 
+    // Build indirizzi list
+    let indirizziHtml = "";
+    if (institute.edu_links && institute.edu_links.length > 0) {
+      indirizziHtml =
+        '<div style="margin-top: 0.5rem;"><strong>Indirizzi:</strong><ul style="margin: 0.25rem 0; padding-left: 1.5rem;">';
+      institute.edu_links.forEach((indirizzo) => {
+        indirizziHtml += `<li><a href="/sede/${institute.id}/" style="color: var(--background-primary);">${indirizzo.name}</a></li>`;
+      });
+      indirizziHtml += "</ul></div>";
+    }
+
+    // Build logo HTML
+    let logoHtml = "";
+    if (institute.logo && institute.logo.id) {
+      logoHtml = `<div style="text-align: center; margin-bottom: 0.5rem;">
+        <img src="${PUBLIC_API_URL}/assets/${institute.logo.id}"
+             alt="${institute.name}"
+             style="height: 60px; object-fit: contain;" />
+      </div>`;
+    }
+
     // create popup html text
-    let popup =
-      '<u><a href="/sede/' +
-      institute.id +
-      '/" class="font-regular">' +
-      institute.name +
-      "</a></u>";
+    let popup = `
+      <div style="min-width: 200px;">
+        ${logoHtml}
+        <div style="text-align: center;">
+          <u><a href="/sede/${institute.id}/" class="font-regular" style="font-size: 1.1rem;">
+            ${institute.name}
+          </a></u>
+        </div>
+        ${indirizziHtml}
+      </div>
+    `;
 
     // Create custom icon using school logo inside a marker shape
     var customIcon;
@@ -205,6 +231,36 @@ const INSTITUTES = await directus.request(
     background: rgba(0, 0, 0, 0.2);
     border-radius: 50%;
     filter: blur(2px);
+  }
+
+  /* Leaflet popup custom styling */
+  .leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    padding: 0;
+  }
+
+  .leaflet-popup-content {
+    margin: 12px;
+    line-height: 1.4;
+  }
+
+  .leaflet-popup-content a {
+    color: var(--background-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .leaflet-popup-content a:hover {
+    color: var(--tint-orange);
+    text-decoration: underline;
+  }
+
+  .leaflet-popup-content ul {
+    list-style-type: disc;
+  }
+
+  .leaflet-popup-content li {
+    margin: 0.25rem 0;
   }
 
   /* Old style - can be removed if not needed */
