@@ -88,8 +88,11 @@ console.log("Fetched routes:", JSON.stringify(routes[0], null, 2));
   }
 </style>
 
-<SchoolRoutesContainer
-  client:only="react"
-  schools={schoolsWithRoutes}
-  routes={routes}
-/>
+<Layout title="Percorsi di Trasporto">
+  <Navbar current_view="routes" />
+  <SchoolRoutesContainer
+    client:only="react"
+    schools={schoolsWithRoutes}
+    routes={routes}
+  />
+</Layout>

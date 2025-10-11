@@ -9,8 +9,9 @@ import directus from "../lib/directus";
 import type { Schema, components } from "../types/schema";
 
 type SiteSettings = components["schemas"]["ItemsSiteSettings"];
-const site_settings = await directus.request<SiteSettings>(readSingleton("site_settings"));
-
+const site_settings = await directus.request<SiteSettings>(
+  readSingleton("site_settings")
+);
 ---
 
 <Layout>
@@ -44,6 +45,10 @@ const site_settings = await directus.request<SiteSettings>(readSingleton("site_s
       <a href="/map/">
         <Icon code="e55b" color="var(--foreground-secondary)" />
         <span class="font-light">Mappa Scuole</span>
+      </a>
+      <a href="/routes/">
+        <Icon code="e52f" color="var(--foreground-secondary)" />
+        <span class="font-light">Percorsi di Trasporto</span>
       </a>
     </nav>
   </main>
