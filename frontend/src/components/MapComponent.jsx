@@ -2,6 +2,7 @@
 import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import styles from "./MapComponent.module.css";
 
 // Fix default marker icon issue in react-leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -35,19 +36,11 @@ export default function MapComponent({ routes, selectedRouteId }) {
   const defaultCenter = allCoordinates[0] || [45.89, 11.04];
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "500px",
-        maxWidth: "100vw",
-        borderRadius: "8px",
-        overflow: "hidden",
-      }}
-    >
+    <div className={styles.mapContainer}>
       <MapContainer
         center={defaultCenter}
         zoom={13}
-        style={{ width: "100%", height: "100%" }}
+        className={styles.leafletMap}
         scrollWheelZoom={true}
       >
         <TileLayer
@@ -78,23 +71,21 @@ export default function MapComponent({ routes, selectedRouteId }) {
                   opacity={isSelected ? 1 : 0.5}
                 >
                   <Popup>
-                    <div>
-                      <strong>{route.name}</strong>
-                      <br />
+                    <div className={styles.popupContent}>
+                      <div className={styles.popupTitle}>{route.name}</div>
                       {route.description && (
-                        <>
-                          <div
-                            dangerouslySetInnerHTML={{ __html: route.description }}
-                            style={{ margin: "0.5rem 0" }}
-                          />
-                          <br />
-                        </>
+                        <div
+                          className={styles.popupDescription}
+                          dangerouslySetInnerHTML={{ __html: route.description }}
+                        />
                       )}
-                      <em>Tipo: {route.transportation_type}</em>
-                      <br />
-                      <em>Tempo: {route.estimated_time_minutes} min</em>
-                      <br />
-                      <strong>Scuola: {route.school?.name}</strong>
+                      <div>
+                        <em>Tipo: {route.transportation_type}</em>
+                        <br />
+                        <em>Tempo: {route.estimated_time_minutes} min</em>
+                        <br />
+                        <strong>Scuola: {route.school?.name}</strong>
+                      </div>
                     </div>
                   </Popup>
                 </Polyline>
@@ -106,11 +97,16 @@ export default function MapComponent({ routes, selectedRouteId }) {
                   position={[route.start.coordinates[1], route.start.coordinates[0]]}
                 >
                   <Popup>
-                    <strong>{route.start_label || "Punto di Partenza"}</strong>
-                    <br />
-                    <em>Percorso: {route.name}</em>
-                    <br />
-                    <strong>Verso: {route.school?.name}</strong>
+                    <div className={styles.popupContent}>
+                      <div className={styles.popupTitle}>
+                        {route.start_label || "Punto di Partenza"}
+                      </div>
+                      <div>
+                        <em>Percorso: {route.name}</em>
+                        <br />
+                        <strong>Verso: {route.school?.name}</strong>
+                      </div>
+                    </div>
                   </Popup>
                 </Marker>
               )}
@@ -122,9 +118,10 @@ export default function MapComponent({ routes, selectedRouteId }) {
                   position={[geom.coordinates[1], geom.coordinates[0]]}
                 >
                   <Popup>
-                    <strong>{route.name}</strong>
-                    <br />
-                    Punto {idx + 1}
+                    <div className={styles.popupContent}>
+                      <div className={styles.popupTitle}>{route.name}</div>
+                      <div>Punto {idx + 1}</div>
+                    </div>
                   </Popup>
                 </Marker>
               ))}

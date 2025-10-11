@@ -1,6 +1,7 @@
 // src/components/RoutesView.jsx
 import { useState, useEffect } from "react";
 import MapComponent from "./MapComponent.jsx";
+import styles from "./RoutesView.module.css";
 
 export default function RoutesView({ routes }) {
   const [selectedRouteId, setSelectedRouteId] = useState(null);
@@ -18,70 +19,37 @@ export default function RoutesView({ routes }) {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <MapComponent
         key={`map-${routes.length}-${selectedRouteId}`}
         routes={routes}
         selectedRouteId={selectedRouteId}
       />
 
-      <h3 style={{ marginTop: "1rem" }}>Percorsi di Trasporto</h3>
-      <p style={{ color: "#666", fontSize: "0.9rem" }}>
+      <h3 className={styles.title}>Percorsi di Trasporto</h3>
+      <p className={styles.subtitle}>
         Clicca su un percorso per evidenziarlo sulla mappa e vedere i dettagli
       </p>
 
-      <ul
-        style={{
-          listStyle: "none",
-          padding: 0,
-          margin: "1rem 0",
-        }}
-      >
+      <ul className={styles.routesList}>
         {routes.map((route) => (
           <li
             key={route.id}
             onClick={() => handleRouteClick(route)}
-            style={{
-              padding: "0.75rem",
-              marginBottom: "0.5rem",
-              background:
-                selectedRouteId === route.id ? "#e3f2fd" : "#f5f5f5",
-              borderRadius: "6px",
-              cursor: "pointer",
-              transition: "all 0.2s",
-              border:
-                selectedRouteId === route.id
-                  ? "2px solid #1976d2"
-                  : "2px solid transparent",
-            }}
-            onMouseEnter={(e) => {
-              if (selectedRouteId !== route.id) {
-                e.currentTarget.style.background = "#e8e8e8";
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (selectedRouteId !== route.id) {
-                e.currentTarget.style.background = "#f5f5f5";
-              }
-            }}
+            className={`${styles.routeItem} ${
+              selectedRouteId === route.id ? styles.selected : ""
+            }`}
           >
-            <div>
-              <strong>{route.name}</strong>
+            <div className={styles.routeHeader}>
+              <span className={styles.routeName}>{route.name}</span>
               {route.start_label && (
-                <span style={{ color: "#666" }}>
-                  {" "}
+                <span className={styles.routeStart}>
                   • Da: {route.start_label}
                 </span>
               )}
             </div>
-            <div
-              style={{
-                fontSize: "0.9rem",
-                color: "#666",
-                marginTop: "0.25rem",
-              }}
-            >
-              <span style={{ textTransform: "capitalize" }}>
+            <div className={styles.routeMeta}>
+              <span className={styles.transportationType}>
                 {route.transportation_type}
               </span>
               {" • "}
@@ -95,20 +63,12 @@ export default function RoutesView({ routes }) {
       </ul>
 
       {selectedRoute && selectedRoute.description && (
-        <div
-          style={{
-            marginTop: "1rem",
-            padding: "1rem",
-            background: "#fff3e0",
-            border: "1px solid #ff9800",
-            borderRadius: "8px",
-          }}
-        >
-          <h4 style={{ marginTop: 0, color: "#f57c00" }}>
+        <div className={styles.detailsBox}>
+          <h4 className={styles.detailsTitle}>
             Dettagli Percorso: {selectedRoute.name}
           </h4>
           <div
-            style={{ margin: "0.5rem 0", lineHeight: "1.6" }}
+            className={styles.detailsContent}
             dangerouslySetInnerHTML={{ __html: selectedRoute.description }}
           />
         </div>

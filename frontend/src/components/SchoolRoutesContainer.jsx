@@ -1,6 +1,7 @@
 // src/components/SchoolRoutesContainer.jsx
 import { useState } from "react";
 import RoutesView from "./RoutesView.jsx";
+import styles from "./SchoolRoutesContainer.module.css";
 
 export default function SchoolRoutesContainer({ schools, routes }) {
   const [selectedSchoolId, setSelectedSchoolId] = useState(
@@ -13,57 +14,17 @@ export default function SchoolRoutesContainer({ schools, routes }) {
     : routes;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        gap: "1rem",
-        minHeight: "100vh",
-      }}
-      className="routes-container-wrapper"
-    >
-      <aside
-        style={{
-          width: "250px",
-          background: "#f8f8f8",
-          padding: "1rem",
-        }}
-        className="sidebar-wrapper"
-      >
-        <h2 style={{ fontSize: "1.2rem" }}>Scuole</h2>
-        <ul
-          style={{
-            listStyle: "none",
-            padding: 0,
-            margin: 0,
-          }}
-        >
+    <div className={styles.container}>
+      <aside className={styles.sidebar}>
+        <h2 className={styles.sidebarTitle}>Scuole</h2>
+        <ul className={styles.schoolList}>
           {schools.map((school) => (
-            <li key={school.id} style={{ marginBottom: "0.5rem" }}>
+            <li key={school.id} className={styles.schoolListItem}>
               <button
                 onClick={() => setSelectedSchoolId(school.id)}
-                style={{
-                  width: "100%",
-                  padding: "0.75rem",
-                  fontSize: "1rem",
-                  border: "none",
-                  background:
-                    selectedSchoolId === school.id ? "#1976d2" : "#e0e0e0",
-                  color: selectedSchoolId === school.id ? "#fff" : "#000",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  transition: "background 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  if (selectedSchoolId !== school.id) {
-                    e.currentTarget.style.background = "#d0d0d0";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (selectedSchoolId !== school.id) {
-                    e.currentTarget.style.background = "#e0e0e0";
-                  }
-                }}
+                className={`${styles.schoolButton} ${
+                  selectedSchoolId === school.id ? styles.active : ""
+                }`}
               >
                 {school.name}
               </button>
@@ -71,13 +32,7 @@ export default function SchoolRoutesContainer({ schools, routes }) {
           ))}
         </ul>
       </aside>
-      <main
-        style={{
-          flex: 1,
-          padding: "1rem",
-        }}
-        className="main-content-wrapper"
-      >
+      <main className={styles.mainContent}>
         <RoutesView routes={filteredRoutes} />
       </main>
     </div>
