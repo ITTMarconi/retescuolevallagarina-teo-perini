@@ -1,7 +1,6 @@
 import { createDirectus, rest } from "@directus/sdk";
 import { PUBLIC_API_URL } from "astro:env/client";
 import type { Schema } from "../types/schema.d.ts";
-import type { CustomDirectusTypes } from "../types/directus.d.ts";
 
 export type SiteSettings = {
   site_logo: string;
@@ -71,7 +70,7 @@ type Schema1 = {
 };
 
 export const client =
-  createDirectus<CustomDirectusTypes>(PUBLIC_API_URL).with(rest());
+  createDirectus<Schema & Schema1>(PUBLIC_API_URL).with(rest());
 
 const directus = createDirectus<Schema & Schema1>(PUBLIC_API_URL).with(rest());
 
