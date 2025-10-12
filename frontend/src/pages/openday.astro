@@ -50,13 +50,13 @@ const site_settings = await directus.request<SiteSettings>(
         (school) =>
           typeof school.events !== "string" &&
           school.events && (
-            <article>
+            <section class="openday-institute">
               <a href={`/sede/${school.id}`}>
                 <h2 class="font-regular">{school.name}</h2>
                 <hr />
               </a>
               <OpenDaysList institute={school} />
-            </article>
+            </section>
           )
       )
     }
@@ -78,6 +78,20 @@ const site_settings = await directus.request<SiteSettings>(
 
   /* Openday Istituti */
   /* ******************************************************************************** */
+  .openday-institute {
+    width: 100%;
+    max-width: 80ch;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1rem;
+    padding: 1rem;
+    border: 2px solid var(--foreground-secondary);
+    border-radius: 0.5rem;
+  }
 
   a {
     text-decoration: underline;

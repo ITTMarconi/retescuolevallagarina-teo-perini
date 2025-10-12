@@ -22,7 +22,7 @@ if (!Array.isArray(openDays)) {
 }
 ---
 
-<article id={`open-days-list-${institute.miur_code}`}>
+<section id={`open-days-list-${institute.miur_code}`}>
   {
     openDays
       .filter((orario: string | components["schemas"]["ItemsEvents"]) => {
@@ -46,31 +46,31 @@ if (!Array.isArray(openDays)) {
         const className = start < now ? "past" : "future";
 
         return (
-          <section data-orario={orario.start_date}>
-            <div class={className}>
-              <span>{getDay(start)}</span>
-              <span>
+          <article data-orario={orario.start_date}>
+            <time datetime={orario.start_date} class={className}>
+              <span class="day">{getDay(start)}</span>
+              <span class="date">
                 {getMonth(start)}/{getYear(start)}
               </span>
-            </div>
+            </time>
 
-            <div>
-              <span>
+            <div class="event-details">
+              <h3 class="event-title">
                 {orario.title} - {getHours(start)}:{getMinutes(start)} -{" "}
                 {getHours(end)}:{getMinutes(end)}
-              </span>
-              <span>
+              </h3>
+              <p class="event-description">
                 <Fragment set:html={orario.description} />
-              </span>
+              </p>
             </div>
-          </section>
+          </article>
         );
       })
   }
-</article>
+</section>
 
 <style>
-  article {
+  section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -85,7 +85,7 @@ if (!Array.isArray(openDays)) {
     box-sizing: border-box;
   }
 
-  article > section {
+  article {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -96,16 +96,16 @@ if (!Array.isArray(openDays)) {
     gap: 1rem;
   }
 
-  section > div {
+  time {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-  /* Ball */
+  /* Date badge */
   /* ******************************************************************************** */
 
-  section > div:first-child {
+  time {
     padding: 0.8rem 0.2rem;
     width: 3rem;
 
@@ -117,11 +117,11 @@ if (!Array.isArray(openDays)) {
     gap: 0.1rem;
   }
 
-  section > div:first-child > span:first-child {
+  time .day {
     font-size: 1.8rem;
   }
 
-  section > div:first-child > span:last-child {
+  time .date {
     font-size: 1rem;
   }
 
@@ -133,41 +133,44 @@ if (!Array.isArray(openDays)) {
     background-color: var(--background-primary);
   }
 
-  /* Description */
+  /* Event details */
   /* ******************************************************************************** */
 
-  section > div:nth-child(2) {
+  .event-details {
     flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: flex-start;
 
     gap: 0.5rem;
   }
 
-  section > div:nth-child(2) > span:first-child {
+  .event-title {
     font-size: 1.3rem;
     font-weight: 500;
+    margin: 0;
   }
 
-  section > div:nth-child(2) > span:last-child {
-    /* max-width: 25ch; */
-
+  .event-description {
     font-size: 1rem;
     line-height: 1.5rem;
     text-wrap: wrap;
     overflow-wrap: break-word;
+    margin: 0;
   }
 
   /* For desktop: */
   @media only screen and (min-width: 768px) {
-    article {
+    section {
       max-width: 50rem;
     }
 
-    article > section {
+    article {
       max-width: 48rem;
     }
 
-    section > div:first-child {
+    time {
       height: 5rem;
       width: 5.5rem;
 
@@ -176,7 +179,7 @@ if (!Array.isArray(openDays)) {
       border-radius: 4rem;
     }
 
-    section > div:nth-child(2) > span:last-child {
+    .event-description {
       max-width: 50ch;
     }
   }
