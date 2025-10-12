@@ -21,6 +21,23 @@
     padding: 2rem;
 } */
 
+/* Reset margins and paddings */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--foreground-primary);
+  color: var(--background-primary);
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  font-size: 1rem;
+
+}
+
 h1,
 h2 {
   margin: 0;
