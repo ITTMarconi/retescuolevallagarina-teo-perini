@@ -92,6 +92,7 @@ if (!Array.isArray(openDays)) {
     align-items: center;
     width: 100%;
     max-width: 40rem;
+    overflow: hidden;
 
     gap: 1rem;
   }
@@ -138,6 +139,7 @@ if (!Array.isArray(openDays)) {
 
   .event-details {
     flex-basis: 100%;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -150,6 +152,11 @@ if (!Array.isArray(openDays)) {
     font-size: 1.3rem;
     font-weight: 500;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    width: 100%;
   }
 
   .event-description {
@@ -157,7 +164,23 @@ if (!Array.isArray(openDays)) {
     line-height: 1.5rem;
     text-wrap: wrap;
     overflow-wrap: break-word;
+    word-break: break-word;
     margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .event-description :global(*) {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .event-description :global(img),
+  .event-description :global(video),
+  .event-description :global(iframe) {
+    max-width: 100%;
+    height: auto;
   }
 
   /* For desktop: */
