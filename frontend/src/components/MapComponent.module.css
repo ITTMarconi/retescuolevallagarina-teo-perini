@@ -1,4 +1,5 @@
 /* MapComponent styles */
+@import "../styles/common.css";
 
 .mapContainer {
   width: 100%;
@@ -25,6 +26,58 @@
 
 .popupDescription {
   margin: 0.5rem 0;
+}
+
+/* Custom school marker styles */
+:global(.custom-school-marker) {
+  background: transparent !important;
+  border: none !important;
+}
+
+:global(.marker-pin) {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background: #3a737d; /* var(--background-primary) */
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 3px solid white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:global(.marker-logo-container) {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: white;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:global(.marker-logo) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 2px;
+}
+
+:global(.marker-shadow) {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  filter: blur(2px);
 }
 
 /* Responsive design */

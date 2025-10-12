@@ -39,7 +39,7 @@ export default function SchoolRoutesContainer({ schools, routes, apiUrl }) {
         </ul>
       </aside>
       <main className={styles.mainContent}>
-        <RoutesView routes={filteredRoutes} />
+        <RoutesView routes={filteredRoutes} apiUrl={apiUrl} />
       </main>
     </div>
   );

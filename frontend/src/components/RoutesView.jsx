@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import MapComponent from "./MapComponent.jsx";
 import styles from "./RoutesView.module.css";
 
-export default function RoutesView({ routes }) {
+export default function RoutesView({ routes, apiUrl }) {
   const [selectedRouteId, setSelectedRouteId] = useState(null);
   const [selectedRoute, setSelectedRoute] = useState(null);
 
@@ -24,6 +24,7 @@ export default function RoutesView({ routes }) {
         key={`map-${routes.length}-${selectedRouteId}`}
         routes={routes}
         selectedRouteId={selectedRouteId}
+        apiUrl={apiUrl}
       />
 
       <h3 className={styles.title}>Percorsi di Trasporto</h3>
