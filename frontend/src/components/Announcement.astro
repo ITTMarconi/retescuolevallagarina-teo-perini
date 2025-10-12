@@ -1,0 +1,87 @@
+---
+// src/components/Announcement.astro
+export interface Props {
+  content?: string | null;
+  class?: string;
+}
+
+const { content, class: className = "" } = Astro.props;
+---
+
+{
+  content && (
+    <article class:list={["hoverable announcement", className]}>
+      <Fragment set:html={content} />
+    </article>
+  )
+}
+
+<style>
+  .announcement {
+    background-color: var(--background-secondary);
+    border-left: 0.4rem solid var(--tint-orange);
+  }
+
+  article {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  article:global(.first-article) {
+    width: calc(100% - 2rem);
+    padding: 2rem;
+  }
+
+  article :global(h1) {
+    text-align: center;
+  }
+
+  article :global(span) {
+    text-align: center;
+  }
+
+  article :global(p) {
+    margin: 1.2rem 0 0 0;
+    text-align: center;
+    line-height: 1.5rem;
+  }
+
+  article :global(div) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  article :global(div > span) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  article :global(div > span > a) {
+    line-height: 1.5rem;
+  }
+
+  /* For desktop: */
+  @media only screen and (min-width: 768px) {
+    article:global(.first-article) {
+      width: calc(100% - 2rem);
+      padding: 2rem;
+    }
+
+    article {
+      max-width: 80ch;
+      width: calc(100% - 4rem);
+      padding: 2rem;
+    }
+
+    article :global(div > span) {
+      text-align: right;
+      flex-direction: row;
+      gap: 1rem;
+    }
+  }
+</style>

@@ -10,6 +10,7 @@ import { SERVER_ADDRESS, SERVER_PORT } from "../../../Data/constants.ts";
 
 import Navbar from "../components/Navbar.astro";
 import OpenDaysList from "../components/OpenDaysList.astro";
+import Announcement from "../components/Announcement.astro";
 
 type Event = components["schemas"]["ItemsEvents"];
 
@@ -19,153 +20,92 @@ import directus from "../lib/directus";
 const { id } = Astro.params;
 
 const allEvents = await directus.request(
-    readItems("events", {
-        // @ts-expect-error: "*.*" is a valid Directus field selector
-        fields: ["*", "*.*"],
-    }),
+  readItems("events", {
+    // @ts-expect-error: "*.*" is a valid Directus field selector
+    fields: ["*", "*.*"],
+  })
 );
 type SiteSettings = components["schemas"]["ItemsSiteSettings"];
 const site_settings = await directus.request<SiteSettings>(
-    readSingleton("site_settings"),
+  readSingleton("site_settings")
 );
 
 const date = new Date();
 
 let month = date.getMonth();
 let year = date.getFullYear();
-
-
-
 ---
 
 <Layout>
-    <Navbar current_view="calendar" />
-    <main>
-        <article class="hoverable">
-            <Fragment set:html={site_settings.open_days_intro} />
-        </article>
+  <Navbar current_view="calendar" />
+  <main>
+    <Announcement
+      content={site_settings.open_days_intro}
+      class="first-article"
+    />
 
-        <h1>Calendario Scuole Aperte</h1>
-        <p>Eventi programmati nelle varie scuole</p>
+    <h1>Calendario Scuole Aperte</h1>
+    <p>Eventi programmati nelle varie scuole</p>
 
-        {/* Use the imported Astro component */}
-        <InteractiveCalendar
-            events={allEvents}
-            initialYear={year}
-            initialMonth={month}
-        />
-    </main>
+    {/* Use the imported Astro component */}
+    <InteractiveCalendar
+      events={allEvents}
+      initialYear={year}
+      initialMonth={month}
+    />
+  </main>
 </Layout>
 
 <style>
-    main {
-        width: calc(100% - 4rem);
-        padding: 2rem;
+  main {
+    width: calc(100% - 4rem);
+    padding: 2rem;
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-        gap: 2rem;
-    }
+    gap: 2rem;
+  }
 
-    /* Banner */
-    /* ******************************************************************************** */
+  /* Openday Istituti */
+  /* ******************************************************************************** */
 
-    main > article:first-child {
-        width: calc(100% - 2rem);
-        padding: 2rem;
-    }
+  a {
+    text-decoration: underline;
+  }
+
+  article > a {
+    padding: 0.4rem 0 0.4rem 0.6rem;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  article > a > h2 {
+    max-width: 30ch;
+
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  a > hr {
+    width: 80%;
+  }
+
+  /* For desktop: */
+  @media only screen and (min-width: 768px) {
     main > article {
-        width: 100%;
-        padding: 1rem;
+      max-width: 80ch;
+      width: calc(100% - 4rem);
+      padding: 2rem;
     }
+  }
 
-    main > article > div > h1 {
-        text-align: center;
-    }
-
-    main > article > div > span {
-        text-align: center;
-    }
-
-    main > article > p {
-        margin: 1.2rem 0 0 0;
-        text-align: center;
-    }
-
-    main > article > p,
-    main > article > div > span > a {
-        line-height: 1.5rem;
-    }
-
-    main > article > div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    main > article > div > span {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* Openday Istituti */
-    /* ******************************************************************************** */
-
-    a {
-        text-decoration: underline;
-    }
-
-    article > a {
-        padding: 0.4rem 0 0.4rem 0.6rem;
-
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    article > a > h2 {
-        max-width: 30ch;
-
-        font-size: 1.8rem;
-        text-align: center;
-    }
-
-    a > hr {
-        width: 80%;
-    }
-
-    /* For desktop: */
-    @media only screen and (min-width: 768px) {
-        main > article:first-child {
-            width: calc(100% - 2rem);
-            padding: 2rem;
-        }
-        main > article {
-            max-width: 80ch;
-
-            width: calc(100% - 4rem);
-            padding: 2rem;
-        }
-
-        main > article > div > span {
-            text-align: right;
-        }
-
-        main > article > div > span {
-            flex-direction: row;
-            gap: 1rem;
-        }
-    }
-
-    /* For wide-desktop: */
-    @media only screen and (min-width: 1536px) {
-    }
+  /* For wide-desktop: */
+  @media only screen and (min-width: 1536px) {
+  }
 </style>
