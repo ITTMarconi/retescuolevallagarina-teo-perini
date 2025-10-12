@@ -32,7 +32,7 @@ export default function SchoolRoutesContainer({ schools, routes, apiUrl }) {
                     className={styles.schoolLogo}
                   />
                 )}
-                <span>{school.name}</span>
+                <div>{school.name}</div>
               </button>
             </li>
           ))}
