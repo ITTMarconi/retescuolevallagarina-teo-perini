@@ -17,11 +17,12 @@ const { id } = Astro.params;
 //const OPENDAYS_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/opendays/${id}`);
 // const OPENDAYS: OpenDays = await OPENDAYS_RAW.json();
 
-const INSTITUTE = await directus.request(
+const INSTITUTE = (await directus.request(
   readItem("schools", id as string, {
+    // @ts-ignore - Directus SDK accepts nested field selectors but TypeScript doesn't recognize them
     fields: ["*", "*.*", "edu_links.educational_path.name"],
   })
-);
+)) as components["schemas"]["ItemsSchools"];
 
 const assetUrl = (fileId: string | null | undefined) =>
   fileId ? `${PUBLIC_API_URL}/assets/${fileId}` : null;
@@ -42,8 +43,8 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
 
       <section>
         <img
-          src={`${PUBLIC_API_URL}/assets/${INSTITUTE.logo?.id}`}
-          alt={`${INSTITUTE.logo?.title}`}
+          src={`${PUBLIC_API_URL}/assets/${typeof INSTITUTE.logo === "string" ? INSTITUTE.logo : INSTITUTE.logo?.id}`}
+          alt={`${typeof INSTITUTE.logo === "string" ? "Logo" : INSTITUTE.logo?.title}`}
         />
 
         <nav>
@@ -82,34 +83,37 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
           <hr />
 
           <div class="videos-grid">
-            {VIDEOS.map((v: components["schemas"]["ItemsVideos"]) => (
-              <figure>
-                <figcaption>{v.title}</figcaption>
-                {v.video_file ? (
-                  <video
-                    src={assetUrl(
-                      typeof v.video_file === "string"
-                        ? v.video_file
-                        : v.video_file?.id
-                    )}
-                    controls
-                  />
-                ) : v.youtube_id ? (
-                  <div class="youtube-wrapper">
-                    <iframe
-                      src={`https://www.youtube.com/embed/${v.youtube_id}`}
-                      title={v.title || "YouTube video"}
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen
+            {VIDEOS.map((v: string | components["schemas"]["ItemsVideos"]) => {
+              if (typeof v === "string") return null;
+              return (
+                <figure>
+                  <figcaption>{v.title}</figcaption>
+                  {v.video_file ? (
+                    <video
+                      src={assetUrl(
+                        typeof v.video_file === "string"
+                          ? v.video_file
+                          : v.video_file?.id
+                      )}
+                      controls
                     />
-                  </div>
-                ) : (
-                  <p>No media available</p>
-                )}
-                {v.description && <p class="video-desc">{v.description}</p>}
-              </figure>
-            ))}
+                  ) : v.youtube_id ? (
+                    <div class="youtube-wrapper">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${v.youtube_id}`}
+                        title={v.title || "YouTube video"}
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      />
+                    </div>
+                  ) : (
+                    <p>No media available</p>
+                  )}
+                  {v.description && <p class="video-desc">{v.description}</p>}
+                </figure>
+              );
+            })}
           </div>
         </section>
       )
