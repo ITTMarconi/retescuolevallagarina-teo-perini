@@ -16,7 +16,7 @@ const site_settings = await directus.request<SiteSettings>(
 
 <Layout>
   <main>
-    <h1 class="font-regular">
+    <h1 class="site-title">
       <span
         >{site_settings.site_title}
         <img
@@ -58,15 +58,15 @@ const site_settings = await directus.request<SiteSettings>(
 
 <style is:global>
   main > p {
-    margin: 2rem 1rem;
+    margin: 2rem 3rem 0rem;
     align-self: flex-start;
-    font-size: 1.5rem;
+    font-size: 2.7rem;
 
     color: var(--foreground-secondary);
     text-align: left;
   }
 
-  main > p > span {
+  main > p > strong {
     color: var(--foreground-primary);
     font-weight: 900;
   }
@@ -75,7 +75,7 @@ const site_settings = await directus.request<SiteSettings>(
 <style>
   main {
     width: calc(100% - 2rem);
-    height: calc(100% - 2.4rem);
+    min-height: calc(100% - 2.4rem);
     padding: 1.2rem 1rem;
 
     background-color: var(--background-primary);
@@ -96,10 +96,7 @@ const site_settings = await directus.request<SiteSettings>(
     color: var(--foreground-secondary);
     line-height: 1.5rem;
     margin-top: 0.6rem;
-    margin-left: 1rem;
-  }
-
-  h1 > span {
+    margin-left: 0rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,8 +109,8 @@ const site_settings = await directus.request<SiteSettings>(
 
   nav {
     width: 100%;
-    height: auto;
     margin-top: 2rem;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -137,11 +134,11 @@ const site_settings = await directus.request<SiteSettings>(
   }
 
   nav span:first-child {
-    font-size: 6rem;
+    font-size: 8rem;
     color: var(--foreground-secondary);
   }
   nav span:last-child {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 500;
     color: var(--foreground-secondary);
   }
@@ -154,28 +151,27 @@ const site_settings = await directus.request<SiteSettings>(
     }
     nav {
       flex-direction: row;
-      margin-top: 2rem;
+      margin-top: 1rem;
       overflow: visible;
       flex-wrap: wrap;
-      gap: 2rem 3rem;
-      align-items: center;
+      gap: 0rem 3rem;
+      align-items: flex-start;
     }
     a {
       margin: 1rem;
       overflow: visible;
     }
-    /* Odd items (1st, 3rd, 5th) - positioned up */
+    /* Odd items positioned up */
     a:nth-child(odd) {
       align-self: flex-start;
-      margin-bottom: 4rem;
     }
-    /* Even items (2nd, 4th) - positioned down */
+    /* Even items positioned down */
     a:nth-child(even) {
       align-self: flex-end;
-      margin-top: 4rem;
+      margin-top: 5rem;
     }
     nav span:first-child {
-      font-size: 8rem;
+      font-size: 10rem;
       color: var(--foreground-secondary);
       transition: all 0.3s;
     }
@@ -196,29 +192,23 @@ const site_settings = await directus.request<SiteSettings>(
   /* For desktop: */
   @media only screen and (min-width: 768px) {
     main {
-      padding: 3rem 2rem;
+      padding: 1.2rem 1rem;
     }
     nav {
-      height: auto;
+      height: 50%;
       margin-top: 3rem;
-      gap: 2rem 4rem;
-      align-items: center;
+      gap: 0rem 4rem;
+      align-items: flex-start;
     }
     a {
       margin: 1.5rem;
     }
-    /* Odd items positioned up */
-    a:nth-child(odd) {
-      align-self: flex-start;
-      margin-bottom: 5rem;
-    }
-    /* Even items positioned down */
+    /* Even items positioned down with more offset */
     a:nth-child(even) {
-      align-self: flex-end;
-      margin-top: 5rem;
+      margin-top: 6rem;
     }
     nav span:first-child {
-      font-size: 9rem;
+      font-size: 12rem;
       color: var(--foreground-secondary);
     }
   }
