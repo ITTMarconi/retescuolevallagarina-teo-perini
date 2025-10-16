@@ -5,11 +5,9 @@ import InteractiveCalendar from "../components/InteractiveCalendar.astro";
 import type { components } from "../types/schema";
 import "../styles/common.css";
 
-import type { Institute, OpenDays, Sede } from "../../../Data/types";
-import { SERVER_ADDRESS, SERVER_PORT } from "../../../Data/constants.ts";
+import type { Sede } from "../../../Data/types";
 
 import Navbar from "../components/Navbar.astro";
-import OpenDaysList from "../components/OpenDaysList.astro";
 import Announcement from "../components/Announcement.astro";
 
 type Event = components["schemas"]["ItemsEvents"];
