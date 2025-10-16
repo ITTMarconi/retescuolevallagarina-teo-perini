@@ -25,8 +25,11 @@ const formatDate = (date: Date): string => {
 //console.log(events);
 // --- Helper functions and data processing (Server-Side) ---
 const formatDateForLookup = (date: Date): string => {
-  // Format specifically for the keys in eventsByDate (YYYY-MM-DD)
-  return date.toISOString().split("T")[0];
+  // Format in local time (YYYY-MM-DD) to avoid timezone issues
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 };
 
 // Group events by date (YYYY-MM-DD)
@@ -46,14 +49,17 @@ events.forEach((event) => {
       return; // Skip this event
     }
 
-    let current = new Date(start);
-    // Set current to the beginning of its day (local time) for consistent looping
-    current.setHours(0, 0, 0, 0);
-
-    // Create a loop end date based on the original end date
-    const loopEndDate = new Date(end);
-    // Set loopEndDate to the beginning of its day (local time) for comparison
-    loopEndDate.setHours(0, 0, 0, 0);
+    // Create date objects in local time (no time component)
+    let current = new Date(
+      start.getFullYear(),
+      start.getMonth(),
+      start.getDate()
+    );
+    const loopEndDate = new Date(
+      end.getFullYear(),
+      end.getMonth(),
+      end.getDate()
+    );
 
     // Loop while the date part of current is less than or equal to the date part of end
     while (current <= loopEndDate) {
