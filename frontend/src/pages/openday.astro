@@ -15,18 +15,13 @@ type Event = components["schemas"]["ItemsEvents"];
 
 import { readItems, readSingleton } from "@directus/sdk";
 import directus from "../lib/directus";
+import { SCHOOL_OPENDAY_FIELDS, SORT_SCHOOLS_BY_NAME } from "../lib/directus-queries";
 
 const INSTITUTES = await directus.request(
   readItems("schools", {
-    // @ts-expect-error: "*.*" is a valid Directus field selector
-    fields: ["*", "*.*", "events.school.*", "events.school.*.*"],
-  })
-);
-
-const ALL_OPENDAYS = await directus.request(
-  readItems("events", {
-    // @ts-expect-error: "*.*" is a valid Directus field selector
-    fields: ["*", "*.*"],
+    fields: SCHOOL_OPENDAY_FIELDS as unknown as string[],
+    sort: SORT_SCHOOLS_BY_NAME as unknown as string[],
+    limit: -1,
   })
 );
 

@@ -4,28 +4,23 @@ import OpenDaysList from "../../components/OpenDaysList.astro";
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Icon from "../../components/Icon.astro";
-import { PUBLIC_API_URL } from "astro:env/client";
 // @ts-ignore - Module works correctly at runtime, TypeScript language server can't resolve types
 import { readItem } from "@directus/sdk";
 import directus from "../../lib/directus";
 import { type components } from "../../types/schema";
+import { SCHOOL_DETAIL_FIELDS, detailLogoUrl, buildAssetUrl } from "../../lib/directus-queries";
 
 const { id } = Astro.params;
-
-//const INSTITUTE_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/istituto/${id}`);
-
-//const OPENDAYS_RAW = await fetch(`http://${SERVER_ADDRESS}:${SERVER_PORT}/opendays/${id}`);
-// const OPENDAYS: OpenDays = await OPENDAYS_RAW.json();
 
 const INSTITUTE = (await directus.request(
   readItem("schools", id as string, {
     // @ts-ignore - Directus SDK accepts nested field selectors but TypeScript doesn't recognize them
-    fields: ["*", "*.*", "edu_links.educational_path.name"],
+    fields: SCHOOL_DETAIL_FIELDS as unknown as string[],
   })
 )) as components["schemas"]["ItemsSchools"];
 
 const assetUrl = (fileId: string | null | undefined) =>
-  fileId ? `${PUBLIC_API_URL}/assets/${fileId}` : null;
+  fileId ? `${buildAssetUrl(fileId)}` : null;
 
 // Ensure videos is an array we can iterate safely
 const VIDEOS = Array.isArray(INSTITUTE.videos)
@@ -43,7 +38,7 @@ const VIDEOS = Array.isArray(INSTITUTE.videos)
 
       <section>
         <img
-          src={`${PUBLIC_API_URL}/assets/${typeof INSTITUTE.logo === "string" ? INSTITUTE.logo : INSTITUTE.logo?.id}`}
+          src={typeof INSTITUTE.logo === "string" ? buildAssetUrl(INSTITUTE.logo) : detailLogoUrl(INSTITUTE.logo?.id)}
           alt={`${typeof INSTITUTE.logo === "string" ? "Logo" : INSTITUTE.logo?.title}`}
         />
 

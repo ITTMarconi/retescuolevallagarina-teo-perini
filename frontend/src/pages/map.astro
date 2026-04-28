@@ -8,15 +8,23 @@ import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
 import { readItems } from "@directus/sdk";
 import directus from "../lib/directus";
-import { PUBLIC_API_URL } from "astro:env/client";
+import { SCHOOL_MAP_FIELDS, SORT_SCHOOLS_BY_NAME, mapPopupLogoUrl, mapMarkerLogoUrl } from "../lib/directus-queries";
 
 const INSTITUTES = await directus.request(
   readItems("schools", {
-    // @ts-expect-error: "*.*" is a valid Directus field selector
-    fields: ["*", "*.*", "edu_links.*"],
+    fields: SCHOOL_MAP_FIELDS as unknown as string[],
+    sort: SORT_SCHOOLS_BY_NAME as unknown as string[],
+    limit: -1,
   })
 );
-console.log("INSTITUTES:", JSON.stringify(INSTITUTES, null, 2));
+
+// Pre-compute optimized logo URLs for inline scripts
+const INSTITUTES_WITH_URLS = INSTITUTES.map((inst: any) => ({
+  ...inst,
+  _popupLogoUrl: mapPopupLogoUrl(inst.logo?.id),
+  _markerLogoUrl: mapMarkerLogoUrl(inst.logo?.id),
+}));
+
 ---
 
 <Layout>
@@ -40,7 +48,7 @@ console.log("INSTITUTES:", JSON.stringify(INSTITUTES, null, 2));
   </main>
 </Layout>
 
-<script is:inline define:vars={{ INSTITUTES, PUBLIC_API_URL }}>
+<script is:inline define:vars={{ INSTITUTES: INSTITUTES_WITH_URLS }}>
   // take data from the db
   //   console.log(
   //     "INSTITUTES:",
@@ -79,7 +87,7 @@ console.log("INSTITUTES:", JSON.stringify(INSTITUTES, null, 2));
     let logoHtml = "";
     if (institute.logo && institute.logo.id) {
       logoHtml = `<div style="text-align: center; margin-bottom: 0.5rem;">
-        <img src="${PUBLIC_API_URL}/assets/${institute.logo.id}"
+        <img src="${institute._popupLogoUrl || ""}"
              alt="${institute.name}"
              style="height: 60px; object-fit: contain;" />
       </div>`;
@@ -105,7 +113,7 @@ console.log("INSTITUTES:", JSON.stringify(INSTITUTES, null, 2));
         className: "custom-school-marker",
         html: `<div class="marker-pin">
                     <div class="marker-logo-container">
-                        <img src="${PUBLIC_API_URL}/assets/${institute.logo.id}"
+                        <img src="${institute._markerLogoUrl || ""}"
                              alt="${institute.name}"
                              class="marker-logo" />
                     </div>

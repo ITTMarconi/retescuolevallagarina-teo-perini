@@ -6,11 +6,14 @@ import SchoolListItem from "../components/SchoolListItem.astro";
 import Layout from "../layouts/Layout.astro";
 import { readItems } from "@directus/sdk";
 import directus from "../lib/directus";
+import { SCHOOL_LIST_FIELDS, SORT_SCHOOLS_BY_NAME } from "../lib/directus-queries";
 
 const INSTITUTES = await directus.request(
   readItems("schools", {
-    // @ts-expect-error: "*.*" is a valid Directus field selector
-    fields: ["*", "*.*"],
+    fields: SCHOOL_LIST_FIELDS as unknown as string[],
+    filter: { main_campus: { _eq: true } },
+    sort: SORT_SCHOOLS_BY_NAME as unknown as string[],
+    limit: -1,
   })
 );
 
@@ -25,7 +28,7 @@ const INSTITUTES = await directus.request(
 
   <stash id="institute-stash" style="display: none;">
     {
-      INSTITUTES.filter((institute) => institute.main_campus).map(
+      INSTITUTES.map(
         (institute) => (
           <div>
             <SchoolListItem institute={institute} />

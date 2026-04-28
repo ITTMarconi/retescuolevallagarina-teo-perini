@@ -5,35 +5,37 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Icon from "../components/Icon.astro";
 import { PUBLIC_API_URL } from "astro:env/client";
-import { readItem, readItems } from "@directus/sdk";
+import { readItems } from "@directus/sdk";
 import directus from "../lib/directus";
 import { fixObjectEncoding } from "../lib/utils";
+import {
+  TRANSPORT_ROUTE_FIELDS,
+  SORT_ROUTES_BY_SCHOOL_NAME,
+} from "../lib/directus-queries";
 
-const schools = await directus.request(
-  readItems("schools", {
-    // @ts-expect-error: "*.*" is a valid Directus field selector
-    fields: ["*", "*.*"],
-  })
-);
-
-let routes: any[] = [];
-
-routes = await directus.request(
+const routes = await directus.request(
   readItems("transport_routes", {
-    // @ts-expect-error: "*.*" is a valid Directus field selector
-    fields: ["*", "*.*"],
+    fields: TRANSPORT_ROUTE_FIELDS as unknown as string[],
+    sort: SORT_ROUTES_BY_SCHOOL_NAME as unknown as string[],
+    limit: -1,
   })
 );
 
 // Fix encoding for all routes
-routes = fixObjectEncoding(routes);
+const decodedRoutes = fixObjectEncoding(routes);
 
-// Filter schools to only show those that have transport routes
-const schoolsWithRoutes = schools.filter((school) =>
-  routes.some((route) => route.school?.id === school.id)
-);
-
-// console.log("Fetched routes:", JSON.stringify(routes[0], null, 2));
+// Derive unique schools from transport_routes data (no separate schools query)
+const schoolsMap = new Map<string, any>();
+for (const route of decodedRoutes) {
+  if (route.school?.id && !schoolsMap.has(route.school.id)) {
+    schoolsMap.set(route.school.id, {
+      id: route.school.id,
+      name: route.school.name,
+      logo: route.school.logo,
+    });
+  }
+}
+const schoolsWithRoutes = Array.from(schoolsMap.values());
 ---
 
 <style>
@@ -63,7 +65,7 @@ const schoolsWithRoutes = schools.filter((school) =>
   <SchoolRoutesContainer
     client:only="react"
     schools={schoolsWithRoutes}
-    routes={routes}
+    routes={decodedRoutes}
     apiUrl={PUBLIC_API_URL}
   />
 </Layout>

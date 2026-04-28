@@ -14,13 +14,15 @@ type Event = components["schemas"]["ItemsEvents"];
 
 import { readItems, readSingleton } from "@directus/sdk";
 import directus from "../lib/directus";
+import { EVENT_CALENDAR_FIELDS, SORT_EVENTS_BY_DATE } from "../lib/directus-queries";
 
 const { id } = Astro.params;
 
 const allEvents = await directus.request(
   readItems("events", {
-    // @ts-expect-error: "*.*" is a valid Directus field selector
-    fields: ["*", "*.*"],
+    fields: EVENT_CALENDAR_FIELDS as unknown as string[],
+    sort: SORT_EVENTS_BY_DATE as unknown as string[],
+    limit: -1,
   })
 );
 type SiteSettings = components["schemas"]["ItemsSiteSettings"];
