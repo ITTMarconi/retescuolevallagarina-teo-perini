@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet"
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import styles from "./MapComponent.module.css";
+import { mapMarkerLogoUrl } from "../lib/directus-queries";
 
 // Fix default marker icon issue in react-leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -17,11 +18,14 @@ L.Icon.Default.mergeOptions({
 const createSchoolIcon = (school, apiUrl) => {
   console.log("Creating icon for school:", school);
   if (school.logo) {
+    const logoUrl = typeof school.logo === "string"
+      ? `${apiUrl}/assets/${school.logo}`
+      : mapMarkerLogoUrl(school.logo.id || school.logo);
     return L.divIcon({
       className: 'custom-school-marker',
       html: `<div class="marker-pin">
         <div class="marker-logo-container">
-          <img src="${apiUrl}/assets/${school.logo}"
+          <img src="${logoUrl}"
                alt="${school.name}"
                class="marker-logo" />
         </div>

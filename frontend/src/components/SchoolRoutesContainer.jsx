@@ -2,6 +2,7 @@
 import { useState } from "react";
 import RoutesView from "./RoutesView.jsx";
 import styles from "./SchoolRoutesContainer.module.css";
+import { routesSidebarLogoUrl } from "../lib/directus-queries";
 
 export default function SchoolRoutesContainer({ schools, routes, apiUrl }) {
   const [selectedSchoolId, setSelectedSchoolId] = useState(
@@ -27,7 +28,7 @@ export default function SchoolRoutesContainer({ schools, routes, apiUrl }) {
               >
                 {school.logo?.id && (
                   <img
-                    src={`${apiUrl}/assets/${school.logo.id}`}
+                    src={routesSidebarLogoUrl(school.logo.id)}
                     alt={school.logo.title || school.name}
                     className={styles.schoolLogo}
                   />
