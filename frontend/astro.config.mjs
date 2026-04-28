@@ -5,6 +5,11 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
+  vite: {
+    server: {
+      allowedHosts: ['retescuolevallagarina.it']
+    }
+  },
   output: "server",
   integrations: [react()],
   env: {
